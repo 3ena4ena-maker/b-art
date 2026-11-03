@@ -161,8 +161,23 @@ export function App() {
     };
   }, [calcCategory, calcQty, calcFinish]);
 
-  // Filtered Galleries
-  const zones = ['전체', '원도심·영도', '전포·서면', '광안·수영', '해운대·달맞이', '기장·일광'];
+  // Filtered Galleries by Busan District (구·군)
+  const zones = [
+    '전체',
+    '해운대구',
+    '수영구',
+    '중구',
+    '영도구',
+    '부산진구',
+    '남구',
+    '북구',
+    '동래구',
+    '사하구',
+    '금정구',
+    '동구',
+    '사상구',
+    '기장군',
+  ];
   const filteredGalleries = useMemo(() => {
     if (selectedZone === '전체') return GALLERIES;
     return GALLERIES.filter((g) => g.zone === selectedZone);
@@ -1058,7 +1073,7 @@ export function App() {
               </button>
             ) : (
               <div className="section-bar-action" style={{ pointerEvents: 'none' }}>
-                <span>05 SPACES</span>
+                <span>{GALLERIES.length} SPACES · 13 DISTRICTS</span>
               </div>
             )}
           </div>

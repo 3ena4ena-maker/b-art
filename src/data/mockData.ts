@@ -87,12 +87,27 @@ export interface CollabPost {
   description: string;
 }
 
+export type BusanDistrict =
+  | '해운대구'
+  | '수영구'
+  | '중구'
+  | '영도구'
+  | '부산진구'
+  | '남구'
+  | '북구'
+  | '동래구'
+  | '사하구'
+  | '금정구'
+  | '동구'
+  | '사상구'
+  | '기장군';
+
 export interface GallerySpace {
   id: string;
   indexNo: string;
   name: string;
   nameEn: string;
-  zone: '원도심·영도' | '전포·서면' | '광안·수영' | '해운대·달맞이' | '기장·일광';
+  zone: BusanDistrict;
   address: string;
   coordinates: string;
   spaceType: string;
@@ -684,136 +699,433 @@ export const GALLERIES: GallerySpace[] = [
   {
     id: 'gal-01',
     indexNo: 'SPC—01',
-    name: '아카이브 피어 4 (Archive Pier 4)',
-    nameEn: 'ARCHIVE PIER 4',
-    zone: '원도심·영도',
-    address: '부산 영도구 해양로 45, 구 선박부품창고 2F',
-    coordinates: '35.0914° N, 129.0438° E',
-    spaceType: '대안전시공간 · 아트북 라운지',
-    hours: '11:00 – 19:00',
-    closedDays: '매주 월·화 휴관',
-    imageUrl: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80',
-    description: '1970년대 선박 부품 창고의 노출 콘크리트 기둥과 바다를 향한 수평 창을 그대로 살린 영도의 대표적인 현대미술 플랫폼입니다.',
+    name: '조현화랑 달맞이 (Johyun Gallery)',
+    nameEn: 'JOHYUN GALLERY',
+    zone: '해운대구',
+    address: '부산광역시 해운대구 달맞이길65번길 171',
+    coordinates: '35.1588° N, 129.1742° E',
+    spaceType: '현대미술 대표 화랑',
+    hours: '10:30 – 18:30',
+    closedDays: '매주 월요일 휴관',
+    imageUrl: 'https://images.unsplash.com/photo-1579783901586-d88db74b4fe4?auto=format&fit=crop&w=1200&q=80',
+    description: '달맞이언덕 소나무 숲과 해운대 바다가 내려다보이는 한국 대표 현대미술 화랑으로 국내외 동시대 미술 거장 및 유망 작가의 기획전을 선보입니다.',
     currentExhibition: {
-      title: '《수평선 아래의 물질들: 부산 청년 조형전》',
-      artists: '김덕희, 배지윤, 심성아 외',
-      period: '2026.10.18 – 2026.12.06',
-      note: '전시 연계 아티스트 에디션 굿즈 현장 판매 중'
+      title: '《동시대 물질과 평면: 해운대 기획전》',
+      artists: '김종학, 이배, 박서보 외',
+      period: '2026.10.10 – 2026.12.06',
+      note: '본관 1·2층 전시실 및 아카이브 룸 운영'
     },
     spaceSpecs: {
-      area: '142㎡ (약 43평)',
-      ceilingHeight: '4.2m (노출 보 기준)',
-      wallType: '합판 위 백색 수성도장 가벽 + 동측 통창 바다 조망',
-      submissionInfo: '상·하반기 정기 대관 및 기획전 포트폴리오 상시 접수'
+      area: '330㎡ (약 100평, 복층 전시장)',
+      ceilingHeight: '최고 5.5m 보이드',
+      wallType: '미술관급 무반사 백색 도장 가벽 및 자연광 루버',
+      submissionInfo: '학예실 기획 초대전 중심 운영 (포트폴리오 이메일 접수)'
     },
-    mapPos: { x: 28, y: 78 }
+    mapPos: { x: 80, y: 44 }
   },
   {
     id: 'gal-02',
     indexNo: 'SPC—02',
-    name: '모노타입 전포 (Monotype Jeonpo)',
-    nameEn: 'MONOTYPE JEONPO',
-    zone: '전포·서면',
-    address: '부산 부산진구 전포대로209번길 18, 3F',
-    coordinates: '35.1562° N, 129.0655° E',
-    spaceType: '프린트 갤러리 · 에디션 쇼룸',
-    hours: '12:00 – 20:00',
+    name: '고은사진미술관 (Goeun Museum of Photography)',
+    nameEn: 'GOEUN MUSEUM',
+    zone: '해운대구',
+    address: '부산광역시 해운대구 해운대로452번길 16 (우동)',
+    coordinates: '35.1665° N, 129.1462° E',
+    spaceType: '사진 전문 등록 미술관',
+    hours: '10:00 – 18:00',
     closedDays: '매주 월요일 휴관',
-    imageUrl: 'https://images.unsplash.com/photo-1577720580479-7d839d829c73?auto=format&fit=crop&w=1200&q=80',
-    description: '전포동 공구길의 철물점 건물 3층에 자리한 판화·사진·지류 예술 특화 갤러리입니다.',
+    imageUrl: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80',
+    description: '지방 최초의 사진 전문 미술관으로 한국 현대사진 아카이빙, 해외 교류전, KT&G 상상마당 올해의 사진가상 연계 전시를 꾸준히 개최합니다.',
     currentExhibition: {
-      title: '《PAPER & PORT: 항구의 종이 물성》',
-      artists: '김근예, 양사윤, 이지영',
-      period: '2026.10.25 – 2026.11.29',
-      note: '매주 토요일 오후 3시 작가 도슨트 및 별색 인쇄 토크 진행'
+      title: '《PORT OF LENS: 부산 다큐멘터리 사진 아카이브》',
+      artists: '고은, 김옥선, 이지훈 외',
+      period: '2026.10.15 – 2026.12.20',
+      note: '1층 사진 전문 라이브러리 및 아카이브 열람 가능'
     },
     spaceSpecs: {
-      area: '86㎡ (약 26평)',
-      ceilingHeight: '3.1m',
-      wallType: '무몰딩 석고보드 백색 도장 + 레일 스팟 조명 24구',
-      submissionInfo: '일러스트·판화·사진 분야 신진 작가 개인전 대관 우대'
+      area: '264㎡ (본관 2·3층 전시실)',
+      ceilingHeight: '3.6m',
+      wallType: '무반사 다크그레이·화이트 가변 파티션 및 정밀 색온도 스팟 조명',
+      submissionInfo: '연례 사진가 지원 프로그램 및 기획 공모 운영'
     },
-    mapPos: { x: 42, y: 46 }
+    mapPos: { x: 73, y: 42 }
   },
   {
     id: 'gal-03',
     indexNo: 'SPC—03',
-    name: '스페이스 윤슬 광안 (Space Yoonseul)',
-    nameEn: 'SPACE YOONSEUL',
-    zone: '광안·수영',
-    address: '부산 수영구 광안해변로 192, B1–1F',
-    coordinates: '35.1531° N, 129.1186° E',
-    spaceType: '복합문화공간 · 공예 오브제 갤러리',
-    hours: '11:00 – 20:00',
-    closedDays: '연중무휴 (전시 교체일 휴관)',
-    imageUrl: 'https://images.unsplash.com/photo-1594787318286-3d835c1d207f?auto=format&fit=crop&w=1200&q=80',
-    description: '광안리 해변과 망미동 예술마을을 잇는 공예·조형 중심의 갤러리입니다.',
+    name: '맥화랑 & 소울아트스페이스 (Gallery Mac & Soul Art Space)',
+    nameEn: 'GALLERY MAC · SOUL ART',
+    zone: '해운대구',
+    address: '부산광역시 해운대구 달맞이길117번나길 162, 2F / 해운대해변로 30',
+    coordinates: '35.1592° N, 129.1805° E',
+    spaceType: '기획 화랑 · 아트 에디션 쇼룸',
+    hours: '10:30 – 18:30',
+    closedDays: '매주 월요일 휴관',
+    imageUrl: 'https://images.unsplash.com/photo-1577720580479-7d839d829c73?auto=format&fit=crop&w=1200&q=80',
+    description: '달맞이길과 마린시티를 대표하는 중견 화랑으로 청년·중견 작가 초대전 및 합리적인 가격대의 소품·에디션 전시로 대중과 컬렉터를 연결합니다.',
     currentExhibition: {
-      title: '《TACTILE TIDE: 손끝에 닿는 파도》',
-      artists: '최시복, 이진호, 최민경',
-      period: '2026.11.01 – 2026.12.15',
-      note: '공예 오브제 에디션 현장 프리오더 가능'
+      title: '《100만원으로 내 집 마련: 부산 미술 에디션전》',
+      artists: '부산·경남 청년 및 중견 작가 30인',
+      period: '2026.10.22 – 2026.11.30',
+      note: '원화 소품 및 판화·오브제 에디션 현장 구매 가능'
     },
     spaceSpecs: {
-      area: '1층 65㎡ / 지하 1층 110㎡',
-      ceilingHeight: '1층 3.6m / 지하 1층 3.8m',
-      wallType: '미장 스투코 마감 및 모듈형 스테인리스 좌대 14조 보유',
-      submissionInfo: '공예·디자인 오브제 작가 상시 입점 및 기획 쇼케이스 공모'
+      area: '145㎡ (약 44평)',
+      ceilingHeight: '3.4m',
+      wallType: '백색 수성도장 가벽 + 해변 조망 테라스 라운지',
+      submissionInfo: '신진·청년작가 포트폴리오 상시 검토'
     },
-    mapPos: { x: 60, y: 55 }
+    mapPos: { x: 83, y: 46 }
   },
   {
     id: 'gal-04',
     indexNo: 'SPC—04',
-    name: '솔트갤러리 해운대 (Salt Gallery)',
-    nameEn: 'SALT GALLERY',
-    zone: '해운대·달맞이',
-    address: '부산 해운대구 달맞이길 117번가길 42',
-    coordinates: '35.1594° N, 129.1782° E',
-    spaceType: '현대미술 화랑 · 컬렉터스 룸',
-    hours: '11:00 – 18:00',
+    name: '국제갤러리 부산 (Kukje Gallery Busan · F1963)',
+    nameEn: 'KUKJE GALLERY BUSAN',
+    zone: '수영구',
+    address: '부산광역시 수영구 구락로123번길 20, F1963 내',
+    coordinates: '35.1768° N, 129.1145° E',
+    spaceType: '글로벌 현대미술 화랑 · 복합문화공간',
+    hours: '10:00 – 18:00',
     closedDays: '매주 월요일 휴관',
-    imageUrl: 'https://images.unsplash.com/photo-1579783901586-d88db74b4fe4?auto=format&fit=crop&w=1200&q=80',
-    description: '달맞이 고개의 소나무 숲과 남해 수평선이 동시에 내려다보이는 건축적 갤러리입니다.',
+    imageUrl: 'https://images.unsplash.com/photo-1594787318286-3d835c1d207f?auto=format&fit=crop&w=1200&q=80',
+    description: '구 고려제강 와이어 공장을 재생한 복합문화공간 F1963 내에 위치하며, 부산 비엔날레 및 국제 수준의 현대미술 전시를 선보이는 거점 공간입니다.',
     currentExhibition: {
-      title: '《Différance: 차연의 풍경》',
-      artists: '안은솔 개인전',
-      period: '2026.10.10 – 2026.11.22',
-      note: '부산문화재단 우수예술지원 선정 전시'
+      title: '《TACTILE HORIZON: 물질과 구조의 공명》',
+      artists: '양혜규, 강이경, 권현조 외',
+      period: '2026.10.12 – 2026.12.15',
+      note: 'F1963 석천홀 및 YES24 아트북 스토어 연계 관람 가능'
     },
     spaceSpecs: {
-      area: '198㎡ (약 60평, 2개 층 복층 구조)',
-      ceilingHeight: '최고 5.4m 보이드',
-      wallType: '미술관급 무반사 도장 가벽 및 자연 채광 루버 시스템',
-      submissionInfo: '연 1회 부산 신진 작가 크리틱 및 전시 지원 공모'
+      area: '300㎡ (약 90평)',
+      ceilingHeight: '4.8m (노출 트러스 구조)',
+      wallType: '고하중 전시 가벽 및 대형 설치물 반입 슬라이딩 도어',
+      submissionInfo: '전속 및 초대전 중심 기획 운영'
     },
-    mapPos: { x: 78, y: 44 }
+    mapPos: { x: 64, y: 45 }
   },
   {
     id: 'gal-05',
     indexNo: 'SPC—05',
-    name: '솔트 하우스 일광 (Salt House Ilgwang)',
-    nameEn: 'SALT HOUSE ILGWANG',
-    zone: '기장·일광',
-    address: '부산 기장군 일광읍 일광로 312',
-    coordinates: '35.2618° N, 129.2335° E',
-    spaceType: '레지던시 쇼룸 · 오션프론트 살롱',
-    hours: '11:00 – 18:30',
-    closedDays: '매주 화·수 휴관',
-    imageUrl: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
-    description: '일광 해변 바로 앞 구 염전 창고 터에 세워진 오픈 스튜디오형 갤러리입니다.',
+    name: '공간 힘 & 미광화랑 (Space Heem & Mikwang Gallery)',
+    nameEn: 'SPACE HEEM · MIKWANG',
+    zone: '수영구',
+    address: '부산광역시 수영구 수미로50번가길 3, 4F (수영동) / 광남로172번길 2 (민락동)',
+    coordinates: '35.1542° N, 129.1185° E',
+    spaceType: '비영리 대안공간 · 지역 원로/중견 화랑',
+    hours: '11:00 – 19:00',
+    closedDays: '전시 일정별 상이 (월요일 휴관)',
+    imageUrl: 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=1200&q=80',
+    description: '수영구 망미·수영권의 실험적 비영리 전시공간 ‘공간 힘’과 광안리 민락동에서 부산 근현대 미술사를 지켜온 ‘미광화랑’이 공존하는 권역입니다.',
     currentExhibition: {
-      title: '《해풍과 시선: 부산 사진·회화 아카이브전》',
-      artists: '임소영, 김유준, 조하은',
-      period: '2026.10.20 – 2026.12.20',
-      note: '주말 오픈 스튜디오 운영'
+      title: '《실험실의 파동: 부산 신진 큐레이터·작가 워크숍전》',
+      artists: '김문주, 김도연, 신기쁨 외',
+      period: '2026.11.01 – 2026.11.29',
+      note: '주말 아티스트 토크 및 비평 라운드테이블 진행'
     },
     spaceSpecs: {
-      area: '125㎡ (본관 전시장 85㎡ + 중정 40㎡)',
-      ceilingHeight: '4.5m 박공 지붕 노출 서까래',
-      wallType: '회벽 마감 및 원목 가변 파티션',
-      submissionInfo: '계절별 단기 창작 레지던시 및 팝업 쇼케이스 수시 협의'
+      area: '88㎡ ~ 130㎡',
+      ceilingHeight: '3.2m',
+      wallType: '가변형 합판 백색 가벽 및 프로젝션 암막 설비 지원',
+      submissionInfo: '비영리 실험예술·평론·기획전 공모 상시 운영'
     },
-    mapPos: { x: 88, y: 22 }
+    mapPos: { x: 62, y: 54 }
+  },
+  {
+    id: 'gal-06',
+    indexNo: 'SPC—06',
+    name: '또따또가 갤러리40 & 부산근현대역사관 별관',
+    nameEn: 'TOTATOGA GALLERY 40',
+    zone: '중구',
+    address: '부산광역시 중구 동광길 49 (동광동, 40계단 문화관 인근) / 대청로 104',
+    coordinates: '35.1041° N, 129.0348° E',
+    spaceType: '원도심 창작공간 갤러리 · 공공 아카이브홀',
+    hours: '10:00 – 18:00',
+    closedDays: '매주 월요일 휴관',
+    imageUrl: 'https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=1200&q=80',
+    description: '중앙동·동광동 인쇄골목과 40계단 일대에 자리한 원도심 창작공간 또따또가 입주작가들의 핵심 발표장이자 아트북·공예 릴레이 전시 공간입니다.',
+    currentExhibition: {
+      title: '《원도심의 층위: 또따또가 6기 입주작가 쇼케이스》',
+      artists: '신미정, 권현조, 김현진, 전은진, 손원영 외',
+      period: '2026.10.20 – 2026.12.10',
+      note: '중앙동 오픈 스튜디오 투어 및 아티스트 굿즈 현장 판매'
+    },
+    spaceSpecs: {
+      area: '112㎡ (약 34평)',
+      ceilingHeight: '3.5m',
+      wallType: '합판 백색 도장 가벽 및 공예 오브제용 모듈형 좌대 12조',
+      submissionInfo: '원도심 활동 예술가 및 창작공간 연계 대관 우선 지원'
+    },
+    mapPos: { x: 34, y: 74 }
+  },
+  {
+    id: 'gal-07',
+    indexNo: 'SPC—07',
+    name: '스페이스 원지 (SPACE ONE Z)',
+    nameEn: 'SPACE ONE Z YEONGDO',
+    zone: '영도구',
+    address: '부산광역시 영도구 봉래나루로 214 (봉래동2가)',
+    coordinates: '35.0938° N, 129.0445° E',
+    spaceType: '복합문화공간 · 오션프론트 아트 갤러리',
+    hours: '10:30 – 21:00',
+    closedDays: '매주 월요일 휴관',
+    imageUrl: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
+    description: '영도 봉래동 부두 창고를 재생한 대형 복합문화공간으로, 부산항 북항 수변 풍경과 맞닿은 전시장에서 입체 조형·설치·공예 기획전을 개최합니다.',
+    currentExhibition: {
+      title: '《부두와 조형: 영도 해양 오브제 프로젝트》',
+      artists: '강준호, 김남진, 곽순곤 외',
+      period: '2026.10.18 – 2026.12.12',
+      note: '1층 아트 라운지 내 작가 콜라보 굿즈 팝업 운영'
+    },
+    spaceSpecs: {
+      area: '240㎡ (약 72평)',
+      ceilingHeight: '6.2m (구 선박창고 박공 트러스)',
+      wallType: '노출 벽돌·콘크리트 및 대형 가변 가벽',
+      submissionInfo: '대형 설치·조각·팝업 쇼케이스 기획 대관 수시 접수'
+    },
+    mapPos: { x: 38, y: 82 }
+  },
+  {
+    id: 'gal-08',
+    indexNo: 'SPC—08',
+    name: 'KT&G 상상마당 부산 갤러리',
+    nameEn: 'SANGSANGMADANG BUSAN',
+    zone: '부산진구',
+    address: '부산광역시 부산진구 서면로 39, 4–5F (부전동)',
+    coordinates: '35.1544° N, 129.0588° E',
+    spaceType: '청년 복합문화예술센터 · 디자인 스퀘어',
+    hours: '10:00 – 20:00 (디자인스퀘어 22:00까지)',
+    closedDays: '연중무휴 (전시 교체일 휴관)',
+    imageUrl: 'https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?auto=format&fit=crop&w=1200&q=80',
+    description: '서면 중심부에 위치한 대형 예술 플랫폼으로 4~5층 현대미술 갤러리와 2층 디자인스퀘어(아티스트 굿즈·오브제 입점 편집숍)가 유기적으로 결합되어 있습니다.',
+    currentExhibition: {
+      title: '《ARTIST LAB BUSAN: 청년 시각예술 선정작가전》',
+      artists: '주다은, 박소현, 최성진, 황지현 외',
+      period: '2026.10.25 – 2026.12.18',
+      note: '2층 디자인스퀘어에서 부산 작가 제작 굿즈 상시 입점 판매'
+    },
+    spaceSpecs: {
+      area: '410㎡ (4층·5층 복층 갤러리)',
+      ceilingHeight: '4.2m',
+      wallType: '미술관급 무몰딩 백색 가벽 및 천장 그리드 조명 레일',
+      submissionInfo: '연례 부산 신진작가 공모(ARTISTART) 및 디자인스퀘어 굿즈 입점 공모'
+    },
+    mapPos: { x: 46, y: 50 }
+  },
+  {
+    id: 'gal-09',
+    indexNo: 'SPC—09',
+    name: '갤러리 앱스트랙트 & 부산문화회관 전시실',
+    nameEn: 'GALLERY ABSTRACT · NAM-GU',
+    zone: '남구',
+    address: '부산광역시 남구 분포로 61, 2F (용호동) / 유엔평화로76번길 1 (대연동)',
+    coordinates: '35.1282° N, 129.1065° E',
+    spaceType: '현대미술 화랑 · 공공 종합전시관',
+    hours: '10:00 – 18:00',
+    closedDays: '매주 월요일 휴관',
+    imageUrl: 'https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=1200&q=80',
+    description: '남구 용호동 해안가의 현대미술 전문 갤러리 앱스트랙트와 대연동 부산문화회관 대전시실·중전시실을 아우르는 남구 예술 거점입니다.',
+    currentExhibition: {
+      title: '《색면과 수평선: 부산 추상회화 8인전》',
+      artists: '권혁, 강미경, 김경화, 김보경 외',
+      period: '2026.10.30 – 2026.12.05',
+      note: '개인전 및 단체전 정기 대관 병행'
+    },
+    spaceSpecs: {
+      area: '165㎡ (약 50평)',
+      ceilingHeight: '3.6m',
+      wallType: '백색 도장 가벽 및 작품 걸이 레일 시스템',
+      submissionInfo: '상·하반기 정기 대관 신청 및 기획 초대전 운영'
+    },
+    mapPos: { x: 56, y: 66 }
+  },
+  {
+    id: 'gal-10',
+    indexNo: 'SPC—10',
+    name: '청년아트스테이션 새물갤러리 & 갤러리 유피',
+    nameEn: 'SAEMUL GALLERY · BUK-GU',
+    zone: '북구',
+    address: '부산광역시 북구 학사로 135 (화명동) / 기찰로 3, B1 (덕천동)',
+    coordinates: '35.2285° N, 129.0142° E',
+    spaceType: '청년 예술 창작플랫폼 · 기획 전시장',
+    hours: '10:00 – 18:00',
+    closedDays: '매주 월요일·공휴일 휴관',
+    imageUrl: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80',
+    description: '북구 화명동·덕천동 권역에서 청년 시각예술가들의 실험적 전시와 주민 참여형 아트마켓, 워크숍을 지원하는 서부산 북부 핵심 거점입니다.',
+    currentExhibition: {
+      title: '《낙동강변의 시선: 북구 청년작가 릴레이전》',
+      artists: '김수연, 김유림, 강민수 외',
+      period: '2026.10.15 – 2026.11.30',
+      note: '청년 예술인 대관료 감면 및 도록·리플렛 제작비 일부 지원'
+    },
+    spaceSpecs: {
+      area: '118㎡ (약 36평)',
+      ceilingHeight: '3.2m',
+      wallType: '화이트 큐브 가벽 + 이동형 전시 파티션 8조',
+      submissionInfo: '부산 거점 청년 작가(만 39세 이하) 무료/우대 대관 공모'
+    },
+    mapPos: { x: 34, y: 24 }
+  },
+  {
+    id: 'gal-11',
+    indexNo: 'SPC—11',
+    name: '성원아트갤러리 & 동래문화회관 전시실',
+    nameEn: 'SUNGWON ART · DONGNAE',
+    zone: '동래구',
+    address: '부산광역시 동래구 아시아드대로 250, 1F (사직동) / 문화로 80 (명륜동)',
+    coordinates: '35.1982° N, 129.0685° E',
+    spaceType: '기획 화랑 · 구립 문화회관 전시실',
+    hours: '10:30 – 18:30',
+    closedDays: '매주 월요일 휴관',
+    imageUrl: 'https://images.unsplash.com/photo-1577720580479-7d839d829c73?auto=format&fit=crop&w=1200&q=80',
+    description: '사직동과 명륜동을 잇는 동래구의 대표 전시 공간으로 한국화·서양화·도자·공예 분야 지역 작가들의 개인전 및 초대전이 활발히 열립니다.',
+    currentExhibition: {
+      title: '《온천과 필묵: 동래 현대 한국화·도예 교류전》',
+      artists: '김덕길, 김영미, 김원정 외',
+      period: '2026.11.01 – 2026.12.04',
+      note: '도자·회화 소품 상설 아카이브 운영'
+    },
+    spaceSpecs: {
+      area: '132㎡ (약 40평)',
+      ceilingHeight: '3.3m',
+      wallType: '백색 석고보드 도장 및 집중 스팟 조명',
+      submissionInfo: '개인전·단체전 수시 대관 문의 가능'
+    },
+    mapPos: { x: 52, y: 34 }
+  },
+  {
+    id: 'gal-12',
+    indexNo: 'SPC—12',
+    name: '부산현대미술관 & 홍티아트센터',
+    nameEn: 'MOCA BUSAN · HONGTI ART',
+    zone: '사하구',
+    address: '부산광역시 사하구 낙동남로 1191 (을숙도) / 다산로106번길 6 (다대동)',
+    coordinates: '35.1092° N, 128.9426° E',
+    spaceType: '공립 현대미술관 · 설치/미디어 레지던시',
+    hours: '10:00 – 18:00 (입장 마감 17:30)',
+    closedDays: '매주 월요일 휴관',
+    imageUrl: 'https://images.unsplash.com/photo-1594787318286-3d835c1d207f?auto=format&fit=crop&w=1200&q=80',
+    description: '을숙도 생태공원 내 위치한 부산현대미술관과 다대포 무지개공단 내 부산문화재단 운영 설치·입체 예술 레지던시 ‘홍티아트센터’가 위치한 서부산 예술 축입니다.',
+    currentExhibition: {
+      title: '《생태와 기계의 경계: 홍티아트센터 입주작가 릴레이전》',
+      artists: '김순임, 김성연, 강정이 외',
+      period: '2026.10.14 – 2026.12.25',
+      note: '홍티아트센터 1층 오픈 스튜디오 및 설치 전시장 무료 관람'
+    },
+    spaceSpecs: {
+      area: '대형 전시장 및 층고 7m 설치 스튜디오',
+      ceilingHeight: '4.5m – 7.2m',
+      wallType: '노출 콘크리트 및 고하중 크레인·미디어 영사 설비',
+      submissionInfo: '부산문화재단 홍티아트센터 국내외 입주작가 매년 정기 공모'
+    },
+    mapPos: { x: 18, y: 74 }
+  },
+  {
+    id: 'gal-13',
+    indexNo: 'SPC—13',
+    name: '금샘미술관 & 킴스아트필드미술관',
+    nameEn: 'GEUMSAEM · KIMS ARTFIELD',
+    zone: '금정구',
+    address: '부산광역시 금정구 체육공원로 7 (구서동) / 죽전1길 29 (장전동)',
+    coordinates: '35.2485° N, 129.0924° E',
+    spaceType: '구립 미술관 · 사립 자연친화 미술관',
+    hours: '10:00 – 18:00',
+    closedDays: '매주 월요일 휴관',
+    imageUrl: 'https://images.unsplash.com/photo-1579783901586-d88db74b4fe4?auto=format&fit=crop&w=1200&q=80',
+    description: '금정문화회관 내 금샘미술관과 금정산 자락의 킴스아트필드미술관, 부산대 앞 대안공간들이 모여 있어 대학가 신진 작가 발표가 가장 활발한 구역입니다.',
+    currentExhibition: {
+      title: '《금정의 젊은 시선: 신진 조형·회화 포트폴리오전》',
+      artists: '김유경, 김윤선, 김은영 외',
+      period: '2026.10.28 – 2026.12.08',
+      note: '전시실 1·2·3관 통합 대관 및 청년 기획전 운영'
+    },
+    spaceSpecs: {
+      area: '360㎡ (3개 전시실 합산)',
+      ceilingHeight: '3.8m',
+      wallType: '미술관급 백색 가벽 및 슬라이딩 이동 파티션',
+      submissionInfo: '금정문화회관 금샘미술관 정기·수시 대관 공고 접수'
+    },
+    mapPos: { x: 58, y: 18 }
+  },
+  {
+    id: 'gal-14',
+    indexNo: 'SPC—14',
+    name: '갤러리 수정 & 문화공감 수정',
+    nameEn: 'GALLERY SUJEONG · DONG-GU',
+    zone: '동구',
+    address: '부산광역시 동구 수정공원로 29 (수정동) / 홍곡로 75 (초량동)',
+    coordinates: '35.1268° N, 129.0412° E',
+    spaceType: '도시재생 아파트 갤러리 · 산복도로 전시공간',
+    hours: '11:00 – 18:00',
+    closedDays: '매주 월·화 휴관',
+    imageUrl: 'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=1200&q=80',
+    description: '산복도로의 오래된 수정아파트를 개조해 만든 독특한 건축적 전시 공간으로, 부산항과 원도심 지형을 주제로 한 사진·설치·드로잉 전시에 최적화된 곳입니다.',
+    currentExhibition: {
+      title: '《산복도로의 빛과 그림자: 초량·수정 아카이브전》',
+      artists: '강지호, 김기드온, 김동유 외',
+      period: '2026.10.20 – 2026.11.30',
+      note: '부산역 유라시아플랫폼에서 도보·버스 10분 거리'
+    },
+    spaceSpecs: {
+      area: '66㎡ (구 아파트 내부 구조 보존형 전시장)',
+      ceilingHeight: '2.6m',
+      wallType: '빈티지 시멘트·목구조 노출 및 백색 전시 벽면',
+      submissionInfo: '장소특정적(Site-specific) 설치·사진 프로젝트 수시 협의'
+    },
+    mapPos: { x: 40, y: 66 }
+  },
+  {
+    id: 'gal-15',
+    indexNo: 'SPC—15',
+    name: '사상아트갤러리 & 사상인디스테이션',
+    nameEn: 'SASANG ART GALLERY',
+    zone: '사상구',
+    address: '부산광역시 사상구 광장로 108-1, 3F (괘법동, 사상역 내) / 사상로 201',
+    coordinates: '35.1624° N, 128.9845° E',
+    spaceType: '역사 내 공공 갤러리 · 청년 서브컬처 아트홀',
+    hours: '10:00 – 18:00',
+    closedDays: '매주 월요일·일요일 휴관',
+    imageUrl: 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=1200&q=80',
+    description: '사상역과 바로 연결된 사상아트갤러리 및 컨테이너 복합문화공간 사상인디스테이션(CATs)은 사상구 공단·인쇄단지의 물성과 결합한 청년 예술 전시를 지원합니다.',
+    currentExhibition: {
+      title: '《INDUSTRIAL WAVE: 사상 공단×예술가 협업 오브제전》',
+      artists: '김성수, 김소연, 김수진 외',
+      period: '2026.10.22 – 2026.12.02',
+      note: '사상구 공업단지 재료(금속·아크릴·지류) 활용 작품 전시'
+    },
+    spaceSpecs: {
+      area: '148㎡ (약 45평)',
+      ceilingHeight: '3.5m',
+      wallType: '화이트 가벽 및 컨테이너 스틸 모듈 전시장',
+      submissionInfo: '사상문화원 및 부산문화재단 연계 대관 공모'
+    },
+    mapPos: { x: 26, y: 50 }
+  },
+  {
+    id: 'gal-16',
+    indexNo: 'SPC—16',
+    name: '갤러리우 & 갤러리아라 기장',
+    nameEn: 'GALLERY WOO · GIJANG',
+    zone: '기장군',
+    address: '부산광역시 기장군 기장읍 대변로 74, CUBE10동 1F / 대청로14번길 8-1',
+    coordinates: '35.2245° N, 129.2268° E',
+    spaceType: '오션프론트 화랑 · 도자/공예 복합 갤러리',
+    hours: '11:00 – 18:30',
+    closedDays: '매주 월·화 휴관',
+    imageUrl: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
+    description: '기장 대변항·일광 해안과 기장 도예촌을 잇는 전시 공간으로, 동부산 해안 드라이브 코스를 찾는 컬렉터들에게 회화·도자·유리 공예 작품을 소개합니다.',
+    currentExhibition: {
+      title: '《동해의 윤슬: 기장 회화·도자 초대전》',
+      artists: '김정아, 김정애, 김정원, 김주영 외',
+      period: '2026.10.20 – 2026.12.20',
+      note: '전시 관람 및 아티스트 도자·오브제 에디션 상설 쇼룸 운영'
+    },
+    spaceSpecs: {
+      area: '150㎡ (본관 전시장 + 오션뷰 테라스)',
+      ceilingHeight: '4.2m',
+      wallType: '백색 미장 마감 및 자연 채광 통창',
+      submissionInfo: '회화·도예·공예 분야 기획 초대전 및 팝업 대관 협의'
+    },
+    mapPos: { x: 90, y: 20 }
   }
 ];
