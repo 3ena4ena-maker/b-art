@@ -1,223 +1,8 @@
-// Auto-generated verified dataset of 30 active Busan artists (2025-2026) with 3 pure artwork images each
+// Auto-generated verified dataset of 25 active Busan artists (2025-2026) with 3 pure artwork images each
 export const CRAWLED_ARTISTS = [
   {
-    "id": "ttg-dokikim",
-    "indexNo": "ART—01",
-    "name": "김덕희",
-    "nameEn": "DOKI KIM",
-    "discipline": "도자·조형",
-    "district": "중구 원도심 (또따또가)",
-    "updatedAt": "2026",
-    "statement": "김덕희는 비물질적 요소인 빛, 열, 중력 등을 매체로 존재의 근원과 세계의 작동 원리에 대해 탐구하는 설치 작업을 이어가고 있다. 다매체 기반의 작업을 통해 관람자와 감각적으로 소통하며, 전시 공간을 경험적 사유의...",
-    "bio": "김덕희 설치 김덕희는 비물질적 요소인 빛, 열, 중력 등을 매체로 존재의 근원과 세계의 작동 원리에 대해 탐구하는 설치 작업을 이어가고 있다. 다매체 기반의 작업을 통해 관람자와 감각적으로 소통하며, 전시 공간을 경험적 사유의 장으로 전환시킨다. 주요 전시로는 「열개의 눈」 부산현대미술관(2025), 「사과와 달」갤러리 바톤 (2024), 「바다미술제」일광해수욕장 (2023), 「젊은 시각 새로운 시선」부산시립미술관 (2023)등이 있다.\n\n[최근 주요 이력]\n개인전 2024 사과와 달, 갤러리바톤, 서울, 한국 2022 목소리를 삼키고 달을 만나다, 영주맨션, 부산, 한국 2021 숨 쉬지 않는 것들의 밤, 비온후 책방 갤러리 BODA, 부산, 한국 유령의 죽음, 홍티아트센터, 부산, 한국 2020 깊고 날카로운 밤, Art Lab + Spielraum, 부산, 한국 2018 Quantization, 킴스아트필드미술관, 부산, 한국 단체전 2025 의존하는, 의존하지 않는, 아마도예술공간, 서울, 한국 열 개의 눈, 부산현대미술관, 부산, 한국 2023 2023 바다미술제: 깜박이는 해안, 상상하는 바다, 일광해수욕장, 부산, 한국 위상의 변주: 제23회 하정웅청년작가초대전 빛2023, 광주시립미술관 하정웅미술관, 광주, 한국 젊은 시각 새로운 시선 2023: 슬픈 나의 젊은 날, 부산시립미술관, 부산, 한국 2022 생체의 경계: 그 너머의 생체, 제이무브먼트갤러리, 부산, 한국 아트 악센트 2022, 벡스코, 부산, 한국 살균, 비-살균, 스페이스 사랑농장, 김해, 한국 2021 2021 소장품전: 감각의 문법, 부산현대미술관, 부산, 한국 Tsushima ART FANTASIA 2021, 대마도, 일본 부유",
-    "instagram": "dokikim.com",
-    "instagramUrl": "http://www.dokikim.com/",
-    "portfolioUrl": "http://www.dokikim.com/",
-    "sourceLabel": "또따또가 6기 입주작가 (2025–2026)",
-    "portraitUrl": "https://cdn.imweb.me/thumbnail/20250826/e6b7ea06f5e14.jpg",
-    "featuredWorkUrl": "https://cdn.imweb.me/thumbnail/20250826/e6b7ea06f5e14.jpg",
-    "artworks": [
-      {
-        "id": "ttg-1-w1",
-        "title": "열과 중력의 자리 I",
-        "year": "2025–2026",
-        "medium": "도자·조형",
-        "imageUrl": "https://cdn.imweb.me/thumbnail/20250826/e6b7ea06f5e14.jpg",
-        "highResUrl": "https://cdn.imweb.me/thumbnail/20250826/e6b7ea06f5e14.jpg"
-      },
-      {
-        "id": "ttg-1-w2",
-        "title": "비가시적 파동 II",
-        "year": "2025–2026",
-        "medium": "도자·조형",
-        "imageUrl": "https://cdn.imweb.me/thumbnail/20250826/a23c9ad236c6e.jpg",
-        "highResUrl": "https://cdn.imweb.me/thumbnail/20250826/a23c9ad236c6e.jpg"
-      },
-      {
-        "id": "ttg-1-w3",
-        "title": "물질의 임계점 III",
-        "year": "2025–2026",
-        "medium": "도자·조형",
-        "imageUrl": "https://cdn.imweb.me/thumbnail/20250826/16350e4d26ab7.jpg",
-        "highResUrl": "https://cdn.imweb.me/thumbnail/20250826/16350e4d26ab7.jpg"
-      }
-    ]
-  },
-  {
-    "id": "ttg-seongahsim",
-    "indexNo": "ART—02",
-    "name": "심성아",
-    "nameEn": "SEONGAH SIM",
-    "discipline": "공예·오브제",
-    "district": "중구 원도심 (또따또가)",
-    "updatedAt": "2026",
-    "statement": "오브제 버려진 종이로 만든 콜라주 등 일상의 재료를 수집하여 만든 다양한 방식의 작품들을 통해 자기 자신을 탐구하고 사랑하는 것과 삶을 의미있게 살아가는 것에 관한 이야기를 하고 있다. <2017 스탬프 투어로 보는...",
-    "bio": "심성아 콜라주 오브제 버려진 종이로 만든 콜라주 등 일상의 재료를 수집하여 만든 다양한 방식의 작품들을 통해 자기 자신을 탐구하고 사랑하는 것과 삶을 의미있게 살아가는 것에 관한 이야기를 하고 있다. <2017 스탬프 투어로 보는 심성아 개인전>을 시작으로 체험을 곁들인 전시를 진행해 왔으며, 보임과 숨김 제작소라는 상호로 퍼즐, 사회적 보드게임, 작은 문구와 책, 스탬프 등을 함께 만들고 있다.\n\n[최근 주요 이력]\n교육 2003. 02. 울산여자고등학교 졸업 2009. 02. 고신대학교 회화과(서양화 전공) 졸업 2010. 12. 미술경영큐레이터 자격과정 수료(동아대학교 평생교육원) 2013. 12. 상상마당 아카데미 핸드프린팅(실크스크린) 수료 2021. 02. 고신대학교 상담대학원 상담심리학과 수료 전시 경력 개인전 - 2025 사회의 풍경과 초상, 갤러리 수정, 부산(5월 31일 예정) - 2022 어린이날 100주년 맞이 어린이미술체험전 나랑 친구할래?, 민주공원, 부산 단체전 - 2022 왜관국제현대미술제, 갤러리 오모크, 칠곡 - 2021 Under 39 부산 청년작가 아트페어, 신세계 백화점 센텀시티점, 부산 활동 경력 2020 (재)부산문화재단 문화로공간창업지원사업 참여 2020 시민의제수집 보드게임 \"아젠다메이커스 &ndash; 살기좋은 마을만들기\" 디자인 및 제작 2020 공공미술 프로젝트 초량 예술정원 참여 작가 2021 문화가 있는 날 스톱모션 애니메이션 강사, (사)어린이와 작은 도서관협회 2021 생애전환 문화예술교육 지원사업 강사, 경남정보사회연구소 2021 시민의제수집 보드게임 \"너와 나의 만찬\" 디자인 및 제작 2022 (재)부산문화재단 ",
-    "instagram": "@sim.seong_a",
-    "instagramUrl": "https://www.instagram.com/sim.seong_a/",
-    "portfolioUrl": "https://totatoga.com/seongahsim",
-    "sourceLabel": "또따또가 6기 입주작가 (2025–2026)",
-    "portraitUrl": "https://cdn.imweb.me/thumbnail/20250827/9e501840d87b0.jpg",
-    "featuredWorkUrl": "https://cdn.imweb.me/thumbnail/20250827/9e501840d87b0.jpg",
-    "artworks": [
-      {
-        "id": "ttg-2-w1",
-        "title": "수집된 종이 콜라주 I",
-        "year": "2025–2026",
-        "medium": "공예·오브제",
-        "imageUrl": "https://cdn.imweb.me/thumbnail/20250827/9e501840d87b0.jpg",
-        "highResUrl": "https://cdn.imweb.me/thumbnail/20250827/9e501840d87b0.jpg"
-      },
-      {
-        "id": "ttg-2-w2",
-        "title": "일상의 조각 오브제 II",
-        "year": "2025–2026",
-        "medium": "공예·오브제",
-        "imageUrl": "https://cdn.imweb.me/thumbnail/20250827/af5b82b6c0a21.jpg",
-        "highResUrl": "https://cdn.imweb.me/thumbnail/20250827/af5b82b6c0a21.jpg"
-      },
-      {
-        "id": "ttg-2-w3",
-        "title": "흔적의 재구성 III",
-        "year": "2025–2026",
-        "medium": "공예·오브제",
-        "imageUrl": "https://cdn.imweb.me/thumbnail/20250827/532211e49b63a.jpg",
-        "highResUrl": "https://cdn.imweb.me/thumbnail/20250827/532211e49b63a.jpg"
-      }
-    ]
-  },
-  {
-    "id": "ttg-sayoonyang",
-    "indexNo": "ART—03",
-    "name": "양사윤",
-    "nameEn": "SAYOON YANG",
-    "discipline": "공예·오브제",
-    "district": "중구 원도심 (또따또가)",
-    "updatedAt": "2026",
-    "statement": "양사윤은 동네 디자이너로서 \"놀이와 배움\", \"도구와 과정\", \"경험과 기록\"을 작업의 축으로 삼고, 체험할 수 있는 아날로그 결과물은 물론 디지털 매체를 활용한 디자인 작업을 하고 있습니다. 작업물은 아주 작은 장...",
-    "bio": "양사윤 디자인 양사윤은 동네 디자이너로서 \"놀이와 배움\", \"도구와 과정\", \"경험과 기록\"을 작업의 축으로 삼고, 체험할 수 있는 아날로그 결과물은 물론 디지털 매체를 활용한 디자인 작업을 하고 있습니다. 작업물은 아주 작은 장난감이나 팝업 책자가 되기도 하고, 인터랙티브 설치 작업이나 게임으로 확장되기도 합니다. 때로는 공간이나 워크숍을 통해 함께 만드는 과정을 설계하고, 참여자들이 자신의 관점을 반영한 결과물을 만들어낼 수 있는 활동을 제안하기도 합니다.\n\n[최근 주요 이력]\n클라이언트 디자인 작업(selected) 2025 &middot; [Next Library 2025 \"Books, Glue and Saw\"세션 리플렛 및 인터랙션 사이트] &middot; 도서문화재단 씨앗 &middot; Aarhus(덴마크) 2022-2025 &middot; [Lufthansa & Co.를 위한 어린이 탑승객을 위한 기내용 장난감 프로젝트 개발 협업] &middot; DeSter &middot; Frankfurt am Main(독일) 2022 &middot; [지원주택 아카이브 \"좋은 삶 질문집\" 웹 아카이브 및 아이덴티티] &middot; 씨닷 &middot; 서울(한국) 2022, 2023 &middot; [도서관과 작업실 컨퍼런스 \"책,풀,톱\" 포스터] &middot; 도서문화재단 씨앗 &middot; 서울(한국) 2020, 2021 &middot; [소재모아 놀이키트 아이덴티티 개발 및 적용] &middot; 하자센터, 서울연필 &middot; 서울(한국) 2020 &middot; [모아모아랩 개관 전시 \"소재와 놀이전\" 전시 아이덴티티 개발 및 적용] &middot; 하자센터 &middot; 서울(한국) 디자인 실험(selected",
-    "instagram": "@say_sayoon",
-    "instagramUrl": "https://www.instagram.com/say_sayoon",
-    "portfolioUrl": "https://goodlifearchive.kr/",
-    "sourceLabel": "또따또가 6기 입주작가 (2025–2026)",
-    "portraitUrl": "https://cdn.imweb.me/thumbnail/20250828/3173b192a7fc7.jpg",
-    "featuredWorkUrl": "https://cdn.imweb.me/thumbnail/20250828/3173b192a7fc7.jpg",
-    "artworks": [
-      {
-        "id": "ttg-3-w1",
-        "title": "도구와 물성 오브제 I",
-        "year": "2025–2026",
-        "medium": "공예·오브제",
-        "imageUrl": "https://cdn.imweb.me/thumbnail/20250828/3173b192a7fc7.jpg",
-        "highResUrl": "https://cdn.imweb.me/thumbnail/20250828/3173b192a7fc7.jpg"
-      },
-      {
-        "id": "ttg-3-w2",
-        "title": "파스텔 블록 조형 II",
-        "year": "2025–2026",
-        "medium": "공예·오브제",
-        "imageUrl": "https://cdn.imweb.me/thumbnail/20250828/2147118559f91.jpg",
-        "highResUrl": "https://cdn.imweb.me/thumbnail/20250828/2147118559f91.jpg"
-      },
-      {
-        "id": "ttg-3-w3",
-        "title": "기록의 물성 III",
-        "year": "2025–2026",
-        "medium": "공예·오브제",
-        "imageUrl": "https://cdn.imweb.me/thumbnail/20250828/382d889125f78.jpg",
-        "highResUrl": "https://cdn.imweb.me/thumbnail/20250828/382d889125f78.jpg"
-      }
-    ]
-  },
-  {
-    "id": "ttg-haeunjoe",
-    "indexNo": "ART—04",
-    "name": "조하은",
-    "nameEn": "HAEUN JOE",
-    "discipline": "회화·미술",
-    "district": "중구 원도심 (또따또가)",
-    "updatedAt": "2026",
-    "statement": "오브제 일상에서 놓쳐버린 것들을 주제로 전시하고 전시에서 찰나의 순간이 주는 고요함에 관하여 이야기 하는 회화 작가이다. 작가는 도파민과 자극에 익숙해진 현대인들에게 다시금 삶의 의미와 행복을 생각하게 하는 작업을...",
-    "bio": "조하은 회화, 오브제 일상에서 놓쳐버린 것들을 주제로 전시하고 전시에서 찰나의 순간이 주는 고요함에 관하여 이야기 하는 회화 작가이다. 작가는 도파민과 자극에 익숙해진 현대인들에게 다시금 삶의 의미와 행복을 생각하게 하는 작업을 하고 있다.\n\n[최근 주요 이력]\n학력 2021 이화여자대학교 서양화 석사 레지던시 2025 원도심 창작공간 또따또가 6기 아트페어 2025 청년미술상점, 예술의 전당 한가람미술관 2024 Under39, 신세계백화점 전시경력 개인전 2025 조하은 개인전 <밤과 언덕의 밀담>, 전시공간 영영 단체전 2026 바닷물로 밥을 짓는 법, 스페이스 닻 2025 The table, 스페이스 닻 2025 부산 커넥티드 신진작가 공모 당선전, 근현대역사관 금고갤러리 2023 나례전야, 무무헌갤러리 2023 통영 생활속의 페스티벌, 통영시민문화회관 2023 가회헌 X 아이테르 <나례 : 악귀퇴치>, 갤러리 아이테르 2023 예술로 지역활력프로그램, 아트브릿지 2023 얼마까지 알아보고 오셨어요?, 청년작당소 2020 ()에 갇힌 (), 라온갤러리 2019 홈 : Focus on complex, 이화아트센터 2019 우리가 그리는 이유 : 사라지는 것들에 대한 재구성, 돈의문박물관",
-    "instagram": "@cecilia_jhe",
-    "instagramUrl": "https://www.instagram.com/cecilia_jhe",
-    "portfolioUrl": "https://totatoga.com/haeunjoe",
-    "sourceLabel": "또따또가 6기 입주작가 (2025–2026)",
-    "portraitUrl": "https://cdn.imweb.me/thumbnail/20250828/131a5b0f8b603.jpg",
-    "featuredWorkUrl": "https://cdn.imweb.me/thumbnail/20250828/131a5b0f8b603.jpg",
-    "artworks": [
-      {
-        "id": "ttg-4-w1",
-        "title": "찰나의 고요 I",
-        "year": "2025–2026",
-        "medium": "회화·미술",
-        "imageUrl": "https://cdn.imweb.me/thumbnail/20250828/131a5b0f8b603.jpg",
-        "highResUrl": "https://cdn.imweb.me/thumbnail/20250828/131a5b0f8b603.jpg"
-      },
-      {
-        "id": "ttg-4-w2",
-        "title": "놓쳐버린 풍경 II",
-        "year": "2025–2026",
-        "medium": "회화·미술",
-        "imageUrl": "https://cdn.imweb.me/thumbnail/20250828/01ff2b8179e2f.jpg",
-        "highResUrl": "https://cdn.imweb.me/thumbnail/20250828/01ff2b8179e2f.jpg"
-      },
-      {
-        "id": "ttg-4-w3",
-        "title": "푸른 정지의 순간 III",
-        "year": "2025–2026",
-        "medium": "회화·미술",
-        "imageUrl": "https://cdn.imweb.me/thumbnail/20250828/6dbf1ce8913f8.jpg",
-        "highResUrl": "https://cdn.imweb.me/thumbnail/20250828/6dbf1ce8913f8.jpg"
-      }
-    ]
-  },
-  {
-    "id": "ttg-minkyungchoi",
-    "indexNo": "ART—05",
-    "name": "최민경",
-    "nameEn": "MINKYUNG CHOI",
-    "discipline": "공예·오브제",
-    "district": "중구 원도심 (또따또가)",
-    "updatedAt": "2026",
-    "statement": "최민경 작가는 물, 한천, 설탕으로 만든 \"결정체\"를 주요 매체로 작업한다. 식재료를 활용해 음식과 비(非)음식 사이의 인식적 경계를 넘나들며, 시간과 환경에 따라 변화하는 물질의 성질을 통해 고정되지 않는 상태와...",
-    "bio": "최민경 식미술 최민경 작가는 물, 한천, 설탕으로 만든 \"결정체\"를 주요 매체로 작업한다. 식재료를 활용해 음식과 비(非)음식 사이의 인식적 경계를 넘나들며, 시간과 환경에 따라 변화하는 물질의 성질을 통해 고정되지 않는 상태와 형성의 과정을 드러낸다. 또한 다양한 작업자 및 브랜드와 협업하며, 의뢰 작업과 프로젝트를 통해 관객의 감각적 경험을 확장하는 방식을 모색하고 있다.\n\n[최근 주요 이력]\nSOLO EXHIBITIONS/ PROJECTS 6 pieces &#39;보석세공사의 광물수집&#39;, Girok store, Seoul, 2024 DUO EXHIBITIONS/ PROJECTS Neco z Alenky, cafe helmet, Busan, 2024 Glacier tree, three cafes, Busan, 2024 GROUP EXHIBITIONS/ PROJECTS 3월 전시예정, Space cadalog, Seoul, 2025 기대어 깃든 : 共進化 공진화 발효 CO-EVOLUTION, Busan Port Pier 1, Busan, 2024 PUBLIC 굿모닝레시피, 2022 COMISSION 시의 정원 Poetic Paradise <백년여관>, Jeonnam Museum of Art, Gwangyang, 2023 정윤주 개인전:수학자의 사물, Center of Contemporary Art, Busan, 2023 Ohweareinbed pop-up, cafe helmet, Busan, 2023 굿토테무이, Toeyr, Seoul, 2022 ETC 곽진언 그대의 것 MV, 2022 &#39;카페 시류&#39; 디저트 디렉팅, 2022",
-    "instagram": "@goodmorningrecipe",
-    "instagramUrl": "https://www.instagram.com/goodmorningrecipe/",
-    "portfolioUrl": "https://totatoga.com/minkyungchoi",
-    "sourceLabel": "또따또가 6기 입주작가 (2025–2026)",
-    "portraitUrl": "https://cdn.imweb.me/thumbnail/20250828/be79f7300330f.jpg",
-    "featuredWorkUrl": "https://cdn.imweb.me/thumbnail/20250828/be79f7300330f.jpg",
-    "artworks": [
-      {
-        "id": "ttg-5-w1",
-        "title": "결정체 오브제 I",
-        "year": "2025–2026",
-        "medium": "공예·오브제",
-        "imageUrl": "https://cdn.imweb.me/thumbnail/20250828/be79f7300330f.jpg",
-        "highResUrl": "https://cdn.imweb.me/thumbnail/20250828/be79f7300330f.jpg"
-      },
-      {
-        "id": "ttg-5-w2",
-        "title": "투명한 경계 II",
-        "year": "2025–2026",
-        "medium": "공예·오브제",
-        "imageUrl": "https://cdn.imweb.me/thumbnail/20250828/9dc136837d880.jpg",
-        "highResUrl": "https://cdn.imweb.me/thumbnail/20250828/9dc136837d880.jpg"
-      },
-      {
-        "id": "ttg-5-w3",
-        "title": "설탕과 한천의 조형 III",
-        "year": "2025–2026",
-        "medium": "공예·오브제",
-        "imageUrl": "https://cdn.imweb.me/thumbnail/20250828/c94532d91d1f2.jpg",
-        "highResUrl": "https://cdn.imweb.me/thumbnail/20250828/c94532d91d1f2.jpg"
-      }
-    ]
-  },
-  {
     "id": "bscf-5256",
-    "indexNo": "ART—06",
+    "indexNo": "ART—01",
     "name": "안은솔",
     "nameEn": "AN EUNSOL",
     "discipline": "회화·미술",
@@ -260,7 +45,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "bscf-5234",
-    "indexNo": "ART—07",
+    "indexNo": "ART—02",
     "name": "최시복",
     "nameEn": "ARCHIVE #5234",
     "discipline": "도자·조형",
@@ -272,11 +57,19 @@ export const CRAWLED_ARTISTS = [
     "instagramUrl": "https://e-archive.bscf.or.kr/23_db/db_view.php?part=a&idx=5234",
     "portfolioUrl": "https://e-archive.bscf.or.kr/23_db/db_view.php?part=a&idx=5234",
     "sourceLabel": "부산문화재단 예술인 전자아카이브 (2025–2026)",
-    "portraitUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1792639092_p.png",
-    "featuredWorkUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1792639092_p.png",
+    "portraitUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1792638821_p.jpg",
+    "featuredWorkUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1792638821_p.jpg",
     "artworks": [
       {
         "id": "bscf-5234-w1",
+        "title": "모퍼시리즈_오카리나 ⅠⅡⅢ",
+        "year": "2025–2026",
+        "medium": "도자·조형",
+        "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1792638821_p.jpg",
+        "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1792638821_p.jpg"
+      },
+      {
+        "id": "bscf-5234-w2",
         "title": "모퍼시리즈_오카리나 ⅠⅡⅢ",
         "year": "2025–2026",
         "medium": "도자·조형",
@@ -284,26 +77,18 @@ export const CRAWLED_ARTISTS = [
         "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1792639092_p.png"
       },
       {
-        "id": "bscf-5234-w2",
+        "id": "bscf-5234-w3",
         "title": "모퍼시리즈_오카리나 ⅠⅡⅢ",
         "year": "2025–2026",
         "medium": "도자·조형",
         "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1792639124_p.png",
         "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1792639124_p.png"
-      },
-      {
-        "id": "bscf-5234-w3",
-        "title": "모퍼시리즈_오카리나 ⅠⅡⅢ",
-        "year": "2025–2026",
-        "medium": "도자·조형",
-        "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1792639455_p.png",
-        "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1792639455_p.png"
       }
     ]
   },
   {
     "id": "bscf-5221",
-    "indexNo": "ART—08",
+    "indexNo": "ART—03",
     "name": "김철황",
     "nameEn": "KIM CHUL HWANG",
     "discipline": "프린트·드로잉",
@@ -346,7 +131,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "bscf-5193",
-    "indexNo": "ART—09",
+    "indexNo": "ART—04",
     "name": "이성은",
     "nameEn": "SEONGEUN LEE",
     "discipline": "도자·조형",
@@ -389,7 +174,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "bscf-5183",
-    "indexNo": "ART—10",
+    "indexNo": "ART—05",
     "name": "김현경 (이플)",
     "nameEn": "KIM HYUNKYUNG (EEPEUL)",
     "discipline": "회화·미술",
@@ -432,7 +217,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "bscf-5170",
-    "indexNo": "ART—11",
+    "indexNo": "ART—06",
     "name": "홍익종",
     "nameEn": "HONG. IK-JONG",
     "discipline": "프린트·드로잉",
@@ -475,7 +260,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "bscf-5128",
-    "indexNo": "ART—12",
+    "indexNo": "ART—07",
     "name": "오원주",
     "nameEn": "WONZU AU",
     "discipline": "사진",
@@ -518,7 +303,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "bscf-5119",
-    "indexNo": "ART—13",
+    "indexNo": "ART—08",
     "name": "이진호",
     "nameEn": "LEEJINHO",
     "discipline": "공예·오브제",
@@ -561,7 +346,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "bscf-5091",
-    "indexNo": "ART—14",
+    "indexNo": "ART—09",
     "name": "조용문",
     "nameEn": "ARCHIVE #5091",
     "discipline": "도자·조형",
@@ -604,7 +389,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "bscf-5065",
-    "indexNo": "ART—15",
+    "indexNo": "ART—10",
     "name": "강민기",
     "nameEn": "ARCHIVE #5065",
     "discipline": "회화·미술",
@@ -647,7 +432,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "bscf-5062",
-    "indexNo": "ART—16",
+    "indexNo": "ART—11",
     "name": "배남주",
     "nameEn": "BAE NAM JU",
     "discipline": "사진",
@@ -690,7 +475,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "bscf-5060",
-    "indexNo": "ART—17",
+    "indexNo": "ART—12",
     "name": "박한샘",
     "nameEn": "ARCHIVE #5060",
     "discipline": "회화·미술",
@@ -733,7 +518,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "bscf-5059",
-    "indexNo": "ART—18",
+    "indexNo": "ART—13",
     "name": "노주련",
     "nameEn": "ROH JURYUN",
     "discipline": "도자·조형",
@@ -776,7 +561,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "bscf-5058",
-    "indexNo": "ART—19",
+    "indexNo": "ART—14",
     "name": "김보경",
     "nameEn": "KIM. BO KYONG",
     "discipline": "회화·미술",
@@ -819,7 +604,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "bscf-5057",
-    "indexNo": "ART—20",
+    "indexNo": "ART—15",
     "name": "김현종(엔조)",
     "nameEn": "KIM HYUNJONG(ENJO)",
     "discipline": "도자·조형",
@@ -862,7 +647,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "bscf-5056",
-    "indexNo": "ART—21",
+    "indexNo": "ART—16",
     "name": "변대용",
     "nameEn": "BYUN DAE YONG",
     "discipline": "회화·미술",
@@ -905,7 +690,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "bscf-5053",
-    "indexNo": "ART—22",
+    "indexNo": "ART—17",
     "name": "정제운(제제)",
     "nameEn": "JEONG JEWOON",
     "discipline": "도자·조형",
@@ -948,7 +733,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "bscf-5051",
-    "indexNo": "ART—23",
+    "indexNo": "ART—18",
     "name": "이창진",
     "nameEn": "CHANGJIN LEE",
     "discipline": "사진",
@@ -991,7 +776,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "bscf-5044",
-    "indexNo": "ART—24",
+    "indexNo": "ART—19",
     "name": "구경환",
     "nameEn": "GU KYUNGHWAN",
     "discipline": "도자·조형",
@@ -1034,7 +819,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "bscf-5040",
-    "indexNo": "ART—25",
+    "indexNo": "ART—20",
     "name": "김윤호",
     "nameEn": "YOUNHO KIM",
     "discipline": "도자·조형",
@@ -1077,7 +862,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "bscf-5024",
-    "indexNo": "ART—26",
+    "indexNo": "ART—21",
     "name": "서일화",
     "nameEn": "SEO IL HWA",
     "discipline": "회화·미술",
@@ -1120,7 +905,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "bscf-5018",
-    "indexNo": "ART—27",
+    "indexNo": "ART—22",
     "name": "구경미",
     "nameEn": "GUKYUNGMI",
     "discipline": "도자·조형",
@@ -1163,7 +948,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "bscf-4984",
-    "indexNo": "ART—28",
+    "indexNo": "ART—23",
     "name": "전재석",
     "nameEn": "JUN JAE SUK",
     "discipline": "회화·미술",
@@ -1206,7 +991,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "bscf-4349",
-    "indexNo": "ART—29",
+    "indexNo": "ART—24",
     "name": "신준식",
     "nameEn": "SHIN JOON SIK",
     "discipline": "도자·조형",
@@ -1249,7 +1034,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "bscf-3562",
-    "indexNo": "ART—30",
+    "indexNo": "ART—25",
     "name": "백근영",
     "nameEn": "KEUNYOUNG BAEK",
     "discipline": "도자·조형",

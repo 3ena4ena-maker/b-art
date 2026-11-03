@@ -68,7 +68,7 @@ export function App() {
       artist,
     }));
 
-    const shifted2 = [...ARTISTS.slice(11), ...ARTISTS.slice(0, 11)];
+    const shifted2 = [...ARTISTS.slice(8), ...ARTISTS.slice(0, 8)];
     const row2 = shifted2.map((artist) => ({
       workId: artist.artworks[1].id,
       title: artist.artworks[1].title,
@@ -76,7 +76,7 @@ export function App() {
       artist,
     }));
 
-    const shifted3 = [...ARTISTS.slice(22), ...ARTISTS.slice(0, 22)];
+    const shifted3 = [...ARTISTS.slice(16), ...ARTISTS.slice(0, 16)];
     const row3 = shifted3.map((artist) => ({
       workId: artist.artworks[2].id,
       title: artist.artworks[2].title,

@@ -3,7 +3,6 @@ import fs from 'fs';
 const scratchDir =
   'C:\\Users\\SenaPark\\.gemini\\antigravity\\brain\\14d16f77-7630-4cc0-a0b3-ffbdc20dc0cb\\scratch';
 
-const totatogaRaw = JSON.parse(fs.readFileSync(`${scratchDir}\\totatoga_artists.json`, 'utf-8'));
 const bscfRaw = JSON.parse(fs.readFileSync(`${scratchDir}\\crawled_artists.json`, 'utf-8'));
 const bscfExtra = JSON.parse(fs.readFileSync(`${scratchDir}\\manifest_bscf_extra.json`, 'utf-8'));
 
@@ -14,69 +13,10 @@ for (const item of bscfExtra) {
   extraByBIdx.get(item.bIdx).push(item);
 }
 
-// Visually verified 100% pure-artwork Totatoga 6th Cohort artists (zero portraits, zero faces, zero posters, zero workshop/studio photos)
-const TOTATOGA_VERIFIED = {
-  '/dokikim': {
-    name: '김덕희',
-    nameEn: 'DOKI KIM',
-    discipline: '도자·조형',
-    district: '중구 원도심 (또따또가)',
-    instagram: 'dokikim.com',
-    instagramUrl: 'http://www.dokikim.com/',
-    website: 'http://www.dokikim.com/',
-    workTitles: ['열과 중력의 자리 I', '비가시적 파동 II', '물질의 임계점 III'],
-    uniqIndices: [2, 4, 6],
-  },
-  '/seongahsim': {
-    name: '심성아',
-    nameEn: 'SEONGAH SIM',
-    discipline: '공예·오브제',
-    district: '중구 원도심 (또따또가)',
-    instagram: '@sim.seong_a',
-    instagramUrl: 'https://www.instagram.com/sim.seong_a/',
-    website: 'https://totatoga.com/seongahsim',
-    workTitles: ['수집된 종이 콜라주 I', '일상의 조각 오브제 II', '흔적의 재구성 III'],
-    uniqIndices: [4, 6, 8],
-  },
-  '/sayoonyang': {
-    name: '양사윤',
-    nameEn: 'SAYOON YANG',
-    discipline: '공예·오브제',
-    district: '중구 원도심 (또따또가)',
-    instagram: '@say_sayoon',
-    instagramUrl: 'https://www.instagram.com/say_sayoon',
-    website: 'https://goodlifearchive.kr/',
-    workTitles: ['도구와 물성 오브제 I', '파스텔 블록 조형 II', '기록의 물성 III'],
-    uniqIndices: [2, 4, 6],
-  },
-  '/haeunjoe': {
-    name: '조하은',
-    nameEn: 'HAEUN JOE',
-    discipline: '회화·미술',
-    district: '중구 원도심 (또따또가)',
-    instagram: '@cecilia_jhe',
-    instagramUrl: 'https://www.instagram.com/cecilia_jhe',
-    website: 'https://totatoga.com/haeunjoe',
-    workTitles: ['찰나의 고요 I', '놓쳐버린 풍경 II', '푸른 정지의 순간 III'],
-    uniqIndices: [4, 6, 8],
-  },
-  '/minkyungchoi': {
-    name: '최민경',
-    nameEn: 'MINKYUNG CHOI',
-    discipline: '공예·오브제',
-    district: '중구 원도심 (또따또가)',
-    instagram: '@goodmorningrecipe',
-    instagramUrl: 'https://www.instagram.com/goodmorningrecipe/',
-    website: 'https://totatoga.com/minkyungchoi',
-    workTitles: ['결정체 오브제 I', '투명한 경계 II', '설탕과 한천의 조형 III'],
-    uniqIndices: [2, 6, 8],
-  },
-};
-
-// Visually verified 100% pure-artwork BSCF E-Archive artists: bIdx -> [wIdx1, wIdx2, wIdx3]
+// Visually verified 100% pure-artwork BSCF E-Archive artists (excluding all Totatoga artists, portraits, posters, and studio shots)
 const BSCF_VERIFIED = [
-  { bIdx: 1, wIndices: [2, 3, 4], district: '해운대구 달맞이·우동' }, // 안은솔 (푸른 물결·수면 회화 3점)
-  { bIdx: 4, wIndices: [1, 2, 3], district: '수영구 남천·광안동' }, // 최시복 (옻칠 조형 3점)
+  { bIdx: 1, wIndices: [2, 3, 4], district: '해운대구 달맞이·우동' }, // 안은솔 (푸른 수면·물결 회화 3점)
+  { bIdx: 4, wIndices: [0, 1, 2], district: '수영구 남천·광안동' }, // 최시복 (옻칠 조형 3점)
   { bIdx: 10, wIndices: [0, 1, 2], district: '동래구 명륜·사직동' }, // 김철황 (한국화 3점)
   { bIdx: 12, wIndices: [0, 5, 7], district: '금정구 장전·구서동' }, // 이성은 (조형·설치 3점)
   { bIdx: 13, wIndices: [1, 5, 6], district: '수영구 망미동 예술마을' }, // 김현경(이플) (회화 3점)
@@ -114,56 +54,6 @@ function parseNameParts(rawName) {
 const finalArtists = [];
 let seq = 1;
 
-// 1. Add Totatoga verified artists
-for (const item of totatogaRaw) {
-  const meta = TOTATOGA_VERIFIED[item.slug];
-  if (!meta) continue;
-
-  const uniqImgs = [...new Set(item.images || [])];
-  const chosenUrls = [
-    ...(meta.customUrls || []),
-    ...meta.uniqIndices.map((idx) => uniqImgs[idx]).filter(Boolean),
-  ].slice(0, 3);
-
-  const introText = item.texts[0] || '';
-  const statement =
-    introText
-      .replace(new RegExp(`^${meta.name}\\s*[^\\s]+\\s*`), '')
-      .slice(0, 120)
-      .trim() + (introText.length > 120 ? '...' : '');
-  const cvText = item.texts[2] || introText;
-
-  const artworks = chosenUrls.map((imgUrl, i) => ({
-    id: `ttg-${seq}-w${i + 1}`,
-    title: meta.workTitles[i] || `${meta.name} 대표작 0${i + 1}`,
-    year: '2025–2026',
-    medium: meta.discipline,
-    imageUrl: imgUrl,
-    highResUrl: imgUrl,
-  }));
-
-  finalArtists.push({
-    id: `ttg-${item.slug.replace('/', '')}`,
-    indexNo: `ART—${String(seq).padStart(2, '0')}`,
-    name: meta.name,
-    nameEn: meta.nameEn,
-    discipline: meta.discipline,
-    district: meta.district,
-    updatedAt: '2026',
-    statement: statement || introText,
-    bio: `${introText}\n\n[최근 주요 이력]\n${cvText.slice(0, 600)}`,
-    instagram: meta.instagram,
-    instagramUrl: meta.instagramUrl,
-    portfolioUrl: meta.website,
-    sourceLabel: '또따또가 6기 입주작가 (2025–2026)',
-    portraitUrl: chosenUrls[0],
-    featuredWorkUrl: chosenUrls[0],
-    artworks,
-  });
-  seq++;
-}
-
-// 2. Add BSCF E-Archive verified artists
 for (const entry of BSCF_VERIFIED) {
   const raw = bscfRaw[entry.bIdx];
   if (!raw) continue;
