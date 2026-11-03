@@ -14,20 +14,8 @@ for (const item of bscfExtra) {
   extraByBIdx.get(item.bIdx).push(item);
 }
 
-// Visually verified 100% pure-artwork Totatoga 6th Cohort artists (zero portraits, zero posters, zero workshop/studio photos)
+// Visually verified 100% pure-artwork Totatoga 6th Cohort artists (zero portraits, zero faces, zero posters, zero workshop/studio photos)
 const TOTATOGA_VERIFIED = {
-  '/kunyekim': {
-    name: '김근예',
-    nameEn: 'KUNYE KIM',
-    discipline: '프린트·드로잉',
-    district: '중구 중앙동 (또따또가)',
-    instagram: '@kunyekim',
-    instagramUrl: 'https://www.instagram.com/kunyekim/',
-    website: 'https://totatoga.com/kunyekim',
-    workTitles: ['일렁임의 찰나 I', '열대의 창 II', '밤의 유영 III'],
-    customUrls: [bscfRaw[0].artworks[0].imageUrl],
-    uniqIndices: [4, 6],
-  },
   '/dokikim': {
     name: '김덕희',
     nameEn: 'DOKI KIM',
@@ -38,17 +26,6 @@ const TOTATOGA_VERIFIED = {
     website: 'http://www.dokikim.com/',
     workTitles: ['열과 중력의 자리 I', '비가시적 파동 II', '물질의 임계점 III'],
     uniqIndices: [2, 4, 6],
-  },
-  '/zeongminkim': {
-    name: '김정민',
-    nameEn: 'ZEONGMIN KIM',
-    discipline: '사진',
-    district: '중구 원도심 (또따또가)',
-    instagram: '@zeongmin.kim',
-    instagramUrl: 'https://www.instagram.com/zeongmin.kim/',
-    website: 'http://zeongminkim.com/',
-    workTitles: ['감각의 시퀀스 01', '감각의 시퀀스 02', '감각의 시퀀스 03'],
-    uniqIndices: [4, 6, 8],
   },
   '/seongahsim': {
     name: '심성아',
@@ -98,7 +75,7 @@ const TOTATOGA_VERIFIED = {
 
 // Visually verified 100% pure-artwork BSCF E-Archive artists: bIdx -> [wIdx1, wIdx2, wIdx3]
 const BSCF_VERIFIED = [
-  { bIdx: 1, wIndices: [0, 3, 4], district: '해운대구 달맞이·우동' }, // 안은솔 (회화 3점)
+  { bIdx: 1, wIndices: [2, 3, 4], district: '해운대구 달맞이·우동' }, // 안은솔 (푸른 물결·수면 회화 3점)
   { bIdx: 4, wIndices: [1, 2, 3], district: '수영구 남천·광안동' }, // 최시복 (옻칠 조형 3점)
   { bIdx: 10, wIndices: [0, 1, 2], district: '동래구 명륜·사직동' }, // 김철황 (한국화 3점)
   { bIdx: 12, wIndices: [0, 5, 7], district: '금정구 장전·구서동' }, // 이성은 (조형·설치 3점)
