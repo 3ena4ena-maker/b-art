@@ -161,7 +161,7 @@ export function App() {
     };
   }, [calcCategory, calcQty, calcFinish]);
 
-  // Filtered Galleries by Busan District (구·군)
+  // Filtered Galleries by Busan District (구·군) & District Signature Colors
   const zones = [
     '전체',
     '해운대구',
@@ -178,6 +178,33 @@ export function App() {
     '사상구',
     '기장군',
   ];
+
+  const districtColorMap: Record<
+    string,
+    { color: string; bg: string; border: string; mapColor: string }
+  > = {
+    해운대구: { color: '#0052FF', bg: '#E6EFFF', border: '#99BAFF', mapColor: '#60A5FA' },
+    수영구: { color: '#007A87', bg: '#E0F7FA', border: '#80DEEA', mapColor: '#22D3EE' },
+    중구: { color: '#D92D20', bg: '#FEE4E2', border: '#FDA29B', mapColor: '#F87171' },
+    영도구: { color: '#4F46E5', bg: '#EEF2FF', border: '#A5B4FC', mapColor: '#818CF8' },
+    부산진구: { color: '#B45309', bg: '#FEF3C7', border: '#FCD34D', mapColor: '#FBBF24' },
+    남구: { color: '#047857', bg: '#D1FAE5', border: '#6EE7B7', mapColor: '#34D399' },
+    북구: { color: '#7C3AED', bg: '#F3E8FF', border: '#C4B5FD', mapColor: '#C084FC' },
+    동래구: { color: '#C2410C', bg: '#FFEDD5', border: '#FDBA74', mapColor: '#FB923C' },
+    사하구: { color: '#0369A1', bg: '#E0F2FE', border: '#7DD3FC', mapColor: '#38BDF8' },
+    금정구: { color: '#15803D', bg: '#DCFCE7', border: '#86EFAC', mapColor: '#4ADE80' },
+    동구: { color: '#BE185D', bg: '#FCE7F3', border: '#F9A8D4', mapColor: '#F472B6' },
+    사상구: { color: '#334155', bg: '#E2E8F0', border: '#94A3B8', mapColor: '#CBD5E1' },
+    기장군: { color: '#0F766E', bg: '#CCFBF1', border: '#5EEAD4', mapColor: '#2DD4BF' },
+  };
+
+  const getDistrictStyle = (zone: string) =>
+    districtColorMap[zone] || {
+      color: '#0052FF',
+      bg: '#E6EFFF',
+      border: '#99BAFF',
+      mapColor: '#60A5FA',
+    };
   const filteredGalleries = useMemo(() => {
     if (selectedZone === '전체') return GALLERIES;
     return GALLERIES.filter((g) => g.zone === selectedZone);
@@ -991,15 +1018,32 @@ export function App() {
 
           <div className="filter-strip">
             <div className="filter-tabs gallery-zone-tabs">
-              {zones.map((z) => (
-                <button
-                  key={z}
-                  className={`filter-tab ${selectedZone === z ? 'active' : ''}`}
-                  onClick={() => setSelectedZone(z)}
-                >
-                  <span>{z}</span>
-                </button>
-              ))}
+              {zones.map((z) => {
+                const isSelected = selectedZone === z;
+                const dColor = z !== '전체' ? getDistrictStyle(z) : null;
+                return (
+                  <button
+                    key={z}
+                    className={`filter-tab ${isSelected ? 'active' : ''}`}
+                    onClick={() => setSelectedZone(z)}
+                    style={
+                      isSelected && dColor
+                        ? { background: dColor.color, color: '#ffffff' }
+                        : undefined
+                    }
+                  >
+                    {dColor && (
+                      <span
+                        className="zone-color-dot"
+                        style={{
+                          background: isSelected ? '#ffffff' : dColor.color,
+                        }}
+                      />
+                    )}
+                    <span>{z}</span>
+                  </button>
+                );
+              })}
             </div>
           </div>
 
@@ -1039,10 +1083,11 @@ export function App() {
                       const isMatched =
                         selectedZone === '전체' || gal.zone === selectedZone;
                       const isSelected = activeGallery?.id === gal.id;
+                      const dStyle = getDistrictStyle(gal.zone);
                       return (
                         <g
                           key={gal.id}
-                          style={{ cursor: 'pointer', opacity: isMatched ? 1 : 0.28 }}
+                          style={{ cursor: 'pointer', opacity: isMatched ? 1 : 0.22 }}
                           onClick={() => setActiveGallery(gal)}
                         >
                           {isSelected && (
@@ -1051,22 +1096,22 @@ export function App() {
                               cy={gal.mapPos.y}
                               r="5.5"
                               fill="none"
-                              stroke="#66A3FF"
-                              strokeWidth="0.6"
+                              stroke={dStyle.mapColor}
+                              strokeWidth="0.7"
                             />
                           )}
                           <circle
                             cx={gal.mapPos.x}
                             cy={gal.mapPos.y}
-                            r={isSelected ? '2.6' : '2.0'}
-                            fill={isSelected ? '#0052FF' : '#ffffff'}
+                            r={isSelected ? '2.8' : '2.2'}
+                            fill={dStyle.mapColor}
                             stroke="#0D1624"
                             strokeWidth="0.5"
                           />
                           <text
                             x={gal.mapPos.x + 3.2}
                             y={gal.mapPos.y + 1}
-                            fill="#ffffff"
+                            fill={dStyle.mapColor}
                             fontSize="3.2"
                             fontFamily="JetBrains Mono, monospace"
                           >
@@ -1081,23 +1126,35 @@ export function App() {
             </div>
 
             <div className="gallery-list-panel">
-              {filteredGalleries.map((gal) => (
-                <article
-                  key={gal.id}
-                  className={`gallery-row-item ${
-                    activeGallery?.id === gal.id ? 'selected' : ''
-                  }`}
-                  onClick={() => setActiveGallery(gal)}
-                >
-                  <div className="gallery-row-compact">
-                    <div className="gallery-row-main">
-                      <span className="gallery-zone-badge">{gal.zone}</span>
-                      <h3 className="gallery-row-title">{gal.name}</h3>
+              {filteredGalleries.map((gal) => {
+                const dStyle = getDistrictStyle(gal.zone);
+                return (
+                  <article
+                    key={gal.id}
+                    className={`gallery-row-item ${
+                      activeGallery?.id === gal.id ? 'selected' : ''
+                    }`}
+                    onClick={() => setActiveGallery(gal)}
+                  >
+                    <div className="gallery-row-compact">
+                      <div className="gallery-row-main">
+                        <span
+                          className="gallery-zone-badge"
+                          style={{
+                            color: dStyle.color,
+                            background: dStyle.bg,
+                            borderColor: dStyle.border,
+                          }}
+                        >
+                          {gal.zone}
+                        </span>
+                        <h3 className="gallery-row-title">{gal.name}</h3>
+                      </div>
+                      <ArrowUpRight size={14} className="gallery-arrow-icon" />
                     </div>
-                    <ArrowUpRight size={14} className="gallery-arrow-icon" />
-                  </div>
-                </article>
-              ))}
+                  </article>
+                );
+              })}
             </div>
           </div>
         </section>
@@ -1418,14 +1475,29 @@ export function App() {
             </div>
 
             <div className="drawer-body-section">
-              <div
-                style={{
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '11px',
-                  color: 'var(--marine)',
-                }}
-              >
-                {activeGallery.zone} · {activeGallery.spaceType}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span
+                  style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '11px',
+                    fontWeight: 600,
+                    padding: '2px 8px',
+                    color: getDistrictStyle(activeGallery.zone).color,
+                    background: getDistrictStyle(activeGallery.zone).bg,
+                    border: `1px solid ${getDistrictStyle(activeGallery.zone).border}`,
+                  }}
+                >
+                  {activeGallery.zone}
+                </span>
+                <span
+                  style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '11px',
+                    color: 'var(--ink-muted)',
+                  }}
+                >
+                  {activeGallery.spaceType}
+                </span>
               </div>
               <h2 style={{ fontSize: '30px', fontWeight: 700, marginTop: '6px' }}>
                 {activeGallery.name}

@@ -1090,6 +1090,13 @@ section {
   flex: 1;
 }
 
+.zone-color-dot {
+  width: 6px;
+  height: 6px;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
 .gallery-zone-badge {
   font-family: var(--font-mono);
   font-size: 11px;
@@ -1097,7 +1104,10 @@ section {
   color: var(--marine);
   letter-spacing: 0.02em;
   flex-shrink: 0;
-  min-width: 52px;
+  min-width: 58px;
+  padding: 2px 7px;
+  border: 1px solid var(--line);
+  text-align: center;
 }
 
 .gallery-row-title {
@@ -1898,12 +1908,17 @@ section {
   }
   .gallery-zone-tabs .filter-tab {
     padding: 8px 3px;
-    font-size: 11.5px;
+    font-size: 11px;
     justify-content: center;
     text-align: center;
     border-right: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
     min-width: 0;
+    gap: 4px;
+  }
+  .zone-color-dot {
+    width: 5px;
+    height: 5px;
   }
   .gallery-zone-tabs .filter-tab:nth-child(5n) {
     border-right: none;
@@ -1969,8 +1984,9 @@ section {
     gap: 10px;
   }
   .gallery-zone-badge {
-    font-size: 11px;
-    min-width: 48px;
+    font-size: 10.5px;
+    min-width: 54px;
+    padding: 2px 6px;
   }
   .gallery-row-title {
     font-size: 14.5px;
