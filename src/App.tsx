@@ -544,30 +544,32 @@ export function App() {
 
           <div className="goods-editorial-layout">
             <div className="goods-index-rail">
-              {GOODS_MANUALS.map((manual) => {
-                const active = manual.id === currentManual.id;
-                return (
-                  <div
-                    key={manual.id}
-                    className={`goods-rail-item ${active ? 'active' : ''}`}
-                    onClick={() => setSelectedManualId(manual.id)}
-                  >
-                    <div className="goods-rail-meta">
-                      <span>
-                        {manual.code} · {manual.category}
-                      </span>
-                      <span>{manual.difficulty}</span>
+              <div className="goods-manual-list">
+                {GOODS_MANUALS.map((manual) => {
+                  const active = manual.id === currentManual.id;
+                  return (
+                    <div
+                      key={manual.id}
+                      className={`goods-rail-item ${active ? 'active' : ''}`}
+                      onClick={() => setSelectedManualId(manual.id)}
+                    >
+                      <div className="goods-rail-meta">
+                        <span>
+                          {manual.code} · {manual.category}
+                        </span>
+                        <span>{manual.difficulty}</span>
+                      </div>
+                      <div className="goods-rail-title">{manual.title}</div>
+                      <div className="goods-rail-moq">
+                        MOQ {manual.moq} · {manual.leadTime}
+                      </div>
                     </div>
-                    <div className="goods-rail-title">{manual.title}</div>
-                    <div className="goods-rail-moq">
-                      MOQ {manual.moq} · {manual.leadTime}
-                    </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
 
               {/* Small-Batch Cost Estimator */}
-              <div style={{ padding: '28px', background: 'var(--bg-alt)' }}>
+              <div className="cost-estimator-box">
                 <div
                   style={{
                     fontFamily: 'var(--font-mono)',
@@ -845,31 +847,15 @@ export function App() {
 
           {/* BUSAN LOCAL MAKERS & PRESS DIRECTORY TABLE */}
           <div className="makers-directory-toolbar">
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: '12px' }}>
-              <strong style={{ fontSize: '15px', letterSpacing: '-0.02em' }}>
-                부산 로컬 인쇄소 · 소량 오브제 공정처 디렉토리
-              </strong>
-              <span
-                style={{
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '11px',
-                  color: 'var(--marine)',
-                }}
-              >
+            <div className="makers-toolbar-header">
+              <strong>부산 로컬 인쇄소 · 소량 오브제 공정처 디렉토리</strong>
+              <span className="makers-vendor-count">
                 {LOCAL_MAKERS.length} VERIFIED VENDORS IN BUSAN
               </span>
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '8px' }}>
-              <div
-                style={{
-                  display: 'flex',
-                  gap: '6px',
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '11px',
-                  flexWrap: 'wrap',
-                }}
-              >
+            <div className="makers-toolbar-controls">
+              <div className="makers-cat-scroll">
                 {[
                   '전체',
                   '지류·인쇄·리소',
@@ -881,48 +867,32 @@ export function App() {
                   <button
                     key={cat}
                     onClick={() => setMakerCategoryFilter(cat)}
-                    style={{
-                      padding: '6px 11px',
-                      border: '1px solid var(--line-strong)',
-                      background: makerCategoryFilter === cat ? 'var(--ink)' : 'transparent',
-                      color: makerCategoryFilter === cat ? '#ffffff' : 'var(--ink)',
-                    }}
+                    className={`makers-cat-btn ${makerCategoryFilter === cat ? 'active' : ''}`}
                   >
                     {cat === '전체' ? `전체 (${LOCAL_MAKERS.length})` : cat}
                   </button>
                 ))}
               </div>
 
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '6px',
-                  padding: '5px 10px',
-                  border: '1px solid var(--line-strong)',
-                  background: 'var(--bg-pure)',
-                }}
-              >
+              <div className="makers-search-box">
                 <Search size={13} />
                 <input
                   type="text"
                   placeholder="업체명·동네·공정 검색..."
                   value={makerQuery}
                   onChange={(e) => setMakerQuery(e.target.value)}
-                  style={{
-                    border: 'none',
-                    outline: 'none',
-                    background: 'transparent',
-                    fontSize: '12px',
-                    width: '160px',
-                  }}
                 />
+                {makerQuery && (
+                  <button onClick={() => setMakerQuery('')}>
+                    <X size={12} />
+                  </button>
+                )}
               </div>
             </div>
           </div>
 
-          <div style={{ overflowX: 'auto' }}>
-            <table className="editorial-table">
+          <div className="makers-table-wrap">
+            <table className="editorial-table makers-table">
               <thead>
                 <tr>
                   <th style={{ width: '120px' }}>CODE / 분류</th>
@@ -947,82 +917,36 @@ export function App() {
                   return matchCat && matchQ;
                 }).map((maker) => (
                   <tr key={maker.id}>
-                    <td>
-                      <div
-                        style={{
-                          fontFamily: 'var(--font-mono)',
-                          fontSize: '12px',
-                          fontWeight: 600,
-                          color: 'var(--marine)',
-                        }}
-                      >
-                        {maker.code}
+                    <td className="maker-cell-code">
+                      <div className="maker-code-badge">{maker.code}</div>
+                      <div className="maker-category-tag">{maker.category}</div>
+                    </td>
+                    <td className="maker-cell-info">
+                      <div className="maker-name">{maker.name}</div>
+                      <div className="maker-district">{maker.district}</div>
+                      <div className="maker-contact">{maker.contact}</div>
+                    </td>
+                    <td className="maker-cell-spec">
+                      <div className="maker-specialty">{maker.specialty}</div>
+                      <div className="maker-equipment">{maker.equipment}</div>
+                    </td>
+                    <td className="maker-cell-moq">
+                      <div className="maker-moq-val">
+                        <span className="mobile-only-label">MOQ</span> {maker.moq}
                       </div>
-                      <div
-                        style={{
-                          display: 'inline-block',
-                          marginTop: '6px',
-                          padding: '2px 6px',
-                          fontSize: '11px',
-                          border: '1px solid var(--line-strong)',
-                          background: 'var(--bg-alt)',
-                        }}
-                      >
-                        {maker.category}
+                      <div className="maker-turnaround-val">
+                        <span className="mobile-only-label">납기</span> {maker.turnaround}
                       </div>
                     </td>
-                    <td>
-                      <div style={{ fontWeight: 700, fontSize: '15px' }}>{maker.name}</div>
-                      <div
-                        style={{
-                          fontFamily: 'var(--font-mono)',
-                          fontSize: '11px',
-                          color: 'var(--ink-muted)',
-                          marginTop: '4px',
-                        }}
-                      >
-                        {maker.district}
-                      </div>
-                      <div
-                        style={{
-                          fontFamily: 'var(--font-mono)',
-                          fontSize: '11px',
-                          color: 'var(--ink)',
-                          marginTop: '4px',
-                        }}
-                      >
-                        {maker.contact}
-                      </div>
-                    </td>
-                    <td>
-                      <div style={{ fontWeight: 600 }}>{maker.specialty}</div>
-                      <div style={{ fontSize: '12px', color: 'var(--ink-muted)', marginTop: '4px' }}>
-                        {maker.equipment}
-                      </div>
-                    </td>
-                    <td style={{ fontFamily: 'var(--font-mono)', fontSize: '12px' }}>
-                      <div>{maker.moq}</div>
-                      <div style={{ color: 'var(--ink-muted)', marginTop: '4px' }}>
-                        {maker.turnaround}
-                      </div>
-                    </td>
-                    <td>
-                      <div style={{ lineHeight: 1.55 }}>{maker.artistNote}</div>
+                    <td className="maker-cell-note">
+                      <div className="maker-note-text">{maker.artistNote}</div>
                       {maker.websiteUrl && (
-                        <div style={{ marginTop: '8px' }}>
+                        <div className="maker-site-wrap">
                           <a
                             href={maker.websiteUrl}
                             target="_blank"
                             rel="noreferrer"
-                            style={{
-                              display: 'inline-flex',
-                              alignItems: 'center',
-                              gap: '4px',
-                              fontFamily: 'var(--font-mono)',
-                              fontSize: '11px',
-                              color: 'var(--marine)',
-                              textDecoration: 'underline',
-                            }}
+                            className="maker-site-link"
                           >
                             <span>OFFICIAL SITE</span>
                             <ArrowUpRight size={12} />
@@ -1324,8 +1248,8 @@ export function App() {
           </div>
         </div>
 
-        <div style={{ overflowX: 'auto' }}>
-          <table className="editorial-table">
+        <div className="makers-table-wrap">
+          <table className="editorial-table dispatch-table">
             <thead>
               <tr>
                 <th style={{ width: '110px' }}>구분</th>
@@ -1337,7 +1261,7 @@ export function App() {
             <tbody>
               {filteredCollabPosts.map((post) => (
                 <tr key={post.id}>
-                  <td>
+                  <td className="dispatch-cell-type">
                     <span
                       style={{
                         display: 'inline-block',
@@ -1362,7 +1286,7 @@ export function App() {
                       {post.date}
                     </div>
                   </td>
-                  <td>
+                  <td className="dispatch-cell-body">
                     <div style={{ fontWeight: 700, fontSize: '15px', marginBottom: '6px' }}>
                       {post.title}
                     </div>
@@ -1370,7 +1294,7 @@ export function App() {
                       {post.description}
                     </div>
                   </td>
-                  <td>
+                  <td className="dispatch-cell-author">
                     <div style={{ fontWeight: 600, fontSize: '13px' }}>{post.author}</div>
                     <div
                       style={{
@@ -1383,7 +1307,7 @@ export function App() {
                       {post.district}
                     </div>
                   </td>
-                  <td style={{ fontFamily: 'var(--font-mono)', fontSize: '12px' }}>
+                  <td className="dispatch-cell-meta" style={{ fontFamily: 'var(--font-mono)', fontSize: '12px' }}>
                     <div>{post.targetCount}</div>
                     <div style={{ color: 'var(--marine)', marginTop: '4px' }}>
                       {post.deadline}
