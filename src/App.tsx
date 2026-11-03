@@ -24,7 +24,8 @@ export function App() {
 
   // Goods Manual & Estimator state
   const [selectedManualId, setSelectedManualId] = useState<string>(GOODS_MANUALS[0].id);
-  const [makerDistrictFilter, setMakerDistrictFilter] = useState<string>('전체');
+  const [makerCategoryFilter, setMakerCategoryFilter] = useState<string>('전체');
+  const [makerQuery, setMakerQuery] = useState<string>('');
   const [calcCategory, setCalcCategory] = useState<'riso' | 'acrylic' | 'fabric' | 'package'>('riso');
   const [calcQty, setCalcQty] = useState<number>(50);
   const [calcFinish, setCalcFinish] = useState<boolean>(true);
@@ -123,28 +124,28 @@ export function App() {
         baseUnit: 5800,
         finishAdd: 900,
         finishName: '코발트 청박 띠지 마감',
-        partner: '전포 리소 & 프레스 랩 / 중앙동 제일별색인쇄소',
+        partner: '스튜디오 소소나 / 케이제이프린트',
       },
       acrylic: {
         name: '20T 고투명 캐스팅 아크릴 문진 (80×80mm)',
         baseUnit: 12500,
         finishAdd: 1500,
         finishName: '4면 경면 폴리싱 + 부분 백판',
-        partner: '영도 정밀 아크릴 & 레이저 공작소',
+        partner: '위드메이킹 / 서면레이저공방',
       },
       fabric: {
         name: '워싱 광목 20수 패브릭 포스터 (50×70cm)',
         baseUnit: 9800,
         finishAdd: 1200,
         finishName: '사방 해리 봉제 + 직조 라벨',
-        partner: '수영 로우패브릭 스크린 스튜디오',
+        partner: '수엘비(SuLB) / 커스텀오버',
       },
       package: {
         name: '무목형 디지털 커팅 오브제 패키지 & 슬리브',
         baseUnit: 1650,
         finishAdd: 450,
         finishName: '비오톱 160g 슬리브 + 청박',
-        partner: '사상 동남지류 & 패키지 공방',
+        partner: '더상자 부산공장 / (주)현진패키지',
       },
     }[calcCategory];
 
@@ -521,7 +522,9 @@ export function App() {
               </button>
             ) : (
               <div className="section-bar-action" style={{ pointerEvents: 'none' }}>
-                <span>04 GUIDES · 05 PARTNERS</span>
+                <span>
+                  0{GOODS_MANUALS.length} GUIDES · {LOCAL_MAKERS.length} PARTNERS
+                </span>
               </div>
             )}
           </div>
@@ -840,26 +843,79 @@ export function App() {
               gap: '12px',
             }}
           >
-            <strong style={{ fontSize: '15px', letterSpacing: '-0.02em' }}>
-              부산 로컬 제작 파트너
-            </strong>
-            <div style={{ display: 'flex', gap: '8px', fontFamily: 'var(--font-mono)', fontSize: '11px' }}>
-              {['전체', '중구 중앙동 인쇄골목', '부산진구 전포동', '영도구 대평동 (깡깡이마을 인근)', '수영구 망미동'].map(
-                (dist) => (
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: '12px' }}>
+              <strong style={{ fontSize: '15px', letterSpacing: '-0.02em' }}>
+                부산 로컬 인쇄소 · 소량 오브제 공정처 디렉토리
+              </strong>
+              <span
+                style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: '11px',
+                  color: 'var(--marine)',
+                }}
+              >
+                {LOCAL_MAKERS.length} VERIFIED VENDORS IN BUSAN
+              </span>
+            </div>
+
+            <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '8px' }}>
+              <div
+                style={{
+                  display: 'flex',
+                  gap: '6px',
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: '11px',
+                  flexWrap: 'wrap',
+                }}
+              >
+                {[
+                  '전체',
+                  '지류·인쇄·리소',
+                  '아크릴·레이저·3D',
+                  '도자·유리·금속 오브제',
+                  '패브릭·실크스크린·자수',
+                  '패키지·액자·화방',
+                ].map((cat) => (
                   <button
-                    key={dist}
-                    onClick={() => setMakerDistrictFilter(dist)}
+                    key={cat}
+                    onClick={() => setMakerCategoryFilter(cat)}
                     style={{
-                      padding: '5px 10px',
+                      padding: '6px 11px',
                       border: '1px solid var(--line-strong)',
-                      background: makerDistrictFilter === dist ? 'var(--ink)' : 'transparent',
-                      color: makerDistrictFilter === dist ? '#ffffff' : 'var(--ink)',
+                      background: makerCategoryFilter === cat ? 'var(--ink)' : 'transparent',
+                      color: makerCategoryFilter === cat ? '#ffffff' : 'var(--ink)',
                     }}
                   >
-                    {dist === '전체' ? 'ALL' : dist.split(' ')[1]}
+                    {cat === '전체' ? `전체 (${LOCAL_MAKERS.length})` : cat}
                   </button>
-                )
-              )}
+                ))}
+              </div>
+
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  padding: '5px 10px',
+                  border: '1px solid var(--line-strong)',
+                  background: 'var(--bg-pure)',
+                }}
+              >
+                <Search size={13} />
+                <input
+                  type="text"
+                  placeholder="업체명·동네·공정 검색..."
+                  value={makerQuery}
+                  onChange={(e) => setMakerQuery(e.target.value)}
+                  style={{
+                    border: 'none',
+                    outline: 'none',
+                    background: 'transparent',
+                    fontSize: '12px',
+                    width: '160px',
+                  }}
+                />
+              </div>
             </div>
           </div>
 
@@ -867,20 +923,51 @@ export function App() {
             <table className="editorial-table">
               <thead>
                 <tr>
-                  <th style={{ width: '90px' }}>CODE</th>
-                  <th style={{ width: '210px' }}>파트너 / 소재지</th>
-                  <th style={{ width: '260px' }}>공정 · 장비</th>
-                  <th style={{ width: '150px' }}>MOQ</th>
-                  <th>노트</th>
+                  <th style={{ width: '120px' }}>CODE / 분류</th>
+                  <th style={{ width: '240px' }}>업체명 / 부산 소재지 · 연락처</th>
+                  <th style={{ width: '280px' }}>주요 공정 · 보유 장비</th>
+                  <th style={{ width: '165px' }}>최소수량(MOQ) / 납기</th>
+                  <th>제작 가이드 & 웹사이트</th>
                 </tr>
               </thead>
               <tbody>
-                {LOCAL_MAKERS.filter(
-                  (m) => makerDistrictFilter === '전체' || m.district === makerDistrictFilter
-                ).map((maker) => (
+                {LOCAL_MAKERS.filter((m) => {
+                  const matchCat =
+                    makerCategoryFilter === '전체' || m.category === makerCategoryFilter;
+                  const q = makerQuery.trim().toLowerCase();
+                  const matchQ =
+                    !q ||
+                    m.name.toLowerCase().includes(q) ||
+                    m.district.toLowerCase().includes(q) ||
+                    m.specialty.toLowerCase().includes(q) ||
+                    m.equipment.toLowerCase().includes(q) ||
+                    m.artistNote.toLowerCase().includes(q);
+                  return matchCat && matchQ;
+                }).map((maker) => (
                   <tr key={maker.id}>
-                    <td style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--marine)' }}>
-                      {maker.code}
+                    <td>
+                      <div
+                        style={{
+                          fontFamily: 'var(--font-mono)',
+                          fontSize: '12px',
+                          fontWeight: 600,
+                          color: 'var(--marine)',
+                        }}
+                      >
+                        {maker.code}
+                      </div>
+                      <div
+                        style={{
+                          display: 'inline-block',
+                          marginTop: '6px',
+                          padding: '2px 6px',
+                          fontSize: '11px',
+                          border: '1px solid var(--line-strong)',
+                          background: 'var(--bg-alt)',
+                        }}
+                      >
+                        {maker.category}
+                      </div>
                     </td>
                     <td>
                       <div style={{ fontWeight: 700, fontSize: '15px' }}>{maker.name}</div>
@@ -894,9 +981,19 @@ export function App() {
                       >
                         {maker.district}
                       </div>
+                      <div
+                        style={{
+                          fontFamily: 'var(--font-mono)',
+                          fontSize: '11px',
+                          color: 'var(--ink)',
+                          marginTop: '4px',
+                        }}
+                      >
+                        {maker.contact}
+                      </div>
                     </td>
                     <td>
-                      <div style={{ fontWeight: 500 }}>{maker.specialty}</div>
+                      <div style={{ fontWeight: 600 }}>{maker.specialty}</div>
                       <div style={{ fontSize: '12px', color: 'var(--ink-muted)', marginTop: '4px' }}>
                         {maker.equipment}
                       </div>
@@ -909,6 +1006,27 @@ export function App() {
                     </td>
                     <td>
                       <div style={{ lineHeight: 1.55 }}>{maker.artistNote}</div>
+                      {maker.websiteUrl && (
+                        <div style={{ marginTop: '8px' }}>
+                          <a
+                            href={maker.websiteUrl}
+                            target="_blank"
+                            rel="noreferrer"
+                            style={{
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: '4px',
+                              fontFamily: 'var(--font-mono)',
+                              fontSize: '11px',
+                              color: 'var(--marine)',
+                              textDecoration: 'underline',
+                            }}
+                          >
+                            <span>OFFICIAL SITE</span>
+                            <ArrowUpRight size={12} />
+                          </a>
+                        </div>
+                      )}
                     </td>
                   </tr>
                 ))}
