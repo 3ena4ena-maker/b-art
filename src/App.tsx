@@ -990,7 +990,7 @@ export function App() {
           </div>
 
           <div className="filter-strip">
-            <div className="filter-tabs">
+            <div className="filter-tabs gallery-zone-tabs">
               {zones.map((z) => (
                 <button
                   key={z}
@@ -1008,23 +1008,15 @@ export function App() {
               <div>
                 <div className="map-panel-header">
                   <div>
-                    <div
-                      style={{
-                        fontFamily: 'var(--font-mono)',
-                        fontSize: '11px',
-                        color: '#66A3FF',
-                        letterSpacing: '0.08em',
-                      }}
-                    >
-                      COASTAL NODES
-                    </div>
-                    <h3 style={{ fontSize: '20px', fontWeight: 700, marginTop: '4px' }}>
-                      부산 갤러리 좌표
-                    </h3>
+                    <div className="map-panel-kicker">COASTAL NODES</div>
+                    <h3 className="map-panel-title">부산 갤러리 좌표</h3>
+                  </div>
+                  <div className="map-panel-count">
+                    {filteredGalleries.length} SPACES
                   </div>
                 </div>
 
-                <div className="map-svg-container" style={{ marginTop: '20px' }}>
+                <div className="map-svg-container">
                   <svg
                     viewBox="0 0 100 100"
                     style={{ width: '100%', height: '100%', display: 'block' }}
@@ -1087,33 +1079,17 @@ export function App() {
                 </div>
               </div>
 
-              <div
-                style={{
-                  borderTop: '1px solid rgba(255,255,255,0.16)',
-                  paddingTop: '16px',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '8px',
-                }}
-              >
-                {GALLERIES.map((g) => (
+              <div className="map-node-list">
+                {filteredGalleries.map((g) => (
                   <div
                     key={g.id}
                     onClick={() => setActiveGallery(g)}
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      fontFamily: 'var(--font-mono)',
-                      fontSize: '11px',
-                      cursor: 'pointer',
-                      color:
-                        activeGallery?.id === g.id ? '#66A3FF' : 'rgba(255,255,255,0.78)',
-                    }}
+                    className={`map-node-item ${activeGallery?.id === g.id ? 'active' : ''}`}
                   >
-                    <span>
+                    <span className="map-node-name">
                       {g.indexNo} · {g.name.split(' (')[0]}
                     </span>
-                    <span>{g.zone}</span>
+                    <span className="map-node-zone">{g.zone}</span>
                   </div>
                 ))}
               </div>
@@ -1133,78 +1109,29 @@ export function App() {
                   </div>
                   <div className="gallery-row-content">
                     <div>
-                      <div
-                        style={{
-                          display: 'flex',
-                          justifyContent: 'space-between',
-                          alignItems: 'center',
-                        }}
-                      >
+                      <div className="gallery-row-meta">
                         <span className="gallery-zone-badge">
                           {gal.indexNo} · {gal.zone} · {gal.spaceType}
                         </span>
-                        <span
-                          style={{
-                            fontFamily: 'var(--font-mono)',
-                            fontSize: '11px',
-                            color: 'var(--ink-muted)',
-                          }}
-                        >
-                          {gal.hours}
-                        </span>
+                        <span className="gallery-hours-text">{gal.hours}</span>
                       </div>
 
-                      <h3
-                        style={{
-                          fontSize: '21px',
-                          fontWeight: 700,
-                          letterSpacing: '-0.02em',
-                          marginTop: '6px',
-                        }}
-                      >
-                        {gal.name}
-                      </h3>
+                      <h3 className="gallery-row-title">{gal.name}</h3>
 
-                      <p
-                        style={{
-                          fontSize: '14px',
-                          color: 'var(--ink-muted)',
-                          marginTop: '8px',
-                          lineHeight: 1.6,
-                        }}
-                      >
-                        {gal.description}
-                      </p>
+                      <p className="gallery-row-desc">{gal.description}</p>
                     </div>
 
-                    <div
-                      style={{
-                        paddingTop: '14px',
-                        borderTop: '1px solid var(--line)',
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        alignItems: 'flex-end',
-                        gap: '16px',
-                        flexWrap: 'wrap',
-                      }}
-                    >
-                      <div>
-                        <div
-                          style={{
-                            fontFamily: 'var(--font-mono)',
-                            fontSize: '10px',
-                            color: 'var(--marine)',
-                            letterSpacing: '0.06em',
-                          }}
-                        >
+                    <div className="gallery-row-exhibition">
+                      <div className="gallery-exhibition-info">
+                        <div className="gallery-exhibition-kicker">
                           ON VIEW ({gal.currentExhibition.period})
                         </div>
-                        <div style={{ fontSize: '14px', fontWeight: 600, marginTop: '2px' }}>
+                        <div className="gallery-exhibition-title">
                           {gal.currentExhibition.title} — {gal.currentExhibition.artists}
                         </div>
                       </div>
 
-                      <ArrowUpRight size={14} />
+                      <ArrowUpRight size={14} className="gallery-arrow-icon" />
                     </div>
                   </div>
                 </article>
