@@ -436,9 +436,7 @@ export function App() {
                   onClick={() => setActiveArtist(artist)}
                 >
                   <div className="artist-col-header">
-                    <span>
-                      {artist.indexNo} · {artist.district}
-                    </span>
+                    <span>{artist.indexNo}</span>
                     <span className="artist-status-tag">{artist.discipline}</span>
                   </div>
 
@@ -846,18 +844,7 @@ export function App() {
           </div>
 
           {/* BUSAN LOCAL MAKERS & PRESS DIRECTORY TABLE */}
-          <div
-            style={{
-              padding: '18px 28px',
-              borderBottom: '1px solid var(--line-strong)',
-              background: 'var(--bg)',
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              flexWrap: 'wrap',
-              gap: '12px',
-            }}
-          >
+          <div className="makers-directory-toolbar">
             <div style={{ display: 'flex', alignItems: 'baseline', gap: '12px' }}>
               <strong style={{ fontSize: '15px', letterSpacing: '-0.02em' }}>
                 부산 로컬 인쇄소 · 소량 오브제 공정처 디렉토리
@@ -1454,7 +1441,7 @@ export function App() {
           <div className="editorial-drawer" onClick={(e) => e.stopPropagation()}>
             <div className="drawer-top-bar">
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--marine)' }}>
-                {activeArtist.indexNo} // {activeArtist.sourceLabel}
+                {activeArtist.indexNo}
               </div>
               <button
                 onClick={() => setActiveArtist(null)}
@@ -1471,7 +1458,7 @@ export function App() {
               </button>
             </div>
 
-            <div style={{ padding: '32px', borderBottom: '1px solid var(--line)' }}>
+            <div className="drawer-body-section" style={{ borderBottom: '1px solid var(--line)' }}>
               <div
                 style={{
                   fontFamily: 'var(--font-mono)',
@@ -1479,7 +1466,7 @@ export function App() {
                   color: 'var(--ink-muted)',
                 }}
               >
-                {activeArtist.discipline} · {activeArtist.district}
+                {activeArtist.discipline}
               </div>
               <div
                 style={{
@@ -1491,18 +1478,9 @@ export function App() {
                   marginTop: '8px',
                 }}
               >
-                <h2 style={{ fontSize: '34px', fontWeight: 700, letterSpacing: '-0.03em' }}>
+                <h2 className="drawer-artist-title">
                   {activeArtist.name}{' '}
-                  <span
-                    style={{
-                      fontFamily: 'var(--font-serif)',
-                      fontStyle: 'italic',
-                      fontWeight: 400,
-                      fontSize: '26px',
-                      color: 'var(--ink-muted)',
-                      marginLeft: '8px',
-                    }}
-                  >
+                  <span className="drawer-artist-title-en">
                     {activeArtist.nameEn}
                   </span>
                 </h2>
@@ -1563,7 +1541,7 @@ export function App() {
             </div>
 
             {/* 3 Representative Artworks — Images Only */}
-            <div style={{ padding: '32px' }}>
+            <div className="drawer-body-section">
               <div
                 style={{
                   fontFamily: 'var(--font-mono)',
@@ -1624,11 +1602,11 @@ export function App() {
               </button>
             </div>
 
-            <div style={{ height: '320px', borderBottom: '1px solid var(--line-strong)' }}>
+            <div className="drawer-hero-img">
               <img src={activeGallery.imageUrl} alt={activeGallery.name} />
             </div>
 
-            <div style={{ padding: '32px' }}>
+            <div className="drawer-body-section">
               <div
                 style={{
                   fontFamily: 'var(--font-mono)',
@@ -1755,7 +1733,7 @@ export function App() {
               </button>
             </div>
 
-            <div style={{ padding: '28px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <div className="drawer-body-section" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               {savedIds.map((id) => {
                 const artist = ARTISTS.find((a) => a.id === id);
                 const manual = GOODS_MANUALS.find((m) => m.id === id);
@@ -1782,7 +1760,7 @@ export function App() {
                         }}
                       >
                         <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--marine)' }}>
-                          ARTIST
+                          {artist.indexNo}
                         </div>
                         <div style={{ fontWeight: 700, fontSize: '16px' }}>{artist.name}</div>
                       </div>
@@ -1904,7 +1882,8 @@ export function App() {
 
             <form
               onSubmit={handleAddCollabPost}
-              style={{ padding: '32px', display: 'flex', flexDirection: 'column', gap: '16px' }}
+              className="drawer-body-section"
+              style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}
             >
               <div style={{ display: 'flex', gap: '8px' }}>
                 {(['공동발주', '굿즈협업', '마켓부스'] as const).map((t) => (

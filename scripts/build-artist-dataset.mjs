@@ -130,7 +130,7 @@ for (const item of totatogaRaw) {
 
   finalArtists.push({
     id: `ttg-${item.slug.replace('/', '')}`,
-    indexNo: `ART—${String(seq).padStart(2, '0')}`,
+    indexNo: `ARTIST ${String(seq).padStart(2, '0')}`,
     name: meta.name,
     nameEn: meta.nameEn,
     discipline: meta.discipline,
@@ -198,7 +198,7 @@ for (const entry of BSCF_VERIFIED) {
 
   finalArtists.push({
     id: raw.id,
-    indexNo: `ART—${String(seq).padStart(2, '0')}`,
+    indexNo: `ARTIST ${String(seq).padStart(2, '0')}`,
     name: krName,
     nameEn: enName || `ARCHIVE #${raw.archiveIdx}`,
     discipline: raw.discipline === '공예' || raw.discipline === '텍스타일' ? '공예·오브제' : raw.discipline,

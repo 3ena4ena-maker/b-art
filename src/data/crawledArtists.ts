@@ -2,7 +2,7 @@
 export const CRAWLED_ARTISTS = [
   {
     "id": "ttg-dokikim",
-    "indexNo": "ART—01",
+    "indexNo": "ARTIST 01",
     "name": "김덕희",
     "nameEn": "DOKI KIM",
     "discipline": "도자·조형",
@@ -45,7 +45,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "ttg-seongahsim",
-    "indexNo": "ART—02",
+    "indexNo": "ARTIST 02",
     "name": "심성아",
     "nameEn": "SEONGAH SIM",
     "discipline": "공예·오브제",
@@ -88,7 +88,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "ttg-sayoonyang",
-    "indexNo": "ART—03",
+    "indexNo": "ARTIST 03",
     "name": "양사윤",
     "nameEn": "SAYOON YANG",
     "discipline": "공예·오브제",
@@ -131,7 +131,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "ttg-haeunjoe",
-    "indexNo": "ART—04",
+    "indexNo": "ARTIST 04",
     "name": "조하은",
     "nameEn": "HAEUN JOE",
     "discipline": "회화·미술",
@@ -174,7 +174,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "bscf-5256",
-    "indexNo": "ART—05",
+    "indexNo": "ARTIST 05",
     "name": "안은솔",
     "nameEn": "AN EUNSOL",
     "discipline": "회화·미술",
@@ -217,7 +217,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "bscf-5234",
-    "indexNo": "ART—06",
+    "indexNo": "ARTIST 06",
     "name": "최시복",
     "nameEn": "ARCHIVE #5234",
     "discipline": "도자·조형",
@@ -260,7 +260,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "bscf-5221",
-    "indexNo": "ART—07",
+    "indexNo": "ARTIST 07",
     "name": "김철황",
     "nameEn": "KIM CHUL HWANG",
     "discipline": "프린트·드로잉",
@@ -303,7 +303,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "bscf-5193",
-    "indexNo": "ART—08",
+    "indexNo": "ARTIST 08",
     "name": "이성은",
     "nameEn": "SEONGEUN LEE",
     "discipline": "도자·조형",
@@ -346,7 +346,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "bscf-5183",
-    "indexNo": "ART—09",
+    "indexNo": "ARTIST 09",
     "name": "김현경 (이플)",
     "nameEn": "KIM HYUNKYUNG (EEPEUL)",
     "discipline": "회화·미술",
@@ -389,7 +389,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "bscf-5170",
-    "indexNo": "ART—10",
+    "indexNo": "ARTIST 10",
     "name": "홍익종",
     "nameEn": "HONG. IK-JONG",
     "discipline": "프린트·드로잉",
@@ -432,7 +432,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "bscf-5128",
-    "indexNo": "ART—11",
+    "indexNo": "ARTIST 11",
     "name": "오원주",
     "nameEn": "WONZU AU",
     "discipline": "사진",
@@ -475,7 +475,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "bscf-5119",
-    "indexNo": "ART—12",
+    "indexNo": "ARTIST 12",
     "name": "이진호",
     "nameEn": "LEEJINHO",
     "discipline": "공예·오브제",
@@ -518,7 +518,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "bscf-5091",
-    "indexNo": "ART—13",
+    "indexNo": "ARTIST 13",
     "name": "조용문",
     "nameEn": "ARCHIVE #5091",
     "discipline": "도자·조형",
@@ -561,7 +561,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "bscf-5065",
-    "indexNo": "ART—14",
+    "indexNo": "ARTIST 14",
     "name": "강민기",
     "nameEn": "ARCHIVE #5065",
     "discipline": "회화·미술",
@@ -604,7 +604,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "bscf-5062",
-    "indexNo": "ART—15",
+    "indexNo": "ARTIST 15",
     "name": "배남주",
     "nameEn": "BAE NAM JU",
     "discipline": "사진",
@@ -647,7 +647,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "bscf-5060",
-    "indexNo": "ART—16",
+    "indexNo": "ARTIST 16",
     "name": "박한샘",
     "nameEn": "ARCHIVE #5060",
     "discipline": "회화·미술",
@@ -690,7 +690,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "bscf-5059",
-    "indexNo": "ART—17",
+    "indexNo": "ARTIST 17",
     "name": "노주련",
     "nameEn": "ROH JURYUN",
     "discipline": "도자·조형",
@@ -733,7 +733,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "bscf-5058",
-    "indexNo": "ART—18",
+    "indexNo": "ARTIST 18",
     "name": "김보경",
     "nameEn": "KIM. BO KYONG",
     "discipline": "회화·미술",
@@ -776,7 +776,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "bscf-5057",
-    "indexNo": "ART—19",
+    "indexNo": "ARTIST 19",
     "name": "김현종(엔조)",
     "nameEn": "KIM HYUNJONG(ENJO)",
     "discipline": "도자·조형",
@@ -819,7 +819,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "bscf-5056",
-    "indexNo": "ART—20",
+    "indexNo": "ARTIST 20",
     "name": "변대용",
     "nameEn": "BYUN DAE YONG",
     "discipline": "회화·미술",
@@ -862,7 +862,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "bscf-5053",
-    "indexNo": "ART—21",
+    "indexNo": "ARTIST 21",
     "name": "정제운(제제)",
     "nameEn": "JEONG JEWOON",
     "discipline": "도자·조형",
@@ -905,7 +905,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "bscf-5051",
-    "indexNo": "ART—22",
+    "indexNo": "ARTIST 22",
     "name": "이창진",
     "nameEn": "CHANGJIN LEE",
     "discipline": "사진",
@@ -948,7 +948,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "bscf-5044",
-    "indexNo": "ART—23",
+    "indexNo": "ARTIST 23",
     "name": "구경환",
     "nameEn": "GU KYUNGHWAN",
     "discipline": "도자·조형",
@@ -991,7 +991,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "bscf-5040",
-    "indexNo": "ART—24",
+    "indexNo": "ARTIST 24",
     "name": "김윤호",
     "nameEn": "YOUNHO KIM",
     "discipline": "도자·조형",
@@ -1034,7 +1034,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "bscf-5024",
-    "indexNo": "ART—25",
+    "indexNo": "ARTIST 25",
     "name": "서일화",
     "nameEn": "SEO IL HWA",
     "discipline": "회화·미술",
@@ -1077,7 +1077,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "bscf-5018",
-    "indexNo": "ART—26",
+    "indexNo": "ARTIST 26",
     "name": "구경미",
     "nameEn": "GUKYUNGMI",
     "discipline": "도자·조형",
@@ -1120,7 +1120,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "bscf-4984",
-    "indexNo": "ART—27",
+    "indexNo": "ARTIST 27",
     "name": "전재석",
     "nameEn": "JUN JAE SUK",
     "discipline": "회화·미술",
@@ -1163,7 +1163,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "bscf-4349",
-    "indexNo": "ART—28",
+    "indexNo": "ARTIST 28",
     "name": "신준식",
     "nameEn": "SHIN JOON SIK",
     "discipline": "도자·조형",
@@ -1206,7 +1206,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "bscf-3562",
-    "indexNo": "ART—29",
+    "indexNo": "ARTIST 29",
     "name": "백근영",
     "nameEn": "KEUNYOUNG BAEK",
     "discipline": "도자·조형",
