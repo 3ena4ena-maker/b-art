@@ -959,19 +959,24 @@ section {
 /* Gallery & Coastline Section */
 .gallery-explorer-layout {
   display: grid;
-  grid-template-columns: 440px 1fr;
+  grid-template-columns: 440px minmax(0, 1fr);
   border-bottom: 1px solid var(--line-strong);
+  width: 100%;
+  max-width: 100%;
 }
 
 .coast-map-panel {
   border-right: 1px solid var(--line-strong);
   background: #0D1624;
   color: #ffffff;
-  padding: 32px;
+  padding: 28px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 24px;
+  justify-content: flex-start;
+  gap: 20px;
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
 }
 
 .map-panel-header {
@@ -1042,26 +1047,24 @@ section {
 }
 
 .gallery-list-panel {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  border-bottom: 1px solid var(--line-strong);
+  display: flex;
+  flex-direction: column;
   width: 100%;
   max-width: 100%;
+  min-width: 0;
 }
 
 .gallery-row-item {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  border-right: 1px solid var(--line);
+  display: block;
   border-bottom: 1px solid var(--line);
   cursor: pointer;
   transition: background 0.15s ease;
   min-width: 0;
+  width: 100%;
 }
 
-.gallery-row-item:nth-child(2n) {
-  border-right: none;
+.gallery-row-item:last-child {
+  border-bottom: none;
 }
 
 .gallery-row-item:hover,
@@ -1913,7 +1916,33 @@ section {
     overflow-x: hidden;
   }
   .coast-map-panel {
-    display: none !important;
+    display: flex;
+    padding: 14px;
+    gap: 10px;
+    width: 100%;
+    max-width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--line-strong);
+  }
+  .map-panel-header {
+    padding-bottom: 8px;
+    align-items: center;
+  }
+  .map-panel-kicker {
+    font-size: 9px;
+  }
+  .map-panel-title {
+    font-size: 15px;
+    margin-top: 2px;
+  }
+  .map-panel-count {
+    font-size: 10px;
+  }
+  .map-svg-container {
+    margin-top: 10px;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    max-height: 175px;
   }
   .gallery-list-panel {
     display: flex;
