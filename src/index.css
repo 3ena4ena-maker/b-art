@@ -30,6 +30,9 @@ html, body {
   font-family: var(--font-sans);
   font-size: 16px;
   line-height: 1.55;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -65,6 +68,7 @@ img {
 
 /* Editorial Layout Shell */
 .magazine-shell {
+  width: 100%;
   max-width: 1480px;
   margin: 0 auto;
   border-left: 1px solid var(--line);
@@ -72,6 +76,14 @@ img {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
+}
+
+section {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
 }
 
 /* Top Issue Masthead Bar */
@@ -1030,20 +1042,26 @@ img {
 }
 
 .gallery-list-panel {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-bottom: 1px solid var(--line-strong);
+  width: 100%;
+  max-width: 100%;
 }
 
 .gallery-row-item {
-  display: grid;
-  grid-template-columns: 280px 1fr;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-right: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
   cursor: pointer;
   transition: background 0.15s ease;
+  min-width: 0;
 }
 
-.gallery-row-item:last-child {
-  border-bottom: none;
+.gallery-row-item:nth-child(2n) {
+  border-right: none;
 }
 
 .gallery-row-item:hover,
@@ -1051,19 +1069,14 @@ img {
   background: var(--bg-pure);
 }
 
-.gallery-row-img {
-  height: 220px;
-  border-right: 1px solid var(--line);
-  position: relative;
-}
-
 .gallery-row-content {
-  padding: 28px 32px;
+  padding: 24px 28px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 16px;
   min-width: 0;
+  height: 100%;
 }
 
 .gallery-row-meta {
@@ -1376,7 +1389,7 @@ img {
 /* Responsive */
 @media (max-width: 1100px) {
   .masthead {
-    grid-template-columns: 1fr auto;
+    grid-template-columns: minmax(0, 1fr) auto;
   }
   .brand-cell {
     border-right: none;
@@ -1390,7 +1403,7 @@ img {
     grid-column: 1 / -1;
     grid-row: 2 / 3;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     border-top: 1px solid var(--line);
     border-bottom: none;
     overflow-x: hidden;
@@ -1411,7 +1424,7 @@ img {
   .goods-content-columns,
   .gallery-explorer-layout,
   .editorial-footer {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .goods-index-rail {
     border-right: none;
@@ -1427,7 +1440,7 @@ img {
     border-bottom: 1px solid var(--line-strong);
   }
   .artist-editorial-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .artist-column:nth-child(3n) {
     border-right: 1px solid var(--line);
@@ -1436,7 +1449,7 @@ img {
     border-right: none;
   }
   .section-bar {
-    grid-template-columns: 1fr auto;
+    grid-template-columns: minmax(0, 1fr) auto;
   }
   .section-bar-index {
     grid-column: 1 / -1;
@@ -1628,6 +1641,10 @@ img {
   .goods-editorial-layout {
     display: flex;
     flex-direction: column;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
   }
   .goods-index-rail {
     display: contents;
@@ -1635,14 +1652,17 @@ img {
   .goods-manual-list {
     order: 1;
     display: flex;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     border-bottom: 1px solid var(--line-strong);
     background: var(--bg);
   }
   .goods-rail-item {
-    min-width: 225px;
-    max-width: 245px;
+    min-width: 210px;
+    max-width: 230px;
     flex-shrink: 0;
     padding: 12px 14px;
     gap: 5px;
@@ -1661,9 +1681,15 @@ img {
   }
   .goods-detail-stage {
     order: 2;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
   }
   .cost-estimator-box {
     order: 3;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
     padding: 18px 14px;
     border-top: 1px solid var(--line-strong);
   }
@@ -1728,6 +1754,10 @@ img {
     flex-direction: column;
     align-items: stretch;
     gap: 10px;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
   }
   .makers-toolbar-header {
     flex-direction: column;
@@ -1742,12 +1772,16 @@ img {
     align-items: stretch;
     gap: 8px;
     width: 100%;
+    max-width: 100%;
+    min-width: 0;
   }
   .makers-cat-scroll {
     flex-wrap: nowrap;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     width: 100%;
+    max-width: 100%;
+    min-width: 0;
     padding-bottom: 2px;
   }
   .makers-cat-btn {
@@ -1886,7 +1920,7 @@ img {
 
   .gallery-zone-tabs {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     width: 100%;
     overflow-x: hidden;
   }
@@ -1897,109 +1931,95 @@ img {
     text-align: center;
     border-right: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
+    min-width: 0;
   }
   .gallery-zone-tabs .filter-tab:nth-child(5n) {
     border-right: none;
   }
 
+  .gallery-explorer-layout {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
   .coast-map-panel {
-    padding: 14px;
-    gap: 10px;
+    display: none !important;
   }
-  .map-panel-header {
-    padding-bottom: 8px;
-    align-items: center;
+  .gallery-list-panel {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 100%;
   }
-  .map-panel-kicker {
-    font-size: 9px;
+  .gallery-row-item,
+  .gallery-row-item:nth-child(2n) {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--line-strong);
   }
-  .map-panel-title {
-    font-size: 15px;
-    margin-top: 2px;
-  }
-  .map-panel-count {
-    font-size: 10px;
-  }
-  .map-svg-container {
-    margin-top: 10px;
-    aspect-ratio: 16 / 8.5;
-    max-height: 150px;
-  }
-  .map-node-list {
-    padding-top: 10px;
-    flex-direction: row;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    gap: 6px;
-  }
-  .map-node-item {
-    flex-shrink: 0;
-    padding: 5px 9px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    background: rgba(255, 255, 255, 0.04);
-    gap: 6px;
-    font-size: 10px;
-    white-space: nowrap;
-  }
-  .map-node-item.active {
-    border-color: #66A3FF;
-    background: rgba(0, 82, 255, 0.22);
-  }
-
-  .gallery-row-item {
-    grid-template-columns: 112px 1fr;
-    align-items: stretch;
-  }
-  .gallery-row-img {
-    width: 112px;
-    height: auto;
-    min-height: 142px;
-    border-right: 1px solid var(--line);
+  .gallery-row-item:last-child {
     border-bottom: none;
   }
   .gallery-row-content {
-    padding: 12px 12px;
-    gap: 8px;
+    padding: 16px 14px;
+    gap: 10px;
+    width: 100%;
+    max-width: 100%;
   }
   .gallery-row-meta {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 2px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px 10px;
   }
   .gallery-zone-badge {
-    font-size: 10px;
+    font-size: 10.5px;
   }
   .gallery-hours-text {
-    font-size: 10px;
+    font-size: 10.5px;
   }
   .gallery-row-title {
-    font-size: 15px;
-    line-height: 1.3;
-    margin-top: 4px;
+    font-size: 16.5px;
+    line-height: 1.35;
+    margin-top: 6px;
+    white-space: normal;
+    word-break: keep-all;
+    overflow-wrap: break-word;
   }
   .gallery-row-desc {
-    font-size: 12px;
-    line-height: 1.45;
-    margin-top: 4px;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    font-size: 13px;
+    line-height: 1.55;
+    margin-top: 6px;
+    display: block;
+    white-space: normal;
+    word-break: keep-all;
+    overflow-wrap: break-word;
   }
   .gallery-row-exhibition {
-    padding-top: 8px;
-    gap: 8px;
-    align-items: center;
+    padding-top: 10px;
+    gap: 10px;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+  .gallery-exhibition-info {
+    min-width: 0;
+    flex: 1;
   }
   .gallery-exhibition-kicker {
-    font-size: 9px;
+    font-size: 9.5px;
   }
   .gallery-exhibition-title {
-    font-size: 11.5px;
-    line-height: 1.35;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    font-size: 12.5px;
+    line-height: 1.45;
+    margin-top: 3px;
+    white-space: normal;
+    word-break: keep-all;
+    overflow-wrap: break-word;
   }
 
   .editorial-drawer {

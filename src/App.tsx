@@ -1003,140 +1003,44 @@ export function App() {
             </div>
           </div>
 
-          <div className="gallery-explorer-layout">
-            <div className="coast-map-panel">
-              <div>
-                <div className="map-panel-header">
+          <div className="gallery-list-panel">
+            {filteredGalleries.map((gal) => (
+              <article
+                key={gal.id}
+                className={`gallery-row-item ${
+                  activeGallery?.id === gal.id ? 'selected' : ''
+                }`}
+                onClick={() => setActiveGallery(gal)}
+              >
+                <div className="gallery-row-content">
                   <div>
-                    <div className="map-panel-kicker">COASTAL NODES</div>
-                    <h3 className="map-panel-title">부산 갤러리 좌표</h3>
-                  </div>
-                  <div className="map-panel-count">
-                    {filteredGalleries.length} SPACES
-                  </div>
-                </div>
-
-                <div className="map-svg-container">
-                  <svg
-                    viewBox="0 0 100 100"
-                    style={{ width: '100%', height: '100%', display: 'block' }}
-                  >
-                    <path
-                      d="M 5 82 L 18 76 L 26 84 L 34 75 L 40 65 L 54 62 L 62 52 L 75 48 L 84 35 L 92 14 L 100 10 L 100 0 L 0 0 L 0 82 Z"
-                      fill="rgba(0, 82, 255, 0.16)"
-                      stroke="#3B82F6"
-                      strokeWidth="0.6"
-                    />
-                    <polyline
-                      points="28,78 42,46 60,55 78,44 88,22"
-                      fill="none"
-                      stroke="rgba(255,255,255,0.35)"
-                      strokeWidth="0.5"
-                      strokeDasharray="1.5 1.5"
-                    />
-
-                    {GALLERIES.map((gal) => {
-                      const isMatched =
-                        selectedZone === '전체' || gal.zone === selectedZone;
-                      const isSelected = activeGallery?.id === gal.id;
-                      return (
-                        <g
-                          key={gal.id}
-                          style={{ cursor: 'pointer', opacity: isMatched ? 1 : 0.28 }}
-                          onClick={() => setActiveGallery(gal)}
-                        >
-                          {isSelected && (
-                            <circle
-                              cx={gal.mapPos.x}
-                              cy={gal.mapPos.y}
-                              r="5.5"
-                              fill="none"
-                              stroke="#66A3FF"
-                              strokeWidth="0.6"
-                            />
-                          )}
-                          <circle
-                            cx={gal.mapPos.x}
-                            cy={gal.mapPos.y}
-                            r={isSelected ? '2.6' : '2.0'}
-                            fill={isSelected ? '#0052FF' : '#ffffff'}
-                            stroke="#0D1624"
-                            strokeWidth="0.5"
-                          />
-                          <text
-                            x={gal.mapPos.x + 3.2}
-                            y={gal.mapPos.y + 1}
-                            fill="#ffffff"
-                            fontSize="3.2"
-                            fontFamily="JetBrains Mono, monospace"
-                          >
-                            {gal.indexNo}
-                          </text>
-                        </g>
-                      );
-                    })}
-                  </svg>
-                </div>
-              </div>
-
-              <div className="map-node-list">
-                {filteredGalleries.map((g) => (
-                  <div
-                    key={g.id}
-                    onClick={() => setActiveGallery(g)}
-                    className={`map-node-item ${activeGallery?.id === g.id ? 'active' : ''}`}
-                  >
-                    <span className="map-node-name">
-                      {g.indexNo} · {g.name.split(' (')[0]}
-                    </span>
-                    <span className="map-node-zone">{g.zone}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="gallery-list-panel">
-              {filteredGalleries.map((gal) => (
-                <article
-                  key={gal.id}
-                  className={`gallery-row-item ${
-                    activeGallery?.id === gal.id ? 'selected' : ''
-                  }`}
-                  onClick={() => setActiveGallery(gal)}
-                >
-                  <div className="gallery-row-img">
-                    <img src={gal.imageUrl} alt={gal.name} />
-                  </div>
-                  <div className="gallery-row-content">
-                    <div>
-                      <div className="gallery-row-meta">
-                        <span className="gallery-zone-badge">
-                          {gal.indexNo} · {gal.zone} · {gal.spaceType}
-                        </span>
-                        <span className="gallery-hours-text">{gal.hours}</span>
-                      </div>
-
-                      <h3 className="gallery-row-title">{gal.name}</h3>
-
-                      <p className="gallery-row-desc">{gal.description}</p>
+                    <div className="gallery-row-meta">
+                      <span className="gallery-zone-badge">
+                        {gal.indexNo} · {gal.zone} · {gal.spaceType}
+                      </span>
+                      <span className="gallery-hours-text">{gal.hours}</span>
                     </div>
 
-                    <div className="gallery-row-exhibition">
-                      <div className="gallery-exhibition-info">
-                        <div className="gallery-exhibition-kicker">
-                          ON VIEW ({gal.currentExhibition.period})
-                        </div>
-                        <div className="gallery-exhibition-title">
-                          {gal.currentExhibition.title} — {gal.currentExhibition.artists}
-                        </div>
-                      </div>
+                    <h3 className="gallery-row-title">{gal.name}</h3>
 
-                      <ArrowUpRight size={14} className="gallery-arrow-icon" />
-                    </div>
+                    <p className="gallery-row-desc">{gal.description}</p>
                   </div>
-                </article>
-              ))}
-            </div>
+
+                  <div className="gallery-row-exhibition">
+                    <div className="gallery-exhibition-info">
+                      <div className="gallery-exhibition-kicker">
+                        ON VIEW ({gal.currentExhibition.period})
+                      </div>
+                      <div className="gallery-exhibition-title">
+                        {gal.currentExhibition.title} — {gal.currentExhibition.artists}
+                      </div>
+                    </div>
+
+                    <ArrowUpRight size={14} className="gallery-arrow-icon" />
+                  </div>
+                </div>
+              </article>
+            ))}
           </div>
         </section>
       )}
@@ -1144,7 +1048,8 @@ export function App() {
       {/* =====================================================================
           SECTION 04: ARTIST COLLAB & JOINT PRODUCTION DISPATCH BOARD
          ===================================================================== */}
-      <section>
+      {(activeSection === 'overview' || activeSection === 'goods') && (
+        <section>
         <div className="section-bar">
           <div className="section-bar-index">
             <span>04</span>
@@ -1245,7 +1150,8 @@ export function App() {
             </tbody>
           </table>
         </div>
-      </section>
+        </section>
+      )}
 
       {/* =====================================================================
           EDITORIAL FOOTER
@@ -1451,10 +1357,6 @@ export function App() {
                 <span>CLOSE</span>
                 <X size={16} />
               </button>
-            </div>
-
-            <div className="drawer-hero-img">
-              <img src={activeGallery.imageUrl} alt={activeGallery.name} />
             </div>
 
             <div className="drawer-body-section">
