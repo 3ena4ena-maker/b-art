@@ -1,12 +1,12 @@
+import { CRAWLED_ARTISTS } from './crawledArtists';
+
 export interface Artwork {
   id: string;
   title: string;
   year: string;
   medium: string;
-  dimensions: string;
   imageUrl: string;
-  goodsAdaptable: boolean;
-  editionNote?: string;
+  highResUrl?: string;
 }
 
 export interface Artist {
@@ -14,15 +14,15 @@ export interface Artist {
   indexNo: string;
   name: string;
   nameEn: string;
-  discipline: '회화' | '도자·오브제' | '프린트·일러스트' | '사진' | '공예·유리' | '텍스타일';
+  discipline: '회화·미술' | '도자·조형' | '프린트·드로잉' | '사진' | '공예·오브제' | string;
   district: string;
-  coordinates: string;
+  updatedAt: string;
   statement: string;
   bio: string;
-  collabStatus: '협업 오픈' | '소량 주문 가능' | '전시 준비 중';
-  goodsSpecialties: string[];
   instagram: string;
-  email: string;
+  instagramUrl: string;
+  portfolioUrl: string;
+  sourceLabel: string;
   portraitUrl: string;
   featuredWorkUrl: string;
   artworks: Artwork[];
@@ -106,262 +106,7 @@ export interface GallerySpace {
   mapPos: { x: number; y: number };
 }
 
-export const ARTISTS: Artist[] = [
-  {
-    id: 'yoon-haejo',
-    indexNo: 'ART—01',
-    name: '윤해조',
-    nameEn: 'YOON HAE-JO',
-    discipline: '회화',
-    district: '영도구 봉래동',
-    coordinates: '35.0928° N, 129.0412° E',
-    statement: '영도 물양장의 수면 위에 맺히는 기름막과 조류의 마찰을 유화와 모래 안료로 기록합니다.',
-    bio: '부산 영도 봉래동 구 선박수리소 건물을 개조한 작업실에서 활동한다. 시간에 따라 변하는 부산항의 수색(水色)을 채집하여 거친 린넨 위에 겹쳐 바르는 작업을 이어오고 있으며, 원화의 마티에르가 살아있는 아카이벌 프린트와 패브릭 에디션을 병행 제작한다.',
-    collabStatus: '협업 오픈',
-    goodsSpecialties: ['실크스크린 패브릭 포스터', '아카이벌 피그먼트 에디션', '양장 아트북'],
-    instagram: '@haejo.yoon.studio',
-    email: 'haejo@parang-index.kr',
-    portraitUrl: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=900&q=80',
-    featuredWorkUrl: 'https://images.unsplash.com/photo-1541961017774-22349e4a1262?auto=format&fit=crop&w=1200&q=80',
-    artworks: [
-      {
-        id: 'w-101',
-        title: '조류의 기록 #14 (Tidal Record #14)',
-        year: '2026',
-        medium: '린넨에 유채, 영도 해안 규사',
-        dimensions: '116.8 × 91.0 cm',
-        imageUrl: 'https://images.unsplash.com/photo-1541961017774-22349e4a1262?auto=format&fit=crop&w=1200&q=80',
-        goodsAdaptable: true,
-        editionNote: '하네뮬레 포토랙 308g 50부 한정 프린트 및 엽서북 제작 가능'
-      },
-      {
-        id: 'w-102',
-        title: '방파제 오후 5시 20분',
-        year: '2025',
-        medium: '캔버스에 유채, 콜드왁스',
-        dimensions: '72.7 × 60.6 cm',
-        imageUrl: 'https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?auto=format&fit=crop&w=1000&q=80',
-        goodsAdaptable: true,
-        editionNote: '광목 20수 패브릭 포스터 에디션 전환 가능'
-      },
-      {
-        id: 'w-103',
-        title: '청색 염분 (Cobalt Salinity)',
-        year: '2026',
-        medium: '종이에 과슈, 안료',
-        dimensions: '42.0 × 29.7 cm',
-        imageUrl: 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=1000&q=80',
-        goodsAdaptable: true,
-        editionNote: '리소그라프 2도 별색 포스터 제작 완료'
-      }
-    ]
-  },
-  {
-    id: 'park-seonwoo',
-    indexNo: 'ART—02',
-    name: '박선우',
-    nameEn: 'PARK SEON-WOO',
-    discipline: '도자·오브제',
-    district: '수영구 망미동',
-    coordinates: '35.1742° N, 129.1088° E',
-    statement: '파도가 깎아낸 몽돌의 곡률과 해수면의 윤슬을 백자와 청자 유약의 경계로 번안합니다.',
-    bio: '망미동 골목의 소규모 가마 스튜디오에서 물레 성형과 슬립 캐스팅 작업을 병행한다. 일상의 책상 위에서 부산의 바다를 촉각적으로 경험할 수 있는 도자 문진, 인센스 홀더, 소형 주병 등 실용과 조형 사이의 오브제를 주로 선보인다.',
-    collabStatus: '소량 주문 가능',
-    goodsSpecialties: ['슬립캐스팅 도자 문진', '윤슬 인센스 홀더', '세라믹 타일'],
-    instagram: '@seonwoo.ceramic',
-    email: 'seonwoo@parang-index.kr',
-    portraitUrl: 'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=900&q=80',
-    featuredWorkUrl: 'https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&w=1200&q=80',
-    artworks: [
-      {
-        id: 'w-201',
-        title: '백자 윤슬 화병 (Yoonseul Vessel 08)',
-        year: '2026',
-        medium: '백자토, 코발트 결정유, 1250°C 환원소성',
-        dimensions: 'Ø 14.5 × H 24.0 cm',
-        imageUrl: 'https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&w=1200&q=80',
-        goodsAdaptable: false,
-        editionNote: '단품 원화 오브제'
-      },
-      {
-        id: 'w-202',
-        title: '파도 단면 인센스 홀더 & 문진',
-        year: '2026',
-        medium: '석기질 점토, 무광 해청유',
-        dimensions: '8.5 × 5.2 × 3.0 cm',
-        imageUrl: 'https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=1000&q=80',
-        goodsAdaptable: true,
-        editionNote: '석고 몰드 기반 30~100개 단위 전시 굿즈 제작 가능'
-      },
-      {
-        id: 'w-203',
-        title: '몽돌 문진 시리즈 (Pebble Weight)',
-        year: '2025',
-        medium: '흑유 및 분청 슬립캐스팅',
-        dimensions: '7.0 × 5.5 × 4.0 cm',
-        imageUrl: 'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=1000&q=80',
-        goodsAdaptable: true,
-        editionNote: '소량 패키지 에디션 제작 가능'
-      }
-    ]
-  },
-  {
-    id: 'kim-doha',
-    indexNo: 'ART—03',
-    name: '김도하',
-    nameEn: 'KIM DO-HA',
-    discipline: '프린트·일러스트',
-    district: '부산진구 전포동',
-    coordinates: '35.1558° N, 129.0641° E',
-    statement: '부산의 공구상가, 부두 크레인, 해안 열차의 기하학적 구조를 콩기름 리소 잉크로 분판합니다.',
-    bio: '전포동에서 프린트 스튜디오 겸 그래픽 작업실을 운영한다. 부산의 산업 풍경과 바다의 대비를 강렬한 별색 판화 기법으로 재해석하며, 지역 서점·갤러리와 협업해 지류 굿즈와 독립출판물을 꾸준히 발행하고 있다.',
-    collabStatus: '협업 오픈',
-    goodsSpecialties: ['리소그라프 3도 포스터', '아코디언 엽서북', '그래픽 마스킹테이프'],
-    instagram: '@doha.press.busan',
-    email: 'doha@parang-index.kr',
-    portraitUrl: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=900&q=80',
-    featuredWorkUrl: 'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=1200&q=80',
-    artworks: [
-      {
-        id: 'w-301',
-        title: '부산항 제5부두 크레인 (Pier 5 Cranes)',
-        year: '2026',
-        medium: '문켄 폴라 러프 240g에 리소그라프 3도 인쇄',
-        dimensions: '29.7 × 42.0 cm (A3)',
-        imageUrl: 'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=1200&q=80',
-        goodsAdaptable: true,
-        editionNote: 'Marine Blue + Fluorescent Orange + Black 별색 에디션 상시 발주 가능'
-      },
-      {
-        id: 'w-302',
-        title: '영도대교 오후 2시 도개 도면',
-        year: '2025',
-        medium: '실크스크린 2도, 코튼지',
-        dimensions: '50.0 × 70.0 cm',
-        imageUrl: 'https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?auto=format&fit=crop&w=1000&q=80',
-        goodsAdaptable: true,
-        editionNote: '접지 포스터 및 엽서 세트 제작 가능'
-      }
-    ]
-  },
-  {
-    id: 'jung-seoyoon',
-    indexNo: 'ART—04',
-    name: '정서윤',
-    nameEn: 'JUNG SEO-YOON',
-    discipline: '사진',
-    district: '중구 중앙동',
-    coordinates: '35.1039° N, 129.0347° E',
-    statement: '해무가 자욱한 새벽의 다대포와 기장 해안의 수평선을 중형 필름의 고요한 계조로 담아냅니다.',
-    bio: '중앙동 구 도심의 암실 기반 사진 작업실에서 흑백 실버 젤라틴 프린트와 컬러 피그먼트 프린트를 제작한다. 사진이 벽면에만 머물지 않고 손에 쥐어지는 물성을 갖도록 아크릴 블록 오브제와 엽서 바인딩 작업을 실험한다.',
-    collabStatus: '협업 오픈',
-    goodsSpecialties: ['20T 투명 아크릴 사진 문진', '노출 사철 제본 사진집', '포스트카드 팩'],
-    instagram: '@seoyoon.archive',
-    email: 'seoyoon@parang-index.kr',
-    portraitUrl: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80',
-    featuredWorkUrl: 'https://images.unsplash.com/photo-1505118380757-91f5f5632de0?auto=format&fit=crop&w=1200&q=80',
-    artworks: [
-      {
-        id: 'w-401',
-        title: '해무가 걷히는 오랑대 05:40',
-        year: '2026',
-        medium: '아카이벌 피그먼트 프린트',
-        dimensions: '80.0 × 100.0 cm',
-        imageUrl: 'https://images.unsplash.com/photo-1505118380757-91f5f5632de0?auto=format&fit=crop&w=1200&q=80',
-        goodsAdaptable: true,
-        editionNote: '아크릴 블록 마운팅 문진 및 A2 포스터 굿즈화 가능'
-      },
-      {
-        id: 'w-402',
-        title: '다대포 간조의 모래 주름',
-        year: '2025',
-        medium: '젤라틴 실버 프린트',
-        dimensions: '50.0 × 60.0 cm',
-        imageUrl: 'https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=1000&q=80',
-        goodsAdaptable: true,
-        editionNote: '무광 은박 후가공 엽서 에디션 제작 가능'
-      }
-    ]
-  },
-  {
-    id: 'lee-taekyung',
-    indexNo: 'ART—05',
-    name: '이태경',
-    nameEn: 'LEE TAE-KYUNG',
-    discipline: '공예·유리',
-    district: '해운대구 달맞이길',
-    coordinates: '35.1589° N, 129.1764° E',
-    statement: '바닷물의 굴절률과 선박의 황동 부품에서 영감을 얻어 빛을 머금는 유리·금속 기물을 만듭니다.',
-    bio: '달맞이길 인근 공방에서 램프워킹과 가마 슬럼핑 기법으로 유리를 다루며 황동 세공을 결합한다. 해운대와 광안리의 빛을 책상 위로 옮겨놓는 코발트 유리 문진과 선박 태그 모티프의 황동 키링 시리즈로 주목받고 있다.',
-    collabStatus: '소량 주문 가능',
-    goodsSpecialties: ['코발트 유리 문진', '각인 황동 키링', '유리 인센스 트레이'],
-    instagram: '@taekyung.glassworks',
-    email: 'taekyung@parang-index.kr',
-    portraitUrl: 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=900&q=80',
-    featuredWorkUrl: 'https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=1200&q=80',
-    artworks: [
-      {
-        id: 'w-501',
-        title: '해수면 굴절 유리 오브제 #09',
-        year: '2026',
-        medium: '블로잉 글라스, 코발트 산화물, 황동 핀',
-        dimensions: 'Ø 9.0 × H 7.5 cm',
-        imageUrl: 'https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=1200&q=80',
-        goodsAdaptable: true,
-        editionNote: '전시 기념 한정판 문진 20개 단위 주문 제작 가능'
-      },
-      {
-        id: 'w-502',
-        title: '선박 황동 태그 & 코발트 드롭',
-        year: '2026',
-        medium: '황동 절삭 각인, 램프워킹 유리',
-        dimensions: '3.2 × 7.8 cm',
-        imageUrl: 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=1000&q=80',
-        goodsAdaptable: true,
-        editionNote: '황동 키링 에디션 30개 단위 제작 가능'
-      }
-    ]
-  },
-  {
-    id: 'choi-yul',
-    indexNo: 'ART—06',
-    name: '최율',
-    nameEn: 'CHOI YUL',
-    discipline: '텍스타일',
-    district: '금정구 장전동',
-    coordinates: '35.2314° N, 129.0862° E',
-    statement: '쪽염(Indigo)의 농담과 수평적 위사 교차를 통해 부산 바다의 수심 변화를 직조합니다.',
-    bio: '장전동 직조 스튜디오에서 수직기와 천연 인디고 염색을 기반으로 패브릭 작업을 전개한다. 회화적 태피스트리부터 실용적인 코스터, 북커버, 와인 보틀백까지 부산의 푸른 색채를 일상의 직물로 확장한다.',
-    collabStatus: '협업 오픈',
-    goodsSpecialties: ['천연 쪽염 패브릭 코스터', '직조 북커버 & 파우치', '자카드 직조 타월'],
-    instagram: '@yul.weave.busan',
-    email: 'yul@parang-index.kr',
-    portraitUrl: 'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=900&q=80',
-    featuredWorkUrl: 'https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?auto=format&fit=crop&w=1200&q=80',
-    artworks: [
-      {
-        id: 'w-601',
-        title: '수심 40미터의 경사 (Warp of 40m Depth)',
-        year: '2026',
-        medium: '린넨, 코튼 원사, 천연 쪽염 수직조',
-        dimensions: '65.0 × 120.0 cm',
-        imageUrl: 'https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?auto=format&fit=crop&w=1200&q=80',
-        goodsAdaptable: true,
-        editionNote: '동일 염색 기법의 북커버 및 티코스터 세트 제작 가능'
-      },
-      {
-        id: 'w-602',
-        title: '해안선 위사 교차 #04',
-        year: '2025',
-        medium: '면사 및 린넨 수직조',
-        dimensions: '45.0 × 65.0 cm',
-        imageUrl: 'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=1000&q=80',
-        goodsAdaptable: true,
-        editionNote: '패브릭 코스터 및 북슬리브 제작 가능'
-      }
-    ]
-  }
-];
+export const ARTISTS: Artist[] = CRAWLED_ARTISTS;
 
 export const GOODS_MANUALS: GoodsManual[] = [
   {
@@ -375,7 +120,7 @@ export const GOODS_MANUALS: GoodsManual[] = [
     estimatedUnitCost: '엽서 10종 묶음 기준 권당 4,800원 – 6,200원',
     difficulty: '입문',
     heroImage: 'https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=1200&q=80',
-    summary: '회화나 사진 작업을 가장 낮은 초기 비용으로 밀도 높은 아트 굿즈로 전환하는 방식입니다. 특히 부산 바다를 상징하는 Marine Blue, Cornflower, Teal 계열 리소 콩기름 잉크와 비코팅 러프글로스지를 조합하면 원화와는 또 다른 판화적 소장 가치를 만듭니다.',
+    summary: '회화나 사진 작업을 가장 낮은 초기 비용으로 밀도 높은 아트 굿즈로 전환하는 방식입니다.',
     specs: [
       { label: '추천 본문 지류', value: '문켄 폴라 러프 240g / 랑데뷰 내추럴 240g / 아코팩 250g' },
       { label: '해상도 및 색상 모드', value: '300–400 dpi / 각 별색 채널별 Grayscale(K 100%) 분판 PDF' },
@@ -420,7 +165,7 @@ export const GOODS_MANUALS: GoodsManual[] = [
     estimatedUnitCost: '80×80×20mm 기준 개당 9,500원 – 13,000원',
     difficulty: '중급',
     heroImage: 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=1200&q=80',
-    summary: '포스터나 엽서보다 객단가가 높고 전시 공간에서 작품과 함께 진열하기 좋은 고부가가치 굿즈입니다. 두께 15mm~20mm의 고투명 캐스팅 아크릴 배면에 컬러와 화이트(백판) 레이어를 부분 차등 인쇄하면 수면 아래를 들여다보는 듯한 깊이감이 완성됩니다.',
+    summary: '두께 15mm~20mm의 고투명 캐스팅 아크릴 배면에 컬러와 화이트(백판) 레이어를 부분 차등 인쇄하면 수면 아래를 들여다보는 듯한 깊이감이 완성됩니다.',
     specs: [
       { label: '권장 소재 규격', value: '국산 정품 캐스팅 투명 아크릴 15T 또는 20T (재생 압출 아크릴 비권장)' },
       { label: '인쇄 레이어 구조', value: '배면 역상 인쇄: [아크릴 배면] → [Color 층] → [부분 White 층] → [클리어 코팅]' },
@@ -459,13 +204,13 @@ export const GOODS_MANUALS: GoodsManual[] = [
     code: 'SPEC—03',
     category: '패브릭·실크스크린',
     title: '광목·린넨 패브릭 포스터 및 수성 안료 실크스크린 제작 가이드',
-    subtitle: '돌돌 말아 여행자의 가방에 넣을 수 있는 부산 아트 포스터: 디지털 텍스타일 프린팅(DTP)과 수작업 실크스크린 비교',
+    subtitle: '디지털 텍스타일 프린팅(DTP)과 수작업 실크스크린 비교',
     leadTime: '영업일 기준 7–12일',
     moq: '30장',
     estimatedUnitCost: '50×70cm 기준 장당 7,500원 – 11,000원',
     difficulty: '중급',
     heroImage: 'https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?auto=format&fit=crop&w=1200&q=80',
-    summary: '타 지역 방문객이 많은 부산 갤러리·소품샵 특성상 부피가 작고 구김에 강한 패브릭 포스터는 가장 판매 전환율이 높은 품목입니다. 다채로운 회화 원화는 반응성 DTP 날염으로, 그래픽·드로잉 작업은 수성 실크스크린으로 접근하는 것이 정석입니다.',
+    summary: '다채로운 회화 원화는 반응성 DTP 날염으로, 그래픽·드로잉 작업은 수성 실크스크린으로 접근하는 것이 정석입니다.',
     specs: [
       { label: '추천 원단', value: '워싱 광목 20수(차분한 미색) / 코튼·린넨 혼방 15수(내추럴 슬럽 조직감)' },
       { label: '인쇄 방식 구분', value: '회화·사진: 반응성 염료 DTP / 1~3도 그래픽: 수성 침투 안료 실크스크린' },
@@ -503,12 +248,12 @@ export const GOODS_MANUALS: GoodsManual[] = [
     estimatedUnitCost: '패키지 단품 기준 개당 600원 – 1,800원',
     difficulty: '입문',
     heroImage: 'https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=1200&q=80',
-    summary: '초기 제작 수량이 50개 미만일 때 전용 칼선 단상자를 제작하면 목형비와 기본 인쇄비로 인해 배보다 배꼽이 커집니다. 기성 무코팅 지류 상자에 작가 고유의 스펙 시트 라벨(띠지)과 코발트 청박 스탬핑을 결합해 갤러리 에디션 수준의 패키지를 완성합니다.',
+    summary: '기성 무코팅 지류 상자에 작가 고유의 스펙 시트 라벨(띠지)과 코발트 청박 스탬핑을 결합해 갤러리 에디션 수준의 패키지를 완성합니다.',
     specs: [
       { label: '베이스 패키지', value: '무표백 크라프트 합지 박스 또는 반투명 트레이싱지(110g) 봉투' },
       { label: '슬리브(띠지) 지류', value: '두성종이 비오톱 160g(네이비/그레이) 또는 해조류 재생지 시로 알가 160g' },
       { label: '포인트 후가공', value: '유광 코발트 청박(Blue Foil) 또는 무광 백박(White Foil) 동판 스탬핑' },
-      { label: '필수 표기 사항', value: '작가명, 작품 원본 캡션, 제작년도, 소재 및 취급 주의사항, 부산 스튜디오 좌표' }
+      { label: '필수 표기 사항', value: '작가명, 작품 원본 캡션, 제작년도, 소재 및 취급 주의사항' }
     ],
     steps: [
       {
@@ -601,7 +346,7 @@ export const INITIAL_COLLAB_POSTS: CollabPost[] = [
     date: '2026.11.02',
     type: '공동발주',
     title: '11월 셋째 주 중앙동 인쇄골목 코발트 청박(Blue Foil) 보증서 카드 합판 발주하실 작가님 (3/5명)',
-    author: '윤해조 (회화 · 영도)',
+    author: '김근예 (일러스트 · 중앙동)',
     district: '중구 중앙동',
     targetCount: '5명 합판 (1인당 200매)',
     deadline: '11.12 마감',
@@ -611,23 +356,23 @@ export const INITIAL_COLLAB_POSTS: CollabPost[] = [
     id: 'col-02',
     date: '2026.10.29',
     type: '굿즈협업',
-    title: '해운대 아트페어 출품용 세라믹 인센스 홀더 × 그래픽 패키지 콜라보 작가님 찾습니다',
-    author: '박선우 (도자 · 망미동)',
-    district: '수영구 망미동',
+    title: '해운대 아트페어 출품용 입체 오브제 × 그래픽 패키지 콜라보 작가님 찾습니다',
+    author: '배지윤 (입체조형 · 원도심)',
+    district: '중구 동광동',
     targetCount: '일러스트/그래픽 작가 1분',
     deadline: '11.15 마감',
-    description: '현재 소성 완료된 파도 단면 인센스 홀더 100세트의 슬리브 그래픽 및 동봉 성냥갑 아트워크를 함께 구성해 공동 에디션으로 선보일 작가님을 찾습니다.'
+    description: '소량 오브제 에디션 50세트의 슬리브 그래픽 및 아트워크를 함께 구성해 공동 에디션으로 선보일 작가님을 찾습니다.'
   },
   {
     id: 'col-03',
     date: '2026.10.24',
     type: '마켓부스',
-    title: '12월 영도 물양장 윈터 오브제 마켓 대형 테이블 부스 쉐어 및 디스플레이 집기 공유',
-    author: '이태경 (유리공예 · 달맞이)',
-    district: '영도구 봉래동',
-    targetCount: '지류 또는 패브릭 분야 1팀',
+    title: '12월 원도심 윈터 아트북 & 오브제 마켓 대형 테이블 부스 쉐어',
+    author: '이지영 (디자인 · 스튜디오 숲)',
+    district: '중구 중앙동',
+    targetCount: '공예 또는 회화 분야 1팀',
     deadline: '11.20 마감',
-    description: '유리 문진 위주라 평면 벽면과 테이블 절반 여유가 있습니다. 지류 포스터나 엽서북 다루시는 작가님과 함께 구성하면 시각적 균형이 좋을 것 같습니다.'
+    description: '아트북과 지류 포스터 위주라 테이블 절반 여유가 있습니다. 입체 소품이나 도자·유리 오브제 다루시는 작가님과 함께 구성하면 시각적 균형이 좋을 것 같습니다.'
   }
 ];
 
@@ -644,18 +389,18 @@ export const GALLERIES: GallerySpace[] = [
     hours: '11:00 – 19:00',
     closedDays: '매주 월·화 휴관',
     imageUrl: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80',
-    description: '1970년대 선박 부품 창고의 노출 콘크리트 기둥과 바다를 향한 수평 창을 그대로 살린 영도의 대표적인 현대미술 플랫폼입니다. 전시장 입구의 에디션 숍에서는 참여 작가들의 소량 굿즈와 독립출판물을 상시 위탁 소개합니다.',
+    description: '1970년대 선박 부품 창고의 노출 콘크리트 기둥과 바다를 향한 수평 창을 그대로 살린 영도의 대표적인 현대미술 플랫폼입니다.',
     currentExhibition: {
-      title: '《수평선 아래의 물질들: 부산 청년 조형 6인전》',
-      artists: '윤해조, 박선우 외 4인',
+      title: '《수평선 아래의 물질들: 부산 청년 조형전》',
+      artists: '김덕희, 배지윤, 심성아 외',
       period: '2026.10.18 – 2026.12.06',
-      note: '전시 연계 아티스트 에디션 굿즈 12종 현장 판매 중'
+      note: '전시 연계 아티스트 에디션 굿즈 현장 판매 중'
     },
     spaceSpecs: {
       area: '142㎡ (약 43평)',
       ceilingHeight: '4.2m (노출 보 기준)',
       wallType: '합판 위 백색 수성도장 가벽 + 동측 통창 바다 조망',
-      submissionInfo: '상·하반기 정기 대관 및 기획전 포트폴리오 상시 접수 (아티스트 굿즈 팝업 병행 가능)'
+      submissionInfo: '상·하반기 정기 대관 및 기획전 포트폴리오 상시 접수'
     },
     mapPos: { x: 28, y: 78 }
   },
@@ -671,10 +416,10 @@ export const GALLERIES: GallerySpace[] = [
     hours: '12:00 – 20:00',
     closedDays: '매주 월요일 휴관',
     imageUrl: 'https://images.unsplash.com/photo-1577720580479-7d839d829c73?auto=format&fit=crop&w=1200&q=80',
-    description: '전포동 공구길의 철물점 건물 3층에 자리한 판화·사진·지류 예술 특화 갤러리입니다. 무거운 원화 컬렉팅의 문턱을 낮추기 위해 모든 전시마다 작가와 협업한 50부 한정 리소/실크스크린 포스터와 오브제를 공동 제작해 출시합니다.',
+    description: '전포동 공구길의 철물점 건물 3층에 자리한 판화·사진·지류 예술 특화 갤러리입니다.',
     currentExhibition: {
       title: '《PAPER & PORT: 항구의 종이 물성》',
-      artists: '김도하, 정서윤 2인전',
+      artists: '김근예, 양사윤, 이지영',
       period: '2026.10.25 – 2026.11.29',
       note: '매주 토요일 오후 3시 작가 도슨트 및 별색 인쇄 토크 진행'
     },
@@ -682,7 +427,7 @@ export const GALLERIES: GallerySpace[] = [
       area: '86㎡ (약 26평)',
       ceilingHeight: '3.1m',
       wallType: '무몰딩 석고보드 백색 도장 + 레일 스팟 조명 24구',
-      submissionInfo: '일러스트·판화·사진 분야 신진 작가 개인전 대관 우대 (굿즈 제작비 50% 공간 매칭 지원 프로그램 운영)'
+      submissionInfo: '일러스트·판화·사진 분야 신진 작가 개인전 대관 우대'
     },
     mapPos: { x: 42, y: 46 }
   },
@@ -698,12 +443,12 @@ export const GALLERIES: GallerySpace[] = [
     hours: '11:00 – 20:00',
     closedDays: '연중무휴 (전시 교체일 휴관)',
     imageUrl: 'https://images.unsplash.com/photo-1594787318286-3d835c1d207f?auto=format&fit=crop&w=1200&q=80',
-    description: '광안리 해변과 망미동 예술마을을 잇는 공예·조형 중심의 갤러리입니다. 자연광이 깊게 들어오는 1층 윈도우 갤러리에서는 도자·유리·텍스타일 작가의 소품 및 굿즈를 큐레이션하며, 지하 1층에서는 몰입형 개인전이 열립니다.',
+    description: '광안리 해변과 망미동 예술마을을 잇는 공예·조형 중심의 갤러리입니다.',
     currentExhibition: {
       title: '《TACTILE TIDE: 손끝에 닿는 파도》',
-      artists: '박선우, 이태경, 최율',
+      artists: '최시복, 이진호, 최민경',
       period: '2026.11.01 – 2026.12.15',
-      note: '도자 문진·유리 고블렛·쪽염 코스터 현장 프리오더 가능'
+      note: '공예 오브제 에디션 현장 프리오더 가능'
     },
     spaceSpecs: {
       area: '1층 65㎡ / 지하 1층 110㎡',
@@ -716,27 +461,27 @@ export const GALLERIES: GallerySpace[] = [
   {
     id: 'gal-04',
     indexNo: 'SPC—04',
-    name: '파빌리온 달맞이 (Pavilion Dalmaji)',
-    nameEn: 'PAVILION DALMAJI',
+    name: '솔트갤러리 해운대 (Salt Gallery)',
+    nameEn: 'SALT GALLERY',
     zone: '해운대·달맞이',
     address: '부산 해운대구 달맞이길 117번가길 42',
     coordinates: '35.1594° N, 129.1782° E',
-    spaceType: '프라이빗 화랑 · 컬렉터스 룸',
+    spaceType: '현대미술 화랑 · 컬렉터스 룸',
     hours: '11:00 – 18:00',
     closedDays: '매주 월요일 휴관',
     imageUrl: 'https://images.unsplash.com/photo-1579783901586-d88db74b4fe4?auto=format&fit=crop&w=1200&q=80',
-    description: '달맞이 고개의 소나무 숲과 남해 수평선이 동시에 내려다보이는 건축적 갤러리입니다. 부산 기반 중견·신진 회화 작가의 원화 전시는 물론, 호텔 및 건축 공간과의 아트 콜라보레이션 에디션을 기획합니다.',
+    description: '달맞이 고개의 소나무 숲과 남해 수평선이 동시에 내려다보이는 건축적 갤러리입니다.',
     currentExhibition: {
-      title: '《COBALT HORIZON: 청색의 온도》',
-      artists: '윤해조 개인전',
+      title: '《Différance: 차연의 풍경》',
+      artists: '안은솔 개인전',
       period: '2026.10.10 – 2026.11.22',
-      note: '전시 도록 및 한정판 실크스크린 에디션 잔여 수량 현장 문의'
+      note: '부산문화재단 우수예술지원 선정 전시'
     },
     spaceSpecs: {
       area: '198㎡ (약 60평, 2개 층 복층 구조)',
       ceilingHeight: '최고 5.4m 보이드',
       wallType: '미술관급 무반사 도장 가벽 및 자연 채광 루버 시스템',
-      submissionInfo: '연 1회 부산 신진 작가 크리틱 및 전시 지원 공모 (매년 1월)'
+      submissionInfo: '연 1회 부산 신진 작가 크리틱 및 전시 지원 공모'
     },
     mapPos: { x: 78, y: 44 }
   },
@@ -752,12 +497,12 @@ export const GALLERIES: GallerySpace[] = [
     hours: '11:00 – 18:30',
     closedDays: '매주 화·수 휴관',
     imageUrl: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
-    description: '일광 해변 바로 앞 구 염전 창고 터에 세워진 오픈 스튜디오형 갤러리입니다. 자연의 물성을 다루는 사진·섬유·도자 작가들이 단기 체류하며 기장의 바다에서 영감받은 굿즈와 신작을 발표합니다.',
+    description: '일광 해변 바로 앞 구 염전 창고 터에 세워진 오픈 스튜디오형 갤러리입니다.',
     currentExhibition: {
-      title: '《해풍과 직조: 일광 레지던시 결과보고전》',
-      artists: '최율, 정서윤',
+      title: '《해풍과 시선: 부산 사진·회화 아카이브전》',
+      artists: '임소영, 김유준, 조하은',
       period: '2026.10.20 – 2026.12.20',
-      note: '주말 오픈 스튜디오 및 천연 쪽염 북커버 워크숍 운영'
+      note: '주말 오픈 스튜디오 운영'
     },
     spaceSpecs: {
       area: '125㎡ (본관 전시장 85㎡ + 중정 40㎡)',

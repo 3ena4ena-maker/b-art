@@ -10,7 +10,7 @@ import {
   GallerySpace,
   CollabPost,
 } from './data/mockData';
-import { ArrowUpRight, Plus, X, Search, Check } from 'lucide-react';
+import { ArrowUpRight, Plus, X, Search } from 'lucide-react';
 
 type ActiveSection = 'overview' | 'artists' | 'goods' | 'galleries';
 
@@ -21,7 +21,6 @@ export function App() {
   const [selectedDiscipline, setSelectedDiscipline] = useState<string>('전체');
   const [artistQuery, setArtistQuery] = useState<string>('');
   const [activeArtist, setActiveArtist] = useState<Artist | null>(null);
-  const [inquirySent, setInquirySent] = useState<boolean>(false);
 
   // Goods Manual & Estimator state
   const [selectedManualId, setSelectedManualId] = useState<string>(GOODS_MANUALS[0].id);
@@ -35,7 +34,7 @@ export function App() {
   const [activeGallery, setActiveGallery] = useState<GallerySpace | null>(null);
 
   // Saved / Archived items
-  const [savedIds, setSavedIds] = useState<string[]>(['yoon-haejo', 'manual-01', 'gal-01']);
+  const [savedIds, setSavedIds] = useState<string[]>([ARTISTS[0]?.id || '', 'manual-01', 'gal-01']);
   const [isArchiveOpen, setIsArchiveOpen] = useState<boolean>(false);
 
   // Collab posts & Modal
@@ -46,7 +45,7 @@ export function App() {
     type: '공동발주' as '공동발주' | '굿즈협업' | '마켓부스',
     title: '',
     author: '',
-    district: '영도구 봉래동',
+    district: '중구 중앙동',
     targetCount: '',
     deadline: '',
     description: '',
@@ -59,37 +58,36 @@ export function App() {
     );
   };
 
-  // Flatten all artworks with artist reference for the PageFlows-style flowing wall
+  // Flatten artworks for the 3-row PageFlows-style flowing wall
   const flowingArtworks = useMemo(() => {
     const list: {
       workId: string;
       title: string;
       imageUrl: string;
-      medium: string;
       artist: Artist;
     }[] = [];
 
-    ARTISTS.forEach((artist) => {
-      artist.artworks.forEach((w) => {
+    // Take 1st representative work from the top 36 artists for variety across 3 rows
+    ARTISTS.slice(0, 36).forEach((artist) => {
+      if (artist.artworks[0]) {
         list.push({
-          workId: w.id,
-          title: w.title,
-          imageUrl: w.imageUrl,
-          medium: w.medium,
+          workId: artist.artworks[0].id,
+          title: artist.artworks[0].title,
+          imageUrl: artist.artworks[0].imageUrl,
           artist,
         });
-      });
+      }
     });
 
-    const row1 = [...list];
-    const row2 = [...list.slice(4), ...list.slice(0, 4)];
-    const row3 = [...list.slice(8), ...list.slice(0, 8)];
+    const row1 = list.slice(0, 12);
+    const row2 = list.slice(12, 24);
+    const row3 = list.slice(24, 36);
 
     return { row1, row2, row3 };
   }, []);
 
   // Filtered Artists
-  const disciplines = ['전체', '회화', '도자·오브제', '프린트·일러스트', '사진', '공예·유리', '텍스타일'];
+  const disciplines = ['전체', '회화·미술', '도자·조형', '프린트·드로잉', '사진', '공예·오브제'];
   const filteredArtists = useMemo(() => {
     return ARTISTS.filter((artist) => {
       const matchDiscipline =
@@ -100,10 +98,17 @@ export function App() {
         artist.name.toLowerCase().includes(q) ||
         artist.nameEn.toLowerCase().includes(q) ||
         artist.district.toLowerCase().includes(q) ||
-        artist.goodsSpecialties.some((s) => s.toLowerCase().includes(q));
+        artist.bio.toLowerCase().includes(q);
       return matchDiscipline && matchQuery;
     });
   }, [selectedDiscipline, artistQuery]);
+
+  const displayedArtists = useMemo(() => {
+    if (activeSection === 'overview' && selectedDiscipline === '전체' && !artistQuery) {
+      return filteredArtists.slice(0, 12);
+    }
+    return filteredArtists;
+  }, [activeSection, filteredArtists, selectedDiscipline, artistQuery]);
 
   // Selected Goods Manual
   const currentManual: GoodsManual = useMemo(() => {
@@ -187,7 +192,7 @@ export function App() {
       type: '공동발주',
       title: '',
       author: '',
-      district: '영도구 봉래동',
+      district: '중구 중앙동',
       targetCount: '',
       deadline: '',
       description: '',
@@ -202,7 +207,7 @@ export function App() {
         <div>
           ISSUE NO. 04 · <span className="issue-strip-accent">35.1028° N, 129.0403° E (BUSAN)</span>
         </div>
-        <div>PARANG ARCHIVE</div>
+        <div>{ARTISTS.length} BUSAN ARTISTS ARCHIVED</div>
       </div>
 
       {/* Sticky Editorial Masthead */}
@@ -226,7 +231,7 @@ export function App() {
             className={`nav-item ${activeSection === 'artists' ? 'active' : ''}`}
             onClick={() => setActiveSection('artists')}
           >
-            <span className="nav-item-num">01 / ARTISTS</span>
+            <span className="nav-item-num">01 / ARTISTS ({ARTISTS.length})</span>
             <span className="nav-item-label">부산 작가 · 작품</span>
           </button>
           <button
@@ -276,7 +281,7 @@ export function App() {
 
             <div className="hero-cta-group">
               <button className="hero-btn-primary" onClick={() => setActiveSection('artists')}>
-                EXPLORE ARTISTS →
+                EXPLORE {ARTISTS.length} ARTISTS →
               </button>
               <button className="hero-btn-secondary" onClick={() => setActiveSection('goods')}>
                 GOODS MANUAL
@@ -289,21 +294,13 @@ export function App() {
             {/* Row 1: Flows Left */}
             <div className="flow-marquee-row">
               <div className="flow-marquee-track flow-left">
-                {[
-                  ...flowingArtworks.row1,
-                  ...flowingArtworks.row1,
-                  ...flowingArtworks.row1,
-                  ...flowingArtworks.row1,
-                ].map((item, idx) => (
+                {[...flowingArtworks.row1, ...flowingArtworks.row1].map((item, idx) => (
                   <div
                     key={`r1-${item.workId}-${idx}`}
                     className="flow-artwork-item"
-                    onClick={() => {
-                      setActiveArtist(item.artist);
-                      setInquirySent(false);
-                    }}
+                    onClick={() => setActiveArtist(item.artist)}
                   >
-                    <img src={item.imageUrl} alt={item.title} />
+                    <img src={item.imageUrl} alt={item.artist.name} loading="lazy" />
                     <span className="flow-artwork-overlay-artist">{item.artist.name}</span>
                   </div>
                 ))}
@@ -313,21 +310,13 @@ export function App() {
             {/* Row 2: Flows Right */}
             <div className="flow-marquee-row">
               <div className="flow-marquee-track flow-right">
-                {[
-                  ...flowingArtworks.row2,
-                  ...flowingArtworks.row2,
-                  ...flowingArtworks.row2,
-                  ...flowingArtworks.row2,
-                ].map((item, idx) => (
+                {[...flowingArtworks.row2, ...flowingArtworks.row2].map((item, idx) => (
                   <div
                     key={`r2-${item.workId}-${idx}`}
                     className="flow-artwork-item"
-                    onClick={() => {
-                      setActiveArtist(item.artist);
-                      setInquirySent(false);
-                    }}
+                    onClick={() => setActiveArtist(item.artist)}
                   >
-                    <img src={item.imageUrl} alt={item.title} />
+                    <img src={item.imageUrl} alt={item.artist.name} loading="lazy" />
                     <span className="flow-artwork-overlay-artist">{item.artist.name}</span>
                   </div>
                 ))}
@@ -337,21 +326,13 @@ export function App() {
             {/* Row 3: Flows Left */}
             <div className="flow-marquee-row">
               <div className="flow-marquee-track flow-left-slow">
-                {[
-                  ...flowingArtworks.row3,
-                  ...flowingArtworks.row3,
-                  ...flowingArtworks.row3,
-                  ...flowingArtworks.row3,
-                ].map((item, idx) => (
+                {[...flowingArtworks.row3, ...flowingArtworks.row3].map((item, idx) => (
                   <div
                     key={`r3-${item.workId}-${idx}`}
                     className="flow-artwork-item"
-                    onClick={() => {
-                      setActiveArtist(item.artist);
-                      setInquirySent(false);
-                    }}
+                    onClick={() => setActiveArtist(item.artist)}
                   >
-                    <img src={item.imageUrl} alt={item.title} />
+                    <img src={item.imageUrl} alt={item.artist.name} loading="lazy" />
                     <span className="flow-artwork-overlay-artist">{item.artist.name}</span>
                   </div>
                 ))}
@@ -362,7 +343,7 @@ export function App() {
       )}
 
       {/* =====================================================================
-          SECTION 01: ARTISTS & ARTWORKS
+          SECTION 01: ARTISTS & ARTWORKS (3 REPRESENTATIVE WORKS PER ARTIST)
          ===================================================================== */}
       {(activeSection === 'overview' || activeSection === 'artists') && (
         <section>
@@ -373,12 +354,12 @@ export function App() {
               <span>ARTISTS</span>
             </div>
             <div className="section-bar-title">
-              <h2>부산 작가 · 작품 아카이브</h2>
-              <span>Artists & Works</span>
+              <h2>부산 활동 작가 · 대표작품 아카이브</h2>
+              <span>{filteredArtists.length} Active Busan Artists</span>
             </div>
             {activeSection === 'overview' ? (
               <button className="section-bar-action" onClick={() => setActiveSection('artists')}>
-                <span>전체 보기</span>
+                <span>전체 {ARTISTS.length}명 보기</span>
                 <ArrowUpRight size={14} />
               </button>
             ) : (
@@ -412,7 +393,7 @@ export function App() {
               <Search size={14} color="var(--ink-muted)" />
               <input
                 type="text"
-                placeholder="작가명, 지역, 굿즈 검색"
+                placeholder="작가명, 장르, 이력 검색"
                 value={artistQuery}
                 onChange={(e) => setArtistQuery(e.target.value)}
               />
@@ -424,52 +405,53 @@ export function App() {
             </div>
           </div>
 
-          {/* Artist Editorial Grid */}
+          {/* Artist Editorial Grid — Each card shows 3 Representative Artworks as Images */}
           <div className="artist-editorial-grid">
-            {filteredArtists.map((artist) => {
+            {displayedArtists.map((artist) => {
               const isSaved = savedIds.includes(artist.id);
+              const w0 = artist.artworks[0]?.imageUrl || artist.featuredWorkUrl;
+              const w1 = artist.artworks[1]?.imageUrl || w0;
+              const w2 = artist.artworks[2]?.imageUrl || w0;
+
               return (
                 <article
                   key={artist.id}
                   className="artist-column"
-                  onClick={() => {
-                    setActiveArtist(artist);
-                    setInquirySent(false);
-                  }}
+                  onClick={() => setActiveArtist(artist)}
                 >
                   <div className="artist-col-header">
                     <span>
                       {artist.indexNo} · {artist.district}
                     </span>
-                    <span className="artist-status-tag">{artist.collabStatus}</span>
+                    <span className="artist-status-tag">{artist.discipline}</span>
                   </div>
 
-                  <div className="artist-image-frame">
-                    <img src={artist.featuredWorkUrl} alt={artist.name} />
+                  {/* 3 Representative Artworks Image Triptych */}
+                  <div className="artist-works-triptych">
+                    <div className="triptych-main">
+                      <img src={w0} alt={artist.name} loading="lazy" />
+                    </div>
+                    <div className="triptych-sub-col">
+                      <div className="triptych-sub-item">
+                        <img src={w1} alt={artist.name} loading="lazy" />
+                      </div>
+                      <div className="triptych-sub-item">
+                        <img src={w2} alt={artist.name} loading="lazy" />
+                      </div>
+                    </div>
                   </div>
 
                   <div className="artist-body">
-                    <div>
-                      <div className="artist-discipline-line">{artist.discipline}</div>
-                      <div className="artist-title-row" style={{ marginTop: '4px' }}>
-                        <h3 className="artist-name">{artist.name}</h3>
-                        <span className="artist-name-en">{artist.nameEn}</span>
-                      </div>
+                    <div className="artist-title-row">
+                      <h3 className="artist-name">{artist.name}</h3>
+                      <span className="artist-name-en">{artist.nameEn}</span>
                     </div>
 
                     <p className="artist-statement">{artist.statement}</p>
-
-                    <div className="artist-goods-list">
-                      {artist.goodsSpecialties.map((spec) => (
-                        <span key={spec} className="goods-spec-pill">
-                          {spec}
-                        </span>
-                      ))}
-                    </div>
                   </div>
 
                   <div className="artist-col-footer">
-                    <span>WORKS ({artist.artworks.length})</span>
+                    <span>{artist.instagram}</span>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                       <button
                         onClick={(e) => toggleSave(artist.id, e)}
@@ -488,6 +470,32 @@ export function App() {
               );
             })}
           </div>
+
+          {activeSection === 'overview' && filteredArtists.length > 12 && (
+            <div
+              style={{
+                padding: '20px 28px',
+                borderBottom: '1px solid var(--line-strong)',
+                display: 'flex',
+                justifyContent: 'center',
+                background: 'var(--bg-pure)',
+              }}
+            >
+              <button
+                onClick={() => setActiveSection('artists')}
+                style={{
+                  padding: '12px 28px',
+                  background: 'var(--ink)',
+                  color: '#ffffff',
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: '12px',
+                  letterSpacing: '0.04em',
+                }}
+              >
+                VIEW ALL {filteredArtists.length} BUSAN ARTISTS →
+              </button>
+            </div>
+          )}
         </section>
       )}
 
@@ -1306,14 +1314,14 @@ export function App() {
       </footer>
 
       {/* =====================================================================
-          DRAWER 1: ARTIST PORTFOLIO & GOODS COLLABORATION SHEET
+          DRAWER 1: ARTIST PROFILE & 3 REPRESENTATIVE WORKS (IMAGES ONLY)
          ===================================================================== */}
       {activeArtist && (
         <div className="drawer-backdrop" onClick={() => setActiveArtist(null)}>
           <div className="editorial-drawer" onClick={(e) => e.stopPropagation()}>
             <div className="drawer-top-bar">
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--marine)' }}>
-                {activeArtist.indexNo} // STUDIO MONOGRAPH
+                {activeArtist.indexNo} // {activeArtist.sourceLabel}
               </div>
               <button
                 onClick={() => setActiveArtist(null)}
@@ -1330,7 +1338,7 @@ export function App() {
               </button>
             </div>
 
-            <div style={{ padding: '36px 32px', borderBottom: '1px solid var(--line)' }}>
+            <div style={{ padding: '32px', borderBottom: '1px solid var(--line)' }}>
               <div
                 style={{
                   fontFamily: 'var(--font-mono)',
@@ -1338,7 +1346,7 @@ export function App() {
                   color: 'var(--ink-muted)',
                 }}
               >
-                {activeArtist.discipline} · {activeArtist.district} ({activeArtist.coordinates})
+                {activeArtist.discipline} · {activeArtist.district}
               </div>
               <div
                 style={{
@@ -1357,7 +1365,7 @@ export function App() {
                       fontFamily: 'var(--font-serif)',
                       fontStyle: 'italic',
                       fontWeight: 400,
-                      fontSize: '28px',
+                      fontSize: '26px',
                       color: 'var(--ink-muted)',
                       marginLeft: '8px',
                     }}
@@ -1365,61 +1373,63 @@ export function App() {
                     {activeArtist.nameEn}
                   </span>
                 </h2>
-                <button
-                  onClick={() => toggleSave(activeArtist.id)}
-                  style={{
-                    padding: '8px 14px',
-                    border: '1px solid var(--line-strong)',
-                    fontFamily: 'var(--font-mono)',
-                    fontSize: '11px',
-                    background: savedIds.includes(activeArtist.id)
-                      ? 'var(--marine)'
-                      : 'transparent',
-                    color: savedIds.includes(activeArtist.id) ? '#ffffff' : 'var(--ink)',
-                  }}
-                >
-                  {savedIds.includes(activeArtist.id) ? 'ARCHIVED' : '+ ARCHIVE'}
-                </button>
+                <div style={{ display: 'flex', gap: '8px' }}>
+                  {activeArtist.instagramUrl && (
+                    <a
+                      href={activeArtist.instagramUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      style={{
+                        padding: '8px 14px',
+                        border: '1px solid var(--line-strong)',
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: '11px',
+                        background: 'var(--bg-pure)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '4px',
+                      }}
+                    >
+                      <span>{activeArtist.instagram}</span>
+                      <ArrowUpRight size={12} />
+                    </a>
+                  )}
+                  <a
+                    href={activeArtist.portfolioUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    style={{
+                      padding: '8px 14px',
+                      border: '1px solid var(--line-strong)',
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: '11px',
+                      background: 'var(--ink)',
+                      color: '#ffffff',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '4px',
+                    }}
+                  >
+                    <span>PORTFOLIO</span>
+                    <ArrowUpRight size={12} />
+                  </a>
+                </div>
               </div>
 
               <p
                 style={{
-                  fontSize: '15px',
-                  lineHeight: 1.7,
+                  fontSize: '14px',
+                  lineHeight: 1.75,
                   color: 'var(--ink)',
                   marginTop: '20px',
+                  whiteSpace: 'pre-line',
                 }}
               >
                 {activeArtist.bio}
               </p>
-
-              <div
-                style={{
-                  marginTop: '24px',
-                  paddingTop: '16px',
-                  borderTop: '1px solid var(--line)',
-                  display: 'grid',
-                  gridTemplateColumns: '1fr 1fr',
-                  gap: '16px',
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '12px',
-                }}
-              >
-                <div>
-                  <div style={{ color: 'var(--ink-muted)', fontSize: '10px' }}>GOODS EDITION</div>
-                  <div style={{ marginTop: '4px' }}>
-                    {activeArtist.goodsSpecialties.join(' / ')}
-                  </div>
-                </div>
-                <div>
-                  <div style={{ color: 'var(--ink-muted)', fontSize: '10px' }}>CONTACT</div>
-                  <div style={{ marginTop: '4px' }}>
-                    {activeArtist.instagram} · {activeArtist.email}
-                  </div>
-                </div>
-              </div>
             </div>
 
+            {/* 3 Representative Artworks — Images Only */}
             <div style={{ padding: '32px' }}>
               <div
                 style={{
@@ -1427,162 +1437,29 @@ export function App() {
                   fontSize: '11px',
                   color: 'var(--marine)',
                   letterSpacing: '0.06em',
-                  marginBottom: '20px',
+                  marginBottom: '16px',
                 }}
               >
-                SELECTED WORKS ({activeArtist.artworks.length})
+                REPRESENTATIVE WORKS (03)
               </div>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
-                {activeArtist.artworks.map((work) => (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                {activeArtist.artworks.slice(0, 3).map((work) => (
                   <div
                     key={work.id}
                     style={{
                       border: '1px solid var(--line-strong)',
                       background: 'var(--bg-pure)',
+                      overflow: 'hidden',
                     }}
                   >
-                    <div
-                      style={{
-                        maxHeight: '420px',
-                        overflow: 'hidden',
-                        borderBottom: '1px solid var(--line)',
-                      }}
-                    >
-                      <img src={work.imageUrl} alt={work.title} />
-                    </div>
-                    <div style={{ padding: '20px 24px' }}>
-                      <div
-                        style={{
-                          display: 'flex',
-                          justifyContent: 'space-between',
-                          alignItems: 'baseline',
-                          gap: '12px',
-                        }}
-                      >
-                        <h4 style={{ fontSize: '18px', fontWeight: 700 }}>{work.title}</h4>
-                        <span
-                          style={{
-                            fontFamily: 'var(--font-mono)',
-                            fontSize: '12px',
-                            color: 'var(--ink-muted)',
-                          }}
-                        >
-                          {work.year}
-                        </span>
-                      </div>
-                      <div
-                        style={{
-                          fontFamily: 'var(--font-mono)',
-                          fontSize: '12px',
-                          color: 'var(--ink-muted)',
-                          marginTop: '4px',
-                        }}
-                      >
-                        {work.medium} — {work.dimensions}
-                      </div>
-                      {work.editionNote && (
-                        <div
-                          style={{
-                            marginTop: '12px',
-                            paddingTop: '12px',
-                            borderTop: '1px solid var(--line)',
-                            fontFamily: 'var(--font-mono)',
-                            fontSize: '12px',
-                            color: 'var(--marine)',
-                          }}
-                        >
-                          {work.editionNote}
-                        </div>
-                      )}
-                    </div>
+                    <img
+                      src={work.imageUrl}
+                      alt={activeArtist.name}
+                      style={{ width: '100%', maxHeight: '460px', objectFit: 'cover' }}
+                    />
                   </div>
                 ))}
-              </div>
-
-              <div
-                style={{
-                  marginTop: '36px',
-                  padding: '28px',
-                  border: '1px solid var(--line-strong)',
-                  background: 'var(--bg-alt)',
-                }}
-              >
-                <div style={{ fontSize: '17px', fontWeight: 700, marginBottom: '12px' }}>
-                  {activeArtist.name} 스튜디오 문의
-                </div>
-
-                {inquirySent ? (
-                  <div
-                    style={{
-                      padding: '16px',
-                      background: 'var(--marine)',
-                      color: '#ffffff',
-                      fontFamily: 'var(--font-mono)',
-                      fontSize: '12px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '8px',
-                    }}
-                  >
-                    <Check size={15} />
-                    <span>{activeArtist.email} 로 접수되었습니다.</span>
-                  </div>
-                ) : (
-                  <form
-                    onSubmit={(e) => {
-                      e.preventDefault();
-                      setInquirySent(true);
-                    }}
-                    style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}
-                  >
-                    <input
-                      required
-                      placeholder="성함 / 소속"
-                      style={{
-                        padding: '10px 12px',
-                        border: '1px solid var(--line-strong)',
-                        background: 'var(--bg)',
-                        fontSize: '13px',
-                      }}
-                    />
-                    <input
-                      required
-                      placeholder="연락처 / 이메일"
-                      style={{
-                        padding: '10px 12px',
-                        border: '1px solid var(--line-strong)',
-                        background: 'var(--bg)',
-                        fontSize: '13px',
-                      }}
-                    />
-                    <textarea
-                      required
-                      rows={3}
-                      placeholder="문의 내용"
-                      style={{
-                        padding: '10px 12px',
-                        border: '1px solid var(--line-strong)',
-                        background: 'var(--bg)',
-                        fontSize: '13px',
-                        resize: 'vertical',
-                      }}
-                    />
-                    <button
-                      type="submit"
-                      style={{
-                        alignSelf: 'flex-start',
-                        padding: '11px 22px',
-                        background: 'var(--ink)',
-                        color: '#ffffff',
-                        fontFamily: 'var(--font-mono)',
-                        fontSize: '12px',
-                      }}
-                    >
-                      SEND →
-                    </button>
-                  </form>
-                )}
               </div>
             </div>
           </div>
