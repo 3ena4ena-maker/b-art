@@ -1012,32 +1012,12 @@ export function App() {
                 }`}
                 onClick={() => setActiveGallery(gal)}
               >
-                <div className="gallery-row-content">
-                  <div>
-                    <div className="gallery-row-meta">
-                      <span className="gallery-zone-badge">
-                        {gal.indexNo} · {gal.zone} · {gal.spaceType}
-                      </span>
-                      <span className="gallery-hours-text">{gal.hours}</span>
-                    </div>
-
+                <div className="gallery-row-compact">
+                  <div className="gallery-row-main">
+                    <span className="gallery-zone-badge">{gal.zone}</span>
                     <h3 className="gallery-row-title">{gal.name}</h3>
-
-                    <p className="gallery-row-desc">{gal.description}</p>
                   </div>
-
-                  <div className="gallery-row-exhibition">
-                    <div className="gallery-exhibition-info">
-                      <div className="gallery-exhibition-kicker">
-                        ON VIEW ({gal.currentExhibition.period})
-                      </div>
-                      <div className="gallery-exhibition-title">
-                        {gal.currentExhibition.title} — {gal.currentExhibition.artists}
-                      </div>
-                    </div>
-
-                    <ArrowUpRight size={14} className="gallery-arrow-icon" />
-                  </div>
+                  <ArrowUpRight size={14} className="gallery-arrow-icon" />
                 </div>
               </article>
             ))}
