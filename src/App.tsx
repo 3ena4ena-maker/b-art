@@ -59,30 +59,30 @@ export function App() {
     );
   };
 
-  // Flatten artworks for the 3-row PageFlows-style flowing wall
+  // Flatten verified pure artworks for the 3-row PageFlows-style flowing wall (zero portraits, zero posters, zero making-of shots)
   const flowingArtworks = useMemo(() => {
-    const list: {
-      workId: string;
-      title: string;
-      imageUrl: string;
-      artist: Artist;
-    }[] = [];
+    const row1 = ARTISTS.map((artist) => ({
+      workId: artist.artworks[0].id,
+      title: artist.artworks[0].title,
+      imageUrl: artist.artworks[0].imageUrl,
+      artist,
+    }));
 
-    // Take 1st representative work from the top 36 artists for variety across 3 rows
-    ARTISTS.slice(0, 36).forEach((artist) => {
-      if (artist.artworks[0]) {
-        list.push({
-          workId: artist.artworks[0].id,
-          title: artist.artworks[0].title,
-          imageUrl: artist.artworks[0].imageUrl,
-          artist,
-        });
-      }
-    });
+    const shifted2 = [...ARTISTS.slice(11), ...ARTISTS.slice(0, 11)];
+    const row2 = shifted2.map((artist) => ({
+      workId: artist.artworks[1].id,
+      title: artist.artworks[1].title,
+      imageUrl: artist.artworks[1].imageUrl,
+      artist,
+    }));
 
-    const row1 = list.slice(0, 12);
-    const row2 = list.slice(12, 24);
-    const row3 = list.slice(24, 36);
+    const shifted3 = [...ARTISTS.slice(22), ...ARTISTS.slice(0, 22)];
+    const row3 = shifted3.map((artist) => ({
+      workId: artist.artworks[2].id,
+      title: artist.artworks[2].title,
+      imageUrl: artist.artworks[2].imageUrl,
+      artist,
+    }));
 
     return { row1, row2, row3 };
   }, []);
