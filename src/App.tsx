@@ -3,18 +3,21 @@ import {
   ARTISTS,
   GOODS_MANUALS,
   LOCAL_MAKERS,
-  COLLAB_SOUVENIRS,
   INITIAL_COLLAB_POSTS,
   GALLERIES,
   Artist,
+  Artwork,
+  ArtistCollabStatus,
   GoodsManual,
   GallerySpace,
   CollabPost,
 } from './data/mockData';
 import { ArrowUpRight, Plus, X, Search } from 'lucide-react';
 
-type ActiveSection = 'overview' | 'artists' | 'galleries' | 'collab';
+type ActiveSection = 'overview' | 'artists' | 'souvenirs' | 'galleries' | 'collab';
 type GallerySpecFilter = 'all' | 'rental' | 'sales' | 'artshop' | 'zero_commission';
+type GalleryAudienceMode = 'all' | 'public' | 'artist';
+type ArtistCollabFilter = 'all' | 'souvenir_partner' | 'open_collab' | 'collectible';
 
 // 15-row dot-matrix bitmaps for Busan's 10,452 active artists (Korea Artist Welfare Foundation / Busan Cultural Foundation)
 const BUSAN_ARTIST_DIGIT_MATRIX: Array<{
@@ -180,25 +183,124 @@ const BUSAN_ARTIST_DIGIT_MATRIX: Array<{
 
 const MATRIX_GLYPHS = ['+', '×', '•', '○', '✳', '▫'];
 
+function parseArtistIntroAndCareer(artist: Artist): {
+  intro: string;
+  careerItems: string[];
+} {
+  const parts = artist.bio.split(/\[최근 주요 (?:활동 )?이력\]/);
+  const rawIntro = (parts[0] || artist.statement || '').trim();
+  const rawCareer = (parts[1] || '').trim();
+
+  let careerItems: string[] = [];
+  if (rawCareer) {
+    careerItems = rawCareer
+      .split(/\n|•|(?=\b20[12]\d\b)/)
+      .map((s) => s.replace(/^[-·•\s]+/, '').trim())
+      .filter((s) => s.length > 4);
+  }
+
+  if (careerItems.length === 0) {
+    careerItems = [
+      ...(artist.soloExhibitions || []),
+      ...(artist.groupExhibitions || []),
+    ];
+  }
+
+  return {
+    intro: rawIntro || artist.statement,
+    careerItems: careerItems.slice(0, 8),
+  };
+}
+
 export function App() {
   const [activeSection, setActiveSection] = useState<ActiveSection>('overview');
 
-  // Artist filters
+  // Artist list (supports live artist registration & profile updates) + filters
+  const [artistList, setArtistList] = useState<Artist[]>(ARTISTS);
   const [selectedDiscipline, setSelectedDiscipline] = useState<string>('전체');
+  const [artistCollabFilter, setArtistCollabFilter] = useState<ArtistCollabFilter>('all');
   const [artistQuery, setArtistQuery] = useState<string>('');
   const [activeArtist, setActiveArtist] = useState<Artist | null>(null);
+  const [isArtistModalOpen, setIsArtistModalOpen] = useState<boolean>(false);
+  const [artistSubmitNotice, setArtistSubmitNotice] = useState<string>('');
 
-  // Goods Manual & Estimator state
+  const [artistForm, setArtistForm] = useState<{
+    mode: 'new' | 'update';
+    targetArtistId: string;
+    name: string;
+    nameEn: string;
+    discipline: string;
+    district: string;
+    collabStatus: ArtistCollabStatus;
+    collabNote: string;
+    statement: string;
+    soloText: string;
+    groupText: string;
+    instagram: string;
+    portfolioUrl: string;
+    works: Array<{
+      title: string;
+      year: string;
+      mediumDetail: string;
+      dimensions: string;
+      availability: '소장 가능' | '판매 문의' | '에디션 가능';
+      priceLabel: string;
+      imageUrl: string;
+    }>;
+  }>({
+    mode: 'new',
+    targetArtistId: '',
+    name: '',
+    nameEn: '',
+    discipline: '회화·미술',
+    district: '중구 원도심 (또따또가)',
+    collabStatus: '기념품 콜라보 참여',
+    collabNote: 'floreur × 부산 관광기념품 콜라보 에디션 및 아트굿즈 제작 희망',
+    statement: '',
+    soloText: '',
+    groupText: '',
+    instagram: '@',
+    portfolioUrl: '',
+    works: [
+      {
+        title: '',
+        year: '2026',
+        mediumDetail: '캔버스에 유채 및 혼합매체',
+        dimensions: '72.7 × 60.6 cm (20호 F)',
+        availability: '소장 가능',
+        priceLabel: '1,200,000 KRW (소장 가능)',
+        imageUrl: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=1000&q=80',
+      },
+      {
+        title: '',
+        year: '2026',
+        mediumDetail: '캔버스에 유채 및 혼합매체',
+        dimensions: '53.0 × 45.5 cm (10호 F)',
+        availability: '소장 가능',
+        priceLabel: '850,000 KRW (소장 가능)',
+        imageUrl: 'https://images.unsplash.com/photo-1541961017774-22349e4a1262?auto=format&fit=crop&w=1000&q=80',
+      },
+      {
+        title: '',
+        year: '2025',
+        mediumDetail: '아카이벌 피그먼트 에디션',
+        dimensions: '50.0 × 70.0 cm',
+        availability: '판매 문의',
+        priceLabel: '판매가 문의 (floreur 중개)',
+        imageUrl: 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=1000&q=80',
+      },
+    ],
+  });
+
+  // Goods Manual & Local Makers filter state
   const [selectedManualId, setSelectedManualId] = useState<string>(GOODS_MANUALS[0].id);
   const [makerCategoryFilter, setMakerCategoryFilter] = useState<string>('전체');
   const [makerQuery, setMakerQuery] = useState<string>('');
-  const [calcCategory, setCalcCategory] = useState<'riso' | 'acrylic' | 'fabric' | 'package'>('riso');
-  const [calcQty, setCalcQty] = useState<number>(50);
-  const [calcFinish, setCalcFinish] = useState<boolean>(true);
 
-  // Gallery filters & selection
+  // Gallery filters, selection & audience mode ([대중용] 전시·관람 안내 vs [작가용] 대관·판매·입점 스펙)
   const [selectedZone, setSelectedZone] = useState<string>('전체');
   const [gallerySpecFilter, setGallerySpecFilter] = useState<GallerySpecFilter>('all');
+  const [galleryAudienceMode, setGalleryAudienceMode] = useState<GalleryAudienceMode>('all');
   const [activeGallery, setActiveGallery] = useState<GallerySpace | null>(null);
 
   // Saved / Archived items
@@ -265,9 +367,17 @@ export function App() {
   // Filtered Artists
   const disciplines = ['전체', '회화·미술', '도자·조형', '프린트·드로잉', '사진', '공예·오브제'];
   const filteredArtists = useMemo(() => {
-    return ARTISTS.filter((artist) => {
+    return artistList.filter((artist) => {
       const matchDiscipline =
         selectedDiscipline === '전체' || artist.discipline === selectedDiscipline;
+      const matchCollab =
+        artistCollabFilter === 'all' ||
+        (artistCollabFilter === 'souvenir_partner' &&
+          artist.collabStatus === '기념품 콜라보 참여') ||
+        (artistCollabFilter === 'open_collab' &&
+          artist.collabStatus === '협업 열림 (Open to Collab)') ||
+        (artistCollabFilter === 'collectible' &&
+          artist.artworks.some((w) => w.availability === '소장 가능'));
       const q = artistQuery.trim().toLowerCase();
       const matchQuery =
         !q ||
@@ -275,61 +385,222 @@ export function App() {
         artist.nameEn.toLowerCase().includes(q) ||
         artist.district.toLowerCase().includes(q) ||
         artist.bio.toLowerCase().includes(q);
-      return matchDiscipline && matchQuery;
+      return matchDiscipline && matchCollab && matchQuery;
     });
-  }, [selectedDiscipline, artistQuery]);
+  }, [artistList, selectedDiscipline, artistCollabFilter, artistQuery]);
 
   const displayedArtists = filteredArtists;
+
+  const openNewArtistModal = () => {
+    setArtistForm({
+      mode: 'new',
+      targetArtistId: '',
+      name: '',
+      nameEn: '',
+      discipline: '회화·미술',
+      district: '중구 원도심 (또따또가)',
+      collabStatus: '기념품 콜라보 참여',
+      collabNote: 'floreur × 부산 관광기념품 콜라보 에디션 및 아트굿즈 제작 희망',
+      statement: '',
+      soloText: '',
+      groupText: '',
+      instagram: '@',
+      portfolioUrl: '',
+      works: [
+        {
+          title: '',
+          year: '2026',
+          mediumDetail: '캔버스에 유채 및 혼합매체',
+          dimensions: '72.7 × 60.6 cm (20호 F)',
+          availability: '소장 가능',
+          priceLabel: '1,200,000 KRW (소장 가능)',
+          imageUrl: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=1000&q=80',
+        },
+        {
+          title: '',
+          year: '2026',
+          mediumDetail: '캔버스에 유채 및 혼합매체',
+          dimensions: '53.0 × 45.5 cm (10호 F)',
+          availability: '소장 가능',
+          priceLabel: '850,000 KRW (소장 가능)',
+          imageUrl: 'https://images.unsplash.com/photo-1541961017774-22349e4a1262?auto=format&fit=crop&w=1000&q=80',
+        },
+        {
+          title: '',
+          year: '2025',
+          mediumDetail: '아카이벌 피그먼트 에디션',
+          dimensions: '50.0 × 70.0 cm',
+          availability: '판매 문의',
+          priceLabel: '판매가 문의 (floreur 중개)',
+          imageUrl: 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=1000&q=80',
+        },
+      ],
+    });
+    setIsArtistModalOpen(true);
+  };
+
+  const openEditArtistModal = (artist: Artist) => {
+    setArtistForm({
+      mode: 'update',
+      targetArtistId: artist.id,
+      name: artist.name,
+      nameEn: artist.nameEn,
+      discipline: artist.discipline,
+      district: artist.district,
+      collabStatus: artist.collabStatus || '기념품 콜라보 참여',
+      collabNote: artist.collabNote || 'floreur × 부산 관광기념품 콜라보 에디션 참여 작가',
+      statement: artist.statement,
+      soloText: (artist.soloExhibitions || []).join('\n'),
+      groupText: (artist.groupExhibitions || []).join('\n'),
+      instagram: artist.instagram,
+      portfolioUrl: artist.portfolioUrl,
+      works: artist.artworks.map((w) => ({
+        title: w.title,
+        year: w.year,
+        mediumDetail: w.mediumDetail || w.medium,
+        dimensions: w.dimensions || '72.7 × 60.6 cm (20호 F)',
+        availability: w.availability || '소장 가능',
+        priceLabel: w.priceLabel || '판매가 문의 (floreur 중개)',
+        imageUrl: w.imageUrl,
+      })),
+    });
+    setIsArtistModalOpen(true);
+  };
+
+  const handleAddWorkSlot = () => {
+    if (artistForm.works.length >= 5) return;
+    setArtistForm((prev) => ({
+      ...prev,
+      works: [
+        ...prev.works,
+        {
+          title: '',
+          year: '2026',
+          mediumDetail: prev.discipline,
+          dimensions: '53.0 × 45.5 cm (10호 F)',
+          availability: '소장 가능',
+          priceLabel: '판매가 문의 (floreur 중개)',
+          imageUrl: 'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=1000&q=80',
+        },
+      ],
+    }));
+  };
+
+  const handleRemoveWorkSlot = (idx: number) => {
+    if (artistForm.works.length <= 3) return;
+    setArtistForm((prev) => ({
+      ...prev,
+      works: prev.works.filter((_, i) => i !== idx),
+    }));
+  };
+
+  const handleSubmitArtistForm = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!artistForm.name.trim()) return;
+
+    const soloList = artistForm.soloText
+      .split('\n')
+      .map((s) => s.trim())
+      .filter(Boolean);
+    const groupList = artistForm.groupText
+      .split('\n')
+      .map((s) => s.trim())
+      .filter(Boolean);
+
+    const builtWorks: Artwork[] = artistForm.works.map((w, i) => ({
+      id: `custom-w-${Date.now()}-${i}`,
+      title: w.title.trim() || `${artistForm.name} 대표작 0${i + 1}`,
+      year: w.year.trim() || '2026',
+      medium: artistForm.discipline,
+      mediumDetail: w.mediumDetail.trim() || artistForm.discipline,
+      dimensions: w.dimensions.trim() || '규격 별도 표기',
+      availability: w.availability,
+      priceLabel: w.priceLabel.trim() || '판매가 문의',
+      imageUrl:
+        w.imageUrl.trim() ||
+        'https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=1000&q=80',
+      highResUrl:
+        w.imageUrl.trim() ||
+        'https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=1000&q=80',
+    }));
+
+    if (artistForm.mode === 'update' && artistForm.targetArtistId) {
+      setArtistList((prev) =>
+        prev.map((a) => {
+          if (a.id !== artistForm.targetArtistId) return a;
+          const updated: Artist = {
+            ...a,
+            name: artistForm.name.trim(),
+            nameEn: artistForm.nameEn.trim() || a.nameEn,
+            discipline: artistForm.discipline,
+            district: artistForm.district.trim(),
+            collabStatus: artistForm.collabStatus,
+            collabNote: artistForm.collabNote.trim(),
+            statement: artistForm.statement.trim() || a.statement,
+            bio: artistForm.statement.trim() || a.bio,
+            soloExhibitions: soloList.length > 0 ? soloList : a.soloExhibitions,
+            groupExhibitions: groupList.length > 0 ? groupList : a.groupExhibitions,
+            instagram: artistForm.instagram.trim() || a.instagram,
+            portfolioUrl: artistForm.portfolioUrl.trim() || a.portfolioUrl,
+            featuredWorkUrl: builtWorks[0]?.imageUrl || a.featuredWorkUrl,
+            artworks: builtWorks,
+          };
+          if (activeArtist?.id === a.id) {
+            setActiveArtist(updated);
+          }
+          return updated;
+        })
+      );
+      setArtistSubmitNotice(
+        `${artistForm.name} 작가 프로필·대표작 수정 신청이 접수되어 아카이브에 반영되었습니다. (floreur 검수 완료)`
+      );
+    } else {
+      const nextNo = artistList.length + 1;
+      const newArtist: Artist = {
+        id: `custom-artist-${Date.now()}`,
+        indexNo: `ARTIST ${nextNo < 10 ? `0${nextNo}` : nextNo} · 검수중`,
+        name: artistForm.name.trim(),
+        nameEn: artistForm.nameEn.trim().toUpperCase() || 'BUSAN ARTIST',
+        discipline: artistForm.discipline,
+        district: artistForm.district.trim() || '부산',
+        updatedAt: '2026.11.04',
+        statement:
+          artistForm.statement.trim() ||
+          `${artistForm.district}를 거점으로 활동하며 ${artistForm.discipline} 작업을 이어가고 있는 부산 예술인입니다.`,
+        bio:
+          artistForm.statement.trim() ||
+          `${artistForm.district}를 거점으로 활동하며 ${artistForm.discipline} 작업을 이어가고 있는 부산 예술인입니다.`,
+        soloExhibitions:
+          soloList.length > 0
+            ? soloList
+            : [`2026 ${artistForm.name} 개인전, 부산`],
+        groupExhibitions:
+          groupList.length > 0
+            ? groupList
+            : [`2025–2026 부산 신진·중견 예술인 기획전, 부산`],
+        collabStatus: artistForm.collabStatus,
+        collabNote: artistForm.collabNote.trim(),
+        instagram: artistForm.instagram.trim() || '@busan_artist',
+        instagramUrl: artistForm.portfolioUrl.trim() || 'https://www.instagram.com/',
+        portfolioUrl: artistForm.portfolioUrl.trim() || 'https://www.instagram.com/',
+        sourceLabel: '작가 직접 제보 · floreur 검수 등재 (2026)',
+        portraitUrl: builtWorks[0].imageUrl,
+        featuredWorkUrl: builtWorks[0].imageUrl,
+        artworks: builtWorks,
+      };
+      setArtistList((prev) => [newArtist, ...prev]);
+      setArtistSubmitNotice(
+        `${newArtist.name} 작가님의 프로필과 대표작 ${builtWorks.length}점이 접수되어 아카이브 상단에 등재되었습니다.`
+      );
+    }
+
+    setIsArtistModalOpen(false);
+  };
 
   // Selected Goods Manual
   const currentManual: GoodsManual = useMemo(() => {
     return GOODS_MANUALS.find((m) => m.id === selectedManualId) || GOODS_MANUALS[0];
   }, [selectedManualId]);
-
-  // Small-Batch Estimator calculation
-  const estimation = useMemo(() => {
-    const baseConfig = {
-      riso: {
-        name: '리소그라프 별색 엽서북 (10매입)',
-        baseUnit: 5800,
-        finishAdd: 900,
-        finishName: '코발트 청박 띠지 마감',
-        partner: '스튜디오 소소나 / 케이제이프린트',
-      },
-      acrylic: {
-        name: '20T 고투명 캐스팅 아크릴 문진 (80×80mm)',
-        baseUnit: 12500,
-        finishAdd: 1500,
-        finishName: '4면 경면 폴리싱 + 부분 백판',
-        partner: '위드메이킹 / 서면레이저공방',
-      },
-      fabric: {
-        name: '워싱 광목 20수 패브릭 포스터 (50×70cm)',
-        baseUnit: 9800,
-        finishAdd: 1200,
-        finishName: '사방 해리 봉제 + 직조 라벨',
-        partner: '수엘비(SuLB) / 커스텀오버',
-      },
-      package: {
-        name: '무목형 디지털 커팅 오브제 패키지 & 슬리브',
-        baseUnit: 1650,
-        finishAdd: 450,
-        finishName: '비오톱 160g 슬리브 + 청박',
-        partner: '더상자 부산공장 / (주)현진패키지',
-      },
-    }[calcCategory];
-
-    const discountFactor = calcQty >= 200 ? 0.76 : calcQty >= 100 ? 0.85 : calcQty >= 50 ? 0.94 : 1.0;
-    const unitPrice =
-      Math.round(((baseConfig.baseUnit + (calcFinish ? baseConfig.finishAdd : 0)) * discountFactor) / 10) * 10;
-    const total = unitPrice * calcQty;
-
-    return {
-      ...baseConfig,
-      unitPrice,
-      total,
-    };
-  }, [calcCategory, calcQty, calcFinish]);
 
   // Filtered Galleries by Busan District (구·군) & District Signature Colors
   const zones = [
@@ -431,10 +702,10 @@ export function App() {
         <div>
           ISSUE NO. 04 · <span className="issue-strip-accent">35.1028° N, 129.0403° E (BUSAN)</span>
         </div>
-        <div>{ARTISTS.length} BUSAN ARTISTS ARCHIVED</div>
+        <div>{artistList.length} BUSAN ARTISTS ARCHIVED</div>
       </div>
 
-      {/* Sticky Editorial Masthead */}
+      {/* Sticky Editorial Masthead — 5 Core Tabs */}
       <header className="masthead">
         <div className="brand-cell" onClick={() => setActiveSection('overview')}>
           <div className="brand-title">
@@ -457,6 +728,12 @@ export function App() {
             <span className="nav-item-label">부산 작가 · 작품</span>
           </button>
           <button
+            className={`nav-item ${activeSection === 'souvenirs' ? 'active' : ''}`}
+            onClick={() => setActiveSection('souvenirs')}
+          >
+            <span className="nav-item-label">부산 아트 기념품</span>
+          </button>
+          <button
             className={`nav-item ${activeSection === 'galleries' ? 'active' : ''}`}
             onClick={() => setActiveSection('galleries')}
           >
@@ -474,6 +751,10 @@ export function App() {
           <button className="saved-trigger" onClick={() => setIsArchiveOpen(true)}>
             <span>ARCHIVE</span>
             <span className="saved-count">{savedIds.length}</span>
+          </button>
+          <button className="artist-register-trigger" onClick={openNewArtistModal}>
+            <Plus size={14} />
+            <span>작가 등록</span>
           </button>
           <button className="submit-trigger" onClick={() => setIsWriteModalOpen(true)}>
             <Plus size={14} />
@@ -617,24 +898,18 @@ export function App() {
       )}
 
       {/* =====================================================================
-          SECTION 01: ARTISTS & ARTWORKS (3 REPRESENTATIVE WORKS PER ARTIST)
+          SECTION 01: ARTISTS & ARTWORKS (PASSEPARTOUT MINIMAL GALLERY GRID)
          ===================================================================== */}
       {activeSection === 'artists' && (
-        <section>
-          <div className="section-bar">
-            <div className="section-bar-title">
-              <h2>부산 활동 작가 · 대표작품 아카이브</h2>
-            </div>
-          </div>
-
-          {/* Filter & Search Bar */}
+        <section className="passepartout-artists-section">
+          {/* Minimal Filter & Search Strip */}
           <div className="filter-strip">
             <div className="filter-tabs">
               {disciplines.map((disc) => {
                 const count =
                   disc === '전체'
-                    ? ARTISTS.length
-                    : ARTISTS.filter((a) => a.discipline === disc).length;
+                    ? artistList.length
+                    : artistList.filter((a) => a.discipline === disc).length;
                 return (
                   <button
                     key={disc}
@@ -651,7 +926,7 @@ export function App() {
               <Search size={14} color="var(--ink-muted)" />
               <input
                 type="text"
-                placeholder="작가명, 장르, 이력 검색"
+                placeholder="작가명, 장르 검색"
                 value={artistQuery}
                 onChange={(e) => setArtistQuery(e.target.value)}
               />
@@ -663,64 +938,37 @@ export function App() {
             </div>
           </div>
 
-          {/* Artist Editorial Grid — Each card shows 3 Representative Artworks as Images */}
-          <div className="artist-editorial-grid">
+          {artistSubmitNotice && (
+            <div className="submission-confirm-banner">
+              <span>{artistSubmitNotice}</span>
+              <button onClick={() => setArtistSubmitNotice('')}>
+                <X size={14} />
+              </button>
+            </div>
+          )}
+
+          {/* Minimal Passepartout Gallery Grid (Left-Top: Name, Right-Top: Genre, Center: Generous Whitespace + Artwork) */}
+          <div className="passepartout-grid">
             {displayedArtists.map((artist) => {
-              const isSaved = savedIds.includes(artist.id);
-              const w0 = artist.artworks[0]?.imageUrl || artist.featuredWorkUrl;
-              const w1 = artist.artworks[1]?.imageUrl || w0;
-              const w2 = artist.artworks[2]?.imageUrl || w0;
+              const mainWork = artist.artworks[0];
+              const w0 = mainWork?.imageUrl || artist.featuredWorkUrl;
 
               return (
                 <article
                   key={artist.id}
-                  className="artist-column"
+                  className="passepartout-card"
                   onClick={() => setActiveArtist(artist)}
                 >
-                  <div className="artist-col-header">
-                    <span>{artist.indexNo}</span>
-                    <span className="artist-status-tag">{artist.discipline}</span>
+                  <div className="passepartout-card-top">
+                    <div className="passepartout-artist-name">
+                      <strong>{artist.name}</strong>
+                      <span>{artist.nameEn}</span>
+                    </div>
+                    <div className="passepartout-artist-genre">{artist.discipline}</div>
                   </div>
 
-                  {/* 3 Representative Artworks Image Triptych */}
-                  <div className="artist-works-triptych">
-                    <div className="triptych-main">
-                      <img src={w0} alt={artist.name} loading="lazy" />
-                    </div>
-                    <div className="triptych-sub-col">
-                      <div className="triptych-sub-item">
-                        <img src={w1} alt={artist.name} loading="lazy" />
-                      </div>
-                      <div className="triptych-sub-item">
-                        <img src={w2} alt={artist.name} loading="lazy" />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="artist-body">
-                    <div className="artist-title-row">
-                      <h3 className="artist-name">{artist.name}</h3>
-                      <span className="artist-name-en">{artist.nameEn}</span>
-                    </div>
-
-                    <p className="artist-statement">{artist.statement}</p>
-                  </div>
-
-                  <div className="artist-col-footer">
-                    <span>{artist.instagram}</span>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                      <button
-                        onClick={(e) => toggleSave(artist.id, e)}
-                        style={{
-                          fontFamily: 'var(--font-mono)',
-                          fontSize: '11px',
-                          textDecoration: 'underline',
-                        }}
-                      >
-                        {isSaved ? 'SAVED' : '+ ARCHIVE'}
-                      </button>
-                      <ArrowUpRight size={14} />
-                    </div>
+                  <div className="passepartout-frame">
+                    <img src={w0} alt={artist.name} loading="lazy" />
                   </div>
                 </article>
               );
@@ -730,15 +978,299 @@ export function App() {
       )}
 
       {/* =====================================================================
-          SECTION 03: COLLAB SOUVENIR SHOWCASE (1단) + LOCAL PRODUCTION MANUAL & MAKERS (2단)
+          SECTION 02: BUSAN ART SOUVENIRS (실무 제작 공정 매뉴얼 + 부산 실존 로컬 공정처 22곳 디렉토리)
+         ===================================================================== */}
+      {activeSection === 'souvenirs' && (
+        <section>
+          <div className="section-bar">
+            <div className="section-bar-title">
+              <h2>부산 아트 기념품 · 로컬 제작 랩</h2>
+            </div>
+            <a
+              href="mailto:floreur88@gmail.com?subject=[PARANG] 부산 관광기념품 콜라보 · B2B 제작 문의"
+              className="section-bar-action"
+            >
+              <span>콜라보 · 납품 제안</span>
+              <ArrowUpRight size={14} />
+            </a>
+          </div>
+
+          <div className="goods-editorial-layout">
+            <div className="goods-index-rail">
+              <div className="goods-manual-list">
+                {GOODS_MANUALS.map((manual) => {
+                  const active = manual.id === currentManual.id;
+                  return (
+                    <div
+                      key={manual.id}
+                      className={`goods-rail-item ${active ? 'active' : ''}`}
+                      onClick={() => setSelectedManualId(manual.id)}
+                    >
+                      <div className="goods-rail-meta">
+                        <span>
+                          {manual.code} · {manual.category}
+                        </span>
+                        <span>{manual.difficulty}</span>
+                      </div>
+                      <div className="goods-rail-title">{manual.title}</div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Right Detail Stage */}
+            <div className="goods-detail-stage">
+              <div className="goods-stage-header" style={{ gridTemplateColumns: '1fr' }}>
+                <div className="goods-stage-title-box">
+                  <div>
+                    <div className="goods-stage-code">
+                      {currentManual.code} // {currentManual.category}
+                    </div>
+                    <h3 className="goods-stage-title" style={{ marginTop: '10px' }}>
+                      {currentManual.title}
+                    </h3>
+                    <p
+                      style={{
+                        fontSize: '14px',
+                        color: 'var(--ink-muted)',
+                        marginTop: '8px',
+                        lineHeight: 1.6,
+                      }}
+                    >
+                      {currentManual.summary}
+                    </p>
+                  </div>
+
+                  <div>
+                    <button
+                      onClick={() => toggleSave(currentManual.id)}
+                      style={{
+                        padding: '9px 16px',
+                        border: '1px solid var(--line-strong)',
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: '11px',
+                        background: savedIds.includes(currentManual.id)
+                          ? 'var(--marine)'
+                          : 'transparent',
+                        color: savedIds.includes(currentManual.id) ? '#ffffff' : 'var(--ink)',
+                      }}
+                    >
+                      {savedIds.includes(currentManual.id) ? 'SAVED' : '+ SAVE SPEC'}
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div className="goods-content-columns">
+                <div className="goods-steps-col">
+                  {currentManual.steps.map((step) => (
+                    <div key={step.stepNo} className="goods-step-row">
+                      <div className="goods-step-num">{step.stepNo}</div>
+                      <div>
+                        <div className="goods-step-title">{step.title}</div>
+                        <p className="goods-step-desc">{step.detail}</p>
+                        <div className="goods-step-note">{step.technicalTip}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="goods-sidebar-col">
+                  <div>
+                    <div
+                      style={{
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: '11px',
+                        color: 'var(--marine)',
+                        letterSpacing: '0.06em',
+                        marginBottom: '10px',
+                      }}
+                    >
+                      세부 사양
+                    </div>
+                    <div className="spec-table-list">
+                      {currentManual.specs.map((s) => (
+                        <div key={s.label} className="spec-table-row">
+                          <span className="spec-table-key">{s.label}</span>
+                          <span className="spec-table-value">{s.value}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div>
+                    <div
+                      style={{
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: '11px',
+                        color: 'var(--marine)',
+                        letterSpacing: '0.06em',
+                        marginBottom: '10px',
+                      }}
+                    >
+                      인쇄·발주 체크리스트
+                    </div>
+                    <div
+                      style={{
+                        borderTop: '1px solid var(--line-strong)',
+                        display: 'flex',
+                        flexDirection: 'column',
+                      }}
+                    >
+                      {currentManual.checklist.map((item, idx) => (
+                        <div
+                          key={idx}
+                          style={{
+                            padding: '10px 0',
+                            borderBottom: '1px solid var(--line)',
+                            fontSize: '13px',
+                            display: 'flex',
+                            alignItems: 'flex-start',
+                            gap: '8px',
+                          }}
+                        >
+                          <span
+                            style={{
+                              fontFamily: 'var(--font-mono)',
+                              fontSize: '11px',
+                              color: 'var(--marine)',
+                            }}
+                          >
+                            0{idx + 1}
+                          </span>
+                          <span>{item}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* BUSAN LOCAL MAKERS & PRESS DIRECTORY TABLE */}
+          <div className="makers-directory-toolbar">
+            <div className="makers-toolbar-header">
+              <strong>부산 로컬 인쇄소 · 소량 오브제 공정처 디렉토리 (22곳)</strong>
+            </div>
+
+            <div className="makers-toolbar-controls">
+              <div className="makers-cat-scroll">
+                {[
+                  '전체',
+                  '지류·인쇄·리소',
+                  '아크릴·레이저·3D',
+                  '도자·유리·금속 오브제',
+                  '패브릭·실크스크린·자수',
+                  '패키지·액자·화방',
+                ].map((cat) => (
+                  <button
+                    key={cat}
+                    onClick={() => setMakerCategoryFilter(cat)}
+                    className={`makers-cat-btn ${makerCategoryFilter === cat ? 'active' : ''}`}
+                  >
+                    {cat === '전체' ? `전체 (${LOCAL_MAKERS.length})` : cat}
+                  </button>
+                ))}
+              </div>
+
+              <div className="makers-search-box">
+                <Search size={13} />
+                <input
+                  type="text"
+                  placeholder="업체명·동네·공정 검색..."
+                  value={makerQuery}
+                  onChange={(e) => setMakerQuery(e.target.value)}
+                />
+                {makerQuery && (
+                  <button onClick={() => setMakerQuery('')}>
+                    <X size={12} />
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
+
+          <div className="makers-table-wrap">
+            <table className="editorial-table makers-table">
+              <thead>
+                <tr>
+                  <th style={{ width: '130px' }}>CODE / 분류</th>
+                  <th style={{ width: '260px' }}>업체명 / 부산 소재지 · 연락처</th>
+                  <th style={{ width: '320px' }}>주요 공정 · 보유 장비</th>
+                  <th>업체 특징 & 공식 웹사이트</th>
+                </tr>
+              </thead>
+              <tbody>
+                {LOCAL_MAKERS.filter((m) => {
+                  const matchCat =
+                    makerCategoryFilter === '전체' || m.category === makerCategoryFilter;
+                  const q = makerQuery.trim().toLowerCase();
+                  const matchQ =
+                    !q ||
+                    m.name.toLowerCase().includes(q) ||
+                    m.district.toLowerCase().includes(q) ||
+                    m.specialty.toLowerCase().includes(q) ||
+                    m.equipment.toLowerCase().includes(q) ||
+                    m.artistNote.toLowerCase().includes(q);
+                  return matchCat && matchQ;
+                }).map((maker) => (
+                  <tr key={maker.id}>
+                    <td className="maker-cell-code">
+                      <div className="maker-code-badge">{maker.code}</div>
+                      <div className="maker-category-tag">{maker.category}</div>
+                    </td>
+                    <td className="maker-cell-info">
+                      <div className="maker-name">{maker.name}</div>
+                      <div className="maker-district">{maker.district}</div>
+                      <div className="maker-contact">{maker.contact}</div>
+                    </td>
+                    <td className="maker-cell-spec">
+                      <div className="maker-specialty">{maker.specialty}</div>
+                      <div className="maker-equipment">{maker.equipment}</div>
+                    </td>
+                    <td className="maker-cell-note">
+                      <div className="maker-note-text">{maker.artistNote}</div>
+                      {maker.websiteUrl && (
+                        <div className="maker-site-wrap">
+                          <a
+                            href={maker.websiteUrl}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="maker-site-link"
+                          >
+                            <span>OFFICIAL SITE</span>
+                            <ArrowUpRight size={12} />
+                          </a>
+                        </div>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )}
+
+      {/* =====================================================================
+          SECTION 05: OPEN CALLS & COLLABORATION LOUNGE ([공고] + [협업])
          ===================================================================== */}
       {activeSection === 'collab' && (
         <section>
-          {/* 01. OPEN CALLS & COLLABORATION BOARD */}
           <div className="section-bar">
             <div className="section-bar-title">
               <h2>부산 미술 공고 · 작가 협업 라운지</h2>
             </div>
+            <button
+              type="button"
+              className="section-bar-cta-primary"
+              onClick={() => setIsWriteModalOpen(true)}
+            >
+              <Plus size={14} />
+              <span>신규 공고 · 콜라보 · 공동발주 모집 등록</span>
+            </button>
           </div>
 
           <div className="filter-strip">
@@ -836,490 +1368,11 @@ export function App() {
               </tbody>
             </table>
           </div>
-
-          {/* 1단: [콜라보 기념품 쇼케이스/샵] (floreur × 부산 활동 작가 콜라보 에디션) */}
-          <div className="section-bar" style={{ borderTop: '1px solid var(--line-strong)' }}>
-            <div className="section-bar-title">
-              <h2>콜라보 기념품 쇼케이스 · 에디션 샵</h2>
-            </div>
-            <a
-              href="mailto:floreur88@gmail.com?subject=[PARANG] 부산 관광기념품 콜라보 · B2B 제작 문의"
-              className="section-bar-action"
-            >
-              <span>콜라보 · 납품 제안</span>
-              <ArrowUpRight size={14} />
-            </a>
-          </div>
-
-          <div className="souvenir-showcase-grid">
-            {COLLAB_SOUVENIRS.map((item) => (
-              <article key={item.id} className="souvenir-card">
-                <div className="souvenir-card-top">
-                  <span className="souvenir-code">{item.code}</span>
-                  <span
-                    className={`souvenir-status-badge ${
-                      item.status === 'COLLAB OPEN' ? 'is-open' : ''
-                    }`}
-                  >
-                    {item.status}
-                  </span>
-                </div>
-                <div className="souvenir-thumb">
-                  <img src={item.imageUrl} alt={item.title} loading="lazy" />
-                  <span className="souvenir-district-chip">{item.districtTheme}</span>
-                </div>
-                <div className="souvenir-body">
-                  <h3 className="souvenir-title">{item.title}</h3>
-                  <p className="souvenir-subtitle">{item.subtitle}</p>
-                  <div className="souvenir-spec-list">
-                    <div className="souvenir-spec-row">
-                      <span>제작 사양</span>
-                      <strong>{item.mediumSpec}</strong>
-                    </div>
-                    <div className="souvenir-spec-row">
-                      <span>부산 공정처</span>
-                      <strong>{item.partnerMaker}</strong>
-                    </div>
-                    <div className="souvenir-spec-row">
-                      <span>단가 · 규모</span>
-                      <strong>{item.moqAndPrice}</strong>
-                    </div>
-                    <div className="souvenir-spec-row">
-                      <span>수익 배분</span>
-                      <strong>{item.royaltyNote}</strong>
-                    </div>
-                  </div>
-                </div>
-                <div className="souvenir-footer">
-                  <a
-                    href={`mailto:floreur88@gmail.com?subject=${encodeURIComponent(
-                      `[PARANG 기념품 콜라보/발주 문의] ${item.title}`
-                    )}`}
-                    className="souvenir-inquiry-btn"
-                  >
-                    <span>작가 콜라보 참여 · B2B 발주 문의</span>
-                    <ArrowUpRight size={13} />
-                  </a>
-                </div>
-              </article>
-            ))}
-          </div>
-
-          {/* 2단: [로컬 제작 매뉴얼 · 공정처] */}
-          <div className="section-bar">
-            <div className="section-bar-title">
-              <h2>로컬 제작 매뉴얼 · 부산 공정처 디렉토리</h2>
-            </div>
-          </div>
-
-          <div className="goods-editorial-layout">
-            <div className="goods-index-rail">
-              <div className="goods-manual-list">
-                {GOODS_MANUALS.map((manual) => {
-                  const active = manual.id === currentManual.id;
-                  return (
-                    <div
-                      key={manual.id}
-                      className={`goods-rail-item ${active ? 'active' : ''}`}
-                      onClick={() => setSelectedManualId(manual.id)}
-                    >
-                      <div className="goods-rail-meta">
-                        <span>
-                          {manual.code} · {manual.category}
-                        </span>
-                        <span>{manual.difficulty}</span>
-                      </div>
-                      <div className="goods-rail-title">{manual.title}</div>
-                      <div className="goods-rail-moq">
-                        MOQ {manual.moq} · {manual.leadTime}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-
-              {/* Small-Batch Cost Estimator */}
-              <div className="cost-estimator-box">
-                <div
-                  style={{
-                    fontSize: '16px',
-                    fontWeight: 700,
-                    letterSpacing: '-0.02em',
-                    marginBottom: '16px',
-                  }}
-                >
-                  소량 제작 단가 계산기
-                </div>
-
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px' }}>
-                    {(
-                      [
-                        ['riso', '별색 엽서북'],
-                        ['acrylic', '20T 아크릴 문진'],
-                        ['fabric', '광목 패브릭포스터'],
-                        ['package', '무목형 패키지'],
-                      ] as const
-                    ).map(([key, label]) => (
-                      <button
-                        key={key}
-                        onClick={() => setCalcCategory(key)}
-                        style={{
-                          padding: '8px 10px',
-                          fontSize: '12px',
-                          fontWeight: 500,
-                          border: '1px solid var(--line-strong)',
-                          background: calcCategory === key ? 'var(--marine)' : 'var(--bg)',
-                          color: calcCategory === key ? '#ffffff' : 'var(--ink)',
-                          textAlign: 'left',
-                        }}
-                      >
-                        {label}
-                      </button>
-                    ))}
-                  </div>
-
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '6px' }}>
-                    {[30, 50, 100, 200].map((qty) => (
-                      <button
-                        key={qty}
-                        onClick={() => setCalcQty(qty)}
-                        style={{
-                          padding: '7px 0',
-                          fontFamily: 'var(--font-mono)',
-                          fontSize: '12px',
-                          border: '1px solid var(--line-strong)',
-                          background: calcQty === qty ? 'var(--ink)' : 'var(--bg)',
-                          color: calcQty === qty ? '#ffffff' : 'var(--ink)',
-                        }}
-                      >
-                        {qty}EA
-                      </button>
-                    ))}
-                  </div>
-
-                  <label
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '8px',
-                      fontSize: '12px',
-                      cursor: 'pointer',
-                    }}
-                  >
-                    <input
-                      type="checkbox"
-                      checked={calcFinish}
-                      onChange={(e) => setCalcFinish(e.target.checked)}
-                    />
-                    <span>{estimation.finishName}</span>
-                  </label>
-
-                  <div
-                    style={{
-                      paddingTop: '14px',
-                      borderTop: '1px solid var(--line-strong)',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      gap: '6px',
-                    }}
-                  >
-                    <div
-                      style={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        fontFamily: 'var(--font-mono)',
-                        fontSize: '12px',
-                      }}
-                    >
-                      <span style={{ color: 'var(--ink-muted)' }}>UNIT</span>
-                      <span style={{ fontWeight: 600 }}>
-                        {estimation.unitPrice.toLocaleString()} KRW
-                      </span>
-                    </div>
-                    <div
-                      style={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        fontFamily: 'var(--font-mono)',
-                        fontSize: '14px',
-                      }}
-                    >
-                      <span style={{ color: 'var(--ink-muted)' }}>TOTAL</span>
-                      <span style={{ color: 'var(--marine)', fontWeight: 700 }}>
-                        {estimation.total.toLocaleString()} KRW
-                      </span>
-                    </div>
-                    <div
-                      style={{
-                        fontFamily: 'var(--font-mono)',
-                        fontSize: '11px',
-                        color: 'var(--ink-muted)',
-                        marginTop: '2px',
-                      }}
-                    >
-                      {estimation.partner}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Right Detail Stage */}
-            <div className="goods-detail-stage">
-              <div className="goods-stage-header">
-                <div className="goods-stage-title-box">
-                  <div>
-                    <div className="goods-stage-code">
-                      {currentManual.code} // {currentManual.category}
-                    </div>
-                    <h3 className="goods-stage-title" style={{ marginTop: '10px' }}>
-                      {currentManual.title}
-                    </h3>
-                  </div>
-
-                  <div>
-                    <button
-                      onClick={() => toggleSave(currentManual.id)}
-                      style={{
-                        padding: '9px 16px',
-                        border: '1px solid var(--line-strong)',
-                        fontFamily: 'var(--font-mono)',
-                        fontSize: '11px',
-                        background: savedIds.includes(currentManual.id)
-                          ? 'var(--marine)'
-                          : 'transparent',
-                        color: savedIds.includes(currentManual.id) ? '#ffffff' : 'var(--ink)',
-                      }}
-                    >
-                      {savedIds.includes(currentManual.id) ? 'SAVED' : '+ SAVE SPEC'}
-                    </button>
-                  </div>
-                </div>
-
-                <div className="goods-stage-photo">
-                  <img src={currentManual.heroImage} alt={currentManual.title} />
-                </div>
-              </div>
-
-              <div className="goods-spec-bar">
-                <div className="goods-spec-cell">
-                  <div className="goods-spec-label">MOQ</div>
-                  <div className="goods-spec-val">{currentManual.moq}</div>
-                </div>
-                <div className="goods-spec-cell">
-                  <div className="goods-spec-label">UNIT COST</div>
-                  <div className="goods-spec-val">{currentManual.estimatedUnitCost}</div>
-                </div>
-                <div className="goods-spec-cell">
-                  <div className="goods-spec-label">LEAD TIME</div>
-                  <div className="goods-spec-val">{currentManual.leadTime}</div>
-                </div>
-              </div>
-
-              <div className="goods-content-columns">
-                <div className="goods-steps-col">
-                  {currentManual.steps.map((step) => (
-                    <div key={step.stepNo} className="goods-step-row">
-                      <div className="goods-step-num">{step.stepNo}</div>
-                      <div>
-                        <div className="goods-step-title">{step.title}</div>
-                        <p className="goods-step-desc">{step.detail}</p>
-                        <div className="goods-step-note">{step.technicalTip}</div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="goods-sidebar-col">
-                  <div>
-                    <div
-                      style={{
-                        fontFamily: 'var(--font-mono)',
-                        fontSize: '11px',
-                        color: 'var(--marine)',
-                        letterSpacing: '0.06em',
-                        marginBottom: '10px',
-                      }}
-                    >
-                      세부 사양
-                    </div>
-                    <div className="spec-table-list">
-                      {currentManual.specs.map((s) => (
-                        <div key={s.label} className="spec-table-row">
-                          <span className="spec-table-key">{s.label}</span>
-                          <span className="spec-table-value">{s.value}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div>
-                    <div
-                      style={{
-                        fontFamily: 'var(--font-mono)',
-                        fontSize: '11px',
-                        color: 'var(--marine)',
-                        letterSpacing: '0.06em',
-                        marginBottom: '10px',
-                      }}
-                    >
-                      인쇄·발주 체크리스트
-                    </div>
-                    <div
-                      style={{
-                        borderTop: '1px solid var(--line-strong)',
-                        display: 'flex',
-                        flexDirection: 'column',
-                      }}
-                    >
-                      {currentManual.checklist.map((item, idx) => (
-                        <div
-                          key={idx}
-                          style={{
-                            padding: '10px 0',
-                            borderBottom: '1px solid var(--line)',
-                            fontSize: '13px',
-                            display: 'flex',
-                            alignItems: 'flex-start',
-                            gap: '8px',
-                          }}
-                        >
-                          <span
-                            style={{
-                              fontFamily: 'var(--font-mono)',
-                              fontSize: '11px',
-                              color: 'var(--marine)',
-                            }}
-                          >
-                            0{idx + 1}
-                          </span>
-                          <span>{item}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* BUSAN LOCAL MAKERS & PRESS DIRECTORY TABLE */}
-          <div className="makers-directory-toolbar">
-            <div className="makers-toolbar-header">
-              <strong>부산 로컬 인쇄소 · 소량 오브제 공정처 디렉토리</strong>
-            </div>
-
-            <div className="makers-toolbar-controls">
-              <div className="makers-cat-scroll">
-                {[
-                  '전체',
-                  '지류·인쇄·리소',
-                  '아크릴·레이저·3D',
-                  '도자·유리·금속 오브제',
-                  '패브릭·실크스크린·자수',
-                  '패키지·액자·화방',
-                ].map((cat) => (
-                  <button
-                    key={cat}
-                    onClick={() => setMakerCategoryFilter(cat)}
-                    className={`makers-cat-btn ${makerCategoryFilter === cat ? 'active' : ''}`}
-                  >
-                    {cat === '전체' ? `전체 (${LOCAL_MAKERS.length})` : cat}
-                  </button>
-                ))}
-              </div>
-
-              <div className="makers-search-box">
-                <Search size={13} />
-                <input
-                  type="text"
-                  placeholder="업체명·동네·공정 검색..."
-                  value={makerQuery}
-                  onChange={(e) => setMakerQuery(e.target.value)}
-                />
-                {makerQuery && (
-                  <button onClick={() => setMakerQuery('')}>
-                    <X size={12} />
-                  </button>
-                )}
-              </div>
-            </div>
-          </div>
-
-          <div className="makers-table-wrap">
-            <table className="editorial-table makers-table">
-              <thead>
-                <tr>
-                  <th style={{ width: '120px' }}>CODE / 분류</th>
-                  <th style={{ width: '240px' }}>업체명 / 부산 소재지 · 연락처</th>
-                  <th style={{ width: '280px' }}>주요 공정 · 보유 장비</th>
-                  <th style={{ width: '165px' }}>최소수량(MOQ) / 납기</th>
-                  <th>제작 가이드 & 웹사이트</th>
-                </tr>
-              </thead>
-              <tbody>
-                {LOCAL_MAKERS.filter((m) => {
-                  const matchCat =
-                    makerCategoryFilter === '전체' || m.category === makerCategoryFilter;
-                  const q = makerQuery.trim().toLowerCase();
-                  const matchQ =
-                    !q ||
-                    m.name.toLowerCase().includes(q) ||
-                    m.district.toLowerCase().includes(q) ||
-                    m.specialty.toLowerCase().includes(q) ||
-                    m.equipment.toLowerCase().includes(q) ||
-                    m.artistNote.toLowerCase().includes(q);
-                  return matchCat && matchQ;
-                }).map((maker) => (
-                  <tr key={maker.id}>
-                    <td className="maker-cell-code">
-                      <div className="maker-code-badge">{maker.code}</div>
-                      <div className="maker-category-tag">{maker.category}</div>
-                    </td>
-                    <td className="maker-cell-info">
-                      <div className="maker-name">{maker.name}</div>
-                      <div className="maker-district">{maker.district}</div>
-                      <div className="maker-contact">{maker.contact}</div>
-                    </td>
-                    <td className="maker-cell-spec">
-                      <div className="maker-specialty">{maker.specialty}</div>
-                      <div className="maker-equipment">{maker.equipment}</div>
-                    </td>
-                    <td className="maker-cell-moq">
-                      <div className="maker-moq-val">
-                        <span className="mobile-only-label">MOQ</span> {maker.moq}
-                      </div>
-                      <div className="maker-turnaround-val">
-                        <span className="mobile-only-label">납기</span> {maker.turnaround}
-                      </div>
-                    </td>
-                    <td className="maker-cell-note">
-                      <div className="maker-note-text">{maker.artistNote}</div>
-                      {maker.websiteUrl && (
-                        <div className="maker-site-wrap">
-                          <a
-                            href={maker.websiteUrl}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="maker-site-link"
-                          >
-                            <span>OFFICIAL SITE</span>
-                            <ArrowUpRight size={12} />
-                          </a>
-                        </div>
-                      )}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
         </section>
       )}
 
       {/* =====================================================================
-          SECTION 02: BUSAN GALLERIES & EXHIBITION SPACES (WITH RENTAL/SALES SPECS)
+          SECTION 04: BUSAN GALLERIES & EXHIBITION SPACES ([대중용] 전시·관람 안내 + [작가용] 대관·판매 스펙)
          ===================================================================== */}
       {activeSection === 'galleries' && (
         <section>
@@ -1327,6 +1380,34 @@ export function App() {
             <div className="section-bar-title">
               <h2>부산 갤러리 · 대관 · 작품판매 인덱스</h2>
             </div>
+          </div>
+
+          {/* Audience Mode Switcher: [대중용] 전시·관람 vs [작가용] 대관·판매·입점 스펙 */}
+          <div className="audience-mode-switcher">
+            <button
+              type="button"
+              className={`audience-mode-btn ${galleryAudienceMode === 'all' ? 'active' : ''}`}
+              onClick={() => setGalleryAudienceMode('all')}
+            >
+              <span className="mode-badge is-neutral">ALL</span>
+              <span>통합 보기 (현재 전시 + 대관·판매 스펙)</span>
+            </button>
+            <button
+              type="button"
+              className={`audience-mode-btn ${galleryAudienceMode === 'public' ? 'active' : ''}`}
+              onClick={() => setGalleryAudienceMode('public')}
+            >
+              <span className="mode-badge is-public">대중 · 관람객용</span>
+              <span>현재 진행 전시 · 관람 시간 · 휴관일 · 위치 안내</span>
+            </button>
+            <button
+              type="button"
+              className={`audience-mode-btn ${galleryAudienceMode === 'artist' ? 'active' : ''}`}
+              onClick={() => setGalleryAudienceMode('artist')}
+            >
+              <span className="mode-badge is-artist">부산 작가 · 기획자용</span>
+              <span>대관 가능 여부 · 1주 대관료/평수 · 작품 판매 수수료율 · 아트샵 입점 조건</span>
+            </button>
           </div>
 
           {/* 1단 필터: 13개 구·군 컬러 필터 */}
@@ -1361,50 +1442,53 @@ export function App() {
             </div>
           </div>
 
-          {/* 2단 실무 필터: 대관 가능 여부 · 작품 판매 · 아트샵 입점 · 수수료 조건 */}
-          <div className="gallery-spec-filter-bar">
-            <div className="spec-filter-pills">
-              {(
-                [
-                  ['all', `전체 공간 (${GALLERIES.length})`],
+          {/* 2단 실무 필터 ([작가용] 및 통합 보기에서 활성화): 대관 가능 여부 · 작품 판매 · 아트샵 입점 · 수수료 조건 */}
+          {galleryAudienceMode !== 'public' && (
+            <div className="gallery-spec-filter-bar">
+              <span className="audience-role-tag is-artist">작가용 실무 필터</span>
+              <div className="spec-filter-pills">
+                {(
                   [
-                    'rental',
-                    `대관 가능 (${GALLERIES.filter((g) => g.rentalAndSales.rentalAvailable).length})`,
-                  ],
-                  [
-                    'sales',
-                    `작품 판매 가능 (${GALLERIES.filter((g) => g.rentalAndSales.artworkSales).length})`,
-                  ],
-                  [
-                    'artshop',
-                    `아트샵 · 굿즈 입점 가능 (${
-                      GALLERIES.filter((g) => g.rentalAndSales.artShopAvailable).length
-                    })`,
-                  ],
-                  [
-                    'zero_commission',
-                    `수수료 0% · 비영리/공립 (${
-                      GALLERIES.filter(
-                        (g) =>
-                          g.rentalAndSales.commissionRate.includes('없음') ||
-                          g.rentalAndSales.commissionRate.includes('비영리') ||
-                          g.rentalAndSales.commissionRate.includes('공립')
-                      ).length
-                    })`,
-                  ],
-                ] as const
-              ).map(([key, label]) => (
-                <button
-                  key={key}
-                  type="button"
-                  className={`spec-filter-pill ${gallerySpecFilter === key ? 'active' : ''}`}
-                  onClick={() => setGallerySpecFilter(key)}
-                >
-                  {label}
-                </button>
-              ))}
+                    ['all', `전체 공간 (${GALLERIES.length})`],
+                    [
+                      'rental',
+                      `대관 가능 (${GALLERIES.filter((g) => g.rentalAndSales.rentalAvailable).length})`,
+                    ],
+                    [
+                      'sales',
+                      `작품 판매 가능 (${GALLERIES.filter((g) => g.rentalAndSales.artworkSales).length})`,
+                    ],
+                    [
+                      'artshop',
+                      `아트샵 · 굿즈 입점 가능 (${
+                        GALLERIES.filter((g) => g.rentalAndSales.artShopAvailable).length
+                      })`,
+                    ],
+                    [
+                      'zero_commission',
+                      `수수료 0% · 비영리/공립 (${
+                        GALLERIES.filter(
+                          (g) =>
+                            g.rentalAndSales.commissionRate.includes('없음') ||
+                            g.rentalAndSales.commissionRate.includes('비영리') ||
+                            g.rentalAndSales.commissionRate.includes('공립')
+                        ).length
+                      })`,
+                    ],
+                  ] as const
+                ).map(([key, label]) => (
+                  <button
+                    key={key}
+                    type="button"
+                    className={`spec-filter-pill ${gallerySpecFilter === key ? 'active' : ''}`}
+                    onClick={() => setGallerySpecFilter(key)}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
 
           <div className="gallery-explorer-layout">
             <div className="coast-map-panel">
@@ -1505,25 +1589,48 @@ export function App() {
                       </div>
 
                       <div className="gallery-row-right">
-                        <div className="gallery-mini-tags">
-                          <span
-                            className={`gallery-mini-tag ${
-                              rs.rentalAvailable ? 'is-rental' : 'is-curated'
-                            }`}
-                          >
-                            {rs.rentalAvailable ? '대관가능' : '기획·공모'}
-                          </span>
-                          <span className="gallery-mini-tag is-pyeong">{rs.pyeong.split('(')[0].trim()}</span>
-                          {rs.artworkSales && (
-                            <span className="gallery-mini-tag is-sales">작품판매</span>
-                          )}
-                          {rs.artShopAvailable && (
-                            <span className="gallery-mini-tag is-shop">아트샵</span>
-                          )}
-                        </div>
+                        {galleryAudienceMode !== 'public' && (
+                          <div className="gallery-mini-tags">
+                            <span
+                              className={`gallery-mini-tag ${
+                                rs.rentalAvailable ? 'is-rental' : 'is-curated'
+                              }`}
+                            >
+                              {rs.rentalAvailable ? '대관가능' : '기획·공모'}
+                            </span>
+                            <span className="gallery-mini-tag is-pyeong">
+                              {rs.pyeong.split('(')[0].trim()}
+                            </span>
+                            {rs.artworkSales && (
+                              <span className="gallery-mini-tag is-sales">작품판매</span>
+                            )}
+                            {rs.artShopAvailable && (
+                              <span className="gallery-mini-tag is-shop">아트샵</span>
+                            )}
+                          </div>
+                        )}
                         <ArrowUpRight size={14} className="gallery-arrow-icon" />
                       </div>
                     </div>
+
+                    {/* [대중용] 현재 전시 · 관람시간 요약 줄 */}
+                    {(galleryAudienceMode === 'public' || galleryAudienceMode === 'all') && (
+                      <div className="gallery-row-sub-public">
+                        <span className="row-mode-chip is-public">관람 안내</span>
+                        <strong>{gal.currentExhibition.title}</strong>
+                        <span>· {gal.currentExhibition.period}</span>
+                        <span>· {gal.hours} ({gal.closedDays})</span>
+                      </div>
+                    )}
+
+                    {/* [작가용] 대관료 · 수수료 · 입점 요약 줄 */}
+                    {galleryAudienceMode === 'artist' && (
+                      <div className="gallery-row-sub-artist">
+                        <span className="row-mode-chip is-artist">대관·판매 스펙</span>
+                        <strong>{rs.rentalFeeSummary}</strong>
+                        <span>· {rs.commissionRate}</span>
+                      </div>
+                    )}
                   </article>
                 );
               })}
@@ -1585,160 +1692,150 @@ export function App() {
       </footer>
 
       {/* =====================================================================
-          DRAWER 1: ARTIST PROFILE & 3 REPRESENTATIVE WORKS (IMAGES ONLY)
+          DRAWER 1: MINIMAL ARTIST DETAIL PAGE VIEW (네이버 프로필형 요약 · 작가소개 · 최근 주요이력 · 포트폴리오/콜라보 버튼 · 작품 3점)
          ===================================================================== */}
-      {activeArtist && (
-        <div className="drawer-backdrop" onClick={() => setActiveArtist(null)}>
-          <div className="editorial-drawer" onClick={(e) => e.stopPropagation()}>
-            <div className="drawer-top-bar">
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--marine)' }}>
-                {activeArtist.indexNo}
-              </div>
-              <button
-                onClick={() => setActiveArtist(null)}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '6px',
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '12px',
-                }}
-              >
-                <span>CLOSE</span>
-                <X size={16} />
-              </button>
-            </div>
+      {activeArtist && (() => {
+        const np = activeArtist.naverProfile;
+        const { intro, careerItems } = parseArtistIntroAndCareer(activeArtist);
+        const detailedIntro = np?.detailedIntro || intro;
 
-            <div className="drawer-body-section" style={{ borderBottom: '1px solid var(--line)' }}>
-              <div
-                style={{
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '11px',
-                  color: 'var(--ink-muted)',
-                }}
-              >
-                {activeArtist.discipline}
+        return (
+          <div className="drawer-backdrop" onClick={() => setActiveArtist(null)}>
+            <div
+              className="editorial-drawer artist-minimal-page-drawer"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="drawer-top-bar">
+                <button
+                  type="button"
+                  onClick={() => setActiveArtist(null)}
+                  className="artist-back-btn"
+                >
+                  <span>← 작가 목록으로 돌아가기</span>
+                </button>
+                <button
+                  onClick={() => setActiveArtist(null)}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '12px',
+                  }}
+                >
+                  <span>CLOSE</span>
+                  <X size={16} />
+                </button>
               </div>
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'baseline',
-                  justifyContent: 'space-between',
-                  flexWrap: 'wrap',
-                  gap: '12px',
-                  marginTop: '8px',
-                }}
-              >
-                <h2 className="drawer-artist-title">
-                  {activeArtist.name}{' '}
-                  <span className="drawer-artist-title-en">
-                    {activeArtist.nameEn}
-                  </span>
-                </h2>
-                <div style={{ display: 'flex', gap: '8px' }}>
-                  {activeArtist.instagramUrl && (
+
+              {/* Artist Profile Header: Minimal Identity + Non-Repetitive Bio & Timeline */}
+              <div className="artist-minimal-header">
+                <div className="artist-minimal-top-row">
+                  <div>
+                    <div className="artist-minimal-meta-badges">
+                      <span className="artist-minimal-genre">{activeArtist.discipline}</span>
+                      <span className="artist-minimal-district-chip">부산 {activeArtist.district}</span>
+                    </div>
+                    <h2 className="artist-minimal-name">
+                      {activeArtist.name} <span>{activeArtist.nameEn}</span>
+                    </h2>
+                    {np?.jobTitle && (
+                      <div className="artist-naver-job-title">{np.jobTitle}</div>
+                    )}
+                  </div>
+
+                  <div className="artist-minimal-actions">
                     <a
-                      href={activeArtist.instagramUrl}
+                      href={activeArtist.portfolioUrl}
                       target="_blank"
                       rel="noreferrer"
-                      style={{
-                        padding: '8px 14px',
-                        border: '1px solid var(--line-strong)',
-                        fontFamily: 'var(--font-mono)',
-                        fontSize: '11px',
-                        background: 'var(--bg-pure)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '4px',
-                      }}
+                      className="artist-btn-outline"
                     >
-                      <span>{activeArtist.instagram}</span>
-                      <ArrowUpRight size={12} />
+                      <span>포트폴리오</span>
+                      <ArrowUpRight size={13} />
                     </a>
-                  )}
-                  <a
-                    href={activeArtist.portfolioUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    style={{
-                      padding: '8px 14px',
-                      border: '1px solid var(--line-strong)',
-                      fontFamily: 'var(--font-mono)',
-                      fontSize: '11px',
-                      background: 'var(--ink)',
-                      color: '#ffffff',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '4px',
-                    }}
-                  >
-                    <span>PORTFOLIO</span>
-                    <ArrowUpRight size={12} />
-                  </a>
+                    <a
+                      href={`mailto:floreur88@gmail.com?subject=${encodeURIComponent(
+                        `[PARANG 작가 콜라보 의뢰] ${activeArtist.name} 작가 협업 문의 (floreur 에이전시 연결)`
+                      )}`}
+                      className="artist-btn-collab"
+                    >
+                      <span>작가에게 콜라보 의뢰하기</span>
+                      <ArrowUpRight size={13} />
+                    </a>
+                  </div>
+                </div>
+
+                {/* Compact Naver Profile Summary (소속/거점 · 학력 · 주요 매체/소장) */}
+                {np && (
+                  <div className="artist-naver-spec-box">
+                    <div className="artist-naver-spec-item">
+                      <span className="artist-naver-spec-key">소속 · 거점</span>
+                      <span className="artist-naver-spec-val">{np.affiliation}</span>
+                    </div>
+                    <div className="artist-naver-spec-item">
+                      <span className="artist-naver-spec-key">학력</span>
+                      <span className="artist-naver-spec-val">{np.education}</span>
+                    </div>
+                    <div className="artist-naver-spec-item" style={{ gridColumn: '1 / -1', borderRight: 'none', borderBottom: 'none' }}>
+                      <span className="artist-naver-spec-key">주요 매체 · 소장</span>
+                      <span className="artist-naver-spec-val">{np.collectionsAndMedia}</span>
+                    </div>
+                  </div>
+                )}
+
+                <div className="artist-minimal-bio-grid">
+                  <div className="artist-minimal-col">
+                    <div className="artist-minimal-label">작가 소개</div>
+                    <p className="artist-minimal-intro">{detailedIntro}</p>
+                  </div>
+
+                  <div className="artist-minimal-col">
+                    <div className="artist-minimal-label">최근 주요 이력</div>
+                    {np?.careerTimeline && np.careerTimeline.length > 0 ? (
+                      <ul className="artist-naver-timeline-list">
+                        {np.careerTimeline.map((item, idx) => (
+                          <li key={idx} className="artist-naver-timeline-row">
+                            <span className="timeline-year">{item.year}</span>
+                            <span className={`timeline-badge is-${item.badge.replace('·', '-')}`}>
+                              {item.badge}
+                            </span>
+                            <span className="timeline-content">{item.content}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <ul className="artist-minimal-career-list">
+                        {careerItems.map((item, idx) => (
+                          <li key={idx}>{item}</li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
                 </div>
               </div>
 
-              <p
-                style={{
-                  fontSize: '14px',
-                  lineHeight: 1.75,
-                  color: 'var(--ink)',
-                  marginTop: '20px',
-                  whiteSpace: 'pre-line',
-                }}
-              >
-                {activeArtist.bio}
-              </p>
-
-              <div style={{ marginTop: '18px' }}>
-                <a
-                  href={`mailto:floreur88@gmail.com?subject=${encodeURIComponent(
-                    `[PARANG 작가 섭외/콜라보 문의] ${activeArtist.name} 작가`
-                  )}`}
-                  className="drawer-agency-cta"
-                >
-                  <span>이 작가에게 전시 · 관광기념품 콜라보 의뢰하기 (floreur 에이전시 연결)</span>
-                  <ArrowUpRight size={14} />
-                </a>
-              </div>
-            </div>
-
-            {/* 3 Representative Artworks — Images Only */}
-            <div className="drawer-body-section">
-              <div
-                style={{
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '11px',
-                  color: 'var(--marine)',
-                  letterSpacing: '0.06em',
-                  marginBottom: '16px',
-                }}
-              >
-                REPRESENTATIVE WORKS (03)
-              </div>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                {activeArtist.artworks.slice(0, 3).map((work) => (
-                  <div
-                    key={work.id}
-                    style={{
-                      border: '1px solid var(--line-strong)',
-                      background: 'var(--bg-pure)',
-                      overflow: 'hidden',
-                    }}
-                  >
-                    <img
-                      src={work.imageUrl}
-                      alt={activeArtist.name}
-                      style={{ width: '100%', maxHeight: '460px', objectFit: 'cover' }}
-                    />
-                  </div>
-                ))}
+              {/* 3 Representative Artworks in Passepartout Gallery Style (Only Title on Top, Blank if No Title) */}
+              <div className="artist-minimal-works-section">
+                <div className="artist-minimal-works-grid">
+                  {activeArtist.artworks.slice(0, 3).map((work) => (
+                    <div key={work.id} className="passepartout-card is-detail-work">
+                      <div className="passepartout-card-top is-title-only">
+                        {work.title ? (
+                          <strong className="passepartout-work-only-title">{work.title}</strong>
+                        ) : null}
+                      </div>
+                      <div className="passepartout-frame">
+                        <img src={work.imageUrl} alt={work.title || activeArtist.name} />
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      )}
+        );
+      })()}
 
       {/* =====================================================================
           DRAWER 2: GALLERY SPACE SPECS & RENTAL SHEET
@@ -2002,7 +2099,7 @@ export function App() {
                         onClick={() => {
                           setIsArchiveOpen(false);
                           setSelectedManualId(manual.id);
-                          setActiveSection('collab');
+                          setActiveSection('souvenirs');
                         }}
                       >
                         <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--marine)' }}>
@@ -2214,6 +2311,419 @@ export function App() {
               >
                 PUBLISH →
               </button>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* =====================================================================
+          DRAWER 5: BUSAN ARTIST DIRECT REGISTRATION & PROFILE UPDATE FORM (3~5 WORKS)
+         ===================================================================== */}
+      {isArtistModalOpen && (
+        <div className="drawer-backdrop" onClick={() => setIsArtistModalOpen(false)}>
+          <div
+            className="editorial-drawer"
+            style={{ width: 'min(760px, 95vw)' }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="drawer-top-bar">
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--marine)' }}>
+                {artistForm.mode === 'update'
+                  ? 'ARTIST PROFILE & WORKS UPDATE'
+                  : 'NEW BUSAN ARTIST ARCHIVE SUBMISSION'}
+              </div>
+              <button
+                onClick={() => setIsArtistModalOpen(false)}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: '12px',
+                }}
+              >
+                <span>CLOSE</span>
+                <X size={16} />
+              </button>
+            </div>
+
+            <form
+              onSubmit={handleSubmitArtistForm}
+              className="drawer-body-section artist-submit-form"
+            >
+              <div className="artist-form-intro">
+                <h3>
+                  {artistForm.mode === 'update'
+                    ? '부산 작가 프로필 · 대표작품 정보 수정 신청'
+                    : '부산 활동 작가 직접 등록 신청 (floreur 승인 후 등재)'}
+                </h3>
+                <p>
+                  부산에서 활동 중인 작가님이 직접 기본 프로필, 전시 이력(개인전/단체전), 콜라보 여부, 대표작 3~5점의 상세 스펙을 제보·수정할 수 있습니다. 제출 즉시 아카이브에 반영되며 floreur 에이전시가 검수를 진행합니다.
+                </p>
+              </div>
+
+              {/* Mode Toggle: 신규 등록 vs 기존 작가 수정 */}
+              <div className="artist-form-mode-tabs">
+                <button
+                  type="button"
+                  className={`form-mode-tab ${artistForm.mode === 'new' ? 'active' : ''}`}
+                  onClick={() =>
+                    setArtistForm((prev) => ({ ...prev, mode: 'new', targetArtistId: '' }))
+                  }
+                >
+                  신규 부산 작가 등록 신청
+                </button>
+                <button
+                  type="button"
+                  className={`form-mode-tab ${artistForm.mode === 'update' ? 'active' : ''}`}
+                  onClick={() => {
+                    const target = activeArtist || artistList[0];
+                    if (target) openEditArtistModal(target);
+                  }}
+                >
+                  기존 등재 작가 정보 · 작품 수정 신청
+                </button>
+              </div>
+
+              {artistForm.mode === 'update' && (
+                <div className="form-field-block">
+                  <label className="form-label">수정할 대상 작가 선택</label>
+                  <select
+                    value={artistForm.targetArtistId}
+                    onChange={(e) => {
+                      const found = artistList.find((a) => a.id === e.target.value);
+                      if (found) openEditArtistModal(found);
+                    }}
+                    className="form-input"
+                  >
+                    {artistList.map((a) => (
+                      <option key={a.id} value={a.id}>
+                        {a.indexNo} — {a.name} ({a.discipline} · {a.district})
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
+
+              {/* 1. 기본 정보 */}
+              <div className="form-section-title">01. 기본 프로필 정보</div>
+              <div className="form-grid-2">
+                <div>
+                  <label className="form-label">활동명 (국문) *</label>
+                  <input
+                    required
+                    value={artistForm.name}
+                    onChange={(e) => setArtistForm({ ...artistForm, name: e.target.value })}
+                    placeholder="예: 김파랑"
+                    className="form-input"
+                  />
+                </div>
+                <div>
+                  <label className="form-label">영문명 (English Name) *</label>
+                  <input
+                    required
+                    value={artistForm.nameEn}
+                    onChange={(e) => setArtistForm({ ...artistForm, nameEn: e.target.value })}
+                    placeholder="예: PARANG KIM"
+                    className="form-input"
+                  />
+                </div>
+              </div>
+
+              <div className="form-grid-2">
+                <div>
+                  <label className="form-label">주 작업 거점 (부산 구·군 및 상세 지역) *</label>
+                  <input
+                    required
+                    value={artistForm.district}
+                    onChange={(e) => setArtistForm({ ...artistForm, district: e.target.value })}
+                    placeholder="예: 수영구 광안동 / 중구 원도심 (또따또가)"
+                    className="form-input"
+                  />
+                </div>
+                <div>
+                  <label className="form-label">주요 장르 *</label>
+                  <select
+                    value={artistForm.discipline}
+                    onChange={(e) => setArtistForm({ ...artistForm, discipline: e.target.value })}
+                    className="form-input"
+                  >
+                    <option value="회화·미술">회화·미술</option>
+                    <option value="도자·조형">도자·조형</option>
+                    <option value="프린트·드로잉">프린트·드로잉</option>
+                    <option value="사진">사진</option>
+                    <option value="공예·오브제">공예·오브제</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="form-grid-2">
+                <div>
+                  <label className="form-label">인스타그램 계정</label>
+                  <input
+                    value={artistForm.instagram}
+                    onChange={(e) => setArtistForm({ ...artistForm, instagram: e.target.value })}
+                    placeholder="예: @parang_art"
+                    className="form-input"
+                  />
+                </div>
+                <div>
+                  <label className="form-label">포트폴리오 · 웹사이트 링크</label>
+                  <input
+                    value={artistForm.portfolioUrl}
+                    onChange={(e) => setArtistForm({ ...artistForm, portfolioUrl: e.target.value })}
+                    placeholder="https://..."
+                    className="form-input"
+                  />
+                </div>
+              </div>
+
+              {/* 2. 콜라보 배지 설정 */}
+              <div className="form-section-title">02. 콜라보 배지 · 협업 상태 설정</div>
+              <div className="form-grid-2">
+                <button
+                  type="button"
+                  className={`collab-choice-btn ${
+                    artistForm.collabStatus === '기념품 콜라보 참여' ? 'active is-souvenir' : ''
+                  }`}
+                  onClick={() =>
+                    setArtistForm({
+                      ...artistForm,
+                      collabStatus: '기념품 콜라보 참여',
+                      collabNote: 'floreur × 부산 관광기념품 콜라보 에디션 및 아트굿즈 제작 참여 희망',
+                    })
+                  }
+                >
+                  <strong>관광기념품 콜라보 참여 작가</strong>
+                  <span>floreur와 함께 부산 관광기념품·아트 에디션 제작 및 수익 배분 참여</span>
+                </button>
+                <button
+                  type="button"
+                  className={`collab-choice-btn ${
+                    artistForm.collabStatus === '협업 열림 (Open to Collab)' ? 'active is-open' : ''
+                  }`}
+                  onClick={() =>
+                    setArtistForm({
+                      ...artistForm,
+                      collabStatus: '협업 열림 (Open to Collab)',
+                      collabNote: '전시 기획 · 브랜드 콜라보 · 공공미술 프로젝트 제안 열림',
+                    })
+                  }
+                >
+                  <strong>협업 열림 (Open to Collab)</strong>
+                  <span>전시 섭외 · 브랜드 협업 · 공간 커미션 작업 제안 상시 열림</span>
+                </button>
+              </div>
+
+              {/* 3. 작가 노트 & 전시 이력 (개인전/단체전) */}
+              <div className="form-section-title">03. 작가 노트 및 전시 이력 (개인전 / 단체전)</div>
+              <div>
+                <label className="form-label">작가 노트 (Artist Statement) *</label>
+                <textarea
+                  required
+                  rows={3}
+                  value={artistForm.statement}
+                  onChange={(e) => setArtistForm({ ...artistForm, statement: e.target.value })}
+                  placeholder="작업 세계관, 주요 매체, 탐구 주제를 작성해 주세요."
+                  className="form-input"
+                />
+              </div>
+
+              <div className="form-grid-2">
+                <div>
+                  <label className="form-label">주요 개인전 이력 (줄바꿈으로 구분)</label>
+                  <textarea
+                    rows={3}
+                    value={artistForm.soloText}
+                    onChange={(e) => setArtistForm({ ...artistForm, soloText: e.target.value })}
+                    placeholder={'2026 개인전 《파도의 결》, 미광화랑, 부산\n2024 초대전, 갤러리 수정, 부산'}
+                    className="form-input"
+                  />
+                </div>
+                <div>
+                  <label className="form-label">주요 단체전 · 아트페어 이력 (줄바꿈으로 구분)</label>
+                  <textarea
+                    rows={3}
+                    value={artistForm.groupText}
+                    onChange={(e) => setArtistForm({ ...artistForm, groupText: e.target.value })}
+                    placeholder={'2026 BAMA 부산국제화랑아트페어, 벡스코\n2025 부산현대미술관 기획전, 부산'}
+                    className="form-input"
+                  />
+                </div>
+              </div>
+
+              {/* 4. 대표작품 3~5점 상세 스펙 */}
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  marginTop: '8px',
+                }}
+              >
+                <div className="form-section-title" style={{ margin: 0 }}>
+                  04. 대표작품 상세 스펙 ({artistForm.works.length}점 / 최소 3점 ~ 최대 5점)
+                </div>
+                {artistForm.works.length < 5 && (
+                  <button
+                    type="button"
+                    onClick={handleAddWorkSlot}
+                    className="add-work-slot-btn"
+                  >
+                    <Plus size={13} />
+                    <span>대표작품 추가 ({artistForm.works.length}/5)</span>
+                  </button>
+                )}
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+                {artistForm.works.map((w, idx) => (
+                  <div key={idx} className="work-form-card">
+                    <div className="work-form-card-header">
+                      <strong>대표작품 0{idx + 1}</strong>
+                      {artistForm.works.length > 3 && (
+                        <button
+                          type="button"
+                          onClick={() => handleRemoveWorkSlot(idx)}
+                          style={{
+                            fontFamily: 'var(--font-mono)',
+                            fontSize: '11px',
+                            color: 'var(--ink-muted)',
+                          }}
+                        >
+                          삭제 ×
+                        </button>
+                      )}
+                    </div>
+
+                    <div className="form-grid-2">
+                      <div>
+                        <label className="form-label">작품명 *</label>
+                        <input
+                          required
+                          value={w.title}
+                          onChange={(e) => {
+                            const updated = [...artistForm.works];
+                            updated[idx] = { ...updated[idx], title: e.target.value };
+                            setArtistForm({ ...artistForm, works: updated });
+                          }}
+                          placeholder="예: 푸른 조류의 기록 I"
+                          className="form-input"
+                        />
+                      </div>
+                      <div>
+                        <label className="form-label">제작연도 *</label>
+                        <input
+                          required
+                          value={w.year}
+                          onChange={(e) => {
+                            const updated = [...artistForm.works];
+                            updated[idx] = { ...updated[idx], year: e.target.value };
+                            setArtistForm({ ...artistForm, works: updated });
+                          }}
+                          placeholder="예: 2026"
+                          className="form-input"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="form-grid-2">
+                      <div>
+                        <label className="form-label">재료 · 기법 *</label>
+                        <input
+                          required
+                          value={w.mediumDetail}
+                          onChange={(e) => {
+                            const updated = [...artistForm.works];
+                            updated[idx] = { ...updated[idx], mediumDetail: e.target.value };
+                            setArtistForm({ ...artistForm, works: updated });
+                          }}
+                          placeholder="예: 캔버스에 유채 및 혼합매체"
+                          className="form-input"
+                        />
+                      </div>
+                      <div>
+                        <label className="form-label">호수 · 규격 (cm) *</label>
+                        <input
+                          required
+                          value={w.dimensions}
+                          onChange={(e) => {
+                            const updated = [...artistForm.works];
+                            updated[idx] = { ...updated[idx], dimensions: e.target.value };
+                            setArtistForm({ ...artistForm, works: updated });
+                          }}
+                          placeholder="예: 72.7 × 60.6 cm (20호 F)"
+                          className="form-input"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="form-grid-2">
+                      <div>
+                        <label className="form-label">소장 가능 여부</label>
+                        <select
+                          value={w.availability}
+                          onChange={(e) => {
+                            const updated = [...artistForm.works];
+                            updated[idx] = {
+                              ...updated[idx],
+                              availability: e.target.value as
+                                | '소장 가능'
+                                | '판매 문의'
+                                | '에디션 가능',
+                            };
+                            setArtistForm({ ...artistForm, works: updated });
+                          }}
+                          className="form-input"
+                        >
+                          <option value="소장 가능">소장 가능</option>
+                          <option value="판매 문의">판매 문의</option>
+                          <option value="에디션 가능">에디션 가능</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label className="form-label">판매가 또는 소장 문의 표기 *</label>
+                        <input
+                          required
+                          value={w.priceLabel}
+                          onChange={(e) => {
+                            const updated = [...artistForm.works];
+                            updated[idx] = { ...updated[idx], priceLabel: e.target.value };
+                            setArtistForm({ ...artistForm, works: updated });
+                          }}
+                          placeholder="예: 1,500,000 KRW (소장 가능) / 판매가 문의"
+                          className="form-input"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="form-label">대표작품 이미지 URL *</label>
+                      <input
+                        required
+                        value={w.imageUrl}
+                        onChange={(e) => {
+                          const updated = [...artistForm.works];
+                          updated[idx] = { ...updated[idx], imageUrl: e.target.value };
+                          setArtistForm({ ...artistForm, works: updated });
+                        }}
+                        placeholder="https://..."
+                        className="form-input"
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="artist-form-submit-row">
+                <button type="submit" className="artist-submit-primary-btn">
+                  <span>
+                    {artistForm.mode === 'update'
+                      ? '프로필 · 대표작 수정 사항 즉시 반영 및 검수 요청 →'
+                      : '부산 작가 아카이브 등재 신청 (즉시 미리보기 반영) →'}
+                  </span>
+                </button>
+              </div>
             </form>
           </div>
         </div>

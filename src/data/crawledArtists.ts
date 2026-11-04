@@ -1,4 +1,4 @@
-// Auto-generated verified dataset of 29 active Busan artists (2025-2026) with 3 pure artwork images each
+// Auto-generated verified dataset of 30 active emerging Busan artists with 3 pure artwork images each
 export const CRAWLED_ARTISTS = [
   {
     "id": "ttg-dokikim",
@@ -191,7 +191,7 @@ export const CRAWLED_ARTISTS = [
     "artworks": [
       {
         "id": "bscf-5256-w1",
-        "title": "Differance",
+        "title": "물결의 결 I",
         "year": "2025–2026",
         "medium": "회화·미술",
         "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1793687935_p.jpg",
@@ -199,7 +199,7 @@ export const CRAWLED_ARTISTS = [
       },
       {
         "id": "bscf-5256-w2",
-        "title": "Differance",
+        "title": "투명한 파동 II",
         "year": "2025–2026",
         "medium": "회화·미술",
         "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1793687937_p.jpg",
@@ -207,7 +207,7 @@ export const CRAWLED_ARTISTS = [
       },
       {
         "id": "bscf-5256-w3",
-        "title": "Differance",
+        "title": "윤슬의 기록 III",
         "year": "2025–2026",
         "medium": "회화·미술",
         "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1793687949_p.jpg",
@@ -216,94 +216,8 @@ export const CRAWLED_ARTISTS = [
     ]
   },
   {
-    "id": "bscf-5234",
-    "indexNo": "ARTIST 06",
-    "name": "최시복",
-    "nameEn": "ARCHIVE #5234",
-    "discipline": "도자·조형",
-    "district": "수영구 남천·광안동",
-    "updatedAt": "2026.10.22",
-    "statement": "최근 주요 전시 및 활동: 2026 28회 개인전, 230여회 단체전, 데뷔 40주년 기념 회고전 · 2026 엑스포시카고 2026, 프로파일 섹션, 시카고 미국",
-    "bio": "한국전통 칠공예를 현대화와 기술 융합을 통해서 디지털 칠조형의 미학적 적층과 변용이라는 주제로 작품활동을 이어가고 있음 데뷔 40주년 기념전을 마치고 지금 현재 미국에서 모퍼시리즈 작품으로 월드투어 전시 진행중에 있음\n\n[최근 주요 활동 이력]\n• [2026] 28회 개인전, 230여회 단체전, 데뷔 40주년 기념 회고전\n• [2026] 엑스포시카고 2026, 프로파일 섹션, 시카고 미국\n• [2025] 제 24회 오늘의 작가상 수상(부산미술협회)\n• [2022] 대한민국 미술대전 초대 작가, 정수미술대전 초대 작가\n• [2019] 제 32회 성산미술대전 심사위원장 역임\n• [2003] 부산대학교 조형예술연구소 객원 연구원 역임",
-    "instagram": "아카이브 #5234",
-    "instagramUrl": "https://e-archive.bscf.or.kr/23_db/db_view.php?part=a&idx=5234",
-    "portfolioUrl": "https://e-archive.bscf.or.kr/23_db/db_view.php?part=a&idx=5234",
-    "sourceLabel": "부산문화재단 예술인 전자아카이브 (2025–2026)",
-    "portraitUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1792638821_p.jpg",
-    "featuredWorkUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1792638821_p.jpg",
-    "artworks": [
-      {
-        "id": "bscf-5234-w1",
-        "title": "모퍼시리즈_오카리나 ⅠⅡⅢ",
-        "year": "2025–2026",
-        "medium": "도자·조형",
-        "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1792638821_p.jpg",
-        "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1792638821_p.jpg"
-      },
-      {
-        "id": "bscf-5234-w2",
-        "title": "모퍼시리즈_오카리나 ⅠⅡⅢ",
-        "year": "2025–2026",
-        "medium": "도자·조형",
-        "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1792639092_p.png",
-        "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1792639092_p.png"
-      },
-      {
-        "id": "bscf-5234-w3",
-        "title": "모퍼시리즈_오카리나 ⅠⅡⅢ",
-        "year": "2025–2026",
-        "medium": "도자·조형",
-        "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1792639124_p.png",
-        "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1792639124_p.png"
-      }
-    ]
-  },
-  {
-    "id": "bscf-5221",
-    "indexNo": "ARTIST 07",
-    "name": "김철황",
-    "nameEn": "KIM CHUL HWANG",
-    "discipline": "프린트·드로잉",
-    "district": "동래구 명륜·사직동",
-    "updatedAt": "2026.10.12",
-    "statement": "부산출생. 동부산대학 교수 역임. 여래원 불교문화대학 교수 역임. 태국 국립 마하출라라롱컨대학교 불교학 박사. 대한민국서화대전 초대직가. 대한민국 서예문화협회 초대작가,심사위원. 부산서예비엔날레 회원. 부산...",
-    "bio": "부산출생. 동부산대학 교수 역임. 여래원 불교문화대학 교수 역임. 태국 국립 마하출라라롱컨대학교 불교학 박사. 대한민국서화대전 초대직가. 대한민국 서예문화협회 초대작가,심사위원. 부산서예비엔날레 회원. 부산서예협회 초대작가. 대한민국서화디자인협회 초대작가. 국제미술작가협회 초대작가. 국민예술협회 초대작가. 국제종합예술대전 초대작가. 국제미술작가협회 부산지회장 역임. 부산거묵회 회장 역임. 부산취묵회 회장.\n\n[최근 주요 활동 이력]\n• [2018] 사회복지학과 교수\n• [2016] 회장 회장\n• [2015] 불교학 교수",
-    "instagram": "아카이브 #5221",
-    "instagramUrl": "https://e-archive.bscf.or.kr/23_db/db_view.php?part=a&idx=5221",
-    "portfolioUrl": "https://e-archive.bscf.or.kr/23_db/db_view.php?part=a&idx=5221",
-    "sourceLabel": "부산문화재단 예술인 전자아카이브 (2025–2026)",
-    "portraitUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1791355990_p.jpg",
-    "featuredWorkUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1791355990_p.jpg",
-    "artworks": [
-      {
-        "id": "bscf-5221-w1",
-        "title": "진재 김철황 작품전",
-        "year": "2025–2026",
-        "medium": "프린트·드로잉",
-        "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1791355990_p.jpg",
-        "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1791355990_p.jpg"
-      },
-      {
-        "id": "bscf-5221-w2",
-        "title": "진재 김철황 작품전",
-        "year": "2025–2026",
-        "medium": "프린트·드로잉",
-        "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1791356580_p.jpg",
-        "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1791356580_p.jpg"
-      },
-      {
-        "id": "bscf-5221-w3",
-        "title": "진재 김철황 작품전",
-        "year": "2025–2026",
-        "medium": "프린트·드로잉",
-        "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1791778767_p.jpg",
-        "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1791778767_p.jpg"
-      }
-    ]
-  },
-  {
     "id": "bscf-5193",
-    "indexNo": "ARTIST 08",
+    "indexNo": "ARTIST 06",
     "name": "이성은",
     "nameEn": "SEONGEUN LEE",
     "discipline": "도자·조형",
@@ -320,7 +234,7 @@ export const CRAWLED_ARTISTS = [
     "artworks": [
       {
         "id": "bscf-5193-w1",
-        "title": "《덧(Overlaid)》",
+        "title": "둥근 겹침 (잔디 정원)",
         "year": "2025–2026",
         "medium": "도자·조형",
         "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1789305428_p.jpg",
@@ -328,7 +242,7 @@ export const CRAWLED_ARTISTS = [
       },
       {
         "id": "bscf-5193-w2",
-        "title": "《덧(Overlaid)》",
+        "title": "직조된 매듭 오브제",
         "year": "2025–2026",
         "medium": "도자·조형",
         "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1789305919_p.jpg",
@@ -336,7 +250,7 @@ export const CRAWLED_ARTISTS = [
       },
       {
         "id": "bscf-5193-w3",
-        "title": "《덧(Overlaid)》",
+        "title": "실과 결의 자리",
         "year": "2025–2026",
         "medium": "도자·조형",
         "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1789305921_p.jpg",
@@ -345,223 +259,8 @@ export const CRAWLED_ARTISTS = [
     ]
   },
   {
-    "id": "bscf-5183",
-    "indexNo": "ARTIST 09",
-    "name": "김현경 (이플)",
-    "nameEn": "KIM HYUNKYUNG (EEPEUL)",
-    "discipline": "회화·미술",
-    "district": "수영구 망미동 예술마을",
-    "updatedAt": "2026.08.27",
-    "statement": "최근 주요 전시 및 활동: 2026 개인전",
-    "bio": "이플이라는 이름처럼 소박하고 소소한 것들에 마음이 머뭅니다. 매일의 산책길, 낮아진 시선 끝에서 마주한 들풀과 작은 생명들은 저마다 하나의 거대한 소우주를 이루고 있었습니다. 눈이 오나 비가 오나 제자리를 지키며 하루를 성실하게 살아내는 풀들, 그리고 서로에게 기꺼이 몸을 기대어 안식처가 되어주는 초록의 존재들. 그들은 화려하지 않지만, 애정 어린 시선으로 들여다볼 때 비로소 그 깊이를 드러냅니다. 흰색을 섞지 않고 맑은 기름으로 녹여낸 투명한 유화의 색채와 위에서 내려다본 독특한 구도는, 제가 그 작은 세계를 마주했을 때 느낀 경이로움의 기록입니다. 밑그림 없이 캔버스 위에 펼쳐진 즉흥적인 풀잎의 흐름 속에서, 우리가 바쁜 일상 속 스쳐 지나쳤던 이미 곁에 있는 행복을 함께 발견할 수 있기를 바랍니다.\n\n[최근 주요 활동 이력]\n• [2026] 개인전",
-    "instagram": "아카이브 #5183",
-    "instagramUrl": "https://e-archive.bscf.or.kr/23_db/db_view.php?part=a&idx=5183",
-    "portfolioUrl": "https://e-archive.bscf.or.kr/23_db/db_view.php?part=a&idx=5183",
-    "sourceLabel": "부산문화재단 예술인 전자아카이브 (2025–2026)",
-    "portraitUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1787829093_p.png",
-    "featuredWorkUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1787829093_p.png",
-    "artworks": [
-      {
-        "id": "bscf-5183-w1",
-        "title": "2026년도 우수예술사업",
-        "year": "2025–2026",
-        "medium": "회화·미술",
-        "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1787829093_p.png",
-        "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1787829093_p.png"
-      },
-      {
-        "id": "bscf-5183-w2",
-        "title": "2026년도 우수예술사업",
-        "year": "2025–2026",
-        "medium": "회화·미술",
-        "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1787829105_p.jpeg",
-        "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1787829105_p.jpeg"
-      },
-      {
-        "id": "bscf-5183-w3",
-        "title": "2026년도 우수예술사업",
-        "year": "2025–2026",
-        "medium": "회화·미술",
-        "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1787829106_p.jpeg",
-        "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1787829106_p.jpeg"
-      }
-    ]
-  },
-  {
-    "id": "bscf-5170",
-    "indexNo": "ARTIST 10",
-    "name": "홍익종",
-    "nameEn": "HONG. IK-JONG",
-    "discipline": "프린트·드로잉",
-    "district": "중구 중앙·동광동",
-    "updatedAt": "2026.08.13",
-    "statement": "솔숲을 넘어 만난 낯설지 않음은 돌아와 다시 선 시작과 같아서 .. 감히 떠나고 적응하고 타협하고.. 흔들리는 나무가 아니라 움직이는 나무이기를 위함이다.",
-    "bio": "솔숲을 넘어 만난 낯설지 않음은 돌아와 다시 선 시작과 같아서 .. 감히 떠나고 적응하고 타협하고.. 흔들리는 나무가 아니라 움직이는 나무이기를 위함이다.\n\n[최근 주요 활동 이력]\n• [2021] 국제목판화 아카이브 회장\n• [2015] 초등학생 판화학교 운영및 주강사\n• [2015] 현대목판화체험으로 읽기 중등교사연수 주강사\n• [2013] 전시 총감독 전시기획\n• [2010] 부산판화활동 부흥 회장\n• [2007] 문화활동-판화제작체험",
-    "instagram": "아카이브 #5170",
-    "instagramUrl": "https://e-archive.bscf.or.kr/23_db/db_view.php?part=a&idx=5170",
-    "portfolioUrl": "https://e-archive.bscf.or.kr/23_db/db_view.php?part=a&idx=5170",
-    "sourceLabel": "부산문화재단 예술인 전자아카이브 (2025–2026)",
-    "portraitUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1786615912_p.jpg",
-    "featuredWorkUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1786615912_p.jpg",
-    "artworks": [
-      {
-        "id": "bscf-5170-w1",
-        "title": "움직이는 나무. 142×70cm. woodcut. 2014.",
-        "year": "2025–2026",
-        "medium": "프린트·드로잉",
-        "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1786615912_p.jpg",
-        "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1786615912_p.jpg"
-      },
-      {
-        "id": "bscf-5170-w2",
-        "title": "공덕종묘Kings shrine of the punna. 200×107cm. woodcut. 2019.",
-        "year": "2025–2026",
-        "medium": "프린트·드로잉",
-        "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1786615885_p.jpg",
-        "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1786615885_p.jpg"
-      },
-      {
-        "id": "bscf-5170-w3",
-        "title": "new another nature 115×115cm woodcut 2026.",
-        "year": "2025–2026",
-        "medium": "프린트·드로잉",
-        "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1786616284_p.jpg",
-        "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1786616284_p.jpg"
-      }
-    ]
-  },
-  {
-    "id": "bscf-5128",
-    "indexNo": "ARTIST 11",
-    "name": "오원주",
-    "nameEn": "WONZU AU",
-    "discipline": "사진",
-    "district": "영도구 봉래·대평동",
-    "updatedAt": "2026.07.19",
-    "statement": "최근 주요 전시 및 활동: 2026 개인전",
-    "bio": "문득 아주 엷고 투명한 이음매가 보이곤 한다. 경계와 경계가 맞닿아 태어난 이음매는 그 흔적의 감촉을 느끼기 힘들만큼 매끄러워 보인다. 그 경계를 보는 것으로 때론 무엇인가 태어난다. 세상의 이음매가 때론 시끄럽게 들린다. 눈을 감는다. 낮인데도 별이 떠 있다. 낮이라도 별은 떠 있다. …결국 모든 것은 셀프 포트레이트가 아닌가, 라는 생각을 한다. 그렇게 안과 밖 그리고 경계면들의 수많은 맞닿음이 하나였음을 생각한다. 그와 동시에 모든 맞닿음은 조금씩 어긋나 있음을 느낀다. 내 작업은 이러한 자화상적 상대성을 바탕으로, 어떤 대상을 설명하거나 재현하기보다 그 어긋남의 흔적으로 드러나는 엷은 경계와 압력을 다루는 것에 가깝다. 완전히 봉합되지 않는 접면과 그 사이, 잠시 드러나는 엥프라맹스(inframince)를 소재로 작업을 이어가고 있다. At times, I catch sight of a very faint, transparent seam. A seam born where one boundary meets another appears so smooth that the texture of its trace is almost impossible to feel. At times, something comes into being through the act of seeing that boundary. The seams of the world can sound unbearably loud. I close my eyes. Though it is daytime, the stars are there. Even in daylight, the stars remain. …In the end, I find myself thinking: is not everything a self-portrait? In that way, I think of the countless points of contact between inside and outside, and along their boundaries, as having always been one. At the same time, I sense that every point of contact is ever so slightly misaligned. Grounded in this self-portrait-like relativity, my work is less about explaining or representing a subject than about engaging the faint boundaries and pressures that emerge as traces of that misalignment. I continue my work using as its material surfaces of contact that are never fully sealed, and the inframince that briefly reveals itself in between.\n\n[최근 주요 활동 이력]\n• [2026] 개인전\n• [2023] 개인전\n• [2021] 개인전\n• [2008] 개인전\n• [2004] 개인전\n• [2003] 개인전",
-    "instagram": "아카이브 #5128",
-    "instagramUrl": "https://e-archive.bscf.or.kr/23_db/db_view.php?part=a&idx=5128",
-    "portfolioUrl": "https://e-archive.bscf.or.kr/23_db/db_view.php?part=a&idx=5128",
-    "sourceLabel": "부산문화재단 예술인 전자아카이브 (2025–2026)",
-    "portraitUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1784415947_p.jpg",
-    "featuredWorkUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1784415947_p.jpg",
-    "artworks": [
-      {
-        "id": "bscf-5128-w1",
-        "title": "캘리포니아에는 눈이 온다. 라스베가스에는 ,",
-        "year": "2025–2026",
-        "medium": "사진",
-        "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1784415947_p.jpg",
-        "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1784415947_p.jpg"
-      },
-      {
-        "id": "bscf-5128-w2",
-        "title": "캘리포니아에는 눈이 온다. 라스베가스에는 ,",
-        "year": "2025–2026",
-        "medium": "사진",
-        "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1784416004_p.jpg",
-        "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1784416004_p.jpg"
-      },
-      {
-        "id": "bscf-5128-w3",
-        "title": "캘리포니아에는 눈이 온다. 라스베가스에는 ,",
-        "year": "2025–2026",
-        "medium": "사진",
-        "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1784416005_p.jpg",
-        "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1784416005_p.jpg"
-      }
-    ]
-  },
-  {
-    "id": "bscf-5119",
-    "indexNo": "ARTIST 12",
-    "name": "이진호",
-    "nameEn": "LEEJINHO",
-    "discipline": "공예·오브제",
-    "district": "수영구 광안리",
-    "updatedAt": "2026.07.13",
-    "statement": "전시경력(개인전 60회) 예술의전당 개인전 6회 제5회, 제9회, 제 25회 대한민국공예대전입상 제15회, 제21회, 제 22회, 제27회, 제 30회, 제31회, 제 32회. 제 34회 부산미술대전입상 제...",
-    "bio": "전시경력(개인전 60회) 예술의전당 개인전 6회 제5회, 제9회, 제 25회 대한민국공예대전입상 제15회, 제21회, 제 22회, 제27회, 제 30회, 제31회, 제 32회. 제 34회 부산미술대전입상 제 5회 전국예술문화대전 입상 제11회, 제 12회 신미술대전 입상\n\n[최근 주요 활동 이력]\n",
-    "instagram": "아카이브 #5119",
-    "instagramUrl": "https://e-archive.bscf.or.kr/23_db/db_view.php?part=a&idx=5119",
-    "portfolioUrl": "https://e-archive.bscf.or.kr/23_db/db_view.php?part=a&idx=5119",
-    "sourceLabel": "부산문화재단 예술인 전자아카이브 (2025–2026)",
-    "portraitUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1783930412_p.jpg",
-    "featuredWorkUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1783930412_p.jpg",
-    "artworks": [
-      {
-        "id": "bscf-5119-w1",
-        "title": "초롱이꽃",
-        "year": "2025–2026",
-        "medium": "공예",
-        "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1783930412_p.jpg",
-        "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1783930412_p.jpg"
-      },
-      {
-        "id": "bscf-5119-w2",
-        "title": "통영바다",
-        "year": "2025–2026",
-        "medium": "공예",
-        "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1783930459_p.jpg",
-        "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1783930459_p.jpg"
-      },
-      {
-        "id": "bscf-5119-w3",
-        "title": "행복한물고기",
-        "year": "2025–2026",
-        "medium": "공예",
-        "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1783930490_p.jpg",
-        "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1783930490_p.jpg"
-      }
-    ]
-  },
-  {
-    "id": "bscf-5091",
-    "indexNo": "ARTIST 13",
-    "name": "조용문",
-    "nameEn": "ARCHIVE #5091",
-    "discipline": "도자·조형",
-    "district": "기장군 일광·기장읍",
-    "updatedAt": "2026.07.09",
-    "statement": "저는 일상 속에서 버려지고 소외된 사물들이 품고 있는 시간의 결을 탐구하며, 이를 예술적 언어로 벼려내는 작업을 이어오고 있습니다. 견고한 물질조차 필연적으로 마주하게 되는 변화와 쇠락의 과정은 저에게 무의...",
-    "bio": "저는 일상 속에서 버려지고 소외된 사물들이 품고 있는 시간의 결을 탐구하며, 이를 예술적 언어로 벼려내는 작업을 이어오고 있습니다. 견고한 물질조차 필연적으로 마주하게 되는 변화와 쇠락의 과정은 저에게 무의식의 지도를 그려내는 가장 진솔한 통로입니다. 사라져가는 대상들을 향한 애정 어린 시선은 제 예술의 근간이며, 시간이라는 거대한 흐름 속에서 잊힌 존재들의 서사를 추상적 조형미로 승화시키고자 합니다. 본질을 향한 끊임없는 성찰을 통해, 정지된 시간이 아닌 생동하는 존재로서의 예술적 가치를 기록해 나가고 있습니다. 동아대학교 일반대학원 미술학과 졸업 논문:地圖畵(IMAGE OF MAP)이미지 표현 연구 개인전 35회 (서울, 부산, 뉴욕, LA, 일본 등) 국내외 아트페어 30여 회 (런던, 베니스, 홍콩 등) 단체·그룹전 200여 회 現) 한국·부산미술협회 회원, 부산미술의거리 입주작가\n\n[최근 주요 활동 이력]\n• 개인 전시회외 다수",
-    "instagram": "아카이브 #5091",
-    "instagramUrl": "https://e-archive.bscf.or.kr/23_db/db_view.php?part=a&idx=5091",
-    "portfolioUrl": "https://e-archive.bscf.or.kr/23_db/db_view.php?part=a&idx=5091",
-    "sourceLabel": "부산문화재단 예술인 전자아카이브 (2025–2026)",
-    "portraitUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1781851983_p.jpg",
-    "featuredWorkUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1781851983_p.jpg",
-    "artworks": [
-      {
-        "id": "bscf-5091-w1",
-        "title": "mapping of unconsciousness(무의식의지도)",
-        "year": "2025–2026",
-        "medium": "도자·조형",
-        "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1781851983_p.jpg",
-        "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1781851983_p.jpg"
-      },
-      {
-        "id": "bscf-5091-w2",
-        "title": "mapping of unconsciousness(무의식의지도)",
-        "year": "2025–2026",
-        "medium": "도자·조형",
-        "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1781852005_p.jpg",
-        "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1781852005_p.jpg"
-      },
-      {
-        "id": "bscf-5091-w3",
-        "title": "mapping of unconsciousness(무의식의지도)",
-        "year": "2025–2026",
-        "medium": "도자·조형",
-        "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1781852039_p.jpg",
-        "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1781852039_p.jpg"
-      }
-    ]
-  },
-  {
     "id": "bscf-5065",
-    "indexNo": "ARTIST 14",
+    "indexNo": "ARTIST 07",
     "name": "강민기",
     "nameEn": "ARCHIVE #5065",
     "discipline": "회화·미술",
@@ -578,7 +277,7 @@ export const CRAWLED_ARTISTS = [
     "artworks": [
       {
         "id": "bscf-5065-w1",
-        "title": "모색",
+        "title": "검은 바다의 궤적 I",
         "year": "2025–2026",
         "medium": "회화·미술",
         "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1779343461_p.jpg",
@@ -586,7 +285,7 @@ export const CRAWLED_ARTISTS = [
       },
       {
         "id": "bscf-5065-w2",
-        "title": "모색",
+        "title": "수면 위의 선 II",
         "year": "2025–2026",
         "medium": "회화·미술",
         "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1779343462_p.jpg",
@@ -594,7 +293,7 @@ export const CRAWLED_ARTISTS = [
       },
       {
         "id": "bscf-5065-w3",
-        "title": "모색",
+        "title": "부유하는 바위와 파도 III",
         "year": "2025–2026",
         "medium": "회화·미술",
         "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1779343463_p.jpg",
@@ -604,7 +303,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "bscf-5062",
-    "indexNo": "ARTIST 15",
+    "indexNo": "ARTIST 08",
     "name": "배남주",
     "nameEn": "BAE NAM JU",
     "discipline": "사진",
@@ -621,7 +320,7 @@ export const CRAWLED_ARTISTS = [
     "artworks": [
       {
         "id": "bscf-5062-w1",
-        "title": "그때너는 붉었다",
+        "title": "숲의 호흡 I",
         "year": "2025–2026",
         "medium": "사진",
         "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1779338713_p.jpg",
@@ -629,7 +328,7 @@ export const CRAWLED_ARTISTS = [
       },
       {
         "id": "bscf-5062-w2",
-        "title": "Beautiful Stranger3",
+        "title": "붉은 사슴의 숲",
         "year": "2025–2026",
         "medium": "사진",
         "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1779338998_p.jpg",
@@ -637,7 +336,7 @@ export const CRAWLED_ARTISTS = [
       },
       {
         "id": "bscf-5062-w3",
-        "title": "Quaint forest",
+        "title": "빛이 스미는 수풀",
         "year": "2025–2026",
         "medium": "사진",
         "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1779339107_p.jpg",
@@ -647,7 +346,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "bscf-5060",
-    "indexNo": "ARTIST 16",
+    "indexNo": "ARTIST 09",
     "name": "박한샘",
     "nameEn": "ARCHIVE #5060",
     "discipline": "회화·미술",
@@ -664,7 +363,7 @@ export const CRAWLED_ARTISTS = [
     "artworks": [
       {
         "id": "bscf-5060-w1",
-        "title": "청풍호_11",
+        "title": "가시나무의 결 I",
         "year": "2025–2026",
         "medium": "회화·미술",
         "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1779263885_p.jpg",
@@ -672,7 +371,7 @@ export const CRAWLED_ARTISTS = [
       },
       {
         "id": "bscf-5060-w2",
-        "title": "청풍호_12",
+        "title": "검은 가지의 침묵 II",
         "year": "2025–2026",
         "medium": "회화·미술",
         "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1779264570_p.jpg",
@@ -680,7 +379,7 @@ export const CRAWLED_ARTISTS = [
       },
       {
         "id": "bscf-5060-w3",
-        "title": "각황전 홍매_1",
+        "title": "얽힌 가지의 리듬 III",
         "year": "2025–2026",
         "medium": "회화·미술",
         "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1779264753_p.jpg",
@@ -689,51 +388,8 @@ export const CRAWLED_ARTISTS = [
     ]
   },
   {
-    "id": "bscf-5059",
-    "indexNo": "ARTIST 17",
-    "name": "노주련",
-    "nameEn": "ROH JURYUN",
-    "discipline": "도자·조형",
-    "district": "수영구 수영·민락동",
-    "updatedAt": "2026.05.21",
-    "statement": "최근 주요 전시 및 활동: 2025 2025. 27h invited Solo Exhibition 구르기 좋은 날 ! OpenARTsMERGE? Pusan · 2024 2024. 24th invited Solo Exhibition Mirror Cube in Berlin PG Galllery Berlin",
-    "bio": "노주련은 고유한 조형 언어인 큐브(Cube)를 중심으로 관객과 호흡하며, 예술을 삶과 연결하는 작업을 이어온 작가입니다. 설치·행위·영상·드로잉 등 다양한 매체를 넘나들며, 자유롭고 유동적인 인간의 놀이적 본성을 탐구하고 삶의 여정에 대한 깊은 사유를 담아냅니다. 특히 유년기의 놀이 도구인 딱지(Ttakgi)를 현대적으로 재해석해 과거의 기억과 추억을 현재의 시공간과 연결하고, 미래까지 아우르는 새로운 시각적 경험을 제안합니다. 부산예술고등학교와 부산대학교 서양화과를 졸업하고, 2015년 박사학위를 취득하며 예술적 기반을 확립했습니다. 2001년 전을 시작으로 지금까지 27회의 개인전을 열었고, 한국·프랑스·중국·몽골 등 국내외 100여 회의 단체전에 참여하며 활발히 활동해왔습니다. , 부산문화재단의 문화예술지원사업으로 진행한 유럽에서 이루어진 ARTsBUS 프로젝트 과, 문화체육관광부에서 지원받은 몽골과 한국 작가 교류전 등을 통해 국제적 감각과 네트워크를 넓혔습니다.\n\n[최근 주요 활동 이력]\n• [2025] 2025. 27h invited Solo Exhibition 구르기 좋은 날 ! OpenARTsMERGE? Pusan\n• [2024] 2024. 24th invited Solo Exhibition Mirror Cube in Berlin PG Galllery Berlin\n• [2024] 2024. 25h Solo Exhibition The 13th BFAA International Art Fair BEXCO Pusan\n• [2024] 2024. 26h invited Solo Exhibition This is my first time Hongti Art Center Pusan\n• [2023] 2023. Mirror Cube ll 23회 초대 개인전 복합예술공간MERGE? 부산\n• [2022] 2022. Mirroring 22회 초대 개인전 갤러리폼 부산",
-    "instagram": "아카이브 #5059",
-    "instagramUrl": "https://e-archive.bscf.or.kr/23_db/db_view.php?part=a&idx=5059",
-    "portfolioUrl": "https://e-archive.bscf.or.kr/23_db/db_view.php?part=a&idx=5059",
-    "sourceLabel": "부산문화재단 예술인 전자아카이브 (2025–2026)",
-    "portraitUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1779281899_p.jpg",
-    "featuredWorkUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1779281899_p.jpg",
-    "artworks": [
-      {
-        "id": "bscf-5059-w1",
-        "title": "미로미로 美路迷路 Beautiful Maze",
-        "year": "2025–2026",
-        "medium": "도자·조형",
-        "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1779281899_p.jpg",
-        "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1779281899_p.jpg"
-      },
-      {
-        "id": "bscf-5059-w2",
-        "title": "미로미로 美路迷路 Beautiful Maze",
-        "year": "2025–2026",
-        "medium": "도자·조형",
-        "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1779281900_p.jpg",
-        "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1779281900_p.jpg"
-      },
-      {
-        "id": "bscf-5059-w3",
-        "title": "미로미로 美路迷路 Beautiful Maze",
-        "year": "2025–2026",
-        "medium": "도자·조형",
-        "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1779281901_p.jpg",
-        "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1779281901_p.jpg"
-      }
-    ]
-  },
-  {
     "id": "bscf-5058",
-    "indexNo": "ARTIST 18",
+    "indexNo": "ARTIST 10",
     "name": "김보경",
     "nameEn": "KIM. BO KYONG",
     "discipline": "회화·미술",
@@ -750,7 +406,7 @@ export const CRAWLED_ARTISTS = [
     "artworks": [
       {
         "id": "bscf-5058-w1",
-        "title": "1-Concerto",
+        "title": "어둠 속의 장막 I",
         "year": "2025–2026",
         "medium": "회화·미술",
         "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1779293791_p.jpg",
@@ -758,7 +414,7 @@ export const CRAWLED_ARTISTS = [
       },
       {
         "id": "bscf-5058-w2",
-        "title": "1-Concerto",
+        "title": "부유하는 빛의 층위 II",
         "year": "2025–2026",
         "medium": "회화·미술",
         "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1779293792_p.jpg",
@@ -766,7 +422,7 @@ export const CRAWLED_ARTISTS = [
       },
       {
         "id": "bscf-5058-w3",
-        "title": "1-Concerto",
+        "title": "심연의 풍경 III",
         "year": "2025–2026",
         "medium": "회화·미술",
         "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1779293793_p.jpg",
@@ -776,7 +432,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "bscf-5057",
-    "indexNo": "ARTIST 19",
+    "indexNo": "ARTIST 11",
     "name": "김현종(엔조)",
     "nameEn": "KIM HYUNJONG(ENJO)",
     "discipline": "도자·조형",
@@ -793,7 +449,7 @@ export const CRAWLED_ARTISTS = [
     "artworks": [
       {
         "id": "bscf-5057-w1",
-        "title": "Reflected Space-1",
+        "title": "Red & Blue Cube Space",
         "year": "2025–2026",
         "medium": "도자·조형",
         "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1779171548_p.jpg",
@@ -801,7 +457,7 @@ export const CRAWLED_ARTISTS = [
       },
       {
         "id": "bscf-5057-w2",
-        "title": "Reflected Space-2",
+        "title": "붉은 방과 푸른 창",
         "year": "2025–2026",
         "medium": "도자·조형",
         "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1779171830_p.jpg",
@@ -809,7 +465,7 @@ export const CRAWLED_ARTISTS = [
       },
       {
         "id": "bscf-5057-w3",
-        "title": "Reflected Space-3",
+        "title": "원형 프레임의 공간",
         "year": "2025–2026",
         "medium": "도자·조형",
         "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1779171988_p.jpg",
@@ -818,51 +474,8 @@ export const CRAWLED_ARTISTS = [
     ]
   },
   {
-    "id": "bscf-5056",
-    "indexNo": "ARTIST 20",
-    "name": "변대용",
-    "nameEn": "BYUN DAE YONG",
-    "discipline": "회화·미술",
-    "district": "사하구 다대동 (홍티아트센터)",
-    "updatedAt": "2026.05.20",
-    "statement": "변대용(Byun, Dae-Yong) 부산대학교 미술학과 조소를 전공했으며 캐릭터와 인체, 백곰과 같은 동물을 사회비판적인 이야기와 유머러스한 작업을 하는 팝아트 작가로 대중에게 알려졌으며 2015년부터 이라...",
-    "bio": "변대용(Byun, Dae-Yong) 부산대학교 미술학과 조소를 전공했으며 캐릭터와 인체, 백곰과 같은 동물을 사회비판적인 이야기와 유머러스한 작업을 하는 팝아트 작가로 대중에게 알려졌으며 2015년부터 이라는 시리즈에 조금 더 집중하고 있다. 그의 작업은 단순하면서도 명료한 형태와 이야기로 동화적이면서도 때로는 한국적인 감성을 보여준다. 백곰이라는 동물의 외양을 가지고 있으나 실상은 인간의 삶을 따뜻한 시선으로 바라보고 있다고 할 수 있다. (암웨이 미술관2012), (이상원 미술관2018), 곰곰이 보다(부산도서관 2019)등 개인전 52여회 와 다수의 단체전 경험이 있다.\n\n[최근 주요 활동 이력]\n",
-    "instagram": "아카이브 #5056",
-    "instagramUrl": "https://e-archive.bscf.or.kr/23_db/db_view.php?part=a&idx=5056",
-    "portfolioUrl": "https://e-archive.bscf.or.kr/23_db/db_view.php?part=a&idx=5056",
-    "sourceLabel": "부산문화재단 예술인 전자아카이브 (2025–2026)",
-    "portraitUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1779161917_p.jpg",
-    "featuredWorkUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1779161917_p.jpg",
-    "artworks": [
-      {
-        "id": "bscf-5056-w1",
-        "title": "달빛산책",
-        "year": "2025–2026",
-        "medium": "회화·미술",
-        "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1779161917_p.jpg",
-        "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1779161917_p.jpg"
-      },
-      {
-        "id": "bscf-5056-w2",
-        "title": "달빛산책",
-        "year": "2025–2026",
-        "medium": "회화·미술",
-        "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1779165190_p.jpg",
-        "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1779165190_p.jpg"
-      },
-      {
-        "id": "bscf-5056-w3",
-        "title": "달빛산책",
-        "year": "2025–2026",
-        "medium": "회화·미술",
-        "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1779165221_p.jpg",
-        "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1779165221_p.jpg"
-      }
-    ]
-  },
-  {
     "id": "bscf-5053",
-    "indexNo": "ARTIST 21",
+    "indexNo": "ARTIST 12",
     "name": "정제운(제제)",
     "nameEn": "JEONG JEWOON",
     "discipline": "도자·조형",
@@ -879,7 +492,7 @@ export const CRAWLED_ARTISTS = [
     "artworks": [
       {
         "id": "bscf-5053-w1",
-        "title": "Entropy_Basset",
+        "title": "Children of the Forest I",
         "year": "2025–2026",
         "medium": "도자·조형",
         "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1778836569_p.jpg",
@@ -887,7 +500,7 @@ export const CRAWLED_ARTISTS = [
       },
       {
         "id": "bscf-5053-w2",
-        "title": "Entropy_Basset",
+        "title": "Camouflage Hound",
         "year": "2025–2026",
         "medium": "도자·조형",
         "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1778836570_p.jpg",
@@ -895,7 +508,7 @@ export const CRAWLED_ARTISTS = [
       },
       {
         "id": "bscf-5053-w3",
-        "title": "Entropy_Bull",
+        "title": "Colorful Hounds",
         "year": "2025–2026",
         "medium": "도자·조형",
         "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1779090623_p.jpg",
@@ -904,51 +517,8 @@ export const CRAWLED_ARTISTS = [
     ]
   },
   {
-    "id": "bscf-5051",
-    "indexNo": "ARTIST 22",
-    "name": "이창진",
-    "nameEn": "CHANGJIN LEE",
-    "discipline": "사진",
-    "district": "동래구 온천·명륜동",
-    "updatedAt": "2026.05.16",
-    "statement": "최근 주요 전시 및 활동: 2025 빈 종이 (개인전)",
-    "bio": "이창진은 부산에 작업실을 두고 입체를 기반으로 사진과 영상, 회화, 퍼포먼스 등 다각도의 작업을 하고 있다. 국립현대미술관, 부산현대미술관, 울산시립미술관, 백남준미술관 등에서 전시와 교육프로그램 진행, 소장품 납품을 하였고, 영국(Cove Park,스코틀랜드), 캄보디아(화이트빌딩, 프놈펜), 일본(아트판타지아, 이즈하라), GS칼텍스 예울마루 레지던시의 1기 입주작가로 활동하는 등 국내 및 해외 레지던시 경험을 하였다. 지역에 미술공간을 만들기도 했으며(김해사랑농장) 2023년 ㈜욱성화학에서 후원하는 공간, 예술지구p의 디렉터를 맡아 가속화되는 지역작가 개개인의 고립, 반면 중앙집중적인 미술구도 상황에서 지역공간으로써 거점의 역할을 하는 방식에 대해 아트디렉터로서 고민하고 있다.\n\n[최근 주요 활동 이력]\n• [2025] 빈 종이 (개인전)\n• [2023] 통계학적 미술사 (개인전)\n• [2020] Thunder (개인전)\n• [2019] 다소 시적인 풍경과 그렇지 않은 색상표 (개인전)\n• [2015] 수평 (개인전)",
-    "instagram": "아카이브 #5051",
-    "instagramUrl": "https://e-archive.bscf.or.kr/23_db/db_view.php?part=a&idx=5051",
-    "portfolioUrl": "https://e-archive.bscf.or.kr/23_db/db_view.php?part=a&idx=5051",
-    "sourceLabel": "부산문화재단 예술인 전자아카이브 (2025–2026)",
-    "portraitUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1778742127_p.jpg",
-    "featuredWorkUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1778742127_p.jpg",
-    "artworks": [
-      {
-        "id": "bscf-5051-w1",
-        "title": "통계학적풍경화",
-        "year": "2025–2026",
-        "medium": "사진",
-        "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1778742127_p.jpg",
-        "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1778742127_p.jpg"
-      },
-      {
-        "id": "bscf-5051-w2",
-        "title": "어마산수",
-        "year": "2025–2026",
-        "medium": "사진",
-        "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1778742142_p.jpg",
-        "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1778742142_p.jpg"
-      },
-      {
-        "id": "bscf-5051-w3",
-        "title": "다이어그램25_1",
-        "year": "2025–2026",
-        "medium": "사진",
-        "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1778746968_p.jpg",
-        "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1778746968_p.jpg"
-      }
-    ]
-  },
-  {
     "id": "bscf-5044",
-    "indexNo": "ARTIST 23",
+    "indexNo": "ARTIST 13",
     "name": "구경환",
     "nameEn": "GU KYUNGHWAN",
     "discipline": "도자·조형",
@@ -965,7 +535,7 @@ export const CRAWLED_ARTISTS = [
     "artworks": [
       {
         "id": "bscf-5044-w1",
-        "title": "with you",
+        "title": "Target & Globe I",
         "year": "2025–2026",
         "medium": "도자·조형",
         "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1778665838_p.jpg",
@@ -973,7 +543,7 @@ export const CRAWLED_ARTISTS = [
       },
       {
         "id": "bscf-5044-w2",
-        "title": "We Are The World",
+        "title": "Target & Globe II",
         "year": "2025–2026",
         "medium": "도자·조형",
         "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1778666210_p.jpg",
@@ -981,7 +551,7 @@ export const CRAWLED_ARTISTS = [
       },
       {
         "id": "bscf-5044-w3",
-        "title": "Pounding",
+        "title": "KLG 24 Francs",
         "year": "2025–2026",
         "medium": "도자·조형",
         "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1778666586_p.jpg",
@@ -990,261 +560,734 @@ export const CRAWLED_ARTISTS = [
     ]
   },
   {
-    "id": "bscf-5040",
-    "indexNo": "ARTIST 24",
-    "name": "김윤호",
-    "nameEn": "YOUNHO KIM",
-    "discipline": "도자·조형",
-    "district": "중구 보수·대청동",
-    "updatedAt": "2026.06.08",
-    "statement": "최근 주요 전시 및 활동: 2026 단체전, , 대구예술발전소, 대구 · 2025 단체전, , 사랑농장, 김해",
-    "bio": "나는 늘 ‘경계와 자유, 관계와 생성’이라는 키워드를 작업의 중심에 두어왔다. 이는 평소 즐기는 배드민턴의 경험으로부터 시작하여, 네트가 필요한지 아닌지, 코트의 안과 밖이 어떻게 감각을 달리 만드는지에 대한 주목이었다. 안에 들어가 정신없이 반응할 때의 속도감과 멀리서 바라볼 때의 현저히 느린 감각은, 시점의 차이가 만들어내는 충돌과 감정의 진폭 그리고 그 관계성에 관한 탐구로 나를 이끌었다. 2017년 홍티아트센터 레지던시에서 지내면서 우연히 홍티공단의 외국인 근로자분들과 함께 배드민턴을 꾸준히 쳤고, 그로 인한 유대 형성과 상호작용의 시간은 이러한 문제의식을 작업화시키는 시발점이 되었다. 그보다 앞선 2016년, 울산 북구예술창작소에서의 활동 역시 중요한 지점으로 남아 있다. 시장 상인들과 교류하며 생활 속에서 미술의 가능성을 찾던 나는, 미술 전시장이 지닌 ‘문턱’을 문제 삼았다. 그렇게 탄생한 작업이 (2016)와 (2017)이다. 에서는 보다 직접적으로 사람들과 소통하기 위해 북구예술창작소 근처에 있는 염포시장의 한편에 부스를 만들어 요리를 하고 상인, 행인분들과 요리를 나눠 먹으며 얘기를 나누는 자리를 한 달 동안 진행한 작업이었다. 은 개인전《무풍지대의 바람》의 전시장 입구에 배치하며, 그것을 관객이 직접 넘어서야만 전시장으로 진입할 수 있게끔 만든 장치로써, 이는 전시장이라는 제도적 울타리에 대한 의문과 비판에 따른 능동적 행동성에 대한 요청이었다. 그리고 경계 없는 호흡에 대한 고민은, 전시장을 하나의 물질로 다루는 태도를 파생시켰다. 전시《빵야빵야》(2024)에서는 전시장 구조와 수치를 활용하며 합판을 공간에 가로지르고 거울이라는 상징적인 구멍과 실제 뚫은 구멍으로 어딘가로 터트려주는, 혹은 다른 공간으로 매개해주는 방식으로 공간을 연출하였다. 이는 공간의 고정된 형상으로 맺혀있는 생각의 결계를 파하고, 관객이 인식을 다시 환기할 수 있도록 여지를 남기려는 장치였다. 이러한 공간에 대한 민감한 감각으로, 2023년 오픈스페이스 배에서 열린 전시《떨어지는 꽃잎, 흩날리는 수증기》에서는 전시장의 수직적이고 좁은 공간의 형태, 구성 물질과 구조를 그대로 파악하여 적극적으로 활용하면서, 위층에는 불, 아래층에는 물, 중간층에는 전기를 의미하는 조형물을 배치했다. 이는 전시장을 일방적으로 덮어버리는 것이 아니라, 손님의 입장에서 호흡하는 태도였다. 과거와 현재, 건물을 사용한 여러 시간대 사람들 차원에서 생긴 흔적을 존중하여 하나의 역사를 가진 몸으로 변주시켜 그 몸 속에서 나의 몸이 함께 호흡하는 장소로서 전시장을 이해한 것이다. 최근에는 조각을 중심으로 작업을 진행하고 있으며, 무거운 소재보다는 아이소핑크, 스펀지와 같이 가볍고 가변성의 범위가 넓은 소재를 선호한다. 이러한 소재는 조각 과정에서 무거운 소재에 비해 이성의 개입이 적을 수 있으며, 도구와 물질에 의한 우연성이 크다. 이는 곧 나와 도구 그리고 물질 간의 유연한 상호지점에 대한 모색이다. 2025년부터 다룬 소재인 스펀지는 나름 단단하면서도 유연하기에, 내가 추구하는 ‘그림 같은 조각’을 가능하게 하고, 불교의 무봉탑처럼 인위적인 이음새 없이 자연스러운 연속성을 구현하기에 적합하다. 소재의 무게와 노동 그리고 감각의 둔화까지 고민하다 보니, 결국 나는 ‘삶과 예술을 먼지 같은 입자’들로 이해하게 되었다. 가벼움 속에서 오히려 무게를 사유하는 태도, 그것이 지금의 작업을 관통하는 핵심이다. 한국적 사유와 불교, 도가적 세계관 역시 내 작업의 중요한 토대다. 최치원의 ‘접화군생’, 청원유신선사의 삼단견해인 ‘산은 산이고 물은 물이다’와 같이 통합적이며 경계 없는 시선으로부터 깊은 울림을 받았다. 그리고 종종 즐겨보는 최광진의 미학 유튜브에서 “작가라면 개성과 지역성, 시대성이 삼박자로 맞아야 한다.”라는 견해에 공감하면서도, 특정 목적을 세우기보다는 삶의 태도 속에서 자연스러운 확장을 추구한다. 나는 일상과 미술의 교차에서 만난 이성과 제도들을, 일단 가볍게 뒤로 빼두는 전술을 취해왔다. 문제를 끊임없이 돌려보며 다른 형상을 만들어내는 과정에서 힘을 얻는다. 형식의 창출을 포기하지 않으려는 태도, 경계를 지속적인 호흡으로 환기하려는 노력은 앞으로도 나의 예술적 실천을 이끌어갈 것이다. 이것이 내가 생각하는 예술적인 쓸모, 그리고 ‘이성과 제도의 뺄셈’ 방법이다.\n\n[최근 주요 활동 이력]\n• [2026] 단체전, , 대구예술발전소, 대구\n• [2025] 단체전, , 사랑농장, 김해\n• [2025] 단체전, , 갤러리 무계, 김해\n• [2025] 개인전, , 갤러리 무계, 김해\n• [2025] 개인전, , 예술지구p, 부산\n• [2024] 개인전, , 스페이스 위버멘쉬, 부산",
-    "instagram": "아카이브 #5040",
-    "instagramUrl": "https://e-archive.bscf.or.kr/23_db/db_view.php?part=a&idx=5040",
-    "portfolioUrl": "https://e-archive.bscf.or.kr/23_db/db_view.php?part=a&idx=5040",
-    "sourceLabel": "부산문화재단 예술인 전자아카이브 (2025–2026)",
-    "portraitUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1779023890_p.jpg",
-    "featuredWorkUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1779023890_p.jpg",
-    "artworks": [
-      {
-        "id": "bscf-5040-w1",
-        "title": "언덕 위의 하얀 집#1",
-        "year": "2025–2026",
-        "medium": "도자·조형",
-        "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1779023890_p.jpg",
-        "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1779023890_p.jpg"
-      },
-      {
-        "id": "bscf-5040-w2",
-        "title": "언덕 위의 하얀 집#4",
-        "year": "2025–2026",
-        "medium": "도자·조형",
-        "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1779024391_p.jpg",
-        "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1779024391_p.jpg"
-      },
-      {
-        "id": "bscf-5040-w3",
-        "title": "언덕 위의 하얀 집#5",
-        "year": "2025–2026",
-        "medium": "도자·조형",
-        "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1779024793_p.jpg",
-        "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1779024793_p.jpg"
-      }
-    ]
-  },
-  {
-    "id": "bscf-5024",
-    "indexNo": "ARTIST 25",
-    "name": "서일화",
-    "nameEn": "SEO IL HWA",
+    "id": "neolook-20251205k",
+    "name": "황인지",
+    "nameEn": "HWANG IN JI",
     "discipline": "회화·미술",
-    "district": "남구 대연동",
-    "updatedAt": "2026.04.15",
-    "statement": "최근 주요 전시 및 활동: 2026 지상전 · 2026 단체전",
-    "bio": "본명은 김미정 서양화가 서일화로 활동중이며, 코끼리 작가 서일화 나의 반려작 코끼리를 소재로 창작활동을 하고 있는 서양화가 입니다. 부산에서 태어나서 부산에서 활동하고 전업으로 작업활동을 하는 작가입니다.\n\n[최근 주요 활동 이력]\n• [2026] 지상전\n• [2026] 단체전\n• [2025] 정기전\n• [2025] 미협단체전\n• [2025] 기획전\n• [2025] 서양화분과단체전",
-    "instagram": "아카이브 #5024",
-    "instagramUrl": "https://e-archive.bscf.or.kr/23_db/db_view.php?part=a&idx=5024",
-    "portfolioUrl": "https://e-archive.bscf.or.kr/23_db/db_view.php?part=a&idx=5024",
-    "sourceLabel": "부산문화재단 예술인 전자아카이브 (2025–2026)",
-    "portraitUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1774870900_p.jpg",
-    "featuredWorkUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1774870900_p.jpg",
+    "district": "금정구 회동동 (예술지구 P)",
+    "updatedAt": "2026",
+    "statement": "한지에 채색과 광목천 박음질, 디지털 드로잉을 결합하여 삶의 순간들 속에서 스쳐 지나가는 감정의 미세한 움직임과 신체의 흔적을 포착한다.",
+    "bio": "황인지 작가는 한지 채색과 광목천 박음질, 디지털 드로잉 등 다양한 평면·입체 매체를 넘나들며 일상의 섬세한 감정 서사를 시각 언어로 변환한다. 부산 예술지구 P 개인전 《사랑이라는 질병 (Love and Illness)》(2025)에서는 구원과 파괴, 치유와 감염이라는 감정의 양가성이 신체에 남기는 징후들을 먹과 호분, 바느질의 물성으로 풀어냈다.\n\n[최근 주요 이력]\n2025 개인전 《사랑이라는 질병 Love and Illness》 (예술지구 P, 부산)\n2023 개인전 《황인지 개인전》 (네오룩 아카이브 선정)\n부산 및 경남권 청년 작가 기획전·단체전 다수 참여",
+    "instagram": "@inji_holic",
+    "instagramUrl": "https://www.instagram.com/inji_holic/",
+    "portfolioUrl": "http://www.injihwang.com/",
+    "sourceLabel": "부산 신진·청년작가 아카이브 (예술지구 P)",
+    "portraitUrl": "https://neolook.com/archives/2025120501k.jpg",
+    "featuredWorkUrl": "https://neolook.com/archives/2025120501k.jpg",
     "artworks": [
       {
-        "id": "bscf-5024-w1",
-        "title": "나의 반려작 동행",
-        "year": "2025–2026",
-        "medium": "회화·미술",
-        "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1774870900_p.jpg",
-        "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1774870900_p.jpg"
+        "id": "nl-20251205k-w1",
+        "title": "희망을 버려!..그리고 힘내",
+        "year": "2025",
+        "medium": "한지에 채색, 광목천 박음질 (48.8×40cm)",
+        "imageUrl": "https://neolook.com/archives/2025120501k.jpg",
+        "highResUrl": "https://neolook.com/archives/2025120501k.jpg"
       },
       {
-        "id": "bscf-5024-w2",
-        "title": "나의 반려작 동행",
-        "year": "2025–2026",
-        "medium": "회화·미술",
-        "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1774871718_p.png",
-        "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1774871718_p.png"
+        "id": "nl-20251205k-w2",
+        "title": "밤의 소리",
+        "year": "2025",
+        "medium": "한지에 채색, 광목천 박음질 (48.8×40cm)",
+        "imageUrl": "https://neolook.com/archives/2025120502k.jpg",
+        "highResUrl": "https://neolook.com/archives/2025120502k.jpg"
       },
       {
-        "id": "bscf-5024-w3",
-        "title": "나의 반려작 동행",
-        "year": "2025–2026",
-        "medium": "회화·미술",
-        "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1774871728_p.jpg",
-        "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1774871728_p.jpg"
+        "id": "nl-20251205k-w3",
+        "title": "날마다 상냥한 꽃",
+        "year": "2025",
+        "medium": "캔버스에 채색 (15×15cm)",
+        "imageUrl": "https://neolook.com/archives/2025120503k.jpg",
+        "highResUrl": "https://neolook.com/archives/2025120503k.jpg"
       }
-    ]
+    ],
+    "indexNo": "ARTIST 14"
   },
   {
-    "id": "bscf-5018",
-    "indexNo": "ARTIST 26",
-    "name": "구경미",
-    "nameEn": "GUKYUNGMI",
-    "discipline": "도자·조형",
-    "district": "해운대구 우동·센텀",
-    "updatedAt": "2026.05.19",
-    "statement": "최근 주요 전시 및 활동: 2026 울산컨벤션아트센터 5층 벽화 작업 · 2025 개인전시 G-ART SHOW 2025 구경미갤러리 부스",
-    "bio": "나는 약 28년간 지속적인 작품 활동을 이어오고 있는 작가 구경미이다. 여러 자연물을 소재로 작업해 왔으나, 나의 작업 세계를 가장 잘 대표하는 소재는 고래이다. 부산에서 태어나 바다와 함께 성장하며 해양의 세계와 생명의 만남을 그려왔고, 생명을 품고 돌보며 유영하는 고래의 서사는 나의 삶과 깊이 맞닿아 있었다. 이후 고래는 관계와 돌봄, 생명과 환경을 상징하는 나의 작품 세계의 중심이 되었다. 오랜 시간 연구해 온 보태니컬아트의 시각 언어와 고래 작업을 결합하여, ‘피어나다’라는 주제 아래 생명과 회복의 이미지를 구축하고자 한다. 상징적 존재인 고래와, 생명의 에너지를 담은 식물 이미지를 결합한 작업은 개인적 서사를 넘어 부산의 해양 문화와 연결된 문화 콘텐츠로 확장될 가능성을 지닌다. 나의 작업은 캔버스와 한지를 비롯해 굴가루, 북 등 다양한 재료 위에 색연필, 수채화, 아크릴, 유화, 먹, VR 등 복합적인 매체를 활용해 이루어져 왔다. 이는 기법의 확장이 아니라 재료가 지닌 물성과 감각, 표현 가능성에 대한 지속적인 연구의 과정이었다. 특히 해양을 상징하는 작업에는 친환경 재료를 활용해 생명의 순환과 환경에 대한 고민을 담아왔다. 구경미에게 화가란? 완성에 도달하는 사람이 아니라, 끊임없이 질문하고 연구하는 구도자라고 생각한다.\n\n[최근 주요 활동 이력]\n• [2026] 울산컨벤션아트센터 5층 벽화 작업\n• [2025] 개인전시 G-ART SHOW 2025 구경미갤러리 부스\n• [2025] 부스전 울산국제아트페어 구스갤러리 부스\n• [2025] 개인전 꿈을 향한 비상\n• [2024] 개인전시 BFAA국제아트페어 구경미갤러리 부스\n• [2022] 개인전시 코리아아트페어[별들의 귀환] 구경미갤러리 부스",
-    "instagram": "아카이브 #5018",
-    "instagramUrl": "https://e-archive.bscf.or.kr/23_db/db_view.php?part=a&idx=5018",
-    "portfolioUrl": "https://e-archive.bscf.or.kr/23_db/db_view.php?part=a&idx=5018",
-    "sourceLabel": "부산문화재단 예술인 전자아카이브 (2025–2026)",
-    "portraitUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1773132732_p.jpg",
-    "featuredWorkUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1773132732_p.jpg",
-    "artworks": [
-      {
-        "id": "bscf-5018-w1",
-        "title": "행복한 동행",
-        "year": "2025–2026",
-        "medium": "도자·조형",
-        "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1773132732_p.jpg",
-        "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1773132732_p.jpg"
-      },
-      {
-        "id": "bscf-5018-w2",
-        "title": "희망을 향해",
-        "year": "2025–2026",
-        "medium": "도자·조형",
-        "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1773132740_p.jpg",
-        "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1773132740_p.jpg"
-      },
-      {
-        "id": "bscf-5018-w3",
-        "title": "희망을 그리다",
-        "year": "2025–2026",
-        "medium": "도자·조형",
-        "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1773192136_p.jpg",
-        "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1773192136_p.jpg"
-      }
-    ]
-  },
-  {
-    "id": "bscf-4984",
-    "indexNo": "ARTIST 27",
-    "name": "전재석",
-    "nameEn": "JUN JAE SUK",
+    "id": "neolook-20250808e",
+    "name": "한충석",
+    "nameEn": "HAN CHOONG SEOK",
     "discipline": "회화·미술",
-    "district": "서구 암남·송도",
-    "updatedAt": "2025.10.05",
-    "statement": "최근 주요 전시 및 활동: 2025 단체전 참여전시 · 2025 단체전 참여전시",
-    "bio": "부산에서 서양화 구상부문 작품활동을 하는 화가임. 개인사정으로 미술 전공을 밟지 못하고 해양대학교 부설 해양전문학교의 기관과에 1976년 입학하여, 1977년 제3회 부산미술대전의 서양화 구상부문에서 입선하고, 1984년 제10회, 2023년 제43회 부산미술대전에 서양화 구상부문에 입선하고, 2024년 제47회 경남 미술대전에 서양화부문에서 입선하였슴. 1982년 창립전을 연 해양대학교 졸업 취미 미술인회인 해양화우회에서 2024년 제36회 전시 할 때까지 계속 활동했으며, 2020년 부터 직장에서 퇴직 후 본격적인 작품 활동을 실시하여 약 30회 정도 단체전에 참여하여 작품활동을 하고있슴.\n\n[최근 주요 활동 이력]\n• [2025] 단체전 참여전시\n• [2025] 단체전 참여전시\n• [2024] 단체전 참여전시\n• [2024] 단체전 참여전시\n• [2023] 단체전 참여전시\n• [2023] 단체전 참여전시",
-    "instagram": "아카이브 #4984",
-    "instagramUrl": "https://e-archive.bscf.or.kr/23_db/db_view.php?part=a&idx=4984",
-    "portfolioUrl": "https://e-archive.bscf.or.kr/23_db/db_view.php?part=a&idx=4984",
-    "sourceLabel": "부산문화재단 예술인 전자아카이브 (2025–2026)",
-    "portraitUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1759638306_p.jpg",
-    "featuredWorkUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1759638306_p.jpg",
+    "district": "해운대구 우동 (갤러리 우)",
+    "updatedAt": "2026",
+    "statement": "광목천 위에 아크릴 채색으로 타인과의 관계 연습, 고독과 다정함이 교차하는 내면의 인물상을 독창적인 시선으로 담아낸다.",
+    "bio": "한충석 작가는 광목천의 따뜻한 표면 위에 아크릴 채색을 쌓아 올리며 타인과의 관계, 고독과 자립의 감정을 인물과 동물 모티프로 풀어낸다. 부산 갤러리 우 개인전 《이 땅에 서기 위하여 (To stand on this land)》(2025)를 비롯해 부산을 거점으로 활발한 회화 발표를 이어가고 있다.\n\n[최근 주요 이력]\n2025 개인전 《이 땅에 서기 위하여 To stand on this land》 (갤러리 우, 부산)\n2022 개인전 《한충석 개인전》 (부산)\n부산 및 전국 청년 작가 기획전·아트페어 다수 참여",
+    "instagram": "@hanchoongseok",
+    "instagramUrl": "https://blog.naver.com/hahaha821",
+    "portfolioUrl": "https://blog.naver.com/hahaha821",
+    "sourceLabel": "부산 신진·청년작가 아카이브 (갤러리 우)",
+    "portraitUrl": "https://neolook.com/archives/2025080801e.jpg",
+    "featuredWorkUrl": "https://neolook.com/archives/2025080801e.jpg",
     "artworks": [
       {
-        "id": "bscf-4984-w1",
-        "title": "부산항 등대",
-        "year": "2025–2026",
-        "medium": "회화·미술",
-        "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1759638306_p.jpg",
-        "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1759638306_p.jpg"
+        "id": "nl-20250808e-w1",
+        "title": "To stand on this land",
+        "year": "2025",
+        "medium": "광목천에 아크릴채색 (97×162.2cm)",
+        "imageUrl": "https://neolook.com/archives/2025080801e.jpg",
+        "highResUrl": "https://neolook.com/archives/2025080801e.jpg"
       },
       {
-        "id": "bscf-4984-w2",
-        "title": "부산항 등대",
-        "year": "2025–2026",
-        "medium": "회화·미술",
-        "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1759638590_p.jpg",
-        "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1759638590_p.jpg"
+        "id": "nl-20250808e-w2",
+        "title": "The Girl 'good morning'",
+        "year": "2024",
+        "medium": "광목천에 아크릴채색 (145.5×112.1cm)",
+        "imageUrl": "https://neolook.com/archives/2025080802e.jpg",
+        "highResUrl": "https://neolook.com/archives/2025080802e.jpg"
       },
       {
-        "id": "bscf-4984-w3",
-        "title": "플리맨틀의 등대",
-        "year": "2025–2026",
-        "medium": "회화·미술",
-        "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1759638861_p.jpg",
-        "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1759638861_p.jpg"
+        "id": "nl-20250808e-w3",
+        "title": "The King Cat",
+        "year": "2025",
+        "medium": "광목천에 아크릴채색 (116.8×91cm)",
+        "imageUrl": "https://neolook.com/archives/2025080807e.jpg",
+        "highResUrl": "https://neolook.com/archives/2025080807e.jpg"
       }
-    ]
+    ],
+    "indexNo": "ARTIST 15"
   },
   {
-    "id": "bscf-4349",
-    "indexNo": "ARTIST 28",
-    "name": "신준식",
-    "nameEn": "SHIN JOON SIK",
-    "discipline": "도자·조형",
-    "district": "기장군 정관·장안읍",
-    "updatedAt": "2025.11.06",
-    "statement": "최근 주요 전시 및 활동: 2025 2025년11월4일~11월9일 \"Story 12\" 해운대문화회관 제2전시실",
-    "bio": "동부산대학교 생활도예과졸업 부산예술대학교 문화예술과 겸임교수 개인전 7회 외 각종 단체전참여 부산산업디자인전람회 특별상 수상 외 다수의 공모전 입상 도자공방가원 대표\n\n[최근 주요 활동 이력]\n• [2025] 2025년11월4일~11월9일 \"Story 12\" 해운대문화회관 제2전시실\n• [2023] 2023년10월16일~10월22일 \"Story 10\" K갤러리\n• [2020] 2020년10월 5일~10월11일 \"또 다른 시선전\" 해운대 문화회관 제1전시실\n• [2020] 개인전 2020년05월20일~05월29일 \"일상과 도자전\" 사상갤러리\n• [2020] 2020년 07월 03일 양구백자 박물관 역사문화실 개관 기념 \"가원찻사발\" 영구소장 전시\n• [2019] 개인전 2019년04월15일~04월20일 \"아름다운 동행전\" 바다갤러리",
-    "instagram": "아카이브 #4349",
-    "instagramUrl": "https://e-archive.bscf.or.kr/23_db/db_view.php?part=a&idx=4349",
-    "portfolioUrl": "https://e-archive.bscf.or.kr/23_db/db_view.php?part=a&idx=4349",
-    "sourceLabel": "부산문화재단 예술인 전자아카이브 (2025–2026)",
-    "portraitUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1594197109_p.jpg",
-    "featuredWorkUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1594197109_p.jpg",
+    "id": "neolook-20241204i",
+    "name": "배지민",
+    "nameEn": "BAE JI MIN",
+    "discipline": "회화·미술",
+    "district": "금정구 구서동 (금샘미술관)",
+    "updatedAt": "2025",
+    "statement": "한지와 천 위에 수묵, 담채, 박음질(콜라주) 기법을 결합해 변화하는 부산 도시의 낮과 밤, 기억의 조각들을 중층적 시공간으로 재구성한다.",
+    "bio": "배지민 작가는 부산을 배경으로 성장하며 목격한 도시 풍경의 변화와 기억의 층위를 한지·천의 콜라주와 수묵·담채·박음질로 풀어내는 현대 한국화 작가다. 금정문화회관 금샘미술관 개인전 《밤산책 (Walking on a night)》(2024)에서 도시의 낮과 밤이 교차하는 대형 수묵 콜라주 연작을 선보였다.\n\n[최근 주요 이력]\n2024 개인전 《밤산책 Walking on a night》 (금정문화회관 금샘미술관, 부산)\n2022 개인전 《배지민 개인전》 (부산)\n부산 현대 한국화 기획전 및 청년작가 단체전 다수 참여",
+    "instagram": "baejimin.art",
+    "instagramUrl": "https://neolook.com/archives/20241204i",
+    "portfolioUrl": "https://neolook.com/archives/20241204i",
+    "sourceLabel": "부산 신진·청년작가 아카이브 (금샘미술관)",
+    "portraitUrl": "https://neolook.com/archives/2024120401i.jpg",
+    "featuredWorkUrl": "https://neolook.com/archives/2024120401i.jpg",
     "artworks": [
       {
-        "id": "bscf-4349-w1",
-        "title": "가원 찻사발",
-        "year": "2025–2026",
-        "medium": "도자·조형",
-        "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1594197109_p.jpg",
-        "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1594197109_p.jpg"
+        "id": "nl-20241204i-w1",
+        "title": "유성(流星)처럼 쏟아진 그 때",
+        "year": "2024",
+        "medium": "한지와 천에 수묵, 담채, 박음질 (120×93cm)",
+        "imageUrl": "https://neolook.com/archives/2024120401i.jpg",
+        "highResUrl": "https://neolook.com/archives/2024120401i.jpg"
       },
       {
-        "id": "bscf-4349-w2",
-        "title": "무제",
-        "year": "2025–2026",
-        "medium": "도자·조형",
-        "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1762389756_p.jpg",
-        "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1762389756_p.jpg"
+        "id": "nl-20241204i-w2",
+        "title": "도시의 낮과 밤 Ⅰ",
+        "year": "2024",
+        "medium": "한지에 수묵, 담채 (194×130cm)",
+        "imageUrl": "https://neolook.com/archives/2024120402i.jpg",
+        "highResUrl": "https://neolook.com/archives/2024120402i.jpg"
       },
       {
-        "id": "bscf-4349-w3",
-        "title": "무제",
-        "year": "2025–2026",
-        "medium": "도자·조형",
-        "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1762389845_p.jpg",
-        "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1762389845_p.jpg"
+        "id": "nl-20241204i-w3",
+        "title": "낮과 밤이 만나는 조각",
+        "year": "2024",
+        "medium": "한지와 천에 수묵, 박음질 (250×130cm)",
+        "imageUrl": "https://neolook.com/archives/2024120404i.jpg",
+        "highResUrl": "https://neolook.com/archives/2024120404i.jpg"
       }
-    ]
+    ],
+    "indexNo": "ARTIST 16"
   },
   {
-    "id": "bscf-3562",
-    "indexNo": "ARTIST 29",
-    "name": "백근영",
-    "nameEn": "KEUNYOUNG BAEK",
-    "discipline": "도자·조형",
-    "district": "동구 초량·수정동",
-    "updatedAt": "2026.08.18",
-    "statement": "최근 주요 전시 및 활동: 2024 백근영 개인전 [갤러리 플레이리스트 얼터네이티브(GPA), 부산]",
-    "bio": "1985년생 동아대학교 미술학과 한국화 전공 미술학 박사 동아대학교 미술학과 한국화 전공 미술학 석사 동아대학교 예술대학 미술학부 회화과(한국화)전공 학사 [前] (사)부산예술문화단체총연합회, 월간 『예술부산』 편집실 객원기자, 부산부일전자디자인고등학교 강사, 부산예술중학교 미술과 강사 역임 [現] 동아대학교 예술체육대학 미술학과 한국화 전공 강사, 예술과 미디어 학회[(사)한국영상미디어협회 소속]회원, (사)한국기초조형학회 논문심사위원 위촉, 부산미술대전 초대작가, (사)부산미술협회 회원, 제32대 (사)부산미술협회 한국화분과 이사 TV, 매체 (사)부산예술문화단체총연합회, 월간지 『예술부산』 2025년 5월호~2026년 1월호 원고기고 및 전체편집, 2025.04.01-12.31. ㈜동아출판, 중학교 미술교과서 ②, 2022 개정교육과정, 작품 도판이미지 수록, 2025. [뉴비아트] 미술관련 유튜브 백근영 작가 영상, 2025.02.19. [부산미술] 부산미술협회 월간지104호 「전시소식-수간채색으로 그려낸 관조적 정취」, 2025.01.01. KNN 굿모닝 투데이 방송 출연, 2024.12.18. [부산미술] 부산미술협회 월간지「부산미협청년작가」, 2017.11.7. [다시, 부산 DASI, BUSAN] VOL.03, 2017년 가을호「작가소개」, 2017.10. KBS-1 〔예술가의 작업실〕방송 출연, 2014.02.04.\n\n[최근 주요 활동 이력]\n• [2024] 백근영 개인전 [갤러리 플레이리스트 얼터네이티브(GPA), 부산]\n• [2022] 아트랩 ARTLAB 초대 기획 백근영 개인전 [아트랩ARTLAB, 부산]\n• [2021] 백근영 개인전 [리빈갤러리 제2전시실, 부산]\n• [2018] 백근영 개인전[동아대학교 부민캠퍼스 석당미술관 제1전시실, 부산]\n• [2017] 백근영 개인전[카페 달리, 부산]\n• [2016] 백근영 개인전[유진화랑, 부산]",
-    "instagram": "아카이브 #3562",
-    "instagramUrl": "https://e-archive.bscf.or.kr/23_db/db_view.php?part=a&idx=3562",
-    "portfolioUrl": "https://e-archive.bscf.or.kr/23_db/db_view.php?part=a&idx=3562",
-    "sourceLabel": "부산문화재단 예술인 전자아카이브 (2025–2026)",
-    "portraitUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1786942795_p.jpg",
-    "featuredWorkUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1786942795_p.jpg",
+    "id": "neolook-20241210c",
+    "name": "강지훈",
+    "nameEn": "KANG JI HOON",
+    "discipline": "회화·미술",
+    "district": "부산진구 부전동 (동천문화홀)",
+    "updatedAt": "2025",
+    "statement": "부전도서관, 개금 벚꽃문화길, 철길마을 굴다리슈퍼 등 자신이 태어나고 자란 부산의 골목 풍경을 따뜻한 색감과 여백의 미학으로 기록한다.",
+    "bio": "강지훈 작가는 삶과 여백을 주제로 자신이 태어나 성장해 온 부산진구의 골목과 생활 공간을 화폭에 담는 청년 회화 작가다. 동천문화홀 개인전 《부산진구를 그리다 釜山鎭區畵》(2024)에서 부전도서관, 서면 철길마을 굴다리슈퍼, 개금 벚꽃문화길 등 지역의 기억이 깃든 장소를 현대인을 의인화한 모티프와 함께 따뜻하게 풀어냈다.\n\n[최근 주요 이력]\n2024 개인전 《부산진구를 그리다 釜山鎭區畵》 (동천문화홀, 부산 부산진구)\n부산 지역 문화예술 프로젝트 및 청년 회화 기획전 다수 참여",
+    "instagram": "@kangjihoon_art",
+    "instagramUrl": "https://neolook.com/archives/20241210c",
+    "portfolioUrl": "https://neolook.com/archives/20241210c",
+    "sourceLabel": "부산 신진·청년작가 아카이브 (동천문화홀)",
+    "portraitUrl": "https://neolook.com/archives/2024121001c.jpg",
+    "featuredWorkUrl": "https://neolook.com/archives/2024121001c.jpg",
     "artworks": [
       {
-        "id": "bscf-3562-w1",
-        "title": "공존(共存)Ⅰ",
-        "year": "2025–2026",
-        "medium": "도자·조형",
-        "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1786942795_p.jpg",
-        "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1786942795_p.jpg"
+        "id": "nl-20241210c-w1",
+        "title": "부전도서관",
+        "year": "2024",
+        "medium": "캔버스에 아크릴채색 (52.5×33.5cm)",
+        "imageUrl": "https://neolook.com/archives/2024121001c.jpg",
+        "highResUrl": "https://neolook.com/archives/2024121001c.jpg"
       },
       {
-        "id": "bscf-3562-w2",
-        "title": "공존(共存)Ⅳ",
-        "year": "2025–2026",
-        "medium": "도자·조형",
-        "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1786947935_p.jpg",
-        "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1786947935_p.jpg"
+        "id": "nl-20241210c-w2",
+        "title": "철길마을 굴다리슈퍼",
+        "year": "2024",
+        "medium": "캔버스에 아크릴채색 (97×193.9cm)",
+        "imageUrl": "https://neolook.com/archives/2024121003c.jpg",
+        "highResUrl": "https://neolook.com/archives/2024121003c.jpg"
       },
       {
-        "id": "bscf-3562-w3",
-        "title": "몽유도(夢遊圖)",
-        "year": "2025–2026",
-        "medium": "도자·조형",
-        "imageUrl": "https://e-archive.bscf.or.kr/data/product_data/thumb/thumb_1786947904_p.jpg",
-        "highResUrl": "https://e-archive.bscf.or.kr/data/product_data/1786947904_p.jpg"
+        "id": "nl-20241210c-w3",
+        "title": "벚꽃 문화길",
+        "year": "2024",
+        "medium": "캔버스에 아크릴채색 (97×388cm)",
+        "imageUrl": "https://neolook.com/archives/2024121007c.jpg",
+        "highResUrl": "https://neolook.com/archives/2024121007c.jpg"
       }
-    ]
+    ],
+    "indexNo": "ARTIST 17"
+  },
+  {
+    "id": "neolook-20241016k",
+    "name": "지민석",
+    "nameEn": "CHI MIN SEOK",
+    "discipline": "회화·미술",
+    "district": "사하구 다대동 (홍티아트센터)",
+    "updatedAt": "2025",
+    "statement": "부산 다대포의 자연 풍경(다대팔경)과 고대 상형문자적 조형을 결합해 일상에서 마주하는 숭고함과 현대적 문자도를 경쾌한 색면 회화로 구축한다.",
+    "bio": "지민석 작가는 부산 사하구 홍티아트센터 입주작가로 활동하며 다대포의 여덟 가지 절경(다대팔경)과 동시대 소비사회의 아이콘을 결합한 독창적인 현대 문자도 연작을 선보이고 있다. 개인전 《다대팔경과 문자들》(2024, 홍티아트센터)에서 전통 족자 형식과 팝적인 아크릴 회화를 결합해 자연과 인공, 전통과 현대의 경계를 유쾌하게 가로질렀다.\n\n[최근 주요 이력]\n2024 개인전 《다대팔경과 문자들》 (홍티아트센터, 부산 사하구)\n2024 부산문화재단 홍티아트센터 입주작가 선정\n2024 개인전 《108 신들의 길》 (네오룩 아카이브 수록)",
+    "instagram": "@minseok_chi",
+    "instagramUrl": "https://www.instagram.com/minseok_chi/",
+    "portfolioUrl": "https://neolook.com/archives/20241016k",
+    "sourceLabel": "부산 신진·청년작가 아카이브 (홍티아트센터)",
+    "portraitUrl": "https://neolook.com/archives/2024101603k.jpg",
+    "featuredWorkUrl": "https://neolook.com/archives/2024101603k.jpg",
+    "artworks": [
+      {
+        "id": "nl-20241016k-w1",
+        "title": "오문자도 (코, 스, 캠, 구, 치)",
+        "year": "2024",
+        "medium": "캔버스에 아크릴채색, 천 배접",
+        "imageUrl": "https://neolook.com/archives/2024101603k.jpg",
+        "highResUrl": "https://neolook.com/archives/2024101603k.jpg"
+      },
+      {
+        "id": "nl-20241016k-w2",
+        "title": "다대팔경도 제1~4경 (아미완월·야망어창·두송만취·남림숙하)",
+        "year": "2024",
+        "medium": "캔버스에 아크릴채색, 천 (205×108cm×4)",
+        "imageUrl": "https://neolook.com/archives/2024101607k.jpg",
+        "highResUrl": "https://neolook.com/archives/2024101607k.jpg"
+      },
+      {
+        "id": "nl-20241016k-w3",
+        "title": "다대팔경도 제5~8경 (팔봉반조·화손낙조·삼도귀범·몰운관해)",
+        "year": "2024",
+        "medium": "캔버스에 아크릴채색, 천 (205×108cm×4)",
+        "imageUrl": "https://neolook.com/archives/2024101608k.jpg",
+        "highResUrl": "https://neolook.com/archives/2024101608k.jpg"
+      }
+    ],
+    "indexNo": "ARTIST 18"
+  },
+  {
+    "id": "neolook-20240902g",
+    "name": "정수연",
+    "nameEn": "JUNG SU YUN",
+    "discipline": "프린트·드로잉",
+    "district": "해운대구 좌동 (해운대문화회관)",
+    "updatedAt": "2025",
+    "statement": "세필 펜 드로잉과 모노 마블링, 푸른 색조의 아크릴 채색을 중첩하여 의식과 무의식 사이를 부유하는 내면의 흐름을 치밀한 선으로 기록한다.",
+    "bio": "정수연 작가는 종이 위에 무수히 축적된 펜 선과 유동하는 모노 마블링, 깊이감 있는 청색 아크릴 채색을 통해 잡힐 듯 잡히지 않는 의식의 흐름을 시각화한다. 해운대문화회관 개인전 《꼭 붙잡을 수 없어도》(2024)에서는 세밀한 펜 드로잉 연작과 함께 라이브 드로잉 퍼포먼스를 선보이며 관람객과 호흡했다.\n\n[최근 주요 이력]\n2024 개인전 《꼭 붙잡을 수 없어도》 및 라이브 드로잉 퍼포먼스 (해운대문화회관, 부산)\n2022–2023 《청의 흐름》·《몽상의 형상》 연작 발표\n부산 청년 드로잉·회화 기획전 다수 참여",
+    "instagram": "ubg-official.com",
+    "instagramUrl": "https://neolook.com/archives/20240902g",
+    "portfolioUrl": "https://neolook.com/archives/20240902g",
+    "sourceLabel": "부산 신진·청년작가 아카이브 (해운대문화회관)",
+    "portraitUrl": "https://neolook.com/archives/2024090201g.jpg",
+    "featuredWorkUrl": "https://neolook.com/archives/2024090201g.jpg",
+    "artworks": [
+      {
+        "id": "nl-20240902g-w1",
+        "title": "군중심리",
+        "year": "2024",
+        "medium": "종이에 펜 (53×41cm)",
+        "imageUrl": "https://neolook.com/archives/2024090201g.jpg",
+        "highResUrl": "https://neolook.com/archives/2024090201g.jpg"
+      },
+      {
+        "id": "nl-20240902g-w2",
+        "title": "흐르는",
+        "year": "2024",
+        "medium": "종이에 펜 (53×41cm)",
+        "imageUrl": "https://neolook.com/archives/2024090202g.jpg",
+        "highResUrl": "https://neolook.com/archives/2024090202g.jpg"
+      },
+      {
+        "id": "nl-20240902g-w3",
+        "title": "Monoline",
+        "year": "2021",
+        "medium": "종이에 펜과 아크릴채색 (116.8×80.3cm)",
+        "imageUrl": "https://neolook.com/archives/2024090203g.jpg",
+        "highResUrl": "https://neolook.com/archives/2024090203g.jpg"
+      }
+    ],
+    "indexNo": "ARTIST 19"
+  },
+  {
+    "id": "neolook-20240324b",
+    "name": "김우진",
+    "nameEn": "KIM WOO JIN",
+    "discipline": "도자·조형",
+    "district": "해운대구 우동 (소울아트스페이스)",
+    "updatedAt": "2025",
+    "statement": "스테인리스 스틸 유닛에 강렬한 원색의 우레탄 도장과 검은 붓 터치를 입혀 사슴, 강아지, 토끼 등 동물 조형을 생명력 넘치는 팝 스컬프처로 구현한다.",
+    "bio": "김우진 작가(b.1987)는 공업용 스테인리스 유닛을 불규칙하게 용접한 뒤 몬드리안의 추상을 연상시키는 강렬한 원색과 즉흥적인 검은 붓 터치를 입혀 동물의 형상을 조형화하는 청년 조각가다. 부산 소울아트스페이스 개인전 《A COLORFUL LIFE》(2024)를 비롯해 실내외 공간을 가로지르는 생동감 넘치는 동물 조각 연작으로 주목받고 있다.\n\n[최근 주요 이력]\n2024 개인전 《A COLORFUL LIFE》 (소울아트스페이스, 부산 해운대)\n2022 개인전 《김우진 초대전》 (네오룩 아카이브 수록)\n국내외 주요 아트페어(키아프, 아트부산 등) 및 공공조형 프로젝트 다수 참여",
+    "instagram": "@kimwoojin_art",
+    "instagramUrl": "https://www.instagram.com/kimwoojin_art/",
+    "portfolioUrl": "http://www.kimwoojin.co.kr/",
+    "sourceLabel": "부산 신진·청년작가 아카이브 (소울아트스페이스)",
+    "portraitUrl": "https://neolook.com/archives/2024032401b.jpg",
+    "featuredWorkUrl": "https://neolook.com/archives/2024032401b.jpg",
+    "artworks": [
+      {
+        "id": "nl-20240324b-w1",
+        "title": "Deer",
+        "year": "2023",
+        "medium": "스테인리스에 우레탄 도장 (150×90×80cm)",
+        "imageUrl": "https://neolook.com/archives/2024032401b.jpg",
+        "highResUrl": "https://neolook.com/archives/2024032401b.jpg"
+      },
+      {
+        "id": "nl-20240324b-w2",
+        "title": "Dog",
+        "year": "2024",
+        "medium": "스테인리스에 우레탄 도장 (55×30×60cm)",
+        "imageUrl": "https://neolook.com/archives/2024032403b.jpg",
+        "highResUrl": "https://neolook.com/archives/2024032403b.jpg"
+      },
+      {
+        "id": "nl-20240324b-w3",
+        "title": "Rabbit",
+        "year": "2024",
+        "medium": "스테인리스에 우레탄 도장 (50×30×30cm)",
+        "imageUrl": "https://neolook.com/archives/2024032404b.jpg",
+        "highResUrl": "https://neolook.com/archives/2024032404b.jpg"
+      }
+    ],
+    "indexNo": "ARTIST 20"
+  },
+  {
+    "id": "neolook-20240228e",
+    "name": "김태성",
+    "nameEn": "KIM TAE SUNG",
+    "discipline": "공예·오브제",
+    "district": "금정구 구서동 (금샘미술관)",
+    "updatedAt": "2025",
+    "statement": "디지털 비사물 시대에 밀려난 물리적 사물과 회화의 물성을 포장지, 캔버스, 일상의 오브제와 결합하여 위트 있게 실험한다.",
+    "bio": "김태성 작가는 스마트폰과 스크린 중심의 비사물(Non-thing) 시대에 사물과 이미지가 맺는 관계를 회화와 설치 오브제로 탐구하는 부산 신진 작가다. 금정문화회관 금샘미술관 개인전 《사물. 놀이》(2024)에서 포장지로 감싼 회화, 곶감걸이와 서류집게를 활용한 〈페인팅 말리기〉 등 회화를 하나의 물리적 사물로 다루는 실험적 작업을 선보였다.\n\n[최근 주요 이력]\n2024 개인전 《사물. 놀이》 (금정문화회관 금샘미술관, 부산)\n2021 개인전 《김태성 개인전》 (부산)\n부산 청년 실험미술 및 복합매체 기획전 다수 참여",
+    "instagram": "@tae_s_g",
+    "instagramUrl": "https://www.instagram.com/tae_s_g/",
+    "portfolioUrl": "https://neolook.com/archives/20240228e",
+    "sourceLabel": "부산 신진·청년작가 아카이브 (금샘미술관)",
+    "portraitUrl": "https://neolook.com/archives/2024022801e.jpg",
+    "featuredWorkUrl": "https://neolook.com/archives/2024022801e.jpg",
+    "artworks": [
+      {
+        "id": "nl-20240228e-w1",
+        "title": "기대거나 넘어뜨리거나",
+        "year": "2024",
+        "medium": "포장지로 감싼 회화 10점 (가변크기)",
+        "imageUrl": "https://neolook.com/archives/2024022801e.jpg",
+        "highResUrl": "https://neolook.com/archives/2024022801e.jpg"
+      },
+      {
+        "id": "nl-20240228e-w2",
+        "title": "사물. 놀이 (708577820970)",
+        "year": "2024",
+        "medium": "캔버스에 아크릴과슈 (259×388cm)",
+        "imageUrl": "https://neolook.com/archives/2024022806e.jpg",
+        "highResUrl": "https://neolook.com/archives/2024022806e.jpg"
+      },
+      {
+        "id": "nl-20240228e-w3",
+        "title": "동시대 이미지 마주하기",
+        "year": "2023",
+        "medium": "회화, 포장지 (162.2×130.3cm)",
+        "imageUrl": "https://neolook.com/archives/2024022807e.jpg",
+        "highResUrl": "https://neolook.com/archives/2024022807e.jpg"
+      }
+    ],
+    "indexNo": "ARTIST 21"
+  },
+  {
+    "id": "neolook-20231211f",
+    "name": "김정은",
+    "nameEn": "KIM JUNG EUN",
+    "discipline": "도자·조형",
+    "district": "금정구 장전동 (디오티미술관)",
+    "updatedAt": "2025",
+    "statement": "무동력 벤틸레이터, PVC 파이프, 타포린 등 산업 오브제를 조형 언어로 전환해 눈에 보이지 않는 바람과 타인과의 관계를 입체 설치로 시각화한다.",
+    "bio": "김정은 작가는 눈에 보이지 않지만 사물을 움직이는 바람의 성질을 뜻대로 조절할 수 없는 타인과의 관계에 비유하며 입체·설치 작업을 전개하는 부산 청년 작가다. 부산문화재단 지원으로 디오티미술관에서 열린 개인전 《바람연구소 (Wind Lab)》(2023)에서 무동력 벤틸레이터와 PVC 파이프, 스틸 그레이팅 등을 결합한 위트 있는 조형 작업들을 발표했다.\n\n[최근 주요 이력]\n2023 개인전 《바람연구소 Wind Lab》 (디오티미술관, 부산 금정구)\n2023 부산문화재단 부산문화예술지원사업 선정 작가\n부산 지역 청년 입체·설치 기획전 다수 참여",
+    "instagram": "@kim_se_ro",
+    "instagramUrl": "https://www.instagram.com/kim_se_ro/",
+    "portfolioUrl": "https://neolook.com/archives/20231211f",
+    "sourceLabel": "부산 신진·청년작가 아카이브 (디오티미술관)",
+    "portraitUrl": "https://neolook.com/archives/2023121101f.jpg",
+    "featuredWorkUrl": "https://neolook.com/archives/2023121101f.jpg",
+    "artworks": [
+      {
+        "id": "nl-20231211f-w1",
+        "title": "포석",
+        "year": "2023",
+        "medium": "무동력 벤틸레이터, PVC파이프, 페인트 (190×130×80cm)",
+        "imageUrl": "https://neolook.com/archives/2023121101f.jpg",
+        "highResUrl": "https://neolook.com/archives/2023121101f.jpg"
+      },
+      {
+        "id": "nl-20231211f-w2",
+        "title": "냉온탕",
+        "year": "2023",
+        "medium": "무동력 벤틸레이터, PVC파이프, 스틸그레이팅 (100×80×70cm)",
+        "imageUrl": "https://neolook.com/archives/2023121106f.jpg",
+        "highResUrl": "https://neolook.com/archives/2023121106f.jpg"
+      },
+      {
+        "id": "nl-20231211f-w3",
+        "title": "대화의 과정",
+        "year": "2023",
+        "medium": "타포린 플렉시블, 화분, 흙 (75×100×30cm)",
+        "imageUrl": "https://neolook.com/archives/2023121107f.jpg",
+        "highResUrl": "https://neolook.com/archives/2023121107f.jpg"
+      }
+    ],
+    "indexNo": "ARTIST 22"
+  },
+  {
+    "id": "neolook-20231104e",
+    "name": "이선경",
+    "nameEn": "LEE SUN KYUNG",
+    "discipline": "프린트·드로잉",
+    "district": "수영구 민락동 (미광화랑)",
+    "updatedAt": "2025",
+    "statement": "종이 위에 세밀한 콘테 드로잉과 아크릴 채색으로 자신과 타인의 상처를 들여다보고 치유해 가는 심리적 서사를 섬세하게 풀어낸다.",
+    "bio": "이선경 작가는 종이에 콘테와 아크릴 채색을 사용하여 인간이 겪는 역경의 순간 곁에 머무는 미미하고도 따뜻한 존재들을 세밀한 필치로 그려낸다. 부산 광안리 미광화랑 개인전 《신과 함께》(2023)에서 나비와 인물, 그림자가 어우러진 420cm 대작 콘테 드로잉을 비롯해 깊이 있는 인물 연작을 선보였다.\n\n[최근 주요 이력]\n2023 개인전 《신과 함께》 (미광화랑, 부산 수영구)\n2021 개인전 《이선경 개인전》 (부산)\n부산 회화·드로잉 기획전 및 아트페어 다수 참여",
+    "instagram": "mkart.net",
+    "instagramUrl": "https://neolook.com/archives/20231104e",
+    "portfolioUrl": "https://neolook.com/archives/20231104e",
+    "sourceLabel": "부산 신진·청년작가 아카이브 (미광화랑)",
+    "portraitUrl": "https://neolook.com/archives/2023110402e.jpg",
+    "featuredWorkUrl": "https://neolook.com/archives/2023110402e.jpg",
+    "artworks": [
+      {
+        "id": "nl-20231104e-w1",
+        "title": "신과함께 - 나비가 되어",
+        "year": "2023",
+        "medium": "종이에 콘테 (174×140cm)",
+        "imageUrl": "https://neolook.com/archives/2023110402e.jpg",
+        "highResUrl": "https://neolook.com/archives/2023110402e.jpg"
+      },
+      {
+        "id": "nl-20231104e-w2",
+        "title": "Angel",
+        "year": "2023",
+        "medium": "종이에 콘테 (76×56cm)",
+        "imageUrl": "https://neolook.com/archives/2023110403e.jpg",
+        "highResUrl": "https://neolook.com/archives/2023110403e.jpg"
+      },
+      {
+        "id": "nl-20231104e-w3",
+        "title": "그림자",
+        "year": "2023",
+        "medium": "종이에 콘테 (76×56cm)",
+        "imageUrl": "https://neolook.com/archives/2023110404e.jpg",
+        "highResUrl": "https://neolook.com/archives/2023110404e.jpg"
+      }
+    ],
+    "indexNo": "ARTIST 23"
+  },
+  {
+    "id": "neolook-20231028e",
+    "name": "이주연",
+    "nameEn": "LEE JU YEON",
+    "discipline": "프린트·드로잉",
+    "district": "금정구 회동동 (예술지구 P)",
+    "updatedAt": "2025",
+    "statement": "도시를 거니는 산책자(Flâneur)의 시선으로 채집한 부산의 낯선 풍경 파편들을 재조립해 매끈한 디지털 페인팅과 드로잉으로 구현한다.",
+    "bio": "이주연 작가는 주변 환경을 산책하며 사진과 메모로 기록한 공간의 파편들을 직관적으로 콜라주·재조립하여 낯설고도 백일몽 같은 실내외 풍경을 구축한다. 부산 예술지구 P 제10기 입주작가로 활동하며 개인전 《PAD(a Pedestrian has A Daydream)》(2023)에서 실제 공간과 디지털 이미지, 회화의 경계를 실험하는 아이패드 드로잉 연작을 발표했다.\n\n[최근 주요 이력]\n2023 개인전 《PAD(a Pedestrian has A Daydream)》 (예술지구 P, 부산)\n2023 예술지구 P 제10기 레지던시 입주작가 선정 (부산 금정구)\n2022 개인전 《이주연 개인전》 (네오룩 아카이브 수록)",
+    "instagram": "@juyeon_artwork",
+    "instagramUrl": "https://www.instagram.com/juyeon_artwork/",
+    "portfolioUrl": "https://leejuyeon.com/",
+    "sourceLabel": "부산 신진·청년작가 아카이브 (예술지구 P)",
+    "portraitUrl": "https://neolook.com/archives/2023102801e.jpg",
+    "featuredWorkUrl": "https://neolook.com/archives/2023102801e.jpg",
+    "artworks": [
+      {
+        "id": "nl-20231028e-w1",
+        "title": "PAD_04",
+        "year": "2023",
+        "medium": "아이패드 디지털 드로잉 (25.4×20.3cm)",
+        "imageUrl": "https://neolook.com/archives/2023102801e.jpg",
+        "highResUrl": "https://neolook.com/archives/2023102801e.jpg"
+      },
+      {
+        "id": "nl-20231028e-w2",
+        "title": "PAD_05",
+        "year": "2023",
+        "medium": "아이패드 디지털 드로잉 (25.4×20.3cm)",
+        "imageUrl": "https://neolook.com/archives/2023102802e.jpg",
+        "highResUrl": "https://neolook.com/archives/2023102802e.jpg"
+      },
+      {
+        "id": "nl-20231028e-w3",
+        "title": "PAD_10",
+        "year": "2023",
+        "medium": "아이패드 디지털 드로잉 (25.4×20.3cm)",
+        "imageUrl": "https://neolook.com/archives/2023102803e.jpg",
+        "highResUrl": "https://neolook.com/archives/2023102803e.jpg"
+      }
+    ],
+    "indexNo": "ARTIST 24"
+  },
+  {
+    "id": "neolook-20230927a",
+    "name": "박주현",
+    "nameEn": "PARK JU HYUN",
+    "discipline": "도자·조형",
+    "district": "해운대구 우동 (부산프랑스문화원)",
+    "updatedAt": "2025",
+    "statement": "목수의 손때가 묻은 망치 머릿쇠와 느티나무·은행나무를 결합하여 도구와 인간이 하나가 되는 해학적이고 시적인 목조·오브제 조각을 선보인다.",
+    "bio": "박주현 작가는 노동의 흔적이 깃든 망치 머릿쇠와 나무를 의인화하여 오늘을 살아가는 현대인의 위태롭고도 따뜻한 초상을 조각한다. 부산프랑스문화원 ART SPACE 개인전 《우연한 조우 (An Encounter)》(2023)에서 전통 목조각과 인체감지센서·저속모터를 결합한 키네틱 사운드 조각을 함께 선보이며 주목받았다.\n\n[최근 주요 이력]\n2023 개인전 《우연한 조우 An Encounter》 (부산프랑스문화원 ART SPACE, 부산)\n2020 개인전 《박주현 조각전》 (네오룩 아카이브 수록)\n부산 조각·입체 기획전 다수 참여",
+    "instagram": "parkjuhyun.art",
+    "instagramUrl": "https://blog.naver.com/paz1893",
+    "portfolioUrl": "https://blog.naver.com/paz1893",
+    "sourceLabel": "부산 신진·청년작가 아카이브 (부산프랑스문화원)",
+    "portraitUrl": "https://neolook.com/archives/2023092702a.jpg",
+    "featuredWorkUrl": "https://neolook.com/archives/2023092702a.jpg",
+    "artworks": [
+      {
+        "id": "nl-20230927a-w1",
+        "title": "하늘에는 날개 수집가가 있나?",
+        "year": "2023",
+        "medium": "망치머리쇠, 나무 (42×10×10cm)",
+        "imageUrl": "https://neolook.com/archives/2023092702a.jpg",
+        "highResUrl": "https://neolook.com/archives/2023092702a.jpg"
+      },
+      {
+        "id": "nl-20230927a-w2",
+        "title": "도시의 바람은 어디서 오는가?",
+        "year": "2023",
+        "medium": "느티나무, 망치머리쇠 (50×15×15cm)",
+        "imageUrl": "https://neolook.com/archives/2023092703a.jpg",
+        "highResUrl": "https://neolook.com/archives/2023092703a.jpg"
+      },
+      {
+        "id": "nl-20230927a-w3",
+        "title": "생각하는 장 씨",
+        "year": "2023",
+        "medium": "느티나무, 망치머리쇠 (40×15×15cm)",
+        "imageUrl": "https://neolook.com/archives/2023092704a.jpg",
+        "highResUrl": "https://neolook.com/archives/2023092704a.jpg"
+      }
+    ],
+    "indexNo": "ARTIST 25"
+  },
+  {
+    "id": "neolook-20230823e",
+    "name": "서유정",
+    "nameEn": "SEO U JEONG",
+    "discipline": "회화·미술",
+    "district": "수영구 민락동 (미광화랑)",
+    "updatedAt": "2025",
+    "statement": "현실 이면에 숨겨진 서사와 이미지 파편들을 상호교잡하는 몽타주 회화와 피그먼트 프린트를 통해 시적인 의미 교란과 새로운 가상의 시공간을 창출한다.",
+    "bio": "서유정 작가는 표면에 드러나지 않는 현실의 이면을 이질적인 이미지들의 결합과 대칭·변형으로 재구성하는 몽타주 회화를 전개한다. 부산문화재단 지원으로 미광화랑에서 열린 개인전 《이면필요충분-조건》(2023)에서 강렬한 색채 대비의 아크릴 회화와 〈unzoo project〉 아카이벌 피그먼트 프린트 연작을 발표했다.\n\n[최근 주요 이력]\n2023 개인전 《이면필요충분-조건》 (미광화랑, 부산 수영구)\n2023 부산문화재단 부산문화예술지원사업 선정\n2022 개인전 《서유정 개인전》 (네오룩 아카이브 수록)",
+    "instagram": "seoujeong.art",
+    "instagramUrl": "https://neolook.com/archives/20230823e",
+    "portfolioUrl": "https://neolook.com/archives/20230823e",
+    "sourceLabel": "부산 신진·청년작가 아카이브 (미광화랑)",
+    "portraitUrl": "https://neolook.com/archives/2023082301e.jpg",
+    "featuredWorkUrl": "https://neolook.com/archives/2023082301e.jpg",
+    "artworks": [
+      {
+        "id": "nl-20230823e-w1",
+        "title": "생살처럼 접근하는 떠들썩한 평온함",
+        "year": "2023",
+        "medium": "캔버스에 아크릴채색 (170×224cm)",
+        "imageUrl": "https://neolook.com/archives/2023082301e.jpg",
+        "highResUrl": "https://neolook.com/archives/2023082301e.jpg"
+      },
+      {
+        "id": "nl-20230823e-w2",
+        "title": "모든 진실은 서로 닮는다",
+        "year": "2023",
+        "medium": "캔버스에 아크릴채색 (80.3×130.3cm)",
+        "imageUrl": "https://neolook.com/archives/2023082302e.jpg",
+        "highResUrl": "https://neolook.com/archives/2023082302e.jpg"
+      },
+      {
+        "id": "nl-20230823e-w3",
+        "title": "잠시 지나는 것이 되고 말 것인가",
+        "year": "2023",
+        "medium": "캔버스에 아크릴채색 (80.3×130.3cm)",
+        "imageUrl": "https://neolook.com/archives/2023082303e.jpg",
+        "highResUrl": "https://neolook.com/archives/2023082303e.jpg"
+      }
+    ],
+    "indexNo": "ARTIST 26"
+  },
+  {
+    "id": "neolook-20230706h",
+    "name": "김도플",
+    "nameEn": "DOPPEL KIM",
+    "discipline": "회화·미술",
+    "district": "수영구 민락동 (미광화랑)",
+    "updatedAt": "2025",
+    "statement": "애니메이션 파편과 서브컬처 도상, 강렬한 네온 색채를 그림자 없는 다중 레이어로 중첩시켜 동시대 디지털 세대의 과잉된 에너지와 감각을 회화로 폭발시킨다.",
+    "bio": "김도플(Doppel Kim) 작가는 서브컬처와 애니메이션, 디지털 문화의 도상들을 과감한 크로핑과 애너모픽(일그러진) 변형으로 캔버스 위에 충돌시키는 부산 기반 현대미술 작가다. 부산 미광화랑 개인전 《하드보일드 러브 (Hard-boiled Love)》(2023)에서 강렬한 색채 에너지가 응축된 아크릴 회화 연작을 선보였다.\n\n[최근 주요 이력]\n2023 개인전 《하드보일드 러브 Hard-boiled Love》 (미광화랑, 부산 수영구)\n2021 개인전 《거의 러브 스토리에 가까운》\n2018 개인전 《비디오 키즈의 생애》 / 2017 《Promiscuity of Images》",
+    "instagram": "@doppelkim",
+    "instagramUrl": "https://www.instagram.com/doppelkim/",
+    "portfolioUrl": "https://www.instagram.com/doppelkim/",
+    "sourceLabel": "부산 신진·청년작가 아카이브 (미광화랑)",
+    "portraitUrl": "https://neolook.com/archives/2023070602h.jpg",
+    "featuredWorkUrl": "https://neolook.com/archives/2023070602h.jpg",
+    "artworks": [
+      {
+        "id": "nl-20230706h-w1",
+        "title": "Promiscuity of images",
+        "year": "2017–2023",
+        "medium": "캔버스에 아크릴채색 (180×130cm)",
+        "imageUrl": "https://neolook.com/archives/2023070602h.jpg",
+        "highResUrl": "https://neolook.com/archives/2023070602h.jpg"
+      },
+      {
+        "id": "nl-20230706h-w2",
+        "title": "Untitled (a fold of Love) I",
+        "year": "2023",
+        "medium": "캔버스에 아크릴채색 (53×45.5cm)",
+        "imageUrl": "https://neolook.com/archives/2023070605h.jpg",
+        "highResUrl": "https://neolook.com/archives/2023070605h.jpg"
+      },
+      {
+        "id": "nl-20230706h-w3",
+        "title": "Untitled (a fold of Love) II",
+        "year": "2023",
+        "medium": "캔버스에 아크릴채색 (53×45.5cm)",
+        "imageUrl": "https://neolook.com/archives/2023070606h.jpg",
+        "highResUrl": "https://neolook.com/archives/2023070606h.jpg"
+      }
+    ],
+    "indexNo": "ARTIST 27"
+  },
+  {
+    "id": "neolook-20230720b",
+    "name": "캐리리",
+    "nameEn": "KERRI LEE",
+    "discipline": "회화·미술",
+    "district": "해운대구 달맞이길 (서정아트 부산)",
+    "updatedAt": "2025",
+    "statement": "바다의 물결과 바람의 온도·습도 등 신체가 감지하는 촉각적 순간을 청색의 유동하는 마티에르와 즉흥적인 검은 획으로 풀어낸다.",
+    "bio": "캐리리(Kerri Lee, b.1987) 작가는 신체가 바람과 파도를 마주할 때 깨어나는 촉각적 감각을 깊고 청량한 블루의 번짐과 자유로운 검은 필획으로 표현하는 추상 회화 작가다. 서정아트 부산 개인전 《Wave on Wave》(2023)에서 계획과 우연이 교차하는 파도의 잔상을 통해 관람객에게 감각적 일체감을 선사했다.\n\n[최근 주요 이력]\n2023 개인전 《Wave on Wave》 (서정아트 부산, 해운대구)\n2020 개인전 《캐리리 개인전》 (네오룩 아카이브 수록)\n부산 및 서울 청년 추상회화 기획전 다수 참여",
+    "instagram": "@kerrilee_studio",
+    "instagramUrl": "https://www.instagram.com/kerrilee_studio/",
+    "portfolioUrl": "https://www.instagram.com/kerrilee_studio/",
+    "sourceLabel": "부산 신진·청년작가 아카이브 (서정아트 부산)",
+    "portraitUrl": "https://neolook.com/archives/2023072001b.jpg",
+    "featuredWorkUrl": "https://neolook.com/archives/2023072001b.jpg",
+    "artworks": [
+      {
+        "id": "nl-20230720b-w1",
+        "title": "Into the Waves No.1",
+        "year": "2023",
+        "medium": "캔버스에 혼합재료 (162.2×97cm)",
+        "imageUrl": "https://neolook.com/archives/2023072001b.jpg",
+        "highResUrl": "https://neolook.com/archives/2023072001b.jpg"
+      },
+      {
+        "id": "nl-20230720b-w2",
+        "title": "Floating Blue",
+        "year": "2023",
+        "medium": "캔버스에 혼합재료 (130.3×89.4cm)",
+        "imageUrl": "https://neolook.com/archives/2023072002b.jpg",
+        "highResUrl": "https://neolook.com/archives/2023072002b.jpg"
+      },
+      {
+        "id": "nl-20230720b-w3",
+        "title": "Swimming with Dolphins No.2",
+        "year": "2023",
+        "medium": "캔버스에 혼합재료 (91×91cm)",
+        "imageUrl": "https://neolook.com/archives/2023072005b.jpg",
+        "highResUrl": "https://neolook.com/archives/2023072005b.jpg"
+      }
+    ],
+    "indexNo": "ARTIST 28"
+  },
+  {
+    "id": "neolook-20230118b",
+    "name": "최재혁",
+    "nameEn": "CHOI JAE HYUG",
+    "discipline": "회화·미술",
+    "district": "동구 초량동 (아스티갤러리 부산)",
+    "updatedAt": "2025",
+    "statement": "골동품과 현대의 오브제, 모란·산호 등 기복적 상징물을 한 화면에 정교한 유채 정물화로 배치하여 오늘을 살아가는 세속적 삶과 소망을 긍정한다.",
+    "bio": "최재혁 작가는 옛 기물(골동품)과 현대의 일상 사물들을 책가도처럼 구획된 화면 안에 치밀한 유채로 재현하며, 보편적인 인간의 소망과 오늘의 삶을 긍정하는 〈Still life〉 연작을 이어오고 있다. 부산역 인근 아스티갤러리 부산 개인전 《세속화 예찬》(2023)을 비롯해 탄탄한 구상 회화 작업으로 활발히 활동 중이다.\n\n[최근 주요 이력]\n2023 개인전 《세속화 예찬 Glorification of secularization》 (아스티갤러리 부산, 동구)\n2021 개인전 《최재혁 개인전》 (네오룩 아카이브 수록)\n부산 및 전국 구상회화 기획전·아트페어 다수 참여",
+    "instagram": "@choi_jaehyug",
+    "instagramUrl": "https://www.instagram.com/choi_jaehyug/",
+    "portfolioUrl": "https://www.instagram.com/choi_jaehyug/",
+    "sourceLabel": "부산 신진·청년작가 아카이브 (아스티갤러리 부산)",
+    "portraitUrl": "https://neolook.com/archives/2023011801b.jpg",
+    "featuredWorkUrl": "https://neolook.com/archives/2023011801b.jpg",
+    "artworks": [
+      {
+        "id": "nl-20230118b-w1",
+        "title": "Still life #87 (문,학,문)",
+        "year": "2021",
+        "medium": "캔버스에 유채 (112.1×193.9cm)",
+        "imageUrl": "https://neolook.com/archives/2023011801b.jpg",
+        "highResUrl": "https://neolook.com/archives/2023011801b.jpg"
+      },
+      {
+        "id": "nl-20230118b-w2",
+        "title": "Still life #90 (PORSCHE 901)",
+        "year": "2021",
+        "medium": "캔버스에 유채 (65×162.2cm)",
+        "imageUrl": "https://neolook.com/archives/2023011802b.jpg",
+        "highResUrl": "https://neolook.com/archives/2023011802b.jpg"
+      },
+      {
+        "id": "nl-20230118b-w3",
+        "title": "Still life #79",
+        "year": "2020",
+        "medium": "캔버스에 유채 (80.3×65.1cm)",
+        "imageUrl": "https://neolook.com/archives/2023011803b.jpg",
+        "highResUrl": "https://neolook.com/archives/2023011803b.jpg"
+      }
+    ],
+    "indexNo": "ARTIST 29"
+  },
+  {
+    "id": "neolook-20220324d",
+    "name": "김민정",
+    "nameEn": "KIM MIN JUNG",
+    "discipline": "회화·미술",
+    "district": "금정구 장전동 (디오티미술관)",
+    "updatedAt": "2025",
+    "statement": "재개발 공사 현장의 가림막(Blind)으로 인해 칼로 자른 듯 나뉜 도시의 일상 풍경과 그 앞을 살아가는 현대인의 모습을 담담한 유채 회화로 포착한다.",
+    "bio": "김민정 작가는 끊임없는 아파트 재개발과 공사장 가림막이 삶의 흔적을 지워버리는 도시의 단면을 〈Blind〉 연작으로 기록하는 부산 회화 작가다. 금정구 디오티미술관 개인전 《BLIND》(2022)에서 거대한 개발 현장의 가림막 앞을 무심히 걸어가는 사람들의 실루엣을 통해 도시 속 실존의 감각을 서정적인 유채 화면으로 담아냈다.\n\n[최근 주요 이력]\n2022 개인전 《BLIND》 (디오티미술관, 부산 금정구)\n2019 개인전 《김민정 개인전》 (네오룩 아카이브 수록)\n부산 지역 청년 회화 기획전 및 단체전 다수 참여",
+    "instagram": "blog.naver.com/beemin",
+    "instagramUrl": "https://blog.naver.com/beemin",
+    "portfolioUrl": "https://blog.naver.com/beemin",
+    "sourceLabel": "부산 신진·청년작가 아카이브 (디오티미술관)",
+    "portraitUrl": "https://neolook.com/archives/2022032401d.jpg",
+    "featuredWorkUrl": "https://neolook.com/archives/2022032401d.jpg",
+    "artworks": [
+      {
+        "id": "nl-20220324d-w1",
+        "title": "Blind I",
+        "year": "2020",
+        "medium": "캔버스에 유채 (193.9×390.9cm)",
+        "imageUrl": "https://neolook.com/archives/2022032401d.jpg",
+        "highResUrl": "https://neolook.com/archives/2022032401d.jpg"
+      },
+      {
+        "id": "nl-20220324d-w2",
+        "title": "Blind II",
+        "year": "2020",
+        "medium": "캔버스에 유채 (130.3×193.9cm)",
+        "imageUrl": "https://neolook.com/archives/2022032402d.jpg",
+        "highResUrl": "https://neolook.com/archives/2022032402d.jpg"
+      },
+      {
+        "id": "nl-20220324d-w3",
+        "title": "Blind III",
+        "year": "2019",
+        "medium": "캔버스에 유채 (130.3×193.9cm)",
+        "imageUrl": "https://neolook.com/archives/2022032403d.jpg",
+        "highResUrl": "https://neolook.com/archives/2022032403d.jpg"
+      }
+    ],
+    "indexNo": "ARTIST 30"
   }
 ];

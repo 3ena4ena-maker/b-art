@@ -1810,6 +1810,1132 @@ section {
   text-decoration: underline;
 }
 
+/* =========================================================
+   AUDIENCE SEPARATION ([대중용] vs [작가용]) & STANDARDIZED ARTIST ARCHIVE
+   ========================================================= */
+.artist-register-trigger {
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--marine);
+  background: var(--marine-tint);
+  color: var(--marine);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.artist-register-trigger:hover {
+  background: var(--marine);
+  color: #ffffff;
+}
+
+.section-bar-cta-primary {
+  padding: 0 24px;
+  border-left: 1px solid var(--line-strong);
+  background: var(--marine);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.15s ease;
+  white-space: nowrap;
+}
+
+.section-bar-cta-primary:hover {
+  background: var(--ink);
+}
+
+.submission-confirm-banner {
+  padding: 12px 28px;
+  background: #047857;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.audience-split-bar {
+  padding: 12px 28px;
+  border-bottom: 1px solid var(--line-strong);
+  background: var(--bg-alt);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 20px;
+}
+
+.audience-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.audience-role-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 9px;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.audience-role-tag.is-public {
+  background: var(--ink);
+  color: #ffffff;
+}
+
+.audience-role-tag.is-artist {
+  background: var(--marine);
+  color: #ffffff;
+}
+
+.artist-direct-submit-pill {
+  padding: 7px 14px;
+  background: var(--bg-pure);
+  border: 1.5px solid var(--marine);
+  color: var(--marine);
+  font-size: 12px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.15s ease;
+}
+
+.artist-direct-submit-pill:hover {
+  background: var(--marine);
+  color: #ffffff;
+}
+
+/* Audience Mode Switcher ([대중용] vs [작가용] Tabs) */
+.audience-mode-switcher {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-bottom: 1px solid var(--line-strong);
+  background: var(--bg-pure);
+}
+
+.audience-mode-btn {
+  padding: 14px 20px;
+  border-right: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-muted);
+  text-align: left;
+  transition: all 0.15s ease;
+}
+
+.audience-mode-btn:last-child {
+  border-right: none;
+}
+
+.audience-mode-btn:hover {
+  background: var(--bg-alt);
+  color: var(--ink);
+}
+
+.audience-mode-btn.active {
+  background: var(--ink);
+  color: #ffffff;
+}
+
+.mode-badge {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 2px 7px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.mode-badge.is-neutral {
+  background: #E2E8F0;
+  color: #1E293B;
+}
+
+.mode-badge.is-public {
+  background: #DBEAFE;
+  color: #1D4ED8;
+}
+
+.mode-badge.is-artist {
+  background: #D1FAE5;
+  color: #047857;
+}
+
+.sub-section-banner {
+  padding: 12px 28px;
+  border-bottom: 1px solid var(--line-strong);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 12.5px;
+  color: var(--ink-muted);
+}
+
+.sub-section-banner.is-public {
+  background: #F0F6FF;
+}
+
+.sub-section-banner.is-artist {
+  background: #ECFDF5;
+  border-top: 1px solid var(--line-strong);
+}
+
+.sub-section-banner strong {
+  font-size: 14px;
+  color: var(--ink);
+  margin-left: 10px;
+}
+
+.sub-banner-tag {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 2px 8px;
+  background: var(--marine);
+  color: #ffffff;
+}
+
+.sub-banner-tag.is-artist {
+  background: #047857;
+}
+
+/* Standardized Artist Card Enhancements */
+.artist-header-left {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.artist-district-pill {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  background: var(--bg-pure);
+  border: 1px solid var(--line-strong);
+  color: var(--ink);
+}
+
+.artist-collab-badge {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 3px 8px;
+  white-space: nowrap;
+}
+
+.artist-collab-badge.is-souvenir {
+  background: var(--marine);
+  color: #ffffff;
+}
+
+.artist-collab-badge.is-open {
+  background: #D1FAE5;
+  color: #065F46;
+  border: 1px solid #6EE7B7;
+}
+
+.triptych-main {
+  position: relative;
+}
+
+.triptych-work-count-chip {
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+  padding: 2px 7px;
+  background: rgba(17, 17, 17, 0.78);
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-size: 10px;
+}
+
+.artist-work-spec-strip {
+  padding: 10px 18px;
+  background: var(--bg-alt);
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.work-spec-strip-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.work-spec-strip-title {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.work-avail-badge {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 2px 7px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.work-avail-badge.is-available {
+  background: #E6EFFF;
+  color: var(--marine);
+  border: 1px solid #99BAFF;
+}
+
+.work-avail-badge.is-inquiry {
+  background: #F1F5F9;
+  color: #334155;
+  border: 1px solid #CBD5E1;
+}
+
+.work-spec-strip-sub {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.artist-note-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.artist-field-kicker {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--marine);
+  letter-spacing: 0.04em;
+}
+
+.artist-exhibition-preview {
+  margin-top: 4px;
+  padding: 9px 11px;
+  background: var(--bg-pure);
+  border: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.exhibition-preview-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11.5px;
+  color: var(--ink-muted);
+  min-width: 0;
+}
+
+.exhibition-type-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 5px;
+  background: var(--ink);
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.exhibition-type-tag.is-group {
+  background: #475569;
+}
+
+.exhibition-preview-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.artist-footer-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.artist-mini-link {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink);
+  text-decoration: underline;
+}
+
+.artist-mini-link:hover {
+  color: var(--marine);
+}
+
+.artist-detail-trigger {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--marine);
+}
+
+/* Gallery Public vs Artist Row Sub-bars */
+.gallery-row-sub-public,
+.gallery-row-sub-artist {
+  padding: 0 22px 12px 96px;
+  font-size: 12px;
+  color: var(--ink-muted);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.gallery-row-sub-public strong,
+.gallery-row-sub-artist strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.row-mode-chip {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 6px;
+}
+
+.row-mode-chip.is-public {
+  background: #DBEAFE;
+  color: #1D4ED8;
+}
+
+.row-mode-chip.is-artist {
+  background: #D1FAE5;
+  color: #047857;
+}
+
+/* Drawer Exhibition & Artwork Spec Cards */
+.drawer-edit-artist-btn {
+  padding: 5px 10px;
+  border: 1px solid var(--marine);
+  background: var(--marine-tint);
+  color: var(--marine);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.drawer-edit-artist-btn:hover {
+  background: var(--marine);
+  color: #ffffff;
+}
+
+.drawer-section-kicker {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--marine);
+  letter-spacing: 0.04em;
+}
+
+.drawer-exhibition-grid {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.drawer-exhibition-box {
+  padding: 14px;
+  border: 1px solid var(--line-strong);
+  background: var(--bg-pure);
+}
+
+.drawer-exhibition-list {
+  margin: 8px 0 0;
+  padding-left: 16px;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--ink);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.drawer-artwork-spec-card {
+  border: 1px solid var(--line-strong);
+  background: var(--bg-pure);
+  overflow: hidden;
+}
+
+.drawer-artwork-meta-body {
+  padding: 18px 20px;
+  border-top: 1px solid var(--line);
+}
+
+.drawer-artwork-header-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.drawer-work-num {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--marine);
+  font-weight: 700;
+}
+
+.drawer-work-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+.drawer-work-year {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--ink-muted);
+}
+
+.work-inquire-inline-btn {
+  padding: 8px 14px;
+  background: var(--ink);
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.work-inquire-inline-btn:hover {
+  background: var(--marine);
+}
+
+/* Artist Registration / Update Modal Form */
+.artist-submit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.artist-form-intro h3 {
+  font-size: 21px;
+  font-weight: 700;
+}
+
+.artist-form-intro p {
+  margin-top: 6px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--ink-muted);
+}
+
+.artist-form-mode-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid var(--line-strong);
+}
+
+.form-mode-tab {
+  padding: 11px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  background: var(--bg-pure);
+  color: var(--ink-muted);
+  border-right: 1px solid var(--line-strong);
+}
+
+.form-mode-tab:last-child {
+  border-right: none;
+}
+
+.form-mode-tab.active {
+  background: var(--ink);
+  color: #ffffff;
+}
+
+.form-section-title {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--marine);
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+}
+
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.form-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: var(--ink);
+}
+
+.form-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--line-strong);
+  background: var(--bg-pure);
+  font-size: 13px;
+}
+
+.collab-choice-btn {
+  padding: 12px 14px;
+  border: 1px solid var(--line-strong);
+  background: var(--bg-pure);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.collab-choice-btn strong {
+  font-size: 13.5px;
+}
+
+.collab-choice-btn span {
+  font-size: 11.5px;
+  color: var(--ink-muted);
+  line-height: 1.45;
+}
+
+.collab-choice-btn.active.is-souvenir {
+  border: 2px solid var(--marine);
+  background: var(--marine-tint);
+}
+
+.collab-choice-btn.active.is-open {
+  border: 2px solid #059669;
+  background: #ECFDF5;
+}
+
+.add-work-slot-btn {
+  padding: 6px 12px;
+  border: 1px solid var(--marine);
+  background: var(--marine-tint);
+  color: var(--marine);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.work-form-card {
+  padding: 16px;
+  border: 1px solid var(--line-strong);
+  background: var(--bg-alt);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.work-form-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--marine);
+}
+
+.artist-submit-primary-btn {
+  width: 100%;
+  padding: 15px 24px;
+  background: var(--marine);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  transition: background 0.15s ease;
+}
+
+.artist-submit-primary-btn:hover {
+  background: var(--ink);
+}
+
+/* =========================================================
+   PASSEPARTOUT MINIMAL GALLERY GRID & ARTIST DETAIL VIEW
+   ========================================================= */
+.passepartout-artists-section {
+  background: #F3F3EF;
+}
+
+.passepartout-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  padding: 16px;
+  background: #F3F3EF;
+}
+
+.passepartout-card {
+  background: #FFFFFF;
+  aspect-ratio: 1 / 1.04;
+  padding: 20px 24px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.passepartout-card:hover {
+  box-shadow: 0 10px 28px rgba(17, 17, 17, 0.06);
+}
+
+.passepartout-card.is-detail-work {
+  cursor: default;
+}
+
+.passepartout-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.passepartout-card-top.is-title-only {
+  min-height: 20px;
+}
+
+.passepartout-work-only-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.passepartout-artist-name {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.passepartout-artist-name strong {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.passepartout-artist-name span {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--ink-muted);
+  letter-spacing: 0.02em;
+}
+
+.passepartout-artist-genre {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-muted);
+  white-space: nowrap;
+}
+
+.passepartout-frame {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 34px 18px;
+  min-height: 0;
+}
+
+.passepartout-frame img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.passepartout-card:hover .passepartout-frame img {
+  transform: scale(1.025);
+}
+
+/* Minimal Artist Detail Page Drawer */
+.artist-minimal-page-drawer {
+  width: min(1080px, 96vw) !important;
+  background: #F3F3EF !important;
+}
+
+.artist-back-btn {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.artist-back-btn:hover {
+  color: var(--marine);
+}
+
+.artist-minimal-header {
+  padding: 32px 36px;
+  background: #FFFFFF;
+  border-bottom: 1px solid var(--line);
+}
+
+.artist-minimal-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.artist-minimal-meta-badges {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.artist-minimal-genre {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--marine);
+  font-weight: 700;
+  padding: 2px 8px;
+  background: var(--marine-tint);
+  border: 1px solid #B8D0FF;
+}
+
+.artist-minimal-district-chip {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink);
+  font-weight: 600;
+  padding: 2px 8px;
+  background: var(--bg-alt);
+  border: 1px solid var(--line-strong);
+}
+
+.artist-minimal-collab-chip {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #065F46;
+  font-weight: 600;
+  padding: 2px 8px;
+  background: #ECFDF5;
+  border: 1px solid #A7F3D0;
+}
+
+.artist-minimal-name {
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.artist-minimal-name span {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 22px;
+  color: var(--ink-muted);
+}
+
+.artist-naver-job-title {
+  margin-top: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.artist-naver-keywords {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.artist-naver-keyword-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-muted);
+  background: #F8FAFC;
+  border: 1px solid var(--line);
+  padding: 3px 8px;
+}
+
+.artist-naver-spec-box {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border: 1px solid var(--line-strong);
+  background: #FAFAF8;
+}
+
+.artist-naver-spec-item {
+  padding: 12px 16px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: 86px 1fr;
+  gap: 10px;
+  align-items: baseline;
+  font-size: 12.5px;
+  line-height: 1.55;
+}
+
+.artist-naver-spec-item:nth-child(2n) {
+  border-right: none;
+}
+
+.artist-naver-spec-item:nth-last-child(-n + 2) {
+  border-bottom: none;
+}
+
+.artist-naver-spec-key {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ink-muted);
+}
+
+.artist-naver-spec-val {
+  color: var(--ink);
+  font-weight: 500;
+  word-break: keep-all;
+}
+
+.artist-minimal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.artist-btn-outline {
+  padding: 11px 18px;
+  border: 1px solid var(--line-strong);
+  background: #FFFFFF;
+  color: var(--ink);
+  font-size: 12.5px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.15s ease;
+}
+
+.artist-btn-outline:hover {
+  border-color: var(--ink);
+  background: var(--bg-alt);
+}
+
+.artist-btn-collab {
+  padding: 11px 20px;
+  background: var(--ink);
+  color: #FFFFFF;
+  font-size: 12.5px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.15s ease;
+}
+
+.artist-btn-collab:hover {
+  background: var(--marine);
+}
+
+.artist-minimal-bio-grid {
+  padding-top: 24px;
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 32px;
+}
+
+.artist-minimal-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--marine);
+  margin-bottom: 10px;
+  letter-spacing: 0.04em;
+}
+
+.artist-minimal-intro {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--ink);
+  word-break: keep-all;
+}
+
+.artist-naver-timeline-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.artist-naver-timeline-row {
+  display: grid;
+  grid-template-columns: 42px 84px 1fr;
+  gap: 8px;
+  align-items: baseline;
+  font-size: 13px;
+  line-height: 1.55;
+  padding-bottom: 7px;
+  border-bottom: 1px dashed var(--line);
+}
+
+.artist-naver-timeline-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.timeline-year {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.timeline-badge {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 1px 6px;
+  text-align: center;
+  border-radius: 2px;
+  background: #F1F5F9;
+  color: #334155;
+}
+
+.timeline-badge.is-개인전 {
+  background: #E6EFFF;
+  color: var(--marine);
+}
+
+.timeline-badge.is-단체전 {
+  background: #F1F5F9;
+  color: #334155;
+}
+
+.timeline-badge.is-수상-선정 {
+  background: #FEF3C7;
+  color: #B45309;
+}
+
+.timeline-badge.is-레지던시-경력 {
+  background: #ECFDF5;
+  color: #047857;
+}
+
+.timeline-badge.is-소장-출판 {
+  background: #F3E8FF;
+  color: #6D28D9;
+}
+
+.timeline-content {
+  color: var(--ink);
+  word-break: keep-all;
+}
+
+.artist-minimal-career-list {
+  margin: 0;
+  padding-left: 16px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--ink);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.artist-minimal-works-section {
+  padding: 16px;
+  background: #F3F3EF;
+}
+
+.artist-minimal-works-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+@media (max-width: 1024px) {
+  .passepartout-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .artist-naver-spec-box,
+  .artist-minimal-bio-grid,
+  .artist-minimal-works-grid {
+    grid-template-columns: 1fr;
+  }
+  .artist-naver-spec-item {
+    border-right: none;
+    border-bottom: 1px solid var(--line) !important;
+  }
+  .artist-naver-spec-item:last-child {
+    border-bottom: none !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .passepartout-grid {
+    grid-template-columns: 1fr;
+    padding: 10px;
+    gap: 10px;
+  }
+  .artist-minimal-header {
+    padding: 20px 16px;
+  }
+  .artist-minimal-works-section {
+    padding: 10px;
+  }
+}
+
 /* Footer */
 .editorial-footer {
   display: grid;
@@ -2483,6 +3609,33 @@ section {
   }
   .souvenir-card:last-child {
     border-bottom: none;
+  }
+  .audience-mode-switcher {
+    grid-template-columns: 1fr;
+  }
+  .audience-mode-btn {
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+    padding: 10px 14px;
+    font-size: 12px;
+  }
+  .audience-mode-btn:last-child {
+    border-bottom: none;
+  }
+  .audience-split-bar {
+    padding: 10px 14px;
+  }
+  .section-bar-cta-primary {
+    padding: 10px 12px;
+    font-size: 11px;
+  }
+  .drawer-exhibition-grid,
+  .form-grid-2 {
+    grid-template-columns: 1fr;
+  }
+  .gallery-row-sub-public,
+  .gallery-row-sub-artist {
+    padding: 0 14px 12px 14px;
   }
   .gallery-zone-badge {
     font-size: 10.5px;
