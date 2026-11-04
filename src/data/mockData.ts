@@ -78,13 +78,27 @@ export interface LocalMaker {
 export interface CollabPost {
   id: string;
   date: string;
-  type: '공동발주' | '굿즈협업' | '마켓부스';
+  type: '전시·지원공고' | '콜라보모집' | '공동발주' | '굿즈협업' | '마켓부스';
   title: string;
   author: string;
   district: string;
   targetCount: string;
   deadline: string;
   description: string;
+}
+
+export interface CollabSouvenirEdition {
+  id: string;
+  code: string;
+  status: 'COLLAB OPEN' | 'PROTOTYPE' | 'B2B / VIP ORDER';
+  title: string;
+  subtitle: string;
+  districtTheme: string;
+  mediumSpec: string;
+  partnerMaker: string;
+  moqAndPrice: string;
+  royaltyNote: string;
+  imageUrl: string;
 }
 
 export type BusanDistrict =
@@ -126,6 +140,16 @@ export interface GallerySpace {
     ceilingHeight: string;
     wallType: string;
     submissionInfo: string;
+  };
+  rentalAndSales: {
+    rentalAvailable: boolean;
+    rentalFeeSummary: string;
+    pyeong: string;
+    artworkSales: boolean;
+    commissionRate: string;
+    artShopAvailable: boolean;
+    artShopNote: string;
+    includedFacilities: string;
   };
   mapPos: { x: number; y: number };
 }
@@ -659,7 +683,95 @@ export const LOCAL_MAKERS: LocalMaker[] = [
   }
 ];
 
+export const COLLAB_SOUVENIRS: CollabSouvenirEdition[] = [
+  {
+    id: 'souv-01',
+    code: 'EDITION—01',
+    status: 'COLLAB OPEN',
+    title: '영도 해안 윤슬 리소그라프 3도 별색 엽서북 (10매입)',
+    subtitle: '영도·원도심 활동 회화/드로잉 작가 아트워크 × 중앙동 리소 스튜디오 공동 제작',
+    districtTheme: '영도구 봉래동 · 흰여울길',
+    mediumSpec: '문켄 폴라 러프 240g · 코발트블루/아쿠아/블랙 3도 분판 · 노출 실제본',
+    partnerMaker: '스튜디오 소소나 × 케이제이프린트',
+    moqAndPrice: '에디션 100권 기준 · 소비자가 18,000원 (도매·납품 가능)',
+    royaltyNote: '작가 아트워크 로열티 정산 + 초판 에디션 작가 증정분 제공',
+    imageUrl: 'https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=900&q=80',
+  },
+  {
+    id: 'souv-02',
+    code: 'EDITION—02',
+    status: 'PROTOTYPE',
+    title: '해운대·광안리 수평선 20T 고투명 아크릴 문진 오브제',
+    subtitle: '부산 바다 추상회화·사진 원작을 배면 차등 백판 UV 인쇄로 구현한 데스크 오브제',
+    districtTheme: '해운대구 달맞이 · 수영구 광안리',
+    mediumSpec: '국산 캐스팅 아크릴 80×80×20mm · 4면 다이아몬드 경면 폴리싱 · 싸바리 케이스',
+    partnerMaker: '위드메이킹 × 현진패키지',
+    moqAndPrice: '소량 30개 단위 제작 · 소비자가 38,000원',
+    royaltyNote: '호텔·뮤지엄샵 VIP 기프트 B2B 납품 및 콜라보 작가 수시 매칭',
+    imageUrl: 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=900&q=80',
+  },
+  {
+    id: 'souv-03',
+    code: 'EDITION—03',
+    status: 'COLLAB OPEN',
+    title: '부산 산복도로 & 항구 워싱 광목 20수 패브릭 포스터',
+    subtitle: '대형 원화의 색감을 반응성 염료 날염과 수작업 실크스크린으로 옮긴 공간 패브릭',
+    districtTheme: '중구 중앙동 · 동구 초량 산복도로',
+    mediumSpec: '바이오 워싱 광목 20수 (50×70cm) · 사방 해리 마감 · 넘버링 직조 라벨',
+    partnerMaker: '수엘비(SuLB) × 예림컴퓨터자수',
+    moqAndPrice: '에디션 50장 기준 · 소비자가 32,000원',
+    royaltyNote: '로컬 스테이·카페 공간 스타일링 납품 및 작가 콜라보 상시 접수',
+    imageUrl: 'https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?auto=format&fit=crop&w=900&q=80',
+  },
+  {
+    id: 'souv-04',
+    code: 'EDITION—04',
+    status: 'B2B / VIP ORDER',
+    title: '기장 해송 & 파도 색소지 세라믹 인센스 홀더 세트',
+    subtitle: '부산 도예·조형 작가와 협업한 마블링 색소지 세라믹 트레이 & 패키지 에디션',
+    districtTheme: '기장군 일광 · 수영구 망미동',
+    mediumSpec: '코발트·샌드 조색 색소지 1250℃ 환원 소성 + 무목형 맞춤 단상자',
+    partnerMaker: '믹스쳐 세라믹 × 더상자 부산공장',
+    moqAndPrice: '소량 30세트 기준 · 소비자가 45,000원',
+    royaltyNote: '기관·기업 부산 상징 기념품 커스텀 발주 가능 (floreur 기획 대행)',
+    imageUrl: 'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=900&q=80',
+  },
+];
+
 export const INITIAL_COLLAB_POSTS: CollabPost[] = [
+  {
+    id: 'col-00',
+    date: '2026.11.04',
+    type: '콜라보모집',
+    title: '[floreur 공식] 2026 겨울 부산 관광기념품 아트 에디션(엽서북·아크릴 문진) 참여 작가 모집',
+    author: 'floreur (PARANG 운영팀)',
+    district: '부산 전역',
+    targetCount: '회화·드로잉·사진·공예 작가 5인',
+    deadline: '11.25 마감',
+    description: '부산의 바다·원도심·산복도로를 모티프로 한 기존 작품 이미지를 활용해 소량 아트 관광기념품 시제품을 함께 제작할 작가님을 찾습니다. 제작 공정 및 패키징은 floreur가 전담하며, 아트샵 입점 및 B2B 납품 시 작가 로열티를 정산합니다.'
+  },
+  {
+    id: 'col-open-01',
+    date: '2026.11.03',
+    type: '전시·지원공고',
+    title: '[공모] KT&G 상상마당 부산 디자인스퀘어 로컬 아티스트 굿즈·오브제 상시 입점 공모',
+    author: 'KT&G 상상마당 부산',
+    district: '부산진구 서면',
+    targetCount: '부산 거점 시각예술·공예 창작자',
+    deadline: '11.30 마감',
+    description: '서면 상상마당 부산 2층 디자인스퀘어 아트샵에 입점할 부산 작가들의 아트 포스터, 엽서북, 도자, 아크릴 오브제 브랜드를 모집합니다. 위탁 판매 방식으로 운영됩니다.'
+  },
+  {
+    id: 'col-open-02',
+    date: '2026.11.01',
+    type: '전시·지원공고',
+    title: '[대관공모] 2027 상반기 청년아트스테이션 새물갤러리 청년작가 무료/우대 대관 공모',
+    author: '청년아트스테이션',
+    district: '북구 화명동',
+    targetCount: '부산 활동 만 39세 이하 청년작가 개인/단체',
+    deadline: '11.22 마감',
+    description: '만 39세 이하 부산 청년 시각예술가를 대상으로 전시장(36평) 대관료 감면 및 리플렛 제작비 일부를 지원하는 정기 대관 공모입니다.'
+  },
   {
     id: 'col-01',
     date: '2026.11.02',
@@ -721,6 +833,16 @@ export const GALLERIES: GallerySpace[] = [
       wallType: '미술관급 무반사 백색 도장 가벽 및 자연광 루버',
       submissionInfo: '학예실 기획 초대전 중심 운영 (포트폴리오 이메일 접수)'
     },
+    rentalAndSales: {
+      rentalAvailable: false,
+      rentalFeeSummary: '기획 초대전 전용 (일반 대관 미운영)',
+      pyeong: '약 100평 (330㎡ · 1~2F)',
+      artworkSales: true,
+      commissionRate: '전속·초대 계약 기준 (화랑 표준 50%)',
+      artShopAvailable: true,
+      artShopNote: '전시 연계 도록 · 에디션 판화 · 아트 오브제 아카이브 룸 판매',
+      includedFacilities: '미술관급 항온항습 · 자연광 루버 · 전문 학예/설치팀'
+    },
     mapPos: { x: 80, y: 44 }
   },
   {
@@ -747,6 +869,16 @@ export const GALLERIES: GallerySpace[] = [
       ceilingHeight: '3.6m',
       wallType: '무반사 다크그레이·화이트 가변 파티션 및 정밀 색온도 스팟 조명',
       submissionInfo: '연례 사진가 지원 프로그램 및 기획 공모 운영'
+    },
+    rentalAndSales: {
+      rentalAvailable: false,
+      rentalFeeSummary: '기획·공모 선정작가 무료 전시 지원',
+      pyeong: '약 80평 (264㎡ · 2~3F)',
+      artworkSales: false,
+      commissionRate: '비영리 미술관 (작품 직접 판매 미진행)',
+      artShopAvailable: true,
+      artShopNote: '1층 아트북 라이브러리 내 사진집 · 도록 · 포스터 에디션 입점',
+      includedFacilities: '정밀 색온도 조명 · 무반사 프레임 · 아카이브 라이브러리'
     },
     mapPos: { x: 73, y: 42 }
   },
@@ -775,6 +907,16 @@ export const GALLERIES: GallerySpace[] = [
       wallType: '백색 수성도장 가벽 + 해변 조망 테라스 라운지',
       submissionInfo: '신진·청년작가 포트폴리오 상시 검토'
     },
+    rentalAndSales: {
+      rentalAvailable: true,
+      rentalFeeSummary: '기획초대 병행 · 대관 시 1주 약 150~200만 원 (별도 협의)',
+      pyeong: '약 44평 (145㎡ · 평당 약 3.5만 원)',
+      artworkSales: true,
+      commissionRate: '작품 판매 수수료 40~50% (에디션·소품전 활발)',
+      artShopAvailable: true,
+      artShopNote: '판화 에디션 · 아트 오브제 · 작가 굿즈 상설 쇼룸 위탁 판매 가능',
+      includedFacilities: '레일 조명 · 와이어 걸이 · VIP 컬렉터 프리뷰 발송 지원'
+    },
     mapPos: { x: 83, y: 46 }
   },
   {
@@ -801,6 +943,16 @@ export const GALLERIES: GallerySpace[] = [
       ceilingHeight: '4.8m (노출 트러스 구조)',
       wallType: '고하중 전시 가벽 및 대형 설치물 반입 슬라이딩 도어',
       submissionInfo: '전속 및 초대전 중심 기획 운영'
+    },
+    rentalAndSales: {
+      rentalAvailable: false,
+      rentalFeeSummary: '국제갤러리 기획전 전용 (F1963 석천홀은 별도 기업/기관 대관)',
+      pyeong: '약 90평 (300㎡)',
+      artworkSales: true,
+      commissionRate: '전속·기획 초대전 기준',
+      artShopAvailable: true,
+      artShopNote: 'F1963 내 아트북 스토어 및 전시 아카이브 코너 연계 입점 가능',
+      includedFacilities: '대형 슬라이딩 반입구 · 고하중 트러스 · 미술관급 조명'
     },
     mapPos: { x: 64, y: 45 }
   },
@@ -829,6 +981,16 @@ export const GALLERIES: GallerySpace[] = [
       wallType: '가변형 합판 백색 가벽 및 프로젝션 암막 설비 지원',
       submissionInfo: '비영리 실험예술·평론·기획전 공모 상시 운영'
     },
+    rentalAndSales: {
+      rentalAvailable: true,
+      rentalFeeSummary: '1주 70~110만 원 (공모 선정 시 공간 무료 지원)',
+      pyeong: '약 27~40평 (평당 약 2.6만 원)',
+      artworkSales: true,
+      commissionRate: '미광화랑 판매 수수료 40% / 공간 힘 비영리 자율 판매',
+      artShopAvailable: true,
+      artShopNote: '독립출판 아트북 · 실험 음반 · 아티스트 엽서팩 전시 기간 위탁 판매',
+      includedFacilities: '빔프로젝터 · 암막 커튼 · 음향 장비 · 가변 가벽'
+    },
     mapPos: { x: 62, y: 54 }
   },
   {
@@ -855,6 +1017,16 @@ export const GALLERIES: GallerySpace[] = [
       ceilingHeight: '3.5m',
       wallType: '합판 백색 도장 가벽 및 공예 오브제용 모듈형 좌대 12조',
       submissionInfo: '원도심 활동 예술가 및 창작공간 연계 대관 우선 지원'
+    },
+    rentalAndSales: {
+      rentalAvailable: true,
+      rentalFeeSummary: '원도심 예술가 우대 대관 · 1주 약 35~50만 원 (실비 수준)',
+      pyeong: '약 34평 (112㎡ · 평당 약 1.2만 원)',
+      artworkSales: true,
+      commissionRate: '별도 화랑 수수료 없음 (작가 직접 판매 100%)',
+      artShopAvailable: true,
+      artShopNote: '원도심 인쇄골목 연계 아트북 · 엽서 · 공예 굿즈 팝업 매대 무료 운영',
+      includedFacilities: '공예 좌대 12조 · 레일 조명 · 오픈스튜디오 투어 연계 홍보'
     },
     mapPos: { x: 34, y: 74 }
   },
@@ -883,6 +1055,16 @@ export const GALLERIES: GallerySpace[] = [
       wallType: '노출 벽돌·콘크리트 및 대형 가변 가벽',
       submissionInfo: '대형 설치·조각·팝업 쇼케이스 기획 대관 수시 접수'
     },
+    rentalAndSales: {
+      rentalAvailable: true,
+      rentalFeeSummary: '1주 140~180만 원 (기획 공동주최 시 대관료 감면/수익쉐어 가능)',
+      pyeong: '약 72평 (240㎡ · 평당 약 2.2만 원)',
+      artworkSales: true,
+      commissionRate: '작품 판매 수수료 30% (기획 협업 시 협의)',
+      artShopAvailable: true,
+      artShopNote: '1층 카페 & 아트라운지 내 부산 관광기념품 · 작가 굿즈 팝업존 상시 입점 가능 (수수료 25%)',
+      includedFacilities: '층고 6.2m 박공 트러스 · 대형 반입문 · 오디오 시스템 · 카페 라운지'
+    },
     mapPos: { x: 38, y: 82 }
   },
   {
@@ -909,6 +1091,16 @@ export const GALLERIES: GallerySpace[] = [
       ceilingHeight: '4.2m',
       wallType: '미술관급 무몰딩 백색 가벽 및 천장 그리드 조명 레일',
       submissionInfo: '연례 부산 신진작가 공모(ARTISTART) 및 디자인스퀘어 굿즈 입점 공모'
+    },
+    rentalAndSales: {
+      rentalAvailable: true,
+      rentalFeeSummary: '부분 대관 및 대학/단체 기획 대관 가능 (공모 선정 시 전액 지원)',
+      pyeong: '약 124평 (410㎡ · 4~5F 분할 대관 가능)',
+      artworkSales: true,
+      commissionRate: '작품 판매 수수료 20~30% (청년작가 우대)',
+      artShopAvailable: true,
+      artShopNote: '2층 디자인스퀘어 대형 아트샵 상시 입점 공모 운영 (부산 작가 굿즈 최다 입점처)',
+      includedFacilities: '그리드 조명 레일 · 대형 화물 엘리베이터 · 전시장 지킴이 · 홍보 배너'
     },
     mapPos: { x: 46, y: 50 }
   },
@@ -937,6 +1129,16 @@ export const GALLERIES: GallerySpace[] = [
       wallType: '백색 도장 가벽 및 작품 걸이 레일 시스템',
       submissionInfo: '상·하반기 정기 대관 신청 및 기획 초대전 운영'
     },
+    rentalAndSales: {
+      rentalAvailable: true,
+      rentalFeeSummary: '1주 85만 원 (부산문화회관 전시실은 일일/주간 공립 조례 단가 적용)',
+      pyeong: '약 50평 (165㎡ · 평당 약 1.7만 원)',
+      artworkSales: true,
+      commissionRate: '사설 갤러리 판매 수수료 30% / 문화회관 수수료 없음',
+      artShopAvailable: false,
+      artShopNote: '전시 기간 중 작가 개인 도록 · 엽서 현장 비치 판매 가능',
+      includedFacilities: '작품 걸이 레일 · 와이어 · 스팟 조명 · 오프닝 리셉션 테이블'
+    },
     mapPos: { x: 56, y: 66 }
   },
   {
@@ -963,6 +1165,16 @@ export const GALLERIES: GallerySpace[] = [
       ceilingHeight: '3.2m',
       wallType: '화이트 큐브 가벽 + 이동형 전시 파티션 8조',
       submissionInfo: '부산 거점 청년 작가(만 39세 이하) 무료/우대 대관 공모'
+    },
+    rentalAndSales: {
+      rentalAvailable: true,
+      rentalFeeSummary: '청년작가 공모 무료 ~ 일반 대관 1주 40만 원',
+      pyeong: '약 36평 (118㎡ · 평당 약 1.1만 원)',
+      artworkSales: true,
+      commissionRate: '판매 수수료 없음 (작가 수익 100%)',
+      artShopAvailable: true,
+      artShopNote: '주말 청년 아트마켓 부스 및 전시장 내 굿즈 쇼케이스 상시 운영',
+      includedFacilities: '이동형 파티션 8조 · 좌대 · 리플렛 디자인/인쇄 일부 지원'
     },
     mapPos: { x: 34, y: 24 }
   },
@@ -991,6 +1203,16 @@ export const GALLERIES: GallerySpace[] = [
       wallType: '백색 석고보드 도장 및 집중 스팟 조명',
       submissionInfo: '개인전·단체전 수시 대관 문의 가능'
     },
+    rentalAndSales: {
+      rentalAvailable: true,
+      rentalFeeSummary: '1주 75만 원 (단체전 4~6인 대관 시 인당 약 15만 원)',
+      pyeong: '약 40평 (132㎡ · 평당 약 1.9만 원)',
+      artworkSales: true,
+      commissionRate: '작품 판매 수수료 30%',
+      artShopAvailable: true,
+      artShopNote: '도자 다기 · 소품 · 한국화 아트상품 상설 코너 위탁 입점 가능',
+      includedFacilities: '도자 전시용 유리 쇼케이스 · 좌대 15조 · 레일 조명'
+    },
     mapPos: { x: 52, y: 34 }
   },
   {
@@ -1017,6 +1239,16 @@ export const GALLERIES: GallerySpace[] = [
       ceilingHeight: '4.5m – 7.2m',
       wallType: '노출 콘크리트 및 고하중 크레인·미디어 영사 설비',
       submissionInfo: '부산문화재단 홍티아트센터 국내외 입주작가 매년 정기 공모'
+    },
+    rentalAndSales: {
+      rentalAvailable: false,
+      rentalFeeSummary: '공립 미술관 · 레지던시 공모 선정작가 전액 무료 지원',
+      pyeong: '대형 설치홀 (층고 7.2m)',
+      artworkSales: false,
+      commissionRate: '공립 기관 (현장 매매 미진행, 컬렉터 문의 시 작가 연결)',
+      artShopAvailable: true,
+      artShopNote: '미술관 뮤지엄샵 내 전시 연계 아트상품 · 도록 입점 운영',
+      includedFacilities: '천장 호이스트 크레인 · 대형 프로젝터 · 입주작가 개인 스튜디오'
     },
     mapPos: { x: 18, y: 74 }
   },
@@ -1045,6 +1277,16 @@ export const GALLERIES: GallerySpace[] = [
       wallType: '미술관급 백색 가벽 및 슬라이딩 이동 파티션',
       submissionInfo: '금정문화회관 금샘미술관 정기·수시 대관 공고 접수'
     },
+    rentalAndSales: {
+      rentalAvailable: true,
+      rentalFeeSummary: '1전시실 기준 1주 약 45~65만 원 (구립 조례 기준 합리적 단가)',
+      pyeong: '약 35~108평 (1·2·3관 선택 대관 가능)',
+      artworkSales: true,
+      commissionRate: '금샘미술관 수수료 없음 / 킴스아트필드 30%',
+      artShopAvailable: false,
+      artShopNote: '전시 기간 중 리셉션 데스크 도록 · 엽서 판매 가능',
+      includedFacilities: '슬라이딩 가벽 · 미술관급 조명 · 넓은 무료 주차장'
+    },
     mapPos: { x: 58, y: 18 }
   },
   {
@@ -1071,6 +1313,16 @@ export const GALLERIES: GallerySpace[] = [
       ceilingHeight: '2.6m',
       wallType: '빈티지 시멘트·목구조 노출 및 백색 전시 벽면',
       submissionInfo: '장소특정적(Site-specific) 설치·사진 프로젝트 수시 협의'
+    },
+    rentalAndSales: {
+      rentalAvailable: true,
+      rentalFeeSummary: '1주 30~45만 원 (산복도로·원도심 주제 프로젝트 우대)',
+      pyeong: '약 20평 (66㎡ · 평당 약 1.8만 원)',
+      artworkSales: true,
+      commissionRate: '판매 수수료 20% (소규모 원화·사진 프린트 판매 활발)',
+      artShopAvailable: true,
+      artShopNote: '산복도로·초량 테마 엽서북 · 사진집 · 마그넷 상설 위탁 판매 가능',
+      includedFacilities: '빈티지 목구조 전시 공간 · 소형 프로젝터 · 다도/오프닝 룸'
     },
     mapPos: { x: 40, y: 66 }
   },
@@ -1099,6 +1351,16 @@ export const GALLERIES: GallerySpace[] = [
       wallType: '화이트 가벽 및 컨테이너 스틸 모듈 전시장',
       submissionInfo: '사상문화원 및 부산문화재단 연계 대관 공모'
     },
+    rentalAndSales: {
+      rentalAvailable: true,
+      rentalFeeSummary: '공모 선정 무료 대관 / 수시 대관 1주 약 40만 원',
+      pyeong: '약 45평 (148㎡ · 평당 약 0.9만 원)',
+      artworkSales: true,
+      commissionRate: '판매 수수료 없음 (직접 거래)',
+      artShopAvailable: false,
+      artShopNote: '전시 연계 팝업 마켓 부스 운영 가능',
+      includedFacilities: '컨테이너 모듈 전시장 · 야외 광장 데크 · 음향/조명 설비'
+    },
     mapPos: { x: 26, y: 50 }
   },
   {
@@ -1125,6 +1387,16 @@ export const GALLERIES: GallerySpace[] = [
       ceilingHeight: '4.2m',
       wallType: '백색 미장 마감 및 자연 채광 통창',
       submissionInfo: '회화·도예·공예 분야 기획 초대전 및 팝업 대관 협의'
+    },
+    rentalAndSales: {
+      rentalAvailable: true,
+      rentalFeeSummary: '1주 100~130만 원 (도자·공예 판매전 시 수수료 기반 대관료 인하 가능)',
+      pyeong: '약 45평 (150㎡ · 평당 약 2.4만 원)',
+      artworkSales: true,
+      commissionRate: '작품 판매 수수료 35~40% (동부산 컬렉터 구매율 높음)',
+      artShopAvailable: true,
+      artShopNote: '오션뷰 쇼룸 내 도자 굿즈 · 유리 오브제 · 아트 포스터 상시 위탁 입점 가능 (수수료 30%)',
+      includedFacilities: '오션뷰 테라스 · 공예 진열대 · VIP 티룸 · 전용 주차장'
     },
     mapPos: { x: 90, y: 20 }
   }

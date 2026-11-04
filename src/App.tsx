@@ -3,6 +3,7 @@ import {
   ARTISTS,
   GOODS_MANUALS,
   LOCAL_MAKERS,
+  COLLAB_SOUVENIRS,
   INITIAL_COLLAB_POSTS,
   GALLERIES,
   Artist,
@@ -12,7 +13,172 @@ import {
 } from './data/mockData';
 import { ArrowUpRight, Plus, X, Search } from 'lucide-react';
 
-type ActiveSection = 'overview' | 'artists' | 'goods' | 'galleries';
+type ActiveSection = 'overview' | 'artists' | 'galleries' | 'collab';
+type GallerySpecFilter = 'all' | 'rental' | 'sales' | 'artshop' | 'zero_commission';
+
+// 15-row dot-matrix bitmaps for Busan's 10,452 active artists (Korea Artist Welfare Foundation / Busan Cultural Foundation)
+const BUSAN_ARTIST_DIGIT_MATRIX: Array<{
+  char: string;
+  cols: number;
+  rows: string[];
+  avatars: Array<{ row: number; col: number; artistIdx: number; ringColor: string }>;
+}> = [
+  {
+    char: '1',
+    cols: 9,
+    rows: [
+      '000111000',
+      '001111000',
+      '011111000',
+      '111111000',
+      '000111000',
+      '000111000',
+      '000111000',
+      '000111000',
+      '000111000',
+      '000111000',
+      '011111110',
+      '011111110',
+      '011111110',
+      '000000000',
+      '000000000',
+    ],
+    avatars: [
+      { row: 2, col: 4, artistIdx: 0, ringColor: '#1E3A8A' },
+      { row: 7, col: 4, artistIdx: 1, ringColor: '#854D0E' },
+      { row: 11, col: 6, artistIdx: 2, ringColor: '#0F766E' },
+    ],
+  },
+  {
+    char: '0',
+    cols: 11,
+    rows: [
+      '00111111100',
+      '01111111110',
+      '11110001111',
+      '11100000111',
+      '11100000111',
+      '11100000111',
+      '11100000111',
+      '11100000111',
+      '11100000111',
+      '11100000111',
+      '11110001111',
+      '01111111110',
+      '00111111100',
+      '00000000000',
+      '00000000000',
+    ],
+    avatars: [
+      { row: 2, col: 2, artistIdx: 3, ringColor: '#0369A1' },
+      { row: 6, col: 9, artistIdx: 4, ringColor: '#9D174D' },
+      { row: 10, col: 8, artistIdx: 5, ringColor: '#14532D' },
+    ],
+  },
+  {
+    char: ',',
+    cols: 4,
+    rows: [
+      '0000',
+      '0000',
+      '0000',
+      '0000',
+      '0000',
+      '0000',
+      '0000',
+      '0000',
+      '0000',
+      '0000',
+      '1111',
+      '1111',
+      '0111',
+      '0110',
+      '1100',
+    ],
+    avatars: [],
+  },
+  {
+    char: '4',
+    cols: 11,
+    rows: [
+      '00000011110',
+      '00000111110',
+      '00001111110',
+      '00011101110',
+      '00111001110',
+      '01110001110',
+      '11100001110',
+      '11111111111',
+      '11111111111',
+      '11111111111',
+      '00000001110',
+      '00000001110',
+      '00000001110',
+      '00000000000',
+      '00000000000',
+    ],
+    avatars: [
+      { row: 2, col: 5, artistIdx: 6, ringColor: '#86198F' },
+      { row: 8, col: 2, artistIdx: 7, ringColor: '#713F12' },
+      { row: 11, col: 8, artistIdx: 8, ringColor: '#115E59' },
+    ],
+  },
+  {
+    char: '5',
+    cols: 11,
+    rows: [
+      '11111111110',
+      '11111111110',
+      '11100000000',
+      '11100000000',
+      '11111111100',
+      '11111111110',
+      '00000000111',
+      '00000000111',
+      '00000000111',
+      '11100000111',
+      '11110001111',
+      '01111111110',
+      '00111111100',
+      '00000000000',
+      '00000000000',
+    ],
+    avatars: [
+      { row: 1, col: 7, artistIdx: 9, ringColor: '#92400E' },
+      { row: 5, col: 2, artistIdx: 10, ringColor: '#1E293B' },
+      { row: 8, col: 9, artistIdx: 11, ringColor: '#1D4ED8' },
+    ],
+  },
+  {
+    char: '2',
+    cols: 11,
+    rows: [
+      '00111111100',
+      '01111111110',
+      '11110001111',
+      '11100000111',
+      '00000001111',
+      '00000011110',
+      '00001111000',
+      '00011110000',
+      '00111100000',
+      '01111000000',
+      '11111111111',
+      '11111111111',
+      '11111111111',
+      '00000000000',
+      '00000000000',
+    ],
+    avatars: [
+      { row: 1, col: 7, artistIdx: 12, ringColor: '#78350F' },
+      { row: 2, col: 7, artistIdx: 13, ringColor: '#065F46' },
+      { row: 10, col: 2, artistIdx: 14, ringColor: '#0F766E' },
+      { row: 11, col: 5, artistIdx: 15, ringColor: '#713F12' },
+    ],
+  },
+];
+
+const MATRIX_GLYPHS = ['+', '×', '•', '○', '✳', '▫'];
 
 export function App() {
   const [activeSection, setActiveSection] = useState<ActiveSection>('overview');
@@ -32,6 +198,7 @@ export function App() {
 
   // Gallery filters & selection
   const [selectedZone, setSelectedZone] = useState<string>('전체');
+  const [gallerySpecFilter, setGallerySpecFilter] = useState<GallerySpecFilter>('all');
   const [activeGallery, setActiveGallery] = useState<GallerySpace | null>(null);
 
   // Saved / Archived items
@@ -42,8 +209,16 @@ export function App() {
   const [collabPosts, setCollabPosts] = useState<CollabPost[]>(INITIAL_COLLAB_POSTS);
   const [collabFilter, setCollabFilter] = useState<string>('전체');
   const [isWriteModalOpen, setIsWriteModalOpen] = useState<boolean>(false);
-  const [newPost, setNewPost] = useState({
-    type: '공동발주' as '공동발주' | '굿즈협업' | '마켓부스',
+  const [newPost, setNewPost] = useState<{
+    type: CollabPost['type'];
+    title: string;
+    author: string;
+    district: string;
+    targetCount: string;
+    deadline: string;
+    description: string;
+  }>({
+    type: '공동발주',
     title: '',
     author: '',
     district: '중구 중앙동',
@@ -104,12 +279,7 @@ export function App() {
     });
   }, [selectedDiscipline, artistQuery]);
 
-  const displayedArtists = useMemo(() => {
-    if (activeSection === 'overview' && selectedDiscipline === '전체' && !artistQuery) {
-      return filteredArtists.slice(0, 12);
-    }
-    return filteredArtists;
-  }, [activeSection, filteredArtists, selectedDiscipline, artistQuery]);
+  const displayedArtists = filteredArtists;
 
   // Selected Goods Manual
   const currentManual: GoodsManual = useMemo(() => {
@@ -206,9 +376,20 @@ export function App() {
       mapColor: '#60A5FA',
     };
   const filteredGalleries = useMemo(() => {
-    if (selectedZone === '전체') return GALLERIES;
-    return GALLERIES.filter((g) => g.zone === selectedZone);
-  }, [selectedZone]);
+    return GALLERIES.filter((g) => {
+      const matchZone = selectedZone === '전체' || g.zone === selectedZone;
+      const matchSpec =
+        gallerySpecFilter === 'all' ||
+        (gallerySpecFilter === 'rental' && g.rentalAndSales.rentalAvailable) ||
+        (gallerySpecFilter === 'sales' && g.rentalAndSales.artworkSales) ||
+        (gallerySpecFilter === 'artshop' && g.rentalAndSales.artShopAvailable) ||
+        (gallerySpecFilter === 'zero_commission' &&
+          (g.rentalAndSales.commissionRate.includes('없음') ||
+            g.rentalAndSales.commissionRate.includes('비영리') ||
+            g.rentalAndSales.commissionRate.includes('공립')));
+      return matchZone && matchSpec;
+    });
+  }, [selectedZone, gallerySpecFilter]);
 
   // Filtered Collab Posts
   const filteredCollabPosts = useMemo(() => {
@@ -267,29 +448,25 @@ export function App() {
             className={`nav-item ${activeSection === 'overview' ? 'active' : ''}`}
             onClick={() => setActiveSection('overview')}
           >
-            <span className="nav-item-num">00 / EDITION</span>
-            <span className="nav-item-label">통합 매거진 뷰</span>
+            <span className="nav-item-label">홈</span>
           </button>
           <button
             className={`nav-item ${activeSection === 'artists' ? 'active' : ''}`}
             onClick={() => setActiveSection('artists')}
           >
-            <span className="nav-item-num">01 / ARTISTS ({ARTISTS.length})</span>
             <span className="nav-item-label">부산 작가 · 작품</span>
-          </button>
-          <button
-            className={`nav-item ${activeSection === 'goods' ? 'active' : ''}`}
-            onClick={() => setActiveSection('goods')}
-          >
-            <span className="nav-item-num">02 / GOODS LAB</span>
-            <span className="nav-item-label">굿즈 제작 · 공정처</span>
           </button>
           <button
             className={`nav-item ${activeSection === 'galleries' ? 'active' : ''}`}
             onClick={() => setActiveSection('galleries')}
           >
-            <span className="nav-item-num">03 / GALLERIES</span>
             <span className="nav-item-label">부산 갤러리</span>
+          </button>
+          <button
+            className={`nav-item ${activeSection === 'collab' ? 'active' : ''}`}
+            onClick={() => setActiveSection('collab')}
+          >
+            <span className="nav-item-label">공고 · 협업</span>
           </button>
         </nav>
 
@@ -306,29 +483,83 @@ export function App() {
       </header>
 
       {/* =====================================================================
-          HERO + PAGEFLOWS-STYLE FLOWING ARTWORKS WALL (Overview)
+          HERO + DOT-MATRIX BUSAN ARTIST COUNTER + 3-ROW ARTWORK FLOWS WALL
          ===================================================================== */}
       {activeSection === 'overview' && (
         <section className="hero-flow-section">
-          <div className="hero-top-header">
-            <div>
-              <div className="cover-kicker">
-                <span className="cover-kicker-line" />
-                <span>BUSAN CONTEMPORARY ART & OBJECT INDEX</span>
-              </div>
-              <h1 className="cover-headline">
-                부산의 작업실과 인쇄골목, 해안의 전시장을 잇는{' '}
-                <span className="cover-headline-serif">Blue Wave</span> 아카이브.
+          <div className="hero-statement-showcase">
+            <div className="hero-statement-copy">
+              <h1 className="hero-dual-headline">
+                <span className="hero-dual-muted">숫자는 기록일 뿐입니다.</span>
+                <span className="hero-dual-strong">부산의 예술에는 이름이 있습니다.</span>
               </h1>
+              <p className="hero-dual-sub">
+                부산의 작업실과 인쇄골목, 해안의 전시장을 잇는{' '}
+                <span className="cover-headline-serif">Blue Wave</span> 아카이브 —
+                <br />
+                지금 부산에서 활동 중인 예술인과 대표작품을 기록합니다.
+              </p>
             </div>
 
-            <div className="hero-cta-group">
-              <button className="hero-btn-primary" onClick={() => setActiveSection('artists')}>
-                EXPLORE {ARTISTS.length} ARTISTS →
-              </button>
-              <button className="hero-btn-secondary" onClick={() => setActiveSection('goods')}>
-                GOODS MANUAL
-              </button>
+            {/* Giant Dot-Matrix Number (10,452) with Interactive Artist Avatars */}
+            <div className="dot-matrix-stage" aria-label="10,452 Busan Active Artists">
+              <div className="dot-matrix-digits">
+                {BUSAN_ARTIST_DIGIT_MATRIX.map((digit, dIdx) => (
+                  <div
+                    key={`${digit.char}-${dIdx}`}
+                    className={`dot-matrix-char ${digit.char === ',' ? 'is-comma' : ''}`}
+                    style={{
+                      gridTemplateColumns: `repeat(${digit.cols}, var(--dot-cell-size))`,
+                    }}
+                  >
+                    {digit.rows.map((rowStr, rIdx) =>
+                      rowStr.split('').map((bit, cIdx) => {
+                        if (bit === '0') {
+                          return (
+                            <span
+                              key={`${rIdx}-${cIdx}`}
+                              className="dot-cell is-empty"
+                            />
+                          );
+                        }
+                        const avatarMatch = digit.avatars.find(
+                          (a) => a.row === rIdx && a.col === cIdx
+                        );
+                        if (avatarMatch) {
+                          const artist =
+                            ARTISTS[avatarMatch.artistIdx % ARTISTS.length];
+                          return (
+                            <button
+                              key={`${rIdx}-${cIdx}`}
+                              type="button"
+                              className="dot-cell is-avatar"
+                              style={{ borderColor: avatarMatch.ringColor }}
+                              onClick={() => setActiveArtist(artist)}
+                              title={`${artist.name} (${artist.discipline})`}
+                            >
+                              <img
+                                src={artist.featuredWorkUrl}
+                                alt={artist.name}
+                                loading="lazy"
+                              />
+                              <span className="dot-avatar-tooltip">
+                                {artist.name} · {artist.discipline}
+                              </span>
+                            </button>
+                          );
+                        }
+                        const glyph =
+                          MATRIX_GLYPHS[(dIdx * 17 + rIdx * 7 + cIdx * 3) % MATRIX_GLYPHS.length];
+                        return (
+                          <span key={`${rIdx}-${cIdx}`} className="dot-cell is-on">
+                            {glyph}
+                          </span>
+                        );
+                      })
+                    )}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
@@ -388,28 +619,12 @@ export function App() {
       {/* =====================================================================
           SECTION 01: ARTISTS & ARTWORKS (3 REPRESENTATIVE WORKS PER ARTIST)
          ===================================================================== */}
-      {(activeSection === 'overview' || activeSection === 'artists') && (
+      {activeSection === 'artists' && (
         <section>
           <div className="section-bar">
-            <div className="section-bar-index">
-              <span>01</span>
-              <span>—</span>
-              <span>ARTISTS</span>
-            </div>
             <div className="section-bar-title">
               <h2>부산 활동 작가 · 대표작품 아카이브</h2>
-              <span>{filteredArtists.length} Active Busan Artists</span>
             </div>
-            {activeSection === 'overview' ? (
-              <button className="section-bar-action" onClick={() => setActiveSection('artists')}>
-                <span>전체 {ARTISTS.length}명 보기</span>
-                <ArrowUpRight size={14} />
-              </button>
-            ) : (
-              <div className="section-bar-action" style={{ pointerEvents: 'none' }}>
-                <span>{filteredArtists.length} ARTISTS</span>
-              </div>
-            )}
           </div>
 
           {/* Filter & Search Bar */}
@@ -511,62 +726,190 @@ export function App() {
               );
             })}
           </div>
-
-          {activeSection === 'overview' && filteredArtists.length > 12 && (
-            <div
-              style={{
-                padding: '20px 28px',
-                borderBottom: '1px solid var(--line-strong)',
-                display: 'flex',
-                justifyContent: 'center',
-                background: 'var(--bg-pure)',
-              }}
-            >
-              <button
-                onClick={() => setActiveSection('artists')}
-                style={{
-                  padding: '12px 28px',
-                  background: 'var(--ink)',
-                  color: '#ffffff',
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '12px',
-                  letterSpacing: '0.04em',
-                }}
-              >
-                VIEW ALL {filteredArtists.length} BUSAN ARTISTS →
-              </button>
-            </div>
-          )}
         </section>
       )}
 
       {/* =====================================================================
-          SECTION 02: GOODS PRODUCTION MANUAL & LOCAL MAKERS LAB
+          SECTION 03: COLLAB SOUVENIR SHOWCASE (1단) + LOCAL PRODUCTION MANUAL & MAKERS (2단)
          ===================================================================== */}
-      {(activeSection === 'overview' || activeSection === 'goods') && (
+      {activeSection === 'collab' && (
         <section>
+          {/* 01. OPEN CALLS & COLLABORATION BOARD */}
           <div className="section-bar">
-            <div className="section-bar-index">
-              <span>02</span>
-              <span>—</span>
-              <span>GOODS LAB</span>
-            </div>
             <div className="section-bar-title">
-              <h2>부산 굿즈 제작 매뉴얼 & 로컬 공정처</h2>
-              <span>Production Specs & Partners</span>
+              <h2>부산 미술 공고 · 작가 협업 라운지</h2>
             </div>
-            {activeSection === 'overview' ? (
-              <button className="section-bar-action" onClick={() => setActiveSection('goods')}>
-                <span>전체 보기</span>
-                <ArrowUpRight size={14} />
-              </button>
-            ) : (
-              <div className="section-bar-action" style={{ pointerEvents: 'none' }}>
-                <span>
-                  0{GOODS_MANUALS.length} GUIDES · {LOCAL_MAKERS.length} PARTNERS
-                </span>
-              </div>
-            )}
+          </div>
+
+          <div className="filter-strip">
+            <div className="filter-tabs">
+              {['전체', '전시·지원공고', '콜라보모집', '공동발주', '굿즈협업', '마켓부스'].map(
+                (tab) => (
+                  <button
+                    key={tab}
+                    className={`filter-tab ${collabFilter === tab ? 'active' : ''}`}
+                    onClick={() => setCollabFilter(tab)}
+                  >
+                    <span>{tab}</span>
+                  </button>
+                )
+              )}
+            </div>
+          </div>
+
+          <div className="makers-table-wrap">
+            <table className="editorial-table dispatch-table">
+              <thead>
+                <tr>
+                  <th style={{ width: '125px' }}>구분</th>
+                  <th>공고 · 협업 내용</th>
+                  <th style={{ width: '200px' }}>주최 · 작성자</th>
+                  <th style={{ width: '185px' }}>모집 대상 / 마감</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredCollabPosts.map((post) => (
+                  <tr key={post.id}>
+                    <td className="dispatch-cell-type">
+                      <span
+                        style={{
+                          display: 'inline-block',
+                          fontFamily: 'var(--font-mono)',
+                          fontSize: '11px',
+                          padding: '2px 7px',
+                          background:
+                            post.type === '콜라보모집' || post.type === '공동발주'
+                              ? 'var(--marine)'
+                              : post.type === '전시·지원공고'
+                              ? '#047857'
+                              : 'var(--ink)',
+                          color: '#ffffff',
+                        }}
+                      >
+                        {post.type}
+                      </span>
+                      <div
+                        style={{
+                          fontFamily: 'var(--font-mono)',
+                          fontSize: '11px',
+                          color: 'var(--ink-muted)',
+                          marginTop: '6px',
+                        }}
+                      >
+                        {post.date}
+                      </div>
+                    </td>
+                    <td className="dispatch-cell-body">
+                      <div style={{ fontWeight: 700, fontSize: '15px', marginBottom: '6px' }}>
+                        {post.title}
+                      </div>
+                      <div
+                        style={{ fontSize: '13px', color: 'var(--ink-muted)', lineHeight: 1.55 }}
+                      >
+                        {post.description}
+                      </div>
+                    </td>
+                    <td className="dispatch-cell-author">
+                      <div style={{ fontWeight: 600, fontSize: '13px' }}>{post.author}</div>
+                      <div
+                        style={{
+                          fontFamily: 'var(--font-mono)',
+                          fontSize: '11px',
+                          color: 'var(--ink-muted)',
+                          marginTop: '4px',
+                        }}
+                      >
+                        {post.district}
+                      </div>
+                    </td>
+                    <td
+                      className="dispatch-cell-meta"
+                      style={{ fontFamily: 'var(--font-mono)', fontSize: '12px' }}
+                    >
+                      <div>{post.targetCount}</div>
+                      <div style={{ color: 'var(--marine)', marginTop: '4px', fontWeight: 600 }}>
+                        {post.deadline}
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* 1단: [콜라보 기념품 쇼케이스/샵] (floreur × 부산 활동 작가 콜라보 에디션) */}
+          <div className="section-bar" style={{ borderTop: '1px solid var(--line-strong)' }}>
+            <div className="section-bar-title">
+              <h2>콜라보 기념품 쇼케이스 · 에디션 샵</h2>
+            </div>
+            <a
+              href="mailto:floreur88@gmail.com?subject=[PARANG] 부산 관광기념품 콜라보 · B2B 제작 문의"
+              className="section-bar-action"
+            >
+              <span>콜라보 · 납품 제안</span>
+              <ArrowUpRight size={14} />
+            </a>
+          </div>
+
+          <div className="souvenir-showcase-grid">
+            {COLLAB_SOUVENIRS.map((item) => (
+              <article key={item.id} className="souvenir-card">
+                <div className="souvenir-card-top">
+                  <span className="souvenir-code">{item.code}</span>
+                  <span
+                    className={`souvenir-status-badge ${
+                      item.status === 'COLLAB OPEN' ? 'is-open' : ''
+                    }`}
+                  >
+                    {item.status}
+                  </span>
+                </div>
+                <div className="souvenir-thumb">
+                  <img src={item.imageUrl} alt={item.title} loading="lazy" />
+                  <span className="souvenir-district-chip">{item.districtTheme}</span>
+                </div>
+                <div className="souvenir-body">
+                  <h3 className="souvenir-title">{item.title}</h3>
+                  <p className="souvenir-subtitle">{item.subtitle}</p>
+                  <div className="souvenir-spec-list">
+                    <div className="souvenir-spec-row">
+                      <span>제작 사양</span>
+                      <strong>{item.mediumSpec}</strong>
+                    </div>
+                    <div className="souvenir-spec-row">
+                      <span>부산 공정처</span>
+                      <strong>{item.partnerMaker}</strong>
+                    </div>
+                    <div className="souvenir-spec-row">
+                      <span>단가 · 규모</span>
+                      <strong>{item.moqAndPrice}</strong>
+                    </div>
+                    <div className="souvenir-spec-row">
+                      <span>수익 배분</span>
+                      <strong>{item.royaltyNote}</strong>
+                    </div>
+                  </div>
+                </div>
+                <div className="souvenir-footer">
+                  <a
+                    href={`mailto:floreur88@gmail.com?subject=${encodeURIComponent(
+                      `[PARANG 기념품 콜라보/발주 문의] ${item.title}`
+                    )}`}
+                    className="souvenir-inquiry-btn"
+                  >
+                    <span>작가 콜라보 참여 · B2B 발주 문의</span>
+                    <ArrowUpRight size={13} />
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          {/* 2단: [로컬 제작 매뉴얼 · 공정처] */}
+          <div className="section-bar">
+            <div className="section-bar-title">
+              <h2>로컬 제작 매뉴얼 · 부산 공정처 디렉토리</h2>
+            </div>
           </div>
 
           <div className="goods-editorial-layout">
@@ -597,17 +940,6 @@ export function App() {
 
               {/* Small-Batch Cost Estimator */}
               <div className="cost-estimator-box">
-                <div
-                  style={{
-                    fontFamily: 'var(--font-mono)',
-                    fontSize: '11px',
-                    color: 'var(--marine)',
-                    letterSpacing: '0.06em',
-                    marginBottom: '6px',
-                  }}
-                >
-                  COST ESTIMATOR
-                </div>
                 <div
                   style={{
                     fontSize: '16px',
@@ -810,7 +1142,7 @@ export function App() {
                         marginBottom: '10px',
                       }}
                     >
-                      SPECIFICATIONS
+                      세부 사양
                     </div>
                     <div className="spec-table-list">
                       {currentManual.specs.map((s) => (
@@ -832,7 +1164,7 @@ export function App() {
                         marginBottom: '10px',
                       }}
                     >
-                      PRE-PRESS CHECKLIST
+                      인쇄·발주 체크리스트
                     </div>
                     <div
                       style={{
@@ -876,9 +1208,6 @@ export function App() {
           <div className="makers-directory-toolbar">
             <div className="makers-toolbar-header">
               <strong>부산 로컬 인쇄소 · 소량 오브제 공정처 디렉토리</strong>
-              <span className="makers-vendor-count">
-                {LOCAL_MAKERS.length} VERIFIED VENDORS IN BUSAN
-              </span>
             </div>
 
             <div className="makers-toolbar-controls">
@@ -990,32 +1319,17 @@ export function App() {
       )}
 
       {/* =====================================================================
-          SECTION 03: BUSAN GALLERIES & EXHIBITION SPACES
+          SECTION 02: BUSAN GALLERIES & EXHIBITION SPACES (WITH RENTAL/SALES SPECS)
          ===================================================================== */}
-      {(activeSection === 'overview' || activeSection === 'galleries') && (
+      {activeSection === 'galleries' && (
         <section>
           <div className="section-bar">
-            <div className="section-bar-index">
-              <span>03</span>
-              <span>—</span>
-              <span>GALLERIES</span>
-            </div>
             <div className="section-bar-title">
-              <h2>부산 갤러리 · 전시공간</h2>
-              <span>Spaces & Exhibitions</span>
+              <h2>부산 갤러리 · 대관 · 작품판매 인덱스</h2>
             </div>
-            {activeSection === 'overview' ? (
-              <button className="section-bar-action" onClick={() => setActiveSection('galleries')}>
-                <span>전체 보기</span>
-                <ArrowUpRight size={14} />
-              </button>
-            ) : (
-              <div className="section-bar-action" style={{ pointerEvents: 'none' }}>
-                <span>{GALLERIES.length} SPACES · 13 DISTRICTS</span>
-              </div>
-            )}
           </div>
 
+          {/* 1단 필터: 13개 구·군 컬러 필터 */}
           <div className="filter-strip">
             <div className="filter-tabs gallery-zone-tabs">
               {zones.map((z) => {
@@ -1047,17 +1361,56 @@ export function App() {
             </div>
           </div>
 
+          {/* 2단 실무 필터: 대관 가능 여부 · 작품 판매 · 아트샵 입점 · 수수료 조건 */}
+          <div className="gallery-spec-filter-bar">
+            <div className="spec-filter-pills">
+              {(
+                [
+                  ['all', `전체 공간 (${GALLERIES.length})`],
+                  [
+                    'rental',
+                    `대관 가능 (${GALLERIES.filter((g) => g.rentalAndSales.rentalAvailable).length})`,
+                  ],
+                  [
+                    'sales',
+                    `작품 판매 가능 (${GALLERIES.filter((g) => g.rentalAndSales.artworkSales).length})`,
+                  ],
+                  [
+                    'artshop',
+                    `아트샵 · 굿즈 입점 가능 (${
+                      GALLERIES.filter((g) => g.rentalAndSales.artShopAvailable).length
+                    })`,
+                  ],
+                  [
+                    'zero_commission',
+                    `수수료 0% · 비영리/공립 (${
+                      GALLERIES.filter(
+                        (g) =>
+                          g.rentalAndSales.commissionRate.includes('없음') ||
+                          g.rentalAndSales.commissionRate.includes('비영리') ||
+                          g.rentalAndSales.commissionRate.includes('공립')
+                      ).length
+                    })`,
+                  ],
+                ] as const
+              ).map(([key, label]) => (
+                <button
+                  key={key}
+                  type="button"
+                  className={`spec-filter-pill ${gallerySpecFilter === key ? 'active' : ''}`}
+                  onClick={() => setGallerySpecFilter(key)}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          </div>
+
           <div className="gallery-explorer-layout">
             <div className="coast-map-panel">
               <div>
                 <div className="map-panel-header">
-                  <div>
-                    <div className="map-panel-kicker">COASTAL NODES</div>
-                    <h3 className="map-panel-title">부산 갤러리 좌표</h3>
-                  </div>
-                  <div className="map-panel-count">
-                    {filteredGalleries.length} SPACES
-                  </div>
+                  <h3 className="map-panel-title">부산 갤러리 좌표</h3>
                 </div>
 
                 <div className="map-svg-container">
@@ -1080,8 +1433,7 @@ export function App() {
                     />
 
                     {GALLERIES.map((gal) => {
-                      const isMatched =
-                        selectedZone === '전체' || gal.zone === selectedZone;
+                      const isMatched = filteredGalleries.some((fg) => fg.id === gal.id);
                       const isSelected = activeGallery?.id === gal.id;
                       const dStyle = getDistrictStyle(gal.zone);
                       return (
@@ -1128,6 +1480,7 @@ export function App() {
             <div className="gallery-list-panel">
               {filteredGalleries.map((gal) => {
                 const dStyle = getDistrictStyle(gal.zone);
+                const rs = gal.rentalAndSales;
                 return (
                   <article
                     key={gal.id}
@@ -1150,121 +1503,32 @@ export function App() {
                         </span>
                         <h3 className="gallery-row-title">{gal.name}</h3>
                       </div>
-                      <ArrowUpRight size={14} className="gallery-arrow-icon" />
+
+                      <div className="gallery-row-right">
+                        <div className="gallery-mini-tags">
+                          <span
+                            className={`gallery-mini-tag ${
+                              rs.rentalAvailable ? 'is-rental' : 'is-curated'
+                            }`}
+                          >
+                            {rs.rentalAvailable ? '대관가능' : '기획·공모'}
+                          </span>
+                          <span className="gallery-mini-tag is-pyeong">{rs.pyeong.split('(')[0].trim()}</span>
+                          {rs.artworkSales && (
+                            <span className="gallery-mini-tag is-sales">작품판매</span>
+                          )}
+                          {rs.artShopAvailable && (
+                            <span className="gallery-mini-tag is-shop">아트샵</span>
+                          )}
+                        </div>
+                        <ArrowUpRight size={14} className="gallery-arrow-icon" />
+                      </div>
                     </div>
                   </article>
                 );
               })}
             </div>
           </div>
-        </section>
-      )}
-
-      {/* =====================================================================
-          SECTION 04: ARTIST COLLAB & JOINT PRODUCTION DISPATCH BOARD
-         ===================================================================== */}
-      {(activeSection === 'overview' || activeSection === 'goods') && (
-        <section>
-        <div className="section-bar">
-          <div className="section-bar-index">
-            <span>04</span>
-            <span>—</span>
-            <span>DISPATCH</span>
-          </div>
-          <div className="section-bar-title">
-            <h2>공동발주 · 굿즈 협업 보드</h2>
-            <span>Open Calls</span>
-          </div>
-          <button className="section-bar-action" onClick={() => setIsWriteModalOpen(true)}>
-            <Plus size={14} />
-            <span>공고 작성</span>
-          </button>
-        </div>
-
-        <div className="filter-strip">
-          <div className="filter-tabs">
-            {['전체', '공동발주', '굿즈협업', '마켓부스'].map((tab) => (
-              <button
-                key={tab}
-                className={`filter-tab ${collabFilter === tab ? 'active' : ''}`}
-                onClick={() => setCollabFilter(tab)}
-              >
-                <span>{tab}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div className="makers-table-wrap">
-          <table className="editorial-table dispatch-table">
-            <thead>
-              <tr>
-                <th style={{ width: '110px' }}>구분</th>
-                <th>내용</th>
-                <th style={{ width: '190px' }}>작가</th>
-                <th style={{ width: '170px' }}>조건 / 마감</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredCollabPosts.map((post) => (
-                <tr key={post.id}>
-                  <td className="dispatch-cell-type">
-                    <span
-                      style={{
-                        display: 'inline-block',
-                        fontFamily: 'var(--font-mono)',
-                        fontSize: '11px',
-                        padding: '2px 7px',
-                        background:
-                          post.type === '공동발주' ? 'var(--marine)' : 'var(--ink)',
-                        color: '#ffffff',
-                      }}
-                    >
-                      {post.type}
-                    </span>
-                    <div
-                      style={{
-                        fontFamily: 'var(--font-mono)',
-                        fontSize: '11px',
-                        color: 'var(--ink-muted)',
-                        marginTop: '6px',
-                      }}
-                    >
-                      {post.date}
-                    </div>
-                  </td>
-                  <td className="dispatch-cell-body">
-                    <div style={{ fontWeight: 700, fontSize: '15px', marginBottom: '6px' }}>
-                      {post.title}
-                    </div>
-                    <div style={{ fontSize: '13px', color: 'var(--ink-muted)', lineHeight: 1.55 }}>
-                      {post.description}
-                    </div>
-                  </td>
-                  <td className="dispatch-cell-author">
-                    <div style={{ fontWeight: 600, fontSize: '13px' }}>{post.author}</div>
-                    <div
-                      style={{
-                        fontFamily: 'var(--font-mono)',
-                        fontSize: '11px',
-                        color: 'var(--ink-muted)',
-                        marginTop: '4px',
-                      }}
-                    >
-                      {post.district}
-                    </div>
-                  </td>
-                  <td className="dispatch-cell-meta" style={{ fontFamily: 'var(--font-mono)', fontSize: '12px' }}>
-                    <div>{post.targetCount}</div>
-                    <div style={{ color: 'var(--marine)', marginTop: '4px' }}>
-                      {post.deadline}
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
         </section>
       )}
 
@@ -1294,14 +1558,29 @@ export function App() {
               color: 'rgba(255,255,255,0.45)',
             }}
           >
-            © 2026 PARANG BUSAN ART & OBJECT INDEX.
+            © 2026 PARANG BUSAN ART & OBJECT INDEX
           </div>
         </div>
 
-        <div className="footer-col" style={{ alignItems: 'flex-end', justifyContent: 'center' }}>
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: '#ffffff' }}>
-            dispatch@parang-busan.kr
+        <div
+          className="footer-col"
+          style={{ alignItems: 'flex-end', justifyContent: 'center', gap: '6px' }}
+        >
+          <div
+            style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: '11px',
+              color: 'rgba(255,255,255,0.6)',
+            }}
+          >
+            OPERATED BY <span style={{ color: '#66A3FF', fontWeight: 600 }}>floreur</span>
           </div>
+          <a
+            href="mailto:floreur88@gmail.com"
+            style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: '#ffffff' }}
+          >
+            floreur88@gmail.com
+          </a>
         </div>
       </footer>
 
@@ -1410,6 +1689,18 @@ export function App() {
               >
                 {activeArtist.bio}
               </p>
+
+              <div style={{ marginTop: '18px' }}>
+                <a
+                  href={`mailto:floreur88@gmail.com?subject=${encodeURIComponent(
+                    `[PARANG 작가 섭외/콜라보 문의] ${activeArtist.name} 작가`
+                  )}`}
+                  className="drawer-agency-cta"
+                >
+                  <span>이 작가에게 전시 · 관광기념품 콜라보 의뢰하기 (floreur 에이전시 연결)</span>
+                  <ArrowUpRight size={14} />
+                </a>
+              </div>
             </div>
 
             {/* 3 Representative Artworks — Images Only */}
@@ -1457,7 +1748,7 @@ export function App() {
           <div className="editorial-drawer" onClick={(e) => e.stopPropagation()}>
             <div className="drawer-top-bar">
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--marine)' }}>
-                {activeGallery.indexNo} // SPACE SPEC
+                {activeGallery.indexNo}
               </div>
               <button
                 onClick={() => setActiveGallery(null)}
@@ -1551,9 +1842,41 @@ export function App() {
                     marginBottom: '10px',
                   }}
                 >
-                  SPECIFICATIONS
+                  대관 · 판매 · 입점 스펙
                 </div>
                 <div className="spec-table-list">
+                  <div className="spec-table-row">
+                    <span className="spec-table-key">대관 가능 여부</span>
+                    <span className="spec-table-value" style={{ fontWeight: 700 }}>
+                      {activeGallery.rentalAndSales.rentalAvailable
+                        ? '대관 가능 (정기/수시 대관 운영)'
+                        : '기획 초대전 · 공모 전용'}
+                    </span>
+                  </div>
+                  <div className="spec-table-row">
+                    <span className="spec-table-key">대관료 (주간/평수)</span>
+                    <span className="spec-table-value" style={{ color: 'var(--marine)', fontWeight: 600 }}>
+                      {activeGallery.rentalAndSales.rentalFeeSummary} · {activeGallery.rentalAndSales.pyeong}
+                    </span>
+                  </div>
+                  <div className="spec-table-row">
+                    <span className="spec-table-key">작품 판매 · 수수료</span>
+                    <span className="spec-table-value">
+                      {activeGallery.rentalAndSales.commissionRate}
+                    </span>
+                  </div>
+                  <div className="spec-table-row">
+                    <span className="spec-table-key">아트샵 · 굿즈 입점</span>
+                    <span className="spec-table-value">
+                      {activeGallery.rentalAndSales.artShopNote}
+                    </span>
+                  </div>
+                  <div className="spec-table-row">
+                    <span className="spec-table-key">포함 장비 · 설비</span>
+                    <span className="spec-table-value">
+                      {activeGallery.rentalAndSales.includedFacilities}
+                    </span>
+                  </div>
                   <div className="spec-table-row">
                     <span className="spec-table-key">운영 시간</span>
                     <span className="spec-table-value">
@@ -1561,25 +1884,29 @@ export function App() {
                     </span>
                   </div>
                   <div className="spec-table-row">
-                    <span className="spec-table-key">면적</span>
-                    <span className="spec-table-value">{activeGallery.spaceSpecs.area}</span>
-                  </div>
-                  <div className="spec-table-row">
-                    <span className="spec-table-key">층고</span>
+                    <span className="spec-table-key">층고 · 벽면 사양</span>
                     <span className="spec-table-value">
-                      {activeGallery.spaceSpecs.ceilingHeight}
+                      {activeGallery.spaceSpecs.ceilingHeight} / {activeGallery.spaceSpecs.wallType}
                     </span>
                   </div>
                   <div className="spec-table-row">
-                    <span className="spec-table-key">벽면 · 조명</span>
-                    <span className="spec-table-value">{activeGallery.spaceSpecs.wallType}</span>
-                  </div>
-                  <div className="spec-table-row">
-                    <span className="spec-table-key">대관 · 공모</span>
+                    <span className="spec-table-key">대관 · 공모 안내</span>
                     <span className="spec-table-value">
                       {activeGallery.spaceSpecs.submissionInfo}
                     </span>
                   </div>
+                </div>
+
+                <div style={{ marginTop: '20px' }}>
+                  <a
+                    href={`mailto:floreur88@gmail.com?subject=${encodeURIComponent(
+                      `[PARANG 갤러리 대관/입점 문의] ${activeGallery.name}`
+                    )}`}
+                    className="drawer-agency-cta"
+                  >
+                    <span>이 갤러리 대관 일정 · 기획 단체전 · 아트샵 입점 문의하기 (floreur 연결)</span>
+                    <ArrowUpRight size={14} />
+                  </a>
                 </div>
               </div>
             </div>
@@ -1675,7 +2002,7 @@ export function App() {
                         onClick={() => {
                           setIsArchiveOpen(false);
                           setSelectedManualId(manual.id);
-                          setActiveSection('goods');
+                          setActiveSection('collab');
                         }}
                       >
                         <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--marine)' }}>
@@ -1768,8 +2095,10 @@ export function App() {
               className="drawer-body-section"
               style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}
             >
-              <div style={{ display: 'flex', gap: '8px' }}>
-                {(['공동발주', '굿즈협업', '마켓부스'] as const).map((t) => (
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                {(
+                  ['전시·지원공고', '콜라보모집', '공동발주', '굿즈협업', '마켓부스'] as const
+                ).map((t) => (
                   <button
                     type="button"
                     key={t}
