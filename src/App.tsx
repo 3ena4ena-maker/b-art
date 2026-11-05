@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import {
   ARTISTS,
   GOODS_MANUALS,
@@ -11,13 +11,180 @@ import {
   GoodsManual,
   GallerySpace,
   CollabPost,
+  NaverCareerItem,
 } from './data/mockData';
-import { ArrowUpRight, Plus, X, Search } from 'lucide-react';
+import { ArrowUpRight, Plus, X, Search, Lock, Check, Clock, Trash2, Upload, ShieldCheck } from 'lucide-react';
 
-type ActiveSection = 'overview' | 'artists' | 'souvenirs' | 'galleries' | 'collab';
+type ActiveSection =
+  | 'overview'
+  | 'artists'
+  | 'souvenirs'
+  | 'galleries'
+  | 'collab'
+  | 'artist-apply'
+  | 'admin';
 type GallerySpecFilter = 'all' | 'rental' | 'sales' | 'artshop' | 'zero_commission';
 type GalleryAudienceMode = 'all' | 'public' | 'artist';
 type ArtistCollabFilter = 'all' | 'souvenir_partner' | 'open_collab' | 'collectible';
+
+export interface ArtistApplication {
+  id: string;
+  status: 'pending' | 'approved';
+  submittedAt: string;
+  approvedAt?: string;
+  name: string;
+  nameEn: string;
+  discipline: string;
+  district: string;
+  jobTitle: string;
+  affiliation: string;
+  instagram: string;
+  instagramUrl: string;
+  portfolioUrl: string;
+  collectionsAndMedia: string;
+  education: string;
+  detailedIntro: string;
+  careerText: string;
+  contact: string;
+  works: Array<{
+    title: string;
+    year: string;
+    mediumDetail: string;
+    imageUrl: string;
+  }>;
+}
+
+const APPLICATIONS_STORAGE_KEY = 'parang_artist_applications_v1';
+const ADMIN_SESSION_KEY = 'parang_admin_authed_v1';
+
+function parseCareerTimelineFromText(careerText: string): NaverCareerItem[] {
+  const lines = careerText
+    .split('\n')
+    .map((l) => l.replace(/^[-·•*]+\s*/, '').trim())
+    .filter(Boolean);
+
+  if (lines.length === 0) {
+    return [{ year: '2026', badge: '개인전', content: '부산 지역 기반 개인전 및 기획전 활동' }];
+  }
+
+  return lines.map((line) => {
+    const yearMatch = line.match(/\b(19\d{2}|20\d{2})\b/);
+    const year = yearMatch ? yearMatch[1] : '최근';
+    const contentClean = line.replace(/^\b(19\d{2}|20\d{2})\b[\s·.:,-]*/, '').trim() || line;
+
+    let badge: NaverCareerItem['badge'] = '단체전';
+    if (line.includes('개인전') || line.includes('초대전') || line.includes('독주')) {
+      badge = '개인전';
+    } else if (line.includes('수상') || line.includes('선정') || line.includes('입선') || line.includes('특선')) {
+      badge = '수상·선정';
+    } else if (line.includes('레지던시') || line.includes('입주') || line.includes('강사') || line.includes('대표')) {
+      badge = '레지던시·경력';
+    } else if (line.includes('소장') || line.includes('출판') || line.includes('프로젝트')) {
+      badge = '소장·출판';
+    }
+
+    return {
+      year,
+      badge,
+      content: contentClean,
+    };
+  });
+}
+
+function normalizeInstagramInput(rawInsta: string): { handle: string; url: string } {
+  const trimmed = rawInsta.trim();
+  if (!trimmed || trimmed === '@') {
+    return { handle: '', url: '' };
+  }
+  if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) {
+    const m = trimmed.match(/instagram\.com\/([A-Za-z0-9._]+)/i);
+    if (m && m[1]) {
+      return { handle: `@${m[1]}`, url: `https://www.instagram.com/${m[1]}/` };
+    }
+    return { handle: trimmed, url: trimmed };
+  }
+  const cleanHandle = trimmed.replace(/^@+/, '');
+  return {
+    handle: `@${cleanHandle}`,
+    url: `https://www.instagram.com/${cleanHandle}/`,
+  };
+}
+
+function buildArtistFromApplication(app: ArtistApplication, idxOffset: number): Artist {
+  const validWorks = app.works.filter((w) => w.imageUrl && w.imageUrl.trim().length > 0);
+  const fallbackImg =
+    validWorks[0]?.imageUrl ||
+    'https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=1000&q=80';
+
+  const paddedWorks = [0, 1, 2].map((i) => {
+    const src = validWorks[i] || validWorks[0] || {
+      title: '',
+      year: '2026',
+      mediumDetail: app.collectionsAndMedia || app.discipline,
+      imageUrl: fallbackImg,
+    };
+    return {
+      id: `${app.id}-w-${i + 1}`,
+      title: src.title || '',
+      year: src.year || '2026',
+      medium: app.discipline,
+      mediumDetail: src.mediumDetail || app.collectionsAndMedia || app.discipline,
+      dimensions: '가변 규격',
+      availability: '소장 가능' as const,
+      priceLabel: '판매가 문의 (floreur 중개)',
+      imageUrl: src.imageUrl || fallbackImg,
+      highResUrl: src.imageUrl || fallbackImg,
+    };
+  });
+
+  const timeline = parseCareerTimelineFromText(app.careerText);
+  const insta = normalizeInstagramInput(app.instagram);
+  const cleanPortfolio = app.portfolioUrl.trim()
+    ? app.portfolioUrl.trim().startsWith('http')
+      ? app.portfolioUrl.trim()
+      : `https://${app.portfolioUrl.trim()}`
+    : '';
+
+  const displayInsta =
+    insta.handle ||
+    (cleanPortfolio
+      ? cleanPortfolio.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')
+      : '@busan_artist');
+  const primaryUrl = insta.url || cleanPortfolio || 'https://www.instagram.com/';
+
+  return {
+    id: `approved-${app.id}`,
+    indexNo: `ARTIST ${51 + idxOffset}`,
+    name: app.name,
+    nameEn: app.nameEn || app.name.toUpperCase(),
+    discipline: app.discipline,
+    district: app.district || '부산',
+    updatedAt: (app.approvedAt || app.submittedAt).slice(0, 10),
+    statement: app.detailedIntro.slice(0, 90) + (app.detailedIntro.length > 90 ? '...' : ''),
+    bio: `${app.detailedIntro}\n\n[최근 주요 활동 이력]\n${app.careerText}`,
+    naverProfile: {
+      jobTitle: app.jobTitle || `${app.discipline} 작가`,
+      affiliation: app.affiliation || `부산 ${app.district} 작업실`,
+      education: app.education || '미술·조형 전공',
+      awards: '부산 활동 예술작가 아카이브 등재',
+      collectionsAndMedia: app.collectionsAndMedia || app.discipline,
+      signatureKeywords: [],
+      detailedIntro: app.detailedIntro,
+      careerTimeline: timeline,
+    },
+    soloExhibitions: timeline.filter((t) => t.badge === '개인전').map((t) => `${t.year} ${t.content}`),
+    groupExhibitions: timeline.filter((t) => t.badge !== '개인전').map((t) => `${t.year} ${t.content}`),
+    collabStatus: '협업 열림 (Open to Collab)',
+    collabNote: '전시 기획 · 브랜드 아트콜라보 · 굿즈 개발 열림',
+    instagram: displayInsta,
+    instagramUrl: primaryUrl,
+    portfolioUrl: cleanPortfolio || primaryUrl,
+    sourceLabel: '작가 직접 신청 · 관리자 승인 등재',
+    portraitUrl: paddedWorks[0].imageUrl,
+    featuredWorkUrl: paddedWorks[0].imageUrl,
+    artworks: paddedWorks,
+  };
+}
 
 // 15-row dot-matrix bitmaps for Busan's 10,452 active artists (Korea Artist Welfare Foundation / Busan Cultural Foundation)
 const BUSAN_ARTIST_DIGIT_MATRIX: Array<{
@@ -215,8 +382,282 @@ function parseArtistIntroAndCareer(artist: Artist): {
 export function App() {
   const [activeSection, setActiveSection] = useState<ActiveSection>('overview');
 
-  // Artist list (supports live artist registration & profile updates) + filters
-  const [artistList, setArtistList] = useState<Artist[]>(ARTISTS);
+  // Applications stored in localStorage (pending / approved)
+  const [applications, setApplications] = useState<ArtistApplication[]>(() => {
+    try {
+      const raw = localStorage.getItem(APPLICATIONS_STORAGE_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed)) return parsed;
+      }
+    } catch {
+      // ignore storage read error
+    }
+    return [];
+  });
+
+  // Artist list (combines approved applications + 50 verified Busan artists)
+  const [artistList, setArtistList] = useState<Artist[]>(() => {
+    try {
+      const raw = localStorage.getItem(APPLICATIONS_STORAGE_KEY);
+      if (raw) {
+        const parsed: ArtistApplication[] = JSON.parse(raw);
+        if (Array.isArray(parsed)) {
+          const approvedArtists = parsed
+            .filter((a) => a.status === 'approved')
+            .map((a, idx) => buildArtistFromApplication(a, idx));
+          return [...approvedArtists, ...ARTISTS];
+        }
+      }
+    } catch {
+      // ignore
+    }
+    return ARTISTS;
+  });
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(APPLICATIONS_STORAGE_KEY, JSON.stringify(applications));
+    } catch {
+      // ignore storage write error
+    }
+    const approvedArtists = applications
+      .filter((a) => a.status === 'approved')
+      .map((a, idx) => buildArtistFromApplication(a, idx));
+    setArtistList([...approvedArtists, ...ARTISTS]);
+  }, [applications]);
+
+  // Dedicated Artist Application Form State ('artist-apply' page)
+  const [applyForm, setApplyForm] = useState<{
+    name: string;
+    nameEn: string;
+    discipline: string;
+    district: string;
+    jobTitle: string;
+    affiliation: string;
+    instagram: string;
+    portfolioUrl: string;
+    collectionsAndMedia: string;
+    education: string;
+    detailedIntro: string;
+    careerText: string;
+    contact: string;
+    works: Array<{
+      title: string;
+      year: string;
+      mediumDetail: string;
+      imageUrl: string;
+    }>;
+  }>({
+    name: '',
+    nameEn: '',
+    discipline: '회화·미술',
+    district: '',
+    jobTitle: '',
+    affiliation: '',
+    instagram: '@',
+    portfolioUrl: '',
+    collectionsAndMedia: '',
+    education: '',
+    detailedIntro: '',
+    careerText: '',
+    contact: '',
+    works: [
+      { title: '', year: '2026', mediumDetail: '', imageUrl: '' },
+      { title: '', year: '2026', mediumDetail: '', imageUrl: '' },
+      { title: '', year: '2025', mediumDetail: '', imageUrl: '' },
+    ],
+  });
+  const [applySubmittedSuccess, setApplySubmittedSuccess] = useState<ArtistApplication | null>(null);
+
+  // Admin Page State ('admin' page)
+  const [isAdminAuthed, setIsAdminAuthed] = useState<boolean>(() => {
+    try {
+      return sessionStorage.getItem(ADMIN_SESSION_KEY) === 'true';
+    } catch {
+      return false;
+    }
+  });
+  const [adminPasswordInput, setAdminPasswordInput] = useState<string>('');
+  const [adminAuthError, setAdminAuthError] = useState<string>('');
+  const [adminFilterTab, setAdminFilterTab] = useState<'pending' | 'approved' | 'all'>('pending');
+
+  const pendingApplicationsCount = useMemo(
+    () => applications.filter((a) => a.status === 'pending').length,
+    [applications]
+  );
+  const approvedApplicationsCount = useMemo(
+    () => applications.filter((a) => a.status === 'approved').length,
+    [applications]
+  );
+
+  const openArtistApplyPage = () => {
+    setApplySubmittedSuccess(null);
+    setActiveSection('artist-apply');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleApplyWorkImageUpload = (idx: number, file: File | undefined) => {
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      const dataUrl = typeof ev.target?.result === 'string' ? ev.target.result : '';
+      if (!dataUrl) return;
+      // Resize image via canvas to keep localStorage fast & lightweight
+      const img = new Image();
+      img.onload = () => {
+        const maxDim = 1000;
+        let w = img.width;
+        let h = img.height;
+        if (w > maxDim || h > maxDim) {
+          if (w > h) {
+            h = Math.round((h * maxDim) / w);
+            w = maxDim;
+          } else {
+            w = Math.round((w * maxDim) / h);
+            h = maxDim;
+          }
+        }
+        const canvas = document.createElement('canvas');
+        canvas.width = w;
+        canvas.height = h;
+        const ctx = canvas.getContext('2d');
+        if (ctx) {
+          ctx.drawImage(img, 0, 0, w, h);
+          const compressed = canvas.toDataURL('image/jpeg', 0.84);
+          setApplyForm((prev) => {
+            const nextWorks = [...prev.works];
+            nextWorks[idx] = { ...nextWorks[idx], imageUrl: compressed };
+            return { ...prev, works: nextWorks };
+          });
+        }
+      };
+      img.src = dataUrl;
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleSubmitApplicationPage = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!applyForm.name.trim()) return;
+
+    const now = new Date();
+    const pad = (n: number) => (n < 10 ? `0${n}` : `${n}`);
+    const timestamp = `${now.getFullYear()}.${pad(now.getMonth() + 1)}.${pad(now.getDate())} ${pad(
+      now.getHours()
+    )}:${pad(now.getMinutes())}`;
+
+    const instaNorm = normalizeInstagramInput(applyForm.instagram);
+    const createdApp: ArtistApplication = {
+      id: `app-${Date.now()}`,
+      status: 'pending',
+      submittedAt: timestamp,
+      name: applyForm.name.trim(),
+      nameEn: applyForm.nameEn.trim() || applyForm.name.trim().toUpperCase(),
+      discipline: applyForm.discipline,
+      district: applyForm.district.trim() || '부산',
+      jobTitle: applyForm.jobTitle.trim() || `${applyForm.discipline} 작가`,
+      affiliation: applyForm.affiliation.trim() || `부산 ${applyForm.district.trim() || '지역'} 스튜디오`,
+      instagram: instaNorm.handle || applyForm.instagram.trim(),
+      instagramUrl: instaNorm.url,
+      portfolioUrl: applyForm.portfolioUrl.trim(),
+      collectionsAndMedia: applyForm.collectionsAndMedia.trim(),
+      education: applyForm.education.trim(),
+      detailedIntro: applyForm.detailedIntro.trim(),
+      careerText: applyForm.careerText.trim(),
+      contact: applyForm.contact.trim(),
+      works: applyForm.works.map((w) => ({
+        title: w.title.trim(),
+        year: w.year.trim() || '2026',
+        mediumDetail: w.mediumDetail.trim() || applyForm.collectionsAndMedia.trim(),
+        imageUrl: w.imageUrl.trim(),
+      })),
+    };
+
+    setApplications((prev) => [createdApp, ...prev]);
+    setApplySubmittedSuccess(createdApp);
+    setApplyForm({
+      name: '',
+      nameEn: '',
+      discipline: '회화·미술',
+      district: '',
+      jobTitle: '',
+      affiliation: '',
+      instagram: '@',
+      portfolioUrl: '',
+      collectionsAndMedia: '',
+      education: '',
+      detailedIntro: '',
+      careerText: '',
+      contact: '',
+      works: [
+        { title: '', year: '2026', mediumDetail: '', imageUrl: '' },
+        { title: '', year: '2026', mediumDetail: '', imageUrl: '' },
+        { title: '', year: '2025', mediumDetail: '', imageUrl: '' },
+      ],
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleAdminLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    const pw = adminPasswordInput.trim();
+    if (pw === 'floreur88' || pw === '0000' || pw === 'admin1234') {
+      setIsAdminAuthed(true);
+      setAdminAuthError('');
+      setAdminPasswordInput('');
+      try {
+        sessionStorage.setItem(ADMIN_SESSION_KEY, 'true');
+      } catch {
+        // ignore
+      }
+    } else {
+      setAdminAuthError('관리자 비밀번호가 일치하지 않습니다.');
+    }
+  };
+
+  const handleAdminLogout = () => {
+    setIsAdminAuthed(false);
+    try {
+      sessionStorage.removeItem(ADMIN_SESSION_KEY);
+    } catch {
+      // ignore
+    }
+  };
+
+  const handleApproveApplication = (appId: string) => {
+    const now = new Date();
+    const pad = (n: number) => (n < 10 ? `0${n}` : `${n}`);
+    const approvedAt = `${now.getFullYear()}.${pad(now.getMonth() + 1)}.${pad(now.getDate())} ${pad(
+      now.getHours()
+    )}:${pad(now.getMinutes())}`;
+
+    setApplications((prev) =>
+      prev.map((a) => (a.id === appId ? { ...a, status: 'approved', approvedAt } : a))
+    );
+  };
+
+  const handleRevertApplicationToPending = (appId: string) => {
+    setApplications((prev) =>
+      prev.map((a) => (a.id === appId ? { ...a, status: 'pending', approvedAt: undefined } : a))
+    );
+  };
+
+  const handleDeleteApplication = (appId: string) => {
+    setApplications((prev) => prev.filter((a) => a.id !== appId));
+  };
+
+  const handleAdminUpdateAppWorkUrl = (appId: string, workIdx: number, newUrl: string) => {
+    setApplications((prev) =>
+      prev.map((a) => {
+        if (a.id !== appId) return a;
+        const nextWorks = [...a.works];
+        nextWorks[workIdx] = { ...nextWorks[workIdx], imageUrl: newUrl };
+        return { ...a, works: nextWorks };
+      })
+    );
+  };
+
   const [selectedDiscipline, setSelectedDiscipline] = useState<string>('전체');
   const [artistCollabFilter, setArtistCollabFilter] = useState<ArtistCollabFilter>('all');
   const [artistQuery, setArtistQuery] = useState<string>('');
@@ -365,7 +806,7 @@ export function App() {
   }, []);
 
   // Filtered Artists
-  const disciplines = ['전체', '회화·미술', '도자·조형', '프린트·드로잉', '사진', '공예·오브제'];
+  const disciplines = ['전체', '회화·미술', '도자·조형', '공예·오브제', '일러스트·드로잉', '사진'];
   const filteredArtists = useMemo(() => {
     return artistList.filter((artist) => {
       const matchDiscipline =
@@ -722,7 +1163,9 @@ export function App() {
             <span className="nav-item-label">홈</span>
           </button>
           <button
-            className={`nav-item ${activeSection === 'artists' ? 'active' : ''}`}
+            className={`nav-item ${
+              activeSection === 'artists' || activeSection === 'artist-apply' ? 'active' : ''
+            }`}
             onClick={() => setActiveSection('artists')}
           >
             <span className="nav-item-label">부산 작가 · 작품</span>
@@ -752,13 +1195,28 @@ export function App() {
             <span>ARCHIVE</span>
             <span className="saved-count">{savedIds.length}</span>
           </button>
-          <button className="artist-register-trigger" onClick={openNewArtistModal}>
+          <button className="artist-register-trigger" onClick={openArtistApplyPage}>
             <Plus size={14} />
-            <span>작가 등록</span>
+            <span>작가 등록 신청</span>
           </button>
           <button className="submit-trigger" onClick={() => setIsWriteModalOpen(true)}>
             <Plus size={14} />
             <span>공고 등록</span>
+          </button>
+          <button
+            type="button"
+            className={`admin-nav-trigger ${activeSection === 'admin' ? 'active' : ''}`}
+            onClick={() => {
+              setActiveSection('admin');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            title="작가 신청 등록 대기/완료 관리자 전용 페이지"
+          >
+            <Lock size={12} />
+            <span>관리자</span>
+            {pendingApplicationsCount > 0 && (
+              <span className="admin-pending-badge">{pendingApplicationsCount}</span>
+            )}
           </button>
         </div>
       </header>
@@ -902,6 +1360,33 @@ export function App() {
          ===================================================================== */}
       {activeSection === 'artists' && (
         <section className="passepartout-artists-section">
+          {/* Brief Editorial Intro Banner + Registration Apply CTA */}
+          <div className="artists-archive-intro-banner">
+            <div className="artists-archive-intro-copy">
+              <div className="artists-archive-intro-kicker">
+                BUSAN ACTIVE ARTISTS · ONLINE PORTFOLIO ARCHIVE
+              </div>
+              <h2 className="artists-archive-intro-title">
+                부산 지역 활동 예술작가 · 온라인 포트폴리오 아카이브
+              </h2>
+              <p className="artists-archive-intro-desc">
+                현재 부산 지역을 기반으로 활발히 작업·전시 활동을 이어가며, 온라인 포트폴리오(공식 작업 인스타그램 또는 홈페이지)가 있는 예술작가들을 소개합니다. 온라인 포트폴리오를 보유한 부산 활동 작가님이라면 누구나 등록을 신청하실 수 있습니다.
+              </p>
+            </div>
+
+            <div className="artists-archive-intro-actions">
+              <button
+                type="button"
+                className="artists-apply-cta-btn"
+                onClick={openArtistApplyPage}
+              >
+                <Plus size={15} />
+                <span>부산 작가 등록 신청하기</span>
+                <ArrowUpRight size={14} />
+              </button>
+            </div>
+          </div>
+
           {/* Minimal Filter & Search Strip */}
           <div className="filter-strip">
             <div className="filter-tabs">
@@ -964,7 +1449,19 @@ export function App() {
                       <strong>{artist.name}</strong>
                       <span>{artist.nameEn}</span>
                     </div>
-                    <div className="passepartout-artist-genre">{artist.discipline}</div>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '2px' }}>
+                      <div className="passepartout-artist-genre">{artist.discipline}</div>
+                      <span
+                        style={{
+                          fontFamily: 'var(--font-mono)',
+                          fontSize: '11px',
+                          color: 'var(--marine)',
+                          letterSpacing: '-0.01em',
+                        }}
+                      >
+                        {artist.instagram}
+                      </span>
+                    </div>
                   </div>
 
                   <div className="passepartout-frame">
@@ -974,6 +1471,723 @@ export function App() {
               );
             })}
           </div>
+        </section>
+      )}
+
+      {/* =====================================================================
+          SECTION 01-B: DEDICATED ARTIST REGISTRATION APPLICATION PAGE ('artist-apply')
+         ===================================================================== */}
+      {activeSection === 'artist-apply' && (
+        <section className="artist-apply-page-section">
+          <div className="section-bar">
+            <div className="section-bar-title" style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+              <button
+                type="button"
+                className="apply-page-back-btn"
+                onClick={() => setActiveSection('artists')}
+              >
+                ← 부산 작가 · 작품 목록으로
+              </button>
+              <h2>부산 활동 작가 아카이브 등록 신청</h2>
+            </div>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11.5px', color: 'var(--ink-muted)' }}>
+              ONLINE PORTFOLIO ARTIST REGISTRATION
+            </div>
+          </div>
+
+          <div className="artist-apply-container">
+            {applySubmittedSuccess ? (
+              <div className="apply-success-card">
+                <div className="apply-success-badge">
+                  <Check size={18} />
+                  <span>신청 접수 완료 · 관리자 검수 대기중</span>
+                </div>
+                <h3>
+                  {applySubmittedSuccess.name} 작가님의 아카이브 등록 신청이 정상적으로 접수되었습니다.
+                </h3>
+                <p>
+                  제출하신 프로필과 온라인 포트폴리오 정보가 <strong>관리자 페이지(신청 등록 대기 목록)</strong>에 자동으로 전달되었습니다.
+                  관리자가 온라인 포트폴리오 및 주요 이력을 확인한 뒤 <strong>등록 완료(승인)</strong> 처리하면 부산 작가·작품 페이지에 즉시 등재됩니다.
+                </p>
+
+                <div className="apply-success-summary">
+                  <div>
+                    <span>신청 작가명</span>
+                    <strong>
+                      {applySubmittedSuccess.name} ({applySubmittedSuccess.nameEn}) · {applySubmittedSuccess.discipline}
+                    </strong>
+                  </div>
+                  <div>
+                    <span>인스타그램 / 온라인 포트폴리오</span>
+                    <strong>
+                      {applySubmittedSuccess.instagram}{' '}
+                      {applySubmittedSuccess.portfolioUrl ? `/ ${applySubmittedSuccess.portfolioUrl}` : ''}
+                    </strong>
+                  </div>
+                  <div>
+                    <span>주요 매체 / 학력</span>
+                    <strong>
+                      {applySubmittedSuccess.collectionsAndMedia} · {applySubmittedSuccess.education}
+                    </strong>
+                  </div>
+                  <div>
+                    <span>접수 일시</span>
+                    <strong>{applySubmittedSuccess.submittedAt} (대기중)</strong>
+                  </div>
+                </div>
+
+                <div className="apply-success-actions">
+                  <button
+                    type="button"
+                    className="artists-apply-cta-btn"
+                    onClick={() => setActiveSection('artists')}
+                  >
+                    <span>부산 작가 · 작품 페이지로 돌아가기</span>
+                  </button>
+                  <button
+                    type="button"
+                    className="apply-secondary-btn"
+                    onClick={() => setApplySubmittedSuccess(null)}
+                  >
+                    <span>추가 신청서 작성하기</span>
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmitApplicationPage} className="artist-apply-form-card">
+                <div className="artist-apply-form-header">
+                  <h3>부산 지역 활동 예술작가 등록 신청서</h3>
+                  <p>
+                    현재 부산에서 활동 중이며 온라인으로 확인 가능한 작업 포트폴리오(인스타그램 작업 계정 또는 홈페이지)가 있는 작가님이라면 누구나 신청하실 수 있습니다. 아래 항목을 작성 후 <strong>[등록 신청하기]</strong> 버튼을 누르시면 관리자 확인 페이지로 자동 접수됩니다.
+                  </p>
+                </div>
+
+                {/* 01. 기본 인적 사항 및 온라인 포트폴리오 */}
+                <div className="form-section-title">01. 작가 기본 정보 및 온라인 포트폴리오</div>
+                <div className="form-grid-2">
+                  <div>
+                    <label className="form-label">이름 (활동명 국문) *</label>
+                    <input
+                      required
+                      value={applyForm.name}
+                      onChange={(e) => setApplyForm({ ...applyForm, name: e.target.value })}
+                      placeholder="예: 김파랑"
+                      className="form-input"
+                    />
+                  </div>
+                  <div>
+                    <label className="form-label">영문명 (English Name)</label>
+                    <input
+                      value={applyForm.nameEn}
+                      onChange={(e) => setApplyForm({ ...applyForm, nameEn: e.target.value })}
+                      placeholder="예: PARANG KIM"
+                      className="form-input"
+                    />
+                  </div>
+                </div>
+
+                <div className="form-grid-2">
+                  <div>
+                    <label className="form-label">인스타그램 작업 계정 *</label>
+                    <input
+                      required
+                      value={applyForm.instagram}
+                      onChange={(e) => setApplyForm({ ...applyForm, instagram: e.target.value })}
+                      placeholder="예: @artist_account 또는 인스타그램 주소"
+                      className="form-input"
+                    />
+                  </div>
+                  <div>
+                    <label className="form-label">온라인 포트폴리오 (홈페이지 · 블로그 · 노션 URL)</label>
+                    <input
+                      value={applyForm.portfolioUrl}
+                      onChange={(e) => setApplyForm({ ...applyForm, portfolioUrl: e.target.value })}
+                      placeholder="예: https://artistportfolio.com (보유 시 입력)"
+                      className="form-input"
+                    />
+                  </div>
+                </div>
+
+                <div className="form-grid-2">
+                  <div>
+                    <label className="form-label">활동 분야 (장르) *</label>
+                    <select
+                      value={applyForm.discipline}
+                      onChange={(e) => setApplyForm({ ...applyForm, discipline: e.target.value })}
+                      className="form-input"
+                    >
+                      <option value="회화·미술">회화·미술</option>
+                      <option value="도자·조형">도자·조형</option>
+                      <option value="공예·오브제">공예·오브제</option>
+                      <option value="일러스트·드로잉">일러스트·드로잉</option>
+                      <option value="사진">사진</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="form-label">부산 내 활동 거점 (구·군 및 작업실 동네) *</label>
+                    <input
+                      required
+                      value={applyForm.district}
+                      onChange={(e) => setApplyForm({ ...applyForm, district: e.target.value })}
+                      placeholder="예: 수영구 광안동 / 중구 원도심 (또따또가)"
+                      className="form-input"
+                    />
+                  </div>
+                </div>
+
+                {/* 02. 주요 매체 · 학력 · 소속 */}
+                <div className="form-section-title">02. 주요 매체 · 학력 · 소속 정보</div>
+                <div className="form-grid-2">
+                  <div>
+                    <label className="form-label">주요 매체 · 작업 재료 *</label>
+                    <input
+                      required
+                      value={applyForm.collectionsAndMedia}
+                      onChange={(e) =>
+                        setApplyForm({ ...applyForm, collectionsAndMedia: e.target.value })
+                      }
+                      placeholder="예: 캔버스에 유채 및 아크릴 혼합매체 / 백자토 물레 성형"
+                      className="form-input"
+                    />
+                  </div>
+                  <div>
+                    <label className="form-label">학력 *</label>
+                    <input
+                      required
+                      value={applyForm.education}
+                      onChange={(e) => setApplyForm({ ...applyForm, education: e.target.value })}
+                      placeholder="예: 부산대학교 미술학과 서양화전공 졸업"
+                      className="form-input"
+                    />
+                  </div>
+                </div>
+
+                <div className="form-grid-2">
+                  <div>
+                    <label className="form-label">소속 · 작업실 및 한 줄 직함</label>
+                    <input
+                      value={applyForm.affiliation}
+                      onChange={(e) => setApplyForm({ ...applyForm, affiliation: e.target.value })}
+                      placeholder="예: 부산 수영구 스튜디오 · 현대회화 작가"
+                      className="form-input"
+                    />
+                  </div>
+                  <div>
+                    <label className="form-label">연락처 또는 이메일 (관리자 확인·안내용) *</label>
+                    <input
+                      required
+                      value={applyForm.contact}
+                      onChange={(e) => setApplyForm({ ...applyForm, contact: e.target.value })}
+                      placeholder="예: 010-0000-0000 또는 artist@email.com"
+                      className="form-input"
+                    />
+                  </div>
+                </div>
+
+                {/* 03. 작가 소개 및 최근 주요 이력 */}
+                <div className="form-section-title">03. 작가 소개 및 최근 주요 이력</div>
+                <div>
+                  <label className="form-label">작가 소개 (작업 세계관 및 소개글) *</label>
+                  <textarea
+                    required
+                    rows={3}
+                    value={applyForm.detailedIntro}
+                    onChange={(e) => setApplyForm({ ...applyForm, detailedIntro: e.target.value })}
+                    placeholder="작가님의 작업 주제, 매체적 특징, 지향하는 예술적 시선을 2~4문장으로 소개해 주세요."
+                    className="form-input"
+                  />
+                </div>
+
+                <div>
+                  <label className="form-label">
+                    최근 주요 이력 (개인전 · 단체전 · 레지던시 · 수상 이력 — 줄바꿈으로 구분) *
+                  </label>
+                  <textarea
+                    required
+                    rows={4}
+                    value={applyForm.careerText}
+                    onChange={(e) => setApplyForm({ ...applyForm, careerText: e.target.value })}
+                    placeholder={
+                      '2026 개인전 《파도의 기록》, 갤러리 수정, 부산\n2025 단체전 《부산 청년미술제》, 부산문화회관, 부산\n2024 부산문화재단 청년예술가 창작지원 선정'
+                    }
+                    className="form-input"
+                  />
+                </div>
+
+                {/* 04. 대표작품 이미지 3점 (선택: 파일 업로드 또는 이미지 URL) */}
+                <div className="form-section-title">
+                  04. 대표작품 이미지 등록 (최대 3점 · 파일 업로드 또는 이미지 URL)
+                </div>
+                <p style={{ fontSize: '12.5px', color: 'var(--ink-muted)', marginTop: '-6px' }}>
+                  작품 포스터나 인물 사진이 아닌 <strong>순수 작품 이미지</strong>를 등록해 주세요. 직접 이미지 파일을 업로드하거나 이미지 주소를 입력할 수 있습니다.
+                </p>
+
+                <div className="apply-works-grid-3">
+                  {applyForm.works.map((w, idx) => (
+                    <div key={idx} className="apply-work-slot-card">
+                      <div className="apply-work-slot-top">
+                        <strong>대표작품 0{idx + 1}</strong>
+                        {w.imageUrl && (
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const next = [...applyForm.works];
+                              next[idx] = { ...next[idx], imageUrl: '' };
+                              setApplyForm({ ...applyForm, works: next });
+                            }}
+                            style={{ fontSize: '11px', color: '#D92D20', fontFamily: 'var(--font-mono)' }}
+                          >
+                            이미지 비우기
+                          </button>
+                        )}
+                      </div>
+
+                      {w.imageUrl ? (
+                        <div className="apply-work-preview-box">
+                          <img src={w.imageUrl} alt={`대표작 0${idx + 1}`} />
+                        </div>
+                      ) : (
+                        <label className="apply-work-upload-dropzone">
+                          <Upload size={16} />
+                          <span>작품 이미지 파일 선택</span>
+                          <input
+                            type="file"
+                            accept="image/*"
+                            style={{ display: 'none' }}
+                            onChange={(e) => handleApplyWorkImageUpload(idx, e.target.files?.[0])}
+                          />
+                        </label>
+                      )}
+
+                      <input
+                        value={w.title}
+                        onChange={(e) => {
+                          const next = [...applyForm.works];
+                          next[idx] = { ...next[idx], title: e.target.value };
+                          setApplyForm({ ...applyForm, works: next });
+                        }}
+                        placeholder="작품명 (선택)"
+                        className="form-input"
+                        style={{ fontSize: '12.5px', padding: '7px 10px' }}
+                      />
+
+                      <input
+                        value={w.imageUrl.startsWith('data:') ? '' : w.imageUrl}
+                        onChange={(e) => {
+                          const next = [...applyForm.works];
+                          next[idx] = { ...next[idx], imageUrl: e.target.value };
+                          setApplyForm({ ...applyForm, works: next });
+                        }}
+                        placeholder="또는 이미지 URL 붙여넣기 (https://...)"
+                        className="form-input"
+                        style={{ fontSize: '12px', padding: '7px 10px' }}
+                      />
+                    </div>
+                  ))}
+                </div>
+
+                <div className="artist-form-submit-row" style={{ marginTop: '12px' }}>
+                  <button type="submit" className="artist-submit-primary-btn">
+                    <span>부산 작가 아카이브 등록 신청하기 (관리자 자동 접수) →</span>
+                  </button>
+                </div>
+              </form>
+            )}
+          </div>
+        </section>
+      )}
+
+      {/* =====================================================================
+          SECTION 01-C: ADMIN ONLY PAGE — 신청 등록 대기 / 등록 완료 관리 ('admin')
+         ===================================================================== */}
+      {activeSection === 'admin' && (
+        <section className="admin-dashboard-section">
+          <div className="section-bar">
+            <div className="section-bar-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <ShieldCheck size={18} color="var(--marine)" />
+              <h2>부산 작가 등록 신청 관리자 페이지 (대기 / 완료 관리)</h2>
+            </div>
+            {isAdminAuthed && (
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <button
+                  type="button"
+                  className="apply-page-back-btn"
+                  onClick={() => setActiveSection('artists')}
+                >
+                  부산 작가 · 작품 페이지 보기 ↗
+                </button>
+                <button type="button" className="admin-logout-btn" onClick={handleAdminLogout}>
+                  관리자 잠금 (로그아웃)
+                </button>
+              </div>
+            )}
+          </div>
+
+          {!isAdminAuthed ? (
+            <div className="admin-login-gate-wrap">
+              <form onSubmit={handleAdminLogin} className="admin-login-card">
+                <div className="admin-login-icon">
+                  <Lock size={22} color="var(--marine)" />
+                </div>
+                <h3>관리자 전용 페이지 인증</h3>
+                <p>
+                  부산 작가 아카이브 신청 등록 대기 및 완료 내역은 관리자(floreur)만 열람·승인할 수 있습니다. 관리자 비밀번호를 입력해 주세요.
+                </p>
+                <input
+                  type="password"
+                  required
+                  value={adminPasswordInput}
+                  onChange={(e) => setAdminPasswordInput(e.target.value)}
+                  placeholder="관리자 비밀번호 입력"
+                  className="form-input"
+                  style={{ textAlign: 'center', fontSize: '15px', letterSpacing: '0.08em' }}
+                />
+                {adminAuthError && <div className="admin-auth-error">{adminAuthError}</div>}
+                <button type="submit" className="artist-submit-primary-btn" style={{ width: '100%' }}>
+                  <span>관리자 페이지 입장하기 →</span>
+                </button>
+              </form>
+            </div>
+          ) : (
+            <div className="admin-dashboard-body">
+              {/* Summary KPI Strip */}
+              <div className="admin-kpi-grid">
+                <div
+                  className={`admin-kpi-card ${adminFilterTab === 'pending' ? 'is-focused' : ''}`}
+                  onClick={() => setAdminFilterTab('pending')}
+                >
+                  <span className="admin-kpi-label">신청 등록 대기 (PENDING)</span>
+                  <strong className="admin-kpi-num is-pending">{pendingApplicationsCount}건</strong>
+                  <span className="admin-kpi-sub">포트폴리오 확인 및 승인 대기 중</span>
+                </div>
+                <div
+                  className={`admin-kpi-card ${adminFilterTab === 'approved' ? 'is-focused' : ''}`}
+                  onClick={() => setAdminFilterTab('approved')}
+                >
+                  <span className="admin-kpi-label">신청 등록 완료 (APPROVED)</span>
+                  <strong className="admin-kpi-num is-approved">{approvedApplicationsCount}건</strong>
+                  <span className="admin-kpi-sub">승인 완료 · 작가 페이지에 자동 반영됨</span>
+                </div>
+                <div
+                  className={`admin-kpi-card ${adminFilterTab === 'all' ? 'is-focused' : ''}`}
+                  onClick={() => setAdminFilterTab('all')}
+                >
+                  <span className="admin-kpi-label">전체 누적 신청 / 현재 총 등재 작가</span>
+                  <strong className="admin-kpi-num">
+                    총 {applications.length}건 신청 · {artistList.length}명 노출중
+                  </strong>
+                  <span className="admin-kpi-sub">기본 검증 작가 50명 + 신규 승인 {approvedApplicationsCount}명</span>
+                </div>
+              </div>
+
+              {/* Filter Tabs: 신청 등록 대기 / 신청 등록 완료 / 전체 */}
+              <div className="filter-strip" style={{ borderTop: '1px solid var(--line-strong)' }}>
+                <div className="filter-tabs">
+                  <button
+                    type="button"
+                    className={`filter-tab ${adminFilterTab === 'pending' ? 'active' : ''}`}
+                    onClick={() => setAdminFilterTab('pending')}
+                  >
+                    <Clock size={13} />
+                    <span>신청 등록 대기</span>
+                    <span className="filter-tab-count">{pendingApplicationsCount}</span>
+                  </button>
+                  <button
+                    type="button"
+                    className={`filter-tab ${adminFilterTab === 'approved' ? 'active' : ''}`}
+                    onClick={() => setAdminFilterTab('approved')}
+                  >
+                    <Check size={13} />
+                    <span>신청 등록 완료</span>
+                    <span className="filter-tab-count">{approvedApplicationsCount}</span>
+                  </button>
+                  <button
+                    type="button"
+                    className={`filter-tab ${adminFilterTab === 'all' ? 'active' : ''}`}
+                    onClick={() => setAdminFilterTab('all')}
+                  >
+                    <span>전체 신청 내역</span>
+                    <span className="filter-tab-count">{applications.length}</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Applications List */}
+              <div className="admin-applications-list">
+                {applications.filter((app) =>
+                  adminFilterTab === 'all' ? true : app.status === adminFilterTab
+                ).length === 0 ? (
+                  <div className="admin-empty-state">
+                    <p>
+                      {adminFilterTab === 'pending'
+                        ? '현재 승인 대기 중인 신규 작가 등록 신청이 없습니다.'
+                        : adminFilterTab === 'approved'
+                        ? '아직 승인 완료된 신규 신청 내역이 없습니다.'
+                        : '접수된 작가 등록 신청 내역이 없습니다.'}
+                    </p>
+                    <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', justifyContent: 'center' }}>
+                      <button
+                        type="button"
+                        className="apply-secondary-btn"
+                        onClick={openArtistApplyPage}
+                      >
+                        + 작가 등록 신청 페이지 열기
+                      </button>
+                      <button
+                        type="button"
+                        className="artists-apply-cta-btn"
+                        onClick={() => {
+                          const demoApp: ArtistApplication = {
+                            id: `demo-app-${Date.now()}`,
+                            status: 'pending',
+                            submittedAt: '2026.11.05 15:00',
+                            name: '윤해랑 (예시 신청서)',
+                            nameEn: 'HAERANG YOON',
+                            discipline: '회화·미술',
+                            district: '수영구 광안동',
+                            jobTitle: '현대회화 작가',
+                            affiliation: '부산 수영구 광안동 스튜디오',
+                            instagram: '@cecilia_jhe',
+                            instagramUrl: 'https://www.instagram.com/cecilia_jhe/',
+                            portfolioUrl: 'https://www.bscf.or.kr',
+                            collectionsAndMedia: '린넨 캔버스에 유채, 아크릴릭 및 모래 혼합매체',
+                            education: '부산대학교 미술학과 서양화전공 학사 졸업',
+                            detailedIntro:
+                              '부산 광안리와 영도 해안의 윤슬, 파도의 마모 흔적을 두터운 유채 임파스토 기법으로 기록합니다. 바다와 맞닿은 도시의 일상을 캔버스 위에 축적하는 회화 작업을 이어가고 있습니다.',
+                            careerText:
+                              '2026 개인전 《푸른 잔상》, 갤러리 수정, 부산\n2025 단체전 《부산 청년미술제》, 부산문화회관, 부산\n2024 부산문화재단 청년예술가 창작지원 선정',
+                            contact: '010-8234-5678 / haerang@example.com',
+                            works: [
+                              {
+                                title: '파도의 결 I',
+                                year: '2026',
+                                mediumDetail: '린넨 캔버스에 유채',
+                                imageUrl:
+                                  'https://www.bscf.or.kr/upload/Portpolio/file1_20250922031308338_0.jpg',
+                              },
+                              {
+                                title: '윤슬의 기록',
+                                year: '2026',
+                                mediumDetail: '린넨 캔버스에 유채',
+                                imageUrl:
+                                  'https://www.bscf.or.kr/upload/Portpolio/file2_20250922031308346_0.jpg',
+                              },
+                              {
+                                title: '푸른 수평선',
+                                year: '2025',
+                                mediumDetail: '린넨 캔버스에 유채',
+                                imageUrl:
+                                  'https://www.bscf.or.kr/upload/Portpolio/file3_20250922031308354_0.jpg',
+                              },
+                            ],
+                          };
+                          setApplications((prev) => [demoApp, ...prev]);
+                          setAdminFilterTab('pending');
+                        }}
+                      >
+                        <span>신청서 접수 화면 미리보기 (예시 1건 불러오기)</span>
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  applications
+                    .filter((app) =>
+                      adminFilterTab === 'all' ? true : app.status === adminFilterTab
+                    )
+                    .map((app) => {
+                      const instaInfo = normalizeInstagramInput(app.instagram);
+                      const cleanPortfolio = app.portfolioUrl.trim()
+                        ? app.portfolioUrl.trim().startsWith('http')
+                          ? app.portfolioUrl.trim()
+                          : `https://${app.portfolioUrl.trim()}`
+                        : '';
+
+                      return (
+                        <article key={app.id} className="admin-app-card">
+                          <div className="admin-app-card-header">
+                            <div className="admin-app-title-group">
+                              <span
+                                className={`admin-status-chip ${
+                                  app.status === 'approved' ? 'is-approved' : 'is-pending'
+                                }`}
+                              >
+                                {app.status === 'approved' ? '✓ 등록 완료 (아카이브 노출중)' : '● 등록 대기중'}
+                              </span>
+                              <span className="artist-minimal-genre">{app.discipline}</span>
+                              <span className="artist-minimal-district-chip">부산 {app.district}</span>
+                              <h3 className="admin-app-artist-name">
+                                {app.name} <span>{app.nameEn}</span>
+                              </h3>
+                            </div>
+
+                            <div className="admin-app-header-actions">
+                              {app.status === 'pending' ? (
+                                <button
+                                  type="button"
+                                  className="admin-approve-btn"
+                                  onClick={() => handleApproveApplication(app.id)}
+                                >
+                                  <Check size={14} />
+                                  <span>승인 · 작가 페이지에 등록 완료 처리</span>
+                                </button>
+                              ) : (
+                                <>
+                                  <button
+                                    type="button"
+                                    className="admin-preview-btn"
+                                    onClick={() => {
+                                      const matched = artistList.find(
+                                        (a) => a.id === `approved-${app.id}`
+                                      );
+                                      if (matched) setActiveArtist(matched);
+                                    }}
+                                  >
+                                    <span>작가 상세 화면 미리보기 ↗</span>
+                                  </button>
+                                  <button
+                                    type="button"
+                                    className="admin-revert-btn"
+                                    onClick={() => handleRevertApplicationToPending(app.id)}
+                                  >
+                                    <span>등록 대기로 되돌리기</span>
+                                  </button>
+                                </>
+                              )}
+                              <button
+                                type="button"
+                                className="admin-delete-btn"
+                                onClick={() => handleDeleteApplication(app.id)}
+                                title="신청 내역 삭제"
+                              >
+                                <Trash2 size={14} />
+                              </button>
+                            </div>
+                          </div>
+
+                          {/* Spec Grid: 인스타그램 / 온라인 포트폴리오 / 주요 매체 / 학력 / 연락처 */}
+                          <div className="artist-naver-spec-box" style={{ marginTop: '14px' }}>
+                            <div className="artist-naver-spec-item">
+                              <span className="artist-naver-spec-key">인스타그램 계정</span>
+                              <span className="artist-naver-spec-val">
+                                {instaInfo.url ? (
+                                  <a
+                                    href={instaInfo.url}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    style={{
+                                      color: 'var(--marine)',
+                                      fontWeight: 700,
+                                      textDecoration: 'underline',
+                                    }}
+                                  >
+                                    {instaInfo.handle} ↗
+                                  </a>
+                                ) : (
+                                  app.instagram || '-'
+                                )}
+                              </span>
+                            </div>
+                            <div className="artist-naver-spec-item">
+                              <span className="artist-naver-spec-key">온라인 포트폴리오</span>
+                              <span className="artist-naver-spec-val">
+                                {cleanPortfolio ? (
+                                  <a
+                                    href={cleanPortfolio}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    style={{
+                                      color: 'var(--marine)',
+                                      fontWeight: 700,
+                                      textDecoration: 'underline',
+                                    }}
+                                  >
+                                    {cleanPortfolio} ↗
+                                  </a>
+                                ) : (
+                                  <span style={{ color: 'var(--ink-muted)' }}>인스타그램 단일 운영</span>
+                                )}
+                              </span>
+                            </div>
+                            <div className="artist-naver-spec-item">
+                              <span className="artist-naver-spec-key">주요 매체</span>
+                              <span className="artist-naver-spec-val">{app.collectionsAndMedia}</span>
+                            </div>
+                            <div className="artist-naver-spec-item">
+                              <span className="artist-naver-spec-key">학력</span>
+                              <span className="artist-naver-spec-val">{app.education}</span>
+                            </div>
+                            <div className="artist-naver-spec-item" style={{ borderBottom: 'none' }}>
+                              <span className="artist-naver-spec-key">소속 · 연락처</span>
+                              <span className="artist-naver-spec-val">
+                                {app.affiliation} · <strong>{app.contact}</strong>
+                              </span>
+                            </div>
+                            <div
+                              className="artist-naver-spec-item"
+                              style={{ borderRight: 'none', borderBottom: 'none' }}
+                            >
+                              <span className="artist-naver-spec-key">신청 / 승인 일시</span>
+                              <span className="artist-naver-spec-val">
+                                신청: {app.submittedAt}
+                                {app.approvedAt ? ` / 승인: ${app.approvedAt}` : ''}
+                              </span>
+                            </div>
+                          </div>
+
+                          {/* Intro & Career */}
+                          <div className="artist-minimal-bio-grid" style={{ marginTop: '16px' }}>
+                            <div className="artist-minimal-col">
+                              <div className="artist-minimal-label">작가 소개</div>
+                              <p className="artist-minimal-intro">{app.detailedIntro}</p>
+                            </div>
+                            <div className="artist-minimal-col">
+                              <div className="artist-minimal-label">최근 주요 이력</div>
+                              <ul className="artist-minimal-career-list">
+                                {app.careerText
+                                  .split('\n')
+                                  .map((l) => l.trim())
+                                  .filter(Boolean)
+                                  .map((line, i) => (
+                                    <li key={i}>{line}</li>
+                                  ))}
+                              </ul>
+                            </div>
+                          </div>
+
+                          {/* Works Preview & Quick Image URL Edit for Admin */}
+                          <div className="admin-app-works-row">
+                            {app.works.map((w, wIdx) => (
+                              <div key={wIdx} className="admin-app-work-item">
+                                <div className="admin-app-work-label">
+                                  대표작 0{wIdx + 1} {w.title ? `— ${w.title}` : ''}
+                                </div>
+                                {w.imageUrl ? (
+                                  <div className="admin-app-work-thumb">
+                                    <img src={w.imageUrl} alt={w.title || app.name} />
+                                  </div>
+                                ) : (
+                                  <div className="admin-app-work-empty">이미지 미첨부</div>
+                                )}
+                                <input
+                                  value={w.imageUrl.startsWith('data:') ? '(업로드된 이미지 파일)' : w.imageUrl}
+                                  readOnly={w.imageUrl.startsWith('data:')}
+                                  onChange={(e) =>
+                                    handleAdminUpdateAppWorkUrl(app.id, wIdx, e.target.value)
+                                  }
+                                  placeholder="관리자: 작품 이미지 URL 입력/수정"
+                                  className="form-input"
+                                  style={{ fontSize: '11.5px', padding: '5px 8px', marginTop: '6px' }}
+                                />
+                              </div>
+                            ))}
+                          </div>
+                        </article>
+                      );
+                    })
+                )}
+              </div>
+            </div>
+          )}
         </section>
       )}
 
@@ -1746,15 +2960,6 @@ export function App() {
 
                   <div className="artist-minimal-actions">
                     <a
-                      href={activeArtist.portfolioUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="artist-btn-outline"
-                    >
-                      <span>포트폴리오</span>
-                      <ArrowUpRight size={13} />
-                    </a>
-                    <a
                       href={`mailto:floreur88@gmail.com?subject=${encodeURIComponent(
                         `[PARANG 작가 콜라보 의뢰] ${activeArtist.name} 작가 협업 문의 (floreur 에이전시 연결)`
                       )}`}
@@ -1766,7 +2971,7 @@ export function App() {
                   </div>
                 </div>
 
-                {/* Compact Naver Profile Summary (소속/거점 · 학력 · 주요 매체/소장) */}
+                {/* Compact Naver Profile Summary (소속/거점 · 학력 · 공식 작업 계정 · 주요 매체/소장) */}
                 {np && (
                   <div className="artist-naver-spec-box">
                     <div className="artist-naver-spec-item">
@@ -1777,7 +2982,45 @@ export function App() {
                       <span className="artist-naver-spec-key">학력</span>
                       <span className="artist-naver-spec-val">{np.education}</span>
                     </div>
-                    <div className="artist-naver-spec-item" style={{ gridColumn: '1 / -1', borderRight: 'none', borderBottom: 'none' }}>
+                    <div className="artist-naver-spec-item" style={{ borderBottom: 'none' }}>
+                      <span className="artist-naver-spec-key">공식 작업 계정</span>
+                      <span className="artist-naver-spec-val">
+                        <a
+                          href={activeArtist.instagramUrl || activeArtist.portfolioUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          style={{
+                            color: 'var(--marine)',
+                            fontWeight: 600,
+                            textDecoration: 'underline',
+                            textUnderlineOffset: '3px',
+                            marginRight: '10px',
+                          }}
+                        >
+                          {activeArtist.instagram} ↗
+                        </a>
+                        {activeArtist.portfolioUrl &&
+                          activeArtist.portfolioUrl !== activeArtist.instagramUrl && (
+                            <a
+                              href={activeArtist.portfolioUrl}
+                              target="_blank"
+                              rel="noreferrer"
+                              style={{
+                                color: 'var(--ink-muted)',
+                                fontSize: '12px',
+                                textDecoration: 'underline',
+                                textUnderlineOffset: '3px',
+                              }}
+                            >
+                              {activeArtist.portfolioUrl
+                                .replace(/^https?:\/\/(www\.)?/, '')
+                                .replace(/\/$/, '')}{' '}
+                              ↗
+                            </a>
+                          )}
+                      </span>
+                    </div>
+                    <div className="artist-naver-spec-item" style={{ borderRight: 'none', borderBottom: 'none' }}>
                       <span className="artist-naver-spec-key">주요 매체 · 소장</span>
                       <span className="artist-naver-spec-val">{np.collectionsAndMedia}</span>
                     </div>
@@ -2450,9 +3693,9 @@ export function App() {
                   >
                     <option value="회화·미술">회화·미술</option>
                     <option value="도자·조형">도자·조형</option>
-                    <option value="프린트·드로잉">프린트·드로잉</option>
-                    <option value="사진">사진</option>
                     <option value="공예·오브제">공예·오브제</option>
+                    <option value="일러스트·드로잉">일러스트·드로잉</option>
+                    <option value="사진">사진</option>
                   </select>
                 </div>
               </div>

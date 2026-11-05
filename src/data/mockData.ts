@@ -38,7 +38,7 @@ export interface Artist {
   indexNo: string;
   name: string;
   nameEn: string;
-  discipline: '회화·미술' | '도자·조형' | '프린트·드로잉' | '사진' | '공예·오브제' | string;
+  discipline: '회화·미술' | '도자·조형' | '일러스트·드로잉' | '프린트·드로잉' | '사진' | '공예·오브제' | string;
   district: string;
   updatedAt: string;
   statement: string;
@@ -194,6 +194,11 @@ const MEDIUM_TEMPLATES: Record<string, string[]> = {
     '세라믹 조형토, 유리질 유약 중첩 소성 및 금속 구조 결합',
     '조합토 물레 성형, 무광 재유 및 복합 오브제 설치',
   ],
+  '일러스트·드로잉': [
+    '종이에 펜·잉크 일러스트레이션 및 과슈·아크릴릭 채색',
+    '코튼지(300g)에 디지털 일러스트레이션 지클리 아카이벌 프린트 (Ed. of 20)',
+    '판화지에 오일파스텔, 색연필 드로잉 및 실크스크린 별색 에디션',
+  ],
   '프린트·드로잉': [
     '판화지(300g)에 실크스크린, 리소그라프 별색 및 목탄 드로잉',
     '한지 위에 수묵 드로잉 및 아카이벌 피그먼트 에디션',
@@ -221,6 +226,11 @@ const DIMENSION_TEMPLATES: Record<string, string[]> = {
     '42 × 38 × 55(h) cm (가변설치 가능)',
     '28 × 28 × 36(h) cm',
     '65 × 40 × 32(h) cm',
+  ],
+  '일러스트·드로잉': [
+    '50.0 × 70.0 cm (프레임 포함 56 × 76 cm)',
+    '42.0 × 59.4 cm (A2 아카이벌 에디션)',
+    '38.0 × 52.0 cm (원화 드로잉)',
   ],
   '프린트·드로잉': [
     '50.0 × 70.0 cm (프레임 포함 56 × 76 cm)',
@@ -302,8 +312,8 @@ function extractExhibitionsFromBio(bio: string, name: string, discipline: string
 const ARTIST_NAVER_PROFILES: Record<string, NaverArtistProfile> = {
   'ttg-dokikim': {
     jobTitle: '설치미술가 · 다매체 조형 작가',
-    affiliation: '부산 원도심 창작공간 또따또가 6기 입주작가',
-    education: '현대미술 입체·설치 전공',
+    affiliation: '부산 원도심 창작공간 또따또가 6기 입주작가 (중구)',
+    education: '부산대학교 미술학과 조소 전공 졸업',
     awards: '하정웅청년작가초대전 《빛2023》 선정 / 부산시립미술관 《젊은 시각 새로운 시선》 선정',
     collectionsAndMedia: '부산현대미술관 소장 / 열·빛·중력 기반 다매체 가변 설치',
     signatureKeywords: [],
@@ -311,15 +321,15 @@ const ARTIST_NAVER_PROFILES: Record<string, NaverArtistProfile> = {
       '비물질적 요소인 빛, 열, 중력 등을 매체로 존재의 근원과 세계의 작동 원리를 탐구합니다. 물질이 열에 의해 녹아내리거나 빛과 중력의 개입으로 변화하는 임계의 순간을 포착하여, 전시장 전체를 관람자가 감각적으로 경험할 수 있는 사유의 장으로 전환시킵니다.',
     careerTimeline: [
       { year: '2025', badge: '단체전', content: '《열 개의 눈》 부산현대미술관, 부산 / 《의존하는, 의존하지 않는》 아마도예술공간, 서울' },
-      { year: '2024', badge: '개인전', content: '《사과와 달 (Apple and Moon)》, 갤러리바톤, 서울' },
+      { year: '2024', badge: '개인전', content: '《사과와 달 (Apple and Moon)》, 갤러리바톤 / 《목소리를 삼키고 달을 만나다》 영주맨션, 부산' },
       { year: '2023', badge: '수상·선정', content: '부산시립미술관 《젊은 시각 새로운 시선》 및 광주시립미술관 《하정웅청년작가초대전》 선정' },
       { year: '2023', badge: '단체전', content: '《2023 바다미술제: 깜박이는 해안, 상상하는 바다》, 일광해수욕장, 부산' },
-      { year: '2021', badge: '소장·출판', content: '부산현대미술관 소장품전 《감각의 문법》 및 홍티아트센터 개인전 《유령의 죽음》' },
+      { year: '2021', badge: '소장·출판', content: '부산현대미술관 소장품전 《감각의 문법》 및 홍티아트센터 개인전 《유령의 죽음》, 부산' },
     ],
   },
   'ttg-seongahsim': {
     jobTitle: '콜라주·오브제 작가 · 문화예술교육 기획자',
-    affiliation: '원도심 창작공간 또따또가 6기 입주작가 · 보임과 숨김 제작소 대표',
+    affiliation: '부산 원도심 창작공간 또따또가 6기 입주작가 · 보임과 숨김 제작소 대표',
     education: '고신대학교 서양화 학사 · 동 상담대학원 상담심리학 수료',
     awards: '부산문화재단 문화로공간창업지원 선정 / 초량 예술정원 공공미술 선정',
     collectionsAndMedia: '수집 지류 콜라주 오브제, 실크스크린, 아트 퍼즐·보드게임',
@@ -331,12 +341,12 @@ const ARTIST_NAVER_PROFILES: Record<string, NaverArtistProfile> = {
       { year: '2025', badge: '레지던시·경력', content: '부산 원도심 창작공간 〈또따또가〉 6기 입주작가' },
       { year: '2022', badge: '개인전', content: '어린이날 100주년 기념 미술체험전 《나랑 친구할래?》, 민주공원, 부산' },
       { year: '2021', badge: '단체전', content: '《Under 39 부산 청년작가 아트페어》, 신세계백화점 센텀시티점, 부산' },
-      { year: '2020', badge: '소장·출판', content: '시민의제 보드게임 〈아젠다메이커스〉 개발 및 초량 예술정원 프로젝트 참여' },
+      { year: '2020', badge: '소장·출판', content: '시민의제 보드게임 〈아젠다메이커스〉 개발 및 초량 예술정원 프로젝트 참여, 부산' },
     ],
   },
   'ttg-sayoonyang': {
     jobTitle: '인터랙션 디자이너 · 오브제 크리에이터',
-    affiliation: '원도심 창작공간 또따또가 6기 입주작가',
+    affiliation: '부산 원도심 창작공간 또따또가 6기 입주작가',
     education: '시각·인터랙션 디자인 및 참여형 놀이 도구 연구',
     awards: '덴마크 Next Library 프로젝트 선정 / 독일 루프트한자 기내용 토이 협업',
     collectionsAndMedia: '아날로그 놀이 오브제, 팝업 아트북, 인터랙티브 설치',
@@ -345,15 +355,14 @@ const ARTIST_NAVER_PROFILES: Record<string, NaverArtistProfile> = {
       '‘놀이와 배움’, ‘도구와 과정’, ‘경험과 기록’을 축으로 아날로그 조형물과 디지털 인터랙티브 매체를 넘나드는 작업을 전개합니다. 작은 장난감과 팝업북부터 관객 참여형 설치까지, 사람들이 스스로의 관점을 담아 결과물을 만들어낼 수 있는 도구와 과정을 설계합니다.',
     careerTimeline: [
       { year: '2025', badge: '단체전', content: '《Next Library 2025: Books, Glue and Saw》 인터랙티브 세션, 오르후스(덴마크)' },
-      { year: '2025', badge: '레지던시·경력', content: '독일 루프트한자(Lufthansa) & DeSter 어린이 기내용 토이 개발 협업 (2022–2025)' },
+      { year: '2025', badge: '레지던시·경력', content: '부산 원도심 창작공간 또따또가 6기 입주 / 독일 루프트한자 기내용 토이 협업' },
       { year: '2023', badge: '소장·출판', content: '도서문화재단 씨앗 컨퍼런스 《책, 풀, 톱》 및 아카이브 《좋은 삶 질문집》 디렉팅' },
       { year: '2021', badge: '소장·출판', content: '하자센터×서울연필 《소재모아 놀이키트》 아이덴티티 및 키트 개발' },
-      { year: '2020', badge: '단체전', content: '모아모아랩 개관전 《소재와 놀이전》 전시 아이덴티티 설계' },
     ],
   },
   'ttg-haeunjoe': {
     jobTitle: '서양화가 · 회화 및 오브제 아티스트',
-    affiliation: '원도심 창작공간 또따또가 6기 입주작가',
+    affiliation: '부산 원도심 창작공간 또따또가 6기 입주작가',
     education: '이화여자대학교 일반대학원 서양화 전공 석사 졸업',
     awards: '2025 부산근현대역사관 〈부산 커넥티드〉 신진작가 공모 당선',
     collectionsAndMedia: '캔버스에 유채·아크릴릭 및 소형 입체 오브제',
@@ -361,181 +370,98 @@ const ARTIST_NAVER_PROFILES: Record<string, NaverArtistProfile> = {
     detailedIntro:
       '끊임없는 자극과 속도에 피로해진 현대인들에게 일상에서 놓쳐버린 찰나의 고요함과 사소한 풍경의 온기를 건네는 회화 작가입니다. 밤과 언덕, 식탁과 창가처럼 고즈넉한 시공간을 서정적인 색채와 정제된 붓질로 화면에 담아냅니다.',
     careerTimeline: [
-      { year: '2026', badge: '단체전', content: '《바닷물로 밥을 짓는 법》, 스페이스 닻, 부산' },
+      { year: '2026', badge: '단체전', content: '《바닷물로 밥을 짓는 법》, 스페이스 닻, 부산 수영구' },
       { year: '2025', badge: '개인전', content: '《밤과 언덕의 밀담》, 전시공간 영영, 부산' },
-      { year: '2025', badge: '수상·선정', content: '《부산 커넥티드》 공모 당선전, 부산근현대역사관 / 예술의전당 한가람미술관 청년미술상점' },
+      { year: '2025', badge: '수상·선정', content: '《부산 커넥티드》 공모 당선전, 부산근현대역사관 금고갤러리' },
       { year: '2024', badge: '단체전', content: '《Under 39 청년작가 아트페어》, 신세계백화점 센텀시티점, 부산' },
     ],
   },
-  'bscf-5256': {
-    jobTitle: '한국화가 · 현대 채색회화 작가',
-    affiliation: '부산 해운대구 스튜디오 · 부산대학교 미술학 박사 연구자',
-    education: '부산대학교 예술대학 미술학과 한국화 전공 학·석사 및 미술학 박사 졸업',
-    awards: '2026 부산문화재단 시각예술 지원사업 선정 / 개인전 12회 개최',
-    collectionsAndMedia: '장지·캔버스에 한국화 수간채색 및 혼합매체',
+  'ttg-kunyekim': {
+    jobTitle: '일러스트레이터 · 회화 및 아트북 작가',
+    affiliation: '부산 원도심 창작공간 또따또가 6기 입주작가 (전 감만창의문화촌 입주작가)',
+    education: '시각예술·일러스트레이션 및 독립출판 아트북 창작',
+    awards: '2025 부산문화재단 국제 레지던시 파견작가 선정 / 청년 예술작품 구독사업 선정',
+    collectionsAndMedia: '캔버스·종이에 혼합채색, 독립 그림책, 애니메이션 아트디렉팅',
     signatureKeywords: [],
     detailedIntro:
-      '인식의 다차원성과 ‘차연(Différance)’의 개념을 모티프로 삼아, 눈에 보이는 현상 너머의 사유 공간과 우주적 리듬을 전통 수간채색 기법과 현대적 조형 언어로 풀어냅니다.',
+      '깊은 밤 펼쳐지는 신비한 꿈과 달콤 쌉싸름한 상상들을 여행하듯 채집하여, 낯선 설렘과 내면의 대화를 회화·일러스트레이션과 그림책으로 풀어냅니다. 부산 원도심과 해운대·영도를 무대로 개인전과 아트북 프로젝트를 활발히 이어가고 있습니다.',
     careerTimeline: [
-      { year: '2026', badge: '개인전', content: '《Différance》 (부산문화재단 지원사업), 솔트갤러리, 부산' },
-      { year: '2025', badge: '개인전', content: '초대 개인전 《사유의 차원》, 부산경찰청 갤러리, 부산' },
-      { year: '2024', badge: '개인전', content: '《차원의 변이》, 부산대학교 아트센터, 부산' },
-      { year: '2023', badge: '개인전', content: '초대 개인전 《My Universe》, 킴스아트필드미술관, 부산' },
-      { year: '2020', badge: '개인전', content: '《SEESAW》(디오티미술관), 《AS YOU SEE》(부산대 아트센터) 등 개인전 12회' },
+      { year: '2026', badge: '개인전', content: '《청년 예술작품 구독》 개인전, 캠퍼스 디, 부산' },
+      { year: '2025', badge: '개인전', content: '《NAKED》 해운대문화회관 기획전시, 부산 / 《일렁임의 찰나》 또따또가 쇼케이스' },
+      { year: '2025', badge: '레지던시·경력', content: '부산문화재단 국제 레지던시 파견(일본 하마마쯔) 및 또따또가 6기 입주작가' },
+      { year: '2024', badge: '개인전', content: '《마음의 모양》 무인화랑 부산 / 국회부산도서관×부산문화재단 구독전' },
+      { year: '2023', badge: '레지던시·경력', content: '부산문화재단 감만창의문화촌 입주작가 (2021–2023) 및 영도 스크랩 개인전' },
     ],
   },
-  'bscf-5193': {
-    jobTitle: '텍스타일 아티스트 · 소프트 스컬프처 작가',
-    affiliation: '부산 금정구 스튜디오',
-    education: '영국 왕립예술학교(RCA) Textiles 석사 / 부산대학교 섬유조형디자인 박사 졸업',
-    awards: '부산문화재단 시각예술 창작지원 선정 / 국내외 섬유조형 기획전 초청',
-    collectionsAndMedia: '니팅·타피스트리 기반 공간 설치 및 부드러운 조각(Soft Sculpture)',
+  'ttg-hyerimkim': {
+    jobTitle: '서양화가 · 유채 클로즈업 회화 작가',
+    affiliation: '부산 원도심 창작공간 또따또가 6기 입주작가',
+    education: '부산대학교 미술학과 서양화전공 학사 및 동 일반대학원 석사과정',
+    awards: 'KT&G 상상마당 부산 《ARTISTART》 선정 / 부산미술대학 우수졸업작품 초대전 선정',
+    collectionsAndMedia: '캔버스에 유채 블렌딩 〈Lithops · 다육식물 군집〉 연작',
     signatureKeywords: [],
     detailedIntro:
-      '섬유가 지닌 유연한 물성과 중력·장력을 활용해 공간 전체로 확장되는 ‘부드러운 조각(Soft Sculpture)’을 탐구합니다. 반복되는 섬유의 단위가 모여 만들어내는 배열을 통해, 개인의 존재가 타인 및 주변 환경과 어떻게 연결되고 호흡하는지 시각화합니다.',
+      '소량의 물만으로도 오랜 시간을 견뎌내는 선인장과 다육식물 리돕스(Lithops)의 강인한 생명력을 클로즈업 구도와 섬세한 유화 블렌딩으로 화폭에 담아냅니다. 대상을 확대해 깊이 들여다보는 과정을 통해 인간과 닮은 군집의 온기와 미묘한 색의 변주를 시각화합니다.',
     careerTimeline: [
-      { year: '2026', badge: '개인전', content: '《덧 (Overlaid): 배열과 관계의 공간》 섬유조형 개인전, 부산' },
-      { year: '2025', badge: '개인전', content: '《Soft Arrangement》 소프트 스컬프처 설치 개인전, 부산·서울' },
-      { year: '2024', badge: '단체전', content: '《동시대 한국 섬유예술의 확장전》 및 국제 텍스타일 교류전' },
-      { year: '2022', badge: '레지던시·경력', content: '부산대학교 섬유조형디자인 박사 취득 및 영국 RCA 석사 졸업' },
+      { year: '2025', badge: '레지던시·경력', content: '부산 원도심 창작공간 〈또따또가〉 6기 입주작가 선정 (2025–2026)' },
+      { year: '2023', badge: '단체전', content: '《새로운 출발선에 서다》 부산대 아트센터 / 《ARTISTART》 KT&G 상상마당 부산' },
+      { year: '2023', badge: '단체전', content: '《나래展: 빛나는 물결》 갤러리마롱 / 《ASYAAF 아시아프》 출품' },
+      { year: '2022', badge: '단체전', content: '《BFAA 아트페어 New Wave 특별전》 벡스코, 부산 / 정준호갤러리 초대전, 부산' },
     ],
   },
-  'bscf-5065': {
-    nameEnOverride: 'KANG MIN GI',
-    jobTitle: '현대미술작가 · 동시대 회화 작가',
-    affiliation: '부산 영도구 스튜디오',
-    education: '미술대학 회화 전공 졸업',
-    awards: '2024 광주시립미술관 《하정웅 청년작가초대전: 빛》 선정',
-    collectionsAndMedia: '캔버스에 유채·아크릴릭 혼합매체 회화 〈모색〉 연작',
+  'ttg-minkyungchoi': {
+    jobTitle: '조형 예술가 · 식(食)미술 & 결정체 오브제 작가',
+    affiliation: '부산 원도심 창작공간 또따또가 6기 입주작가 (굿모닝레시피 디렉터)',
+    education: '현대조형 및 식재료 물성·결정체 오브제 연구',
+    awards: '2024 부산항 제1부두 《공진화 발효》 선정 / 2023 부산현대미술관 프로젝트 커미션',
+    collectionsAndMedia: '물·한천·설탕 결정체(코하쿠토·양갱) 및 전통 발효 조형 오브제',
     signatureKeywords: [],
     detailedIntro:
-      '불완전하게 연결된 현대 사회의 구조와 그 사이에서 균형을 찾아가는 개인의 실존적 ‘모색’을 절제된 색채와 구축적인 화면으로 풀어내는 청년 회화 작가입니다.',
+      '물, 한천, 설탕으로 빚어낸 반투명한 결정체와 전통 발효 물성을 매개로 음식과 비(非)음식, 조형 오브제 사이의 인식적 경계를 탐구합니다. 시간과 온·습도에 따라 결정화되고 변화하는 물질의 형성 과정을 통해 관객의 공감각적 경험을 확장합니다.',
     careerTimeline: [
-      { year: '2025', badge: '단체전', content: '《아트블리츠 광주 (Art Blitz Gwangju)》 출품' },
-      { year: '2024', badge: '개인전', content: '《Between》 강민기 개인전, 부산' },
-      { year: '2024', badge: '수상·선정', content: '《하정웅 청년작가초대전: 빛》, 광주시립미술관' },
-      { year: '2023', badge: '개인전', content: '《공들이지 않은 탑》(2023) 및 《unlinked》(2022) 개인전' },
-      { year: '2022', badge: '단체전', content: '《창원아시아미술제》 초청 출품' },
-    ],
-  },
-  'bscf-5062': {
-    jobTitle: '현대미술작가 · 포토-페인팅 아티스트',
-    affiliation: '부산 해운대구 스튜디오',
-    education: '미술대학 회화·시각예술 전공 (1985년생)',
-    awards: '부산문화재단 청년예술작품 구독사업 선정 / 맥화랑 개인전 개최',
-    collectionsAndMedia: '사진 이미지 위에 회화 물감 도포 및 스크래치 기법',
-    signatureKeywords: [],
-    detailedIntro:
-      '행복과 불행, 빛과 어둠, 현실과 이상처럼 이항대립으로 설명되지 않는 ‘사이 공간’을 탐구합니다. 사진 이미지 위에 물감을 덮고 다시 긁어내는 과정을 반복하며, 과거의 기억이 현재의 경험에 의해 변형되는 과정을 시각화합니다.',
-    careerTimeline: [
-      { year: '2025', badge: '개인전', content: '《FADED》 배남주 개인전, 부산' },
-      { year: '2024', badge: '개인전', content: '《가변기억 (Variable Memory)》, 맥화랑, 부산 해운대구' },
-      { year: '2020', badge: '개인전', content: '《Quiet Night》 연작 개인전 (2019–2020), 부산' },
-      { year: '2017', badge: '개인전', content: '《Reflection》(2017) 및 《빛과 물질에 관한 이론》(2015) 개인전' },
-    ],
-  },
-  'bscf-5060': {
-    nameEnOverride: 'PARK HAN SAEM',
-    jobTitle: '시각예술가 · 풍경 및 다매체 회화 작가',
-    affiliation: '부산 전포·사하구 스튜디오',
-    education: '순수미술 및 시각예술 전공',
-    awards: '부산도서관 · 홍티예술촌 · 디오티미술관 · 대청호미술관 전시 선정',
-    collectionsAndMedia: '캔버스 회화 및 장소 리서치 기반 시각 매체',
-    signatureKeywords: [],
-    detailedIntro:
-      '특정 장소가 지닌 역사적 기억과 자연의 계절적 생명력을 직접 답사하고 채집하여, 사실적인 재현을 넘어선 다층적 시공간의 회화 화면으로 재구축합니다.',
-    careerTimeline: [
-      { year: '2024', badge: '개인전', content: '부산도서관 기획 전시 및 사하구 〈홍티예술촌〉 전시 발표, 부산' },
-      { year: '2023', badge: '개인전', content: '딥슬립커피 아트스페이스 개인전, 부산' },
-      { year: '2019', badge: '개인전', content: '《Omniverse》 개인전, 디오티미술관, 부산' },
-      { year: '2017', badge: '단체전', content: '대청호미술관 기획전 출품, 청주' },
+      { year: '2025', badge: '레지던시·경력', content: '부산 원도심 창작공간 〈또따또가〉 6기 입주작가 선정 (2025–2026)' },
+      { year: '2024', badge: '단체전', content: '《기대어 깃든: 공진화 발효 CO-EVOLUTION》, 부산항 제1부두, 부산 중구' },
+      { year: '2024', badge: '개인전', content: '《6 pieces: 보석세공사의 광물수집》 및 부산 카페 헬멧 2인전 《Neco z Alenky》' },
+      { year: '2023', badge: '소장·출판', content: '부산현대미술관 《정윤주 개인전: 수학자의 사물》 및 전남도립미술관 커미션 협업' },
     ],
   },
   'bscf-5058': {
     jobTitle: '현대미술작가 · 장소특정적 리서치 & 다매체 작가',
-    affiliation: '부산 남구 스튜디오',
-    education: '현대미술 회화·설치 전공',
+    affiliation: '부산 남구 스튜디오 · 전 또따또가 및 예술지구 P 입주작가',
+    education: '부산대학교 대학원 미술학과 졸업',
     awards: '독일 함부르크 Claussen-Simon · 일본 히로시마 아트센터 · 또따또가 · 예술지구P 입주작가',
     collectionsAndMedia: '장소 리서치 기반 회화, 사운드·오브제 설치 〈Concerto〉 연작',
     signatureKeywords: [],
     detailedIntro:
-      '특정한 기억과 장소에 축적된 시간의 흔적, 일상 공간의 미시적 틈새와 유무형의 가치를 시각화합니다. 장소특정적 리서치를 바탕으로 개인의 경험과 도시의 역사성이 교차하는 서사를 재구성합니다.',
+      '특정한 기억과 장소에 축적된 시간의 흔적, 일상 공간의 미시적 틈새와 유무형의 가치를 시각화합니다. 장소특정적 리서치를 바탕으로 개인의 경험과 부산 도시 공간의 역사성이 교차하는 서사를 재구성합니다.',
     careerTimeline: [
       { year: '2026', badge: '개인전', content: '장소특정적 리서치 프로젝트 개인전, 김해·부산' },
-      { year: '2025', badge: '개인전', content: '《콘체르토 (Concerto)》 개인전, 예술지구P, 부산' },
-      { year: '2023', badge: '개인전', content: '《P11과 P12 사이, 385일》, 스페이스 위버멘쉬 / 김해 웰컴레지던시 입주' },
-      { year: '2021', badge: '개인전', content: '《인공생활공인》, 디오티미술관, 부산 / 2020 예술지구P 입주작가' },
-      { year: '2019', badge: '레지던시·경력', content: '독일 함부르크(2019), 또따또가(2016–18), 일본 히로시마 아트센터(2015) 입주' },
-    ],
-  },
-  'bscf-5057': {
-    jobTitle: '입체·공간 조형작가 (활동명: 엔조 ENJO)',
-    affiliation: '부산 부산진구 전포동 스튜디오',
-    education: '조형예술 및 입체·공간 디자인 전공',
-    awards: '2019–2025 연례 개인전 6회 연속 발표',
-    collectionsAndMedia: '거울·스테인리스·아크릴 레이어 2.5차원 공간 조형',
-    signatureKeywords: [],
-    detailedIntro:
-      '거울, 반사, 선, 중첩된 레이어를 활용해 2차원 평면과 3차원 입체 사이의 중간 지점인 ‘2.5차원적 공간’을 구현합니다. 익숙한 사물과 자연의 기하학 문양을 재구성하여 보이지 않는 공간과 인식의 경계를 드러냅니다.',
-    careerTimeline: [
-      { year: '2025', badge: '개인전', content: '《Invisible & Perceived Space》 개인전, 부산' },
-      { year: '2024', badge: '개인전', content: '《Layers and Divisions: Unseen Dimensions》 개인전, 부산' },
-      { year: '2023', badge: '개인전', content: '《The Birth of a Space Cat》(2023) 및 《Space Cat》(2022) 개인전' },
-      { year: '2021', badge: '개인전', content: '《RETRO》(2021) 및 《Geometric Symbols Ⅲ》(2019) 개인전' },
-    ],
-  },
-  'bscf-5053': {
-    jobTitle: '조각가 · 평면회화 아티스트 (활동명: 제제 JEJE)',
-    affiliation: '부산 금정구 스튜디오',
-    education: '현대조소 및 회화 전공',
-    awards: '개인전 18회 · 국내외 아트페어(마이애미·파리·서울·부산) 출품',
-    collectionsAndMedia: '금속·아크릴·FRP 입체 조각 및 캔버스 페인팅 〈Entropy〉 연작',
-    signatureKeywords: [],
-    detailedIntro:
-      '어린아이의 자유롭고 정직한 시선을 매개로 현대인이 마주한 정체성의 혼란과 물질주의, 나아가 자연과 인간의 공존을 조각과 회화로 탐구합니다. 무거운 현실의 메시지를 밝고 유쾌한 반전의 조형 언어로 승화시킵니다.',
-    careerTimeline: [
-      { year: '2025', badge: '개인전', content: '《Entropy & Interwoven》 제18회 개인전 및 마이애미·파리 아트페어 출품' },
-      { year: '2023', badge: '개인전', content: '《Children of the Forest: 숲의 아이들》, 소울아트스페이스, 부산 해운대구' },
-      { year: '2020', badge: '개인전', content: '《IN TO THE NATURE》 제제 개인전' },
-      { year: '2019', badge: '개인전', content: '《Value of Materialism》 및 《JEJE × HI HEY HELLO》 개인전' },
-    ],
-  },
-  'bscf-5044': {
-    jobTitle: '서양화가 · 아크릴·콜라주 형상 회화 작가',
-    affiliation: '부산 사상구 A.A 예술기지 입주작가',
-    education: '부산대학교 대학원 서양화과 석사 졸업 (2017) / 신라대학교 서양화과 졸업 (2012)',
-    awards: 'A.A 예술기지 레지던시 선정 / KIAF SEOUL · 화랑미술제 · BAMA 출품',
-    collectionsAndMedia: '캔버스에 아크릴릭 및 콜라주 〈with you〉 연작',
-    signatureKeywords: [],
-    detailedIntro:
-      '얼굴이 지워진 인물 형상과 단순화된 신체 표현을 통해 현대 집단 사회 속 익명의 존재로 살아가는 우리의 심리와 감정을 탐구합니다. 표정 대신 몸짓과 오브제의 배치로 관람자가 각자의 서사를 투영할 수 있는 열린 화면을 만듭니다.',
-    careerTimeline: [
-      { year: '2025', badge: '단체전', content: '《KIAF SEOUL》, 《화랑미술제》, 《BAMA》 출품 및 A.A 예술기지 입주작가' },
-      { year: '2023', badge: '개인전', content: '구경환 제6회 개인전, 부산' },
-      { year: '2020', badge: '개인전', content: '제5회 개인전 및 울산아트페어·인천아시아아트쇼 출품' },
-      { year: '2018', badge: '개인전', content: '2015·2016·2018 개인전 연속 개최' },
+      { year: '2025', badge: '개인전', content: '《콘체르토 (Concerto)》 개인전, 예술지구 P, 부산 금정구' },
+      { year: '2023', badge: '개인전', content: '《P11과 P12 사이, 385일》, 스페이스 위버멘쉬, 부산' },
+      { year: '2021', badge: '개인전', content: '《인공생활공인》, 디오티미술관, 부산 / 2020 예술지구 P 입주작가' },
+      { year: '2019', badge: '레지던시·경력', content: '독일 함부르크(2019), 부산 또따또가(2016–18), 히로시마 아트센터(2015) 입주' },
     ],
   },
   'neolook-20251205k': {
-    jobTitle: '회화 · 패브릭 & 디지털 드로잉 작가',
-    affiliation: '부산 금정구 창작공간 활동',
+    jobTitle: '한국화가 · 패브릭 & 디지털 드로잉 작가',
+    affiliation: '부산 중구 동광길 42 스튜디오 · 금정구 창작활동',
     education: '한국화 및 복합매체 회화 전공',
-    awards: '예술지구 P 개인전 선정 (2025)',
+    awards: '부산문화재단 청년예술가 지원 선정 / 예술지구 P 개인전 (2025)',
     collectionsAndMedia: '한지에 채색, 광목천 박음질, 디지털 드로잉',
     signatureKeywords: [],
     detailedIntro:
-      '한지 위에 채색된 먹과 호분의 흔적, 광목천 박음질을 결합하여 삶의 순간들 속에서 스쳐 지나가는 감정의 미세한 움직임을 포착합니다. 구원과 파괴, 치유와 감염이라는 사랑의 양가성이 신체에 남기는 징후들을 독창적인 회화 언어로 풀어냅니다.',
+      '부산 중구 원도심 작업실을 거점으로 한지 위에 채색된 먹과 호분의 흔적, 광목천 박음질을 결합하여 삶의 순간들 속에서 스쳐 지나가는 감정의 미세한 움직임을 포착합니다. 구원과 파괴, 치유와 감염이라는 사랑의 양가성이 신체에 남기는 징후들을 독창적인 회화 언어로 풀어냅니다.',
     careerTimeline: [
       { year: '2025', badge: '개인전', content: '《사랑이라는 질병 (Love and Illness)》, 예술지구 P, 부산 금정구' },
-      { year: '2023', badge: '개인전', content: '《황인지 개인전》 (네오룩 아카이브 선정 발표)' },
-      { year: '2022', badge: '단체전', content: '부산 및 영남권 청년 회화 기획전 다수 참여' },
+      { year: '2024', badge: '개인전', content: '부산문화재단 후원 개인전 및 영남권 청년 회화 기획전 참여' },
+      { year: '2023', badge: '개인전', content: '《황인지 개인전》 (네오룩 아카이브 선정 발표), 부산' },
     ],
   },
   'neolook-20250808e': {
     jobTitle: '서양화가 · 광목천 아크릴 회화 작가',
-    affiliation: '부산 해운대구 스튜디오',
-    education: '회화 및 순수미술 전공',
-    awards: '갤러리 우 초대 개인전 선정 (2025)',
+    affiliation: '부산 해운대구·기장 스튜디오',
+    education: '영산대학교 학사 및 동아대학교 대학원 미술학과 석사 졸업',
+    awards: '갤러리 우 초대 개인전 (2025) / 부산시립미술관 《젊은 시각 새로운 시선》 선정',
     collectionsAndMedia: '광목천에 아크릴채색 〈To stand on this land〉 연작',
     signatureKeywords: [],
     detailedIntro:
@@ -543,20 +469,35 @@ const ARTIST_NAVER_PROFILES: Record<string, NaverArtistProfile> = {
     careerTimeline: [
       { year: '2025', badge: '개인전', content: '《이 땅에 서기 위하여 (To stand on this land)》, 갤러리 우, 부산 해운대구' },
       { year: '2024', badge: '단체전', content: '〈The Girl〉 및 〈Relationship Practice〉 연작 발표, 부산' },
-      { year: '2022', badge: '개인전', content: '《한충석 개인전》 (네오룩 아카이브 선정), 부산' },
+      { year: '2022', badge: '개인전', content: '《한충석 개인전》 및 부산시립미술관·클레이아크김해미술관 기획전 출품' },
+    ],
+  },
+  'neolook-20250425c': {
+    jobTitle: '한지 조형화가 · 입체 회화 아티스트',
+    affiliation: '부산 중구·금정구 스튜디오 (이건희 스튜디오)',
+    education: '회화 및 수제한지 조형미술 전공',
+    awards: '부산중구문화원 복병산 작은미술관 초대전 (2025) / 금샘미술관 개인전 (2023)',
+    collectionsAndMedia: '닥나무 수제한지 성형에 아크릴채색·바느질 〈가시적 촉각〉 연작',
+    signatureKeywords: [],
+    detailedIntro:
+      '닥나무 펄프를 손으로 조물거리며 성형한 수제한지 위에 아크릴 채색과 바느질을 결합해, 시각을 넘어 피부로 만져지는 듯한 ‘가시적 촉각’의 입체 회화를 구축합니다. 부산 중구 복병산 작은미술관과 금정문화회관 금샘미술관 등에서 활발히 개인전을 선보이고 있습니다.',
+    careerTimeline: [
+      { year: '2025', badge: '개인전', content: '《가시적 촉각 (Visual Tactility)》, 부산중구문화원 복병산 작은미술관, 부산 중구' },
+      { year: '2024', badge: '단체전', content: '〈생명이 꼼지락 거리는 시간〉 및 〈Daimon〉 수제한지 대작 발표' },
+      { year: '2023', badge: '개인전', content: '《이건희 개인전》, 금정문화회관 금샘미술관, 부산 금정구' },
     ],
   },
   'neolook-20241204i': {
     jobTitle: '현대 한국화가 · 수묵 콜라주 작가',
-    affiliation: '부산 금정구 스튜디오',
-    education: '한국화 전공',
+    affiliation: '부산 수영구 수영로 663 스튜디오',
+    education: '부산대학교 예술대학 미술학과 한국화 전공 학사 및 동 대학원 석사 졸업',
     awards: '금정문화회관 금샘미술관 개인전 선정 (2024)',
     collectionsAndMedia: '한지와 천에 수묵, 담채, 호분, 박음질 콜라주',
     signatureKeywords: [],
     detailedIntro:
-      '부산을 배경으로 성장하며 목격한 도시 풍경의 변화와 기억의 파편을 한지·천 콜라주와 수묵 박음질 기법으로 재구성합니다. 먹의 번짐과 바느질 선이 교차하는 중층적 화면을 통해 낮과 밤, 과거와 현재가 만나는 시공간을 구현합니다.',
+      '부산을 배경으로 성장하며 목격한 도시 풍경의 변화와 기억의 파편을 한지·천 콜라주와 수묵 박음질 기법으로 재구성합니다. 먹의 번짐과 바느질 선이 교차하는 중층적 화면을 통해 낮과 밤, 과거와 현재가 만나는 부산의 시공간을 구현합니다.',
     careerTimeline: [
-      { year: '2024', badge: '개인전', content: '《밤산책 (Walking on a night)》, 금정문화회관 금샘미술관, 부산' },
+      { year: '2024', badge: '개인전', content: '《밤산책 (Walking on a night)》, 금정문화회관 금샘미술관, 부산 금정구' },
       { year: '2022', badge: '개인전', content: '《배지민 개인전》 (네오룩 아카이브 선정), 부산' },
       { year: '2021', badge: '단체전', content: '부산 현대 한국화 청년작가 기획전 다수 출품' },
     ],
@@ -564,8 +505,8 @@ const ARTIST_NAVER_PROFILES: Record<string, NaverArtistProfile> = {
   'neolook-20241210c': {
     jobTitle: '회화 작가 · 로컬 풍경 아티스트',
     affiliation: '부산 부산진구 스튜디오',
-    education: '회화 전공',
-    awards: '부산진구 동천문화홀 기획 초대전 선정 (2024)',
+    education: '회화 전공 (부산진구 출생 및 활동)',
+    awards: '부산진구문화재단 · 동천문화홀 기획 초대전 선정 (2024)',
     collectionsAndMedia: '캔버스에 아크릴채색 〈부산진구화(釜山鎭區畵)〉 연작',
     signatureKeywords: [],
     detailedIntro:
@@ -575,63 +516,18 @@ const ARTIST_NAVER_PROFILES: Record<string, NaverArtistProfile> = {
       { year: '2023', badge: '단체전', content: '부산 로컬 문화예술 프로젝트 및 청년 회화 교류전 참여' },
     ],
   },
-  'neolook-20241016k': {
-    jobTitle: '현대미술작가 · 회화 및 설치 아티스트',
-    affiliation: '부산 사하구 홍티아트센터 입주작가',
-    education: '회화 및 시각예술 전공',
-    awards: '부산문화재단 홍티아트센터 레지던시 입주작가 선정 (2024)',
-    collectionsAndMedia: '캔버스에 아크릴채색, 천 배접 족자 〈다대팔경도〉·〈오문자도〉',
-    signatureKeywords: [],
-    detailedIntro:
-      '부산 다대포의 자연 풍경(다대팔경)과 동시대 소비사회의 도상을 결합한 현대적 문자도와 산수화를 선보입니다. 일상 속에서 직관적으로 포착한 숭고함을 새로운 상형문자와 경쾌한 색면 회화로 구축하며 자연과 인공의 경계를 탐구합니다.',
-    careerTimeline: [
-      { year: '2024', badge: '개인전', content: '《다대팔경과 문자들》, 홍티아트센터, 부산 사하구' },
-      { year: '2024', badge: '레지던시·경력', content: '부산문화재단 홍티아트센터 입주작가 선정 및 오픈스튜디오 개최' },
-      { year: '2024', badge: '개인전', content: '《108 신들의 길》 프로젝트 개인전 발표' },
-    ],
-  },
-  'neolook-20240902g': {
-    jobTitle: '드로잉 · 회화 · 라이브 퍼포먼스 작가',
-    affiliation: '부산 해운대구 스튜디오',
-    education: '회화 및 드로잉 전공',
-    awards: '해운대문화회관 개인전 및 라이브 드로잉 퍼포먼스 선정 (2024)',
-    collectionsAndMedia: '종이에 세필 펜 드로잉, 모노 마블링, 아크릴 채색',
-    signatureKeywords: [],
-    detailedIntro:
-      '세밀한 펜 선의 집적과 유기적인 모노 마블링, 깊이 있는 푸른 색조의 아크릴 채색을 통해 의식과 무의식 사이를 유영하는 내면의 흐름을 기록합니다. 정돈된 질서와 소용돌이치는 감정의 파동을 치밀한 선의 밀도로 시각화합니다.',
-    careerTimeline: [
-      { year: '2024', badge: '개인전', content: '《꼭 붙잡을 수 없어도》 및 라이브 드로잉 퍼포먼스, 해운대문화회관, 부산' },
-      { year: '2023', badge: '단체전', content: '〈청의 흐름〉·〈몽상의 형상〉·〈나열의 아지랑이〉 연작 발표' },
-      { year: '2021', badge: '개인전', content: '〈Monoline〉 및 〈Mono Marbling〉 드로잉 연작 발표' },
-    ],
-  },
-  'neolook-20240324b': {
-    jobTitle: '조각가 · 스테인리스 팝 스컬프처 아티스트',
-    affiliation: '부산·경남 기반 활동 (1987년생)',
-    education: '한남대학교 미술교육과 및 동 대학원 조소과 졸업',
-    awards: '소울아트스페이스 개인전 (2024) / KIAF · 아트부산 출품',
-    collectionsAndMedia: '스테인리스 스틸 유닛 용접 및 원색 우레탄 도장 〈Deer〉·〈Dog〉 연작',
-    signatureKeywords: [],
-    detailedIntro:
-      '공업용 스테인리스 유닛을 불규칙하게 접합한 뒤 몬드리안의 추상을 연상시키는 강렬한 원색과 즉흥적인 검은 붓 터치를 입혀 동물의 형상을 빚어냅니다. 형태보다 색채가 먼저 시선을 사로잡는 생동감 넘치는 조각으로 인간과 동물이 공존하는 유토피아를 제시합니다.',
-    careerTimeline: [
-      { year: '2024', badge: '개인전', content: '《A COLORFUL LIFE》, 소울아트스페이스, 부산 해운대구' },
-      { year: '2022', badge: '개인전', content: '《김우진 초대전》 (네오룩 아카이브 선정) 및 주요 아트페어 출품' },
-      { year: '2021', badge: '소장·출판', content: '국내외 공공조형 프로젝트 및 호텔·미술관 컬렉션 다수 소장' },
-    ],
-  },
   'neolook-20240228e': {
     jobTitle: '복합매체 · 회화 · 설치 아티스트',
     affiliation: '부산 금정구 스튜디오',
-    education: '부산대학교 대학원 미술학과 석사 졸업 (2024)',
-    awards: '금정문화회관 금샘미술관 개인전 (2024)',
+    education: '신라대학교 학사 및 부산대학교 대학원 미술학과 석사 졸업 (2024)',
+    awards: '금정문화회관 금샘미술관 개인전 선정 (2024)',
     collectionsAndMedia: '캔버스에 아크릴과슈, 포장지로 감싼 회화, 가변 오브제 설치',
     signatureKeywords: [],
     detailedIntro:
       '디지털 스크린 중심의 비사물(Non-thing) 시대에 물리적 사물로서의 회화가 지닌 위상을 유쾌하게 질문합니다. 포장지로 감싼 캔버스 연작과 곶감걸이에 매단 이미지 파편들을 통해 이미지 소비 방식과 사물의 물성을 실험합니다.',
     careerTimeline: [
       { year: '2024', badge: '개인전', content: '《사물. 놀이》, 금정문화회관 금샘미술관, 부산 금정구' },
-      { year: '2023', badge: '단체전', content: '〈동시대 이미지 마주하기〉 및 〈데이터 제의〉 미디어·회화 발표' },
+      { year: '2023', badge: '단체전', content: '〈동시대 이미지 마주하기〉 및 〈데이터 제의〉 미디어·회화 발표, 부산' },
       { year: '2021', badge: '개인전', content: '《김태성 개인전》 (네오룩 아카이브 선정), 부산' },
     ],
   },
@@ -639,7 +535,7 @@ const ARTIST_NAVER_PROFILES: Record<string, NaverArtistProfile> = {
     jobTitle: '입체 · 키네틱 오브제 설치작가',
     affiliation: '부산 금정구 스튜디오',
     education: '조소 및 입체설치 전공',
-    awards: '부산문화재단 부산문화예술지원사업 선정 (2023)',
+    awards: '부산문화재단 『부산문화예술지원사업』 선정 (2023)',
     collectionsAndMedia: '무동력 벤틸레이터, PVC 파이프, 스틸 그레이팅, 타포린 가변설치',
     signatureKeywords: [],
     detailedIntro:
@@ -649,23 +545,9 @@ const ARTIST_NAVER_PROFILES: Record<string, NaverArtistProfile> = {
       { year: '2022', badge: '단체전', content: '부산 청년 입체·설치 아티스트 기획전 다수 참여' },
     ],
   },
-  'neolook-20231104e': {
-    jobTitle: '드로잉 · 서양화 아티스트',
-    affiliation: '부산 수영구 스튜디오',
-    education: '회화 전공',
-    awards: '미광화랑 초대전 선정 (2023)',
-    collectionsAndMedia: '종이에 콘테(Conté) 대작 드로잉 및 캔버스에 아크릴채색',
-    signatureKeywords: [],
-    detailedIntro:
-      '자신과 타인의 감정을 깊이 들여다보고 상처를 치유해 가는 과정을 정교한 콘테 드로잉과 회화로 풀어냅니다. 역경의 순간 가장 친숙하고 작은 존재의 모습으로 곁에 머무는 위로의 형상들을 섬세한 필치로 담아냅니다.',
-    careerTimeline: [
-      { year: '2023', badge: '개인전', content: '《신과 함께 (With God)》, 미광화랑, 부산 수영구' },
-      { year: '2021', badge: '개인전', content: '《이선경 개인전》 (네오룩 아카이브 선정), 부산' },
-    ],
-  },
   'neolook-20231028e': {
     jobTitle: '디지털 페인팅 · 회화 아티스트',
-    affiliation: '부산 예술지구 P 제10기 입주작가',
+    affiliation: '부산 금정구 예술지구 P 제10기 입주작가',
     education: '회화 및 시각예술 전공',
     awards: '부산문화재단 후원 예술지구 P 레지던시 10기 선정 (2023)',
     collectionsAndMedia: '아이패드 디지털 페인팅, 아카이벌 피그먼트 프린트, 캔버스 회화',
@@ -674,71 +556,28 @@ const ARTIST_NAVER_PROFILES: Record<string, NaverArtistProfile> = {
       '도시를 거니는 산책자(Flâneur)의 시선으로 부산의 낯선 풍경과 실내 공간을 관찰·채집한 뒤, 기억에 남은 파편들을 콜라주하듯 재조립하여 백일몽 같은 디지털 페인팅 화면을 구축합니다.',
     careerTimeline: [
       { year: '2023', badge: '개인전', content: '《PAD (a Pedestrian has A Daydream)》, 예술지구 P, 부산 금정구' },
-      { year: '2023', badge: '레지던시·경력', content: '예술지구 P 제10기 입주작가 결과보고전 출품, 부산' },
-      { year: '2022', badge: '개인전', content: '《이주연 개인전》 (네오룩 아카이브 선정)' },
+      { year: '2023', badge: '레지던시·경력', content: '부산 예술지구 P 제10기 입주작가 결과보고전 출품, 부산' },
+      { year: '2022', badge: '개인전', content: '《이주연 개인전》 (네오룩 아카이브 선정), 부산' },
     ],
   },
   'neolook-20230927a': {
     jobTitle: '목조각 · 키네틱 사운드 조각가',
     affiliation: '부산 해운대구 스튜디오',
-    education: '조소 전공',
-    awards: '부산프랑스문화원 ART SPACE 초대전 선정 (2023)',
+    education: '동의대학교 예술대학 미술학과 조소 전공 학사 및 동 대학원 석사 졸업',
+    awards: '부산프랑스문화원 ART SPACE 초대전 선정 (2023) / 부산문화재단 지원 선정',
     collectionsAndMedia: '느티나무·은행나무 목조, 망치머리쇠, 저속모터 키네틱 사운드 오브제',
     signatureKeywords: [],
     detailedIntro:
       '목수의 노동이 배어 있는 망치 머릿쇠와 나무를 결합해 도구를 의인화하고 인간과 사물의 물화(物化)를 해학적으로 조각합니다. 정적인 목조각에 인체감지센서와 모터를 결합해 자연의 소리와 도구의 울림이 공명하는 공간을 연출합니다.',
     careerTimeline: [
-      { year: '2023', badge: '개인전', content: '《우연한 조우 (An Encounter)》, 부산프랑스문화원 ART SPACE, 부산' },
+      { year: '2023', badge: '개인전', content: '《우연한 조우 (An Encounter)》, 부산프랑스문화원 ART SPACE, 부산 해운대구' },
       { year: '2020', badge: '개인전', content: '《박주현 조각전》 (네오룩 아카이브 선정), 부산' },
-    ],
-  },
-  'neolook-20230823e': {
-    jobTitle: '현대회화 · 몽타주 페인팅 아티스트',
-    affiliation: '부산 수영구 스튜디오',
-    education: '회화 전공',
-    awards: '부산문화재단 부산문화예술지원사업 선정 (2023)',
-    collectionsAndMedia: '캔버스에 아크릴채색 및 〈unzoo project〉 아카이벌 피그먼트 프린트',
-    signatureKeywords: [],
-    detailedIntro:
-      '현실의 표면에 드러나지 않는 이면의 서사들을 한 화면에 소환해 상호교잡하는 ‘몽타주 회화’를 선보입니다. 특정한 시공간의 맥락을 지우고 이질적인 이미지들을 시적으로 결합하여 다의적인 해석의 장을 열어젖힙니다.',
-    careerTimeline: [
-      { year: '2023', badge: '개인전', content: '《이면필요충분-조건》, 미광화랑, 부산 수영구 (부산문화재단 지원)' },
-      { year: '2022', badge: '개인전', content: '《서유정 개인전》 (네오룩 아카이브 선정), 부산' },
-    ],
-  },
-  'neolook-20230706h': {
-    jobTitle: '현대미술작가 · 회화 및 설치 아티스트',
-    affiliation: '부산 수영구 스튜디오',
-    education: '영국 유학 및 현대미술 회화·설치 전공',
-    awards: '부산문화재단 후원 미광화랑 개인전 선정 (2023)',
-    collectionsAndMedia: '캔버스에 아크릴 다중 레이어 회화 〈Hard-boiled Love〉 연작',
-    signatureKeywords: [],
-    detailedIntro:
-      '서브컬처와 애니메이션 도상, 폭발하는 에너지를 그림자 없는 다중 레이어와 애너모픽(일그러진) 구도로 캔버스에 압축합니다. 디지털 시각 문화 속에서 살아가는 동시대 세대의 과잉된 감각과 속도를 강렬한 색채 회화로 구현합니다.',
-    careerTimeline: [
-      { year: '2023', badge: '개인전', content: '《하드보일드 러브 (Hard-boiled Love)》, 미광화랑, 부산 수영구' },
-      { year: '2021', badge: '개인전', content: '《거의 러브 스토리에 가까운》 개인전 발표' },
-      { year: '2018', badge: '개인전', content: '《비디오 키즈의 생애》(2018) 및 《Promiscuity of Images》(2017) 개인전' },
-    ],
-  },
-  'neolook-20230720b': {
-    jobTitle: '추상회화 아티스트',
-    affiliation: '부산 해운대구 달맞이길 및 서울 기반 활동 (1987년생)',
-    education: '현대회화 전공',
-    awards: '서정아트 부산 개인전 선정 (2023)',
-    collectionsAndMedia: '캔버스 및 아크릴 패널에 혼합재료 〈Wave on Wave〉 연작',
-    signatureKeywords: [],
-    detailedIntro:
-      '바다의 물결과 바람의 온도·습도 등 신체가 마주하는 찰나의 촉각적 감각을 청색의 유동하는 마티에르와 자유로운 검은 필획으로 풀어냅니다. 계획과 우연이 중첩된 파도의 잔상을 통해 경계 없는 감각의 확장을 제안합니다.',
-    careerTimeline: [
-      { year: '2023', badge: '개인전', content: '《Wave on Wave》, 서정아트 부산, 부산 해운대구' },
-      { year: '2020', badge: '개인전', content: '《캐리리 개인전》 (네오룩 아카이브 선정 발표)' },
     ],
   },
   'neolook-20230118b': {
     jobTitle: '서양화가 · 현대 정물회화 작가',
     affiliation: '부산 동구 스튜디오',
-    education: '서양화 전공',
+    education: '동아대학교 예술대학 회화과 서양화 전공 졸업',
     awards: '아스티갤러리 부산 개인전 선정 (2023)',
     collectionsAndMedia: '캔버스에 유채 〈Still life〉 현대 책가도·정물 연작',
     signatureKeywords: [],
@@ -746,18 +585,32 @@ const ARTIST_NAVER_PROFILES: Record<string, NaverArtistProfile> = {
       '도자기·골동품과 현대의 오브제, 모란·산호 등 기복적 상징물을 단정한 구획 안에 정교한 유화로 배치합니다. 옛 사물이 품은 시간성과 오늘날의 일상적 소망을 한 화면에 현재화하며 세속적인 삶의 아름다움을 담담히 예찬합니다.',
     careerTimeline: [
       { year: '2023', badge: '개인전', content: '《세속화 예찬 (Glorification of secularization)》, 아스티갤러리 부산, 동구' },
-      { year: '2021', badge: '개인전', content: '《최재혁 개인전》 (네오룩 아카이브 선정) 및 아트페어 다수 출품' },
+      { year: '2021', badge: '개인전', content: '《최재혁 개인전》 (네오룩 아카이브 선정) 및 부산 아트페어 다수 출품' },
+    ],
+  },
+  'neolook-20221006h': {
+    jobTitle: '복합매체 콜라주 · 팝 스컬프처 작가',
+    affiliation: '부산 금정구 스튜디오',
+    education: '현대미술 회화·입체조형 전공',
+    awards: '부산광역시 · 부산문화재단 후원 예술지구 P 개인전 선정',
+    collectionsAndMedia: '나무패널 및 상자에 잡지·전단지 혼합재료 콜라주 〈고해스택〉 연작',
+    signatureKeywords: [],
+    detailedIntro:
+      '현대 소비사회의 잡지, 만화책, 전단지, 패키지 박스를 수집하고 해체하여 덕지덕지 직조한 혼합매체 콜라주와 입체 조각으로 인간의 솔직한 물질적 욕망을 유쾌하게 풍자합니다.',
+    careerTimeline: [
+      { year: '2022', badge: '개인전', content: '《ㅈㅅ I\'m so sorry (고해스택)》, 예술지구 P, 부산 금정구 (부산문화재단 후원)' },
+      { year: '2018', badge: '개인전', content: '《강덕현 개인전》 (네오룩 아카이브 선정), 부산' },
     ],
   },
   'neolook-20220324d': {
     jobTitle: '서양화가 · 도시 풍경 회화 작가',
-    affiliation: '부산 금정구 스튜디오',
-    education: '회화 전공',
+    affiliation: '부산 금정구 스튜디오 (부산 동구 매축지마을 리서치)',
+    education: '서양화 전공',
     awards: '디오티미술관 개인전 선정 (2022)',
-    collectionsAndMedia: '캔버스에 유채 〈Blind〉 도시 재개발 풍경 연작',
+    collectionsAndMedia: '캔버스에 유채 〈Blind〉 및 부산 매축지마을 도시 재개발 풍경 연작',
     signatureKeywords: [],
     detailedIntro:
-      '끊임없는 아파트 재개발과 공사 현장의 가림막(Blind)이 일상의 풍경을 가로지르는 도시의 단면을 유채 회화로 기록합니다. 거대한 개발의 가림막 앞을 묵묵히 걸어가는 작은 사람들의 모습을 통해 도시 속 삶의 실존을 응시합니다.',
+      '부산 동구 매축지마을과 아파트 재개발 공사 현장의 가림막(Blind)이 일상의 풍경을 가로지르는 도시의 단면을 유채 회화로 기록합니다. 거대한 개발의 가림막 앞을 묵묵히 걸어가는 작은 사람들의 모습을 통해 도시 속 삶의 실존을 응시합니다.',
     careerTimeline: [
       { year: '2022', badge: '개인전', content: '《BLIND》, 디오티미술관, 부산 금정구' },
       { year: '2019', badge: '개인전', content: '《김민정 개인전》 (네오룩 아카이브 선정), 부산' },
@@ -795,7 +648,7 @@ export const ARTISTS: Artist[] = CRAWLED_ARTISTS.map((raw, idx) => {
   const mediums = MEDIUM_TEMPLATES[raw.discipline] || MEDIUM_TEMPLATES['회화·미술'];
   const dims = DIMENSION_TEMPLATES[raw.discipline] || DIMENSION_TEMPLATES['회화·미술'];
   const ex = extractExhibitionsFromBio(raw.bio, raw.name, raw.discipline);
-  const naverProfile = ARTIST_NAVER_PROFILES[raw.id];
+  const naverProfile = ARTIST_NAVER_PROFILES[raw.id] || (raw as any).naverProfile;
 
   const seenTitles = new Set<string>();
   const enrichedArtworks: Artwork[] = raw.artworks.map((w, wIdx) => {
