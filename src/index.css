@@ -3013,6 +3013,7 @@ section {
   .magazine-shell {
     border-left: none;
     border-right: none;
+    padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px));
   }
   .issue-strip {
     padding: 6px 14px;
@@ -3020,9 +3021,12 @@ section {
     letter-spacing: 0.03em;
   }
   .masthead {
-    padding: 10px 12px 8px;
-    flex-wrap: wrap;
-    gap: 8px 6px;
+    padding: 10px 12px;
+    flex-wrap: nowrap;
+    gap: 8px;
+    background: var(--bg-pure);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
     border-bottom: 1px solid var(--line);
   }
   .brand-cell {
@@ -3052,25 +3056,45 @@ section {
     white-space: nowrap;
   }
   .nav-links {
-    order: 3;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 95;
     width: 100%;
-    flex: 1 0 100%;
-    margin-right: 0;
-    padding-top: 8px;
-    border-top: 1px solid var(--line);
-    justify-content: space-between;
-    gap: 6px;
+    margin: 0;
+    padding: 6px 6px calc(8px + env(safe-area-inset-bottom, 0px));
+    background: rgba(250, 251, 249, 0.98);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid var(--line-strong);
+    box-shadow: 0 -4px 18px rgba(14, 19, 24, 0.08);
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 2px;
+    overflow: visible;
   }
   .nav-item {
-    padding: 4px 2px;
+    padding: 8px 2px;
+    border-radius: 6px;
+    border-bottom: none;
+    justify-content: center;
+    text-align: center;
   }
   .nav-item-label {
-    font-size: 12px;
-    letter-spacing: -0.02em;
+    font-size: clamp(10.5px, 2.85vw, 12px);
+    font-weight: 600;
+    letter-spacing: -0.05em;
     white-space: nowrap;
   }
   .nav-item.active {
-    border-bottom: 2px solid var(--marine);
+    background: var(--marine-tint);
+    color: var(--marine);
+    border-bottom: none;
+  }
+  .nav-item.active .nav-item-label {
+    color: var(--marine);
+    font-weight: 800;
   }
 
   .hero-top-header {
@@ -3182,6 +3206,30 @@ section {
     font-size: 12px;
     white-space: nowrap;
     flex-shrink: 0;
+  }
+  .artist-discipline-tabs {
+    display: flex;
+    width: 100%;
+    overflow-x: hidden;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+  }
+  .artist-discipline-tabs .filter-tab {
+    flex: 1 1 auto;
+    min-width: 0;
+    padding: 10px 2px;
+    font-size: clamp(10.5px, 2.8vw, 12px);
+    letter-spacing: -0.05em;
+    justify-content: center;
+    text-align: center;
+    gap: 0;
+    border-right: 1px solid var(--line);
+  }
+  .artist-discipline-tabs .filter-tab:last-child {
+    border-right: none;
+  }
+  .artist-discipline-tabs .filter-tab-count {
+    display: none;
   }
   .search-cell {
     min-width: 0;

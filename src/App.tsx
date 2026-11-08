@@ -1155,10 +1155,15 @@ export function App() {
           </div>
         </div>
 
-        <nav className="nav-links">
+        <nav className="nav-links" aria-label="주요 메뉴">
           <button
             className={`nav-item ${activeSection === 'overview' ? 'active' : ''}`}
-            onClick={() => setActiveSection('overview')}
+            onClick={() => {
+              setActiveArtist(null);
+              setActiveGallery(null);
+              setActiveSection('overview');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
           >
             <span className="nav-item-label">홈</span>
           </button>
@@ -1166,25 +1171,45 @@ export function App() {
             className={`nav-item ${
               activeSection === 'artists' || activeSection === 'artist-apply' ? 'active' : ''
             }`}
-            onClick={() => setActiveSection('artists')}
+            onClick={() => {
+              setActiveArtist(null);
+              setActiveGallery(null);
+              setActiveSection('artists');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
           >
             <span className="nav-item-label">부산 작가 · 작품</span>
           </button>
           <button
             className={`nav-item ${activeSection === 'souvenirs' ? 'active' : ''}`}
-            onClick={() => setActiveSection('souvenirs')}
+            onClick={() => {
+              setActiveArtist(null);
+              setActiveGallery(null);
+              setActiveSection('souvenirs');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
           >
             <span className="nav-item-label">부산 아트 기념품</span>
           </button>
           <button
             className={`nav-item ${activeSection === 'galleries' ? 'active' : ''}`}
-            onClick={() => setActiveSection('galleries')}
+            onClick={() => {
+              setActiveArtist(null);
+              setActiveGallery(null);
+              setActiveSection('galleries');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
           >
             <span className="nav-item-label">부산 갤러리</span>
           </button>
           <button
             className={`nav-item ${activeSection === 'collab' ? 'active' : ''}`}
-            onClick={() => setActiveSection('collab')}
+            onClick={() => {
+              setActiveArtist(null);
+              setActiveGallery(null);
+              setActiveSection('collab');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
           >
             <span className="nav-item-label">공고 · 협업</span>
           </button>
@@ -1385,7 +1410,7 @@ export function App() {
 
           {/* Minimal Filter & Search Strip */}
           <div className="filter-strip">
-            <div className="filter-tabs">
+            <div className="filter-tabs artist-discipline-tabs">
               {disciplines.map((disc) => {
                 const count =
                   disc === '전체'
