@@ -1147,7 +1147,7 @@ export function App() {
       </div>
 
       {/* Sticky Editorial Masthead — 5 Core Tabs */}
-      <header className="masthead">
+      <header className={`masthead ${activeSection === 'overview' ? 'is-overview' : ''}`}>
         <div className="brand-cell" onClick={() => setActiveSection('overview')}>
           <div className="brand-title">
             <span className="brand-en">PARANG</span>
@@ -1322,6 +1322,70 @@ export function App() {
               </div>
             </div>
           </div>
+
+          {/* Mobile Menu Bar placed right above the 3-Row Flowing Artwork Streams */}
+          <nav className="mobile-above-flow-nav" aria-label="모바일 메인 메뉴">
+            <button
+              type="button"
+              className={`nav-item ${activeSection === 'overview' ? 'active' : ''}`}
+              onClick={() => {
+                setActiveArtist(null);
+                setActiveGallery(null);
+                setActiveSection('overview');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+            >
+              <span className="nav-item-label">홈</span>
+            </button>
+            <button
+              type="button"
+              className="nav-item"
+              onClick={() => {
+                setActiveArtist(null);
+                setActiveGallery(null);
+                setActiveSection('artists');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+            >
+              <span className="nav-item-label">부산 작가 · 작품</span>
+            </button>
+            <button
+              type="button"
+              className="nav-item"
+              onClick={() => {
+                setActiveArtist(null);
+                setActiveGallery(null);
+                setActiveSection('souvenirs');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+            >
+              <span className="nav-item-label">부산 아트 기념품</span>
+            </button>
+            <button
+              type="button"
+              className="nav-item"
+              onClick={() => {
+                setActiveArtist(null);
+                setActiveGallery(null);
+                setActiveSection('galleries');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+            >
+              <span className="nav-item-label">부산 갤러리</span>
+            </button>
+            <button
+              type="button"
+              className="nav-item"
+              onClick={() => {
+                setActiveArtist(null);
+                setActiveGallery(null);
+                setActiveSection('collab');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+            >
+              <span className="nav-item-label">공고 · 협업</span>
+            </button>
+          </nav>
 
           {/* 3-Row Flowing Artwork Streams (Page Flows style) */}
           <div className="artwork-flows-wall">
@@ -2873,74 +2937,6 @@ export function App() {
           </div>
         </section>
       )}
-
-      {/* =====================================================================
-          MOBILE MENU BAR (PLACED RIGHT ABOVE THE EDITORIAL FOOTER)
-         ===================================================================== */}
-      <nav className="mobile-above-footer-nav" aria-label="모바일 하단 메뉴">
-        <button
-          type="button"
-          className={`nav-item ${activeSection === 'overview' ? 'active' : ''}`}
-          onClick={() => {
-            setActiveArtist(null);
-            setActiveGallery(null);
-            setActiveSection('overview');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }}
-        >
-          <span className="nav-item-label">홈</span>
-        </button>
-        <button
-          type="button"
-          className={`nav-item ${
-            activeSection === 'artists' || activeSection === 'artist-apply' ? 'active' : ''
-          }`}
-          onClick={() => {
-            setActiveArtist(null);
-            setActiveGallery(null);
-            setActiveSection('artists');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }}
-        >
-          <span className="nav-item-label">부산 작가 · 작품</span>
-        </button>
-        <button
-          type="button"
-          className={`nav-item ${activeSection === 'souvenirs' ? 'active' : ''}`}
-          onClick={() => {
-            setActiveArtist(null);
-            setActiveGallery(null);
-            setActiveSection('souvenirs');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }}
-        >
-          <span className="nav-item-label">부산 아트 기념품</span>
-        </button>
-        <button
-          type="button"
-          className={`nav-item ${activeSection === 'galleries' ? 'active' : ''}`}
-          onClick={() => {
-            setActiveArtist(null);
-            setActiveGallery(null);
-            setActiveSection('galleries');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }}
-        >
-          <span className="nav-item-label">부산 갤러리</span>
-        </button>
-        <button
-          type="button"
-          className={`nav-item ${activeSection === 'collab' ? 'active' : ''}`}
-          onClick={() => {
-            setActiveArtist(null);
-            setActiveGallery(null);
-            setActiveSection('collab');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }}
-        >
-          <span className="nav-item-label">공고 · 협업</span>
-        </button>
-      </nav>
 
       {/* =====================================================================
           EDITORIAL FOOTER

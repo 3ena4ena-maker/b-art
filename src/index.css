@@ -79,7 +79,7 @@ img {
   overflow-x: clip;
 }
 
-.mobile-above-footer-nav {
+.mobile-above-flow-nav {
   display: none;
 }
 
@@ -3025,8 +3025,8 @@ section {
     letter-spacing: 0.03em;
   }
   .masthead {
-    padding: 10px 12px;
-    flex-wrap: nowrap;
+    padding: 10px 12px 8px;
+    flex-wrap: wrap;
     gap: 8px;
     background: var(--bg-pure);
     border-bottom: 1px solid var(--line);
@@ -3057,45 +3057,54 @@ section {
     gap: 3px;
     white-space: nowrap;
   }
-  .masthead .nav-links {
+  .masthead.is-overview .nav-links {
     display: none;
   }
-  .mobile-above-footer-nav {
-    position: sticky;
-    bottom: 0;
-    z-index: 90;
-    margin-top: auto;
+  .masthead:not(.is-overview) .nav-links {
+    order: 3;
+    width: 100%;
+    flex: 1 0 100%;
+    margin: 0;
+    padding-top: 8px;
+    border-top: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 2px;
+    overflow: visible;
+  }
+  .mobile-above-flow-nav {
     width: 100%;
     padding: 8px 6px;
-    background: rgba(250, 251, 249, 0.98);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: var(--bg-pure);
     border-top: 1px solid var(--line-strong);
     border-bottom: 1px solid var(--line-strong);
-    box-shadow: 0 -4px 16px rgba(14, 19, 24, 0.08);
     display: grid;
     grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 2px;
   }
-  .mobile-above-footer-nav .nav-item {
+  .masthead:not(.is-overview) .nav-item,
+  .mobile-above-flow-nav .nav-item {
     padding: 8px 2px;
     border-radius: 6px;
     border-bottom: none;
     justify-content: center;
     text-align: center;
   }
-  .mobile-above-footer-nav .nav-item-label {
+  .masthead:not(.is-overview) .nav-item-label,
+  .mobile-above-flow-nav .nav-item-label {
     font-size: clamp(10.5px, 2.85vw, 12px);
     font-weight: 600;
     letter-spacing: -0.05em;
     white-space: nowrap;
   }
-  .mobile-above-footer-nav .nav-item.active {
+  .masthead:not(.is-overview) .nav-item.active,
+  .mobile-above-flow-nav .nav-item.active {
     background: var(--marine-tint);
     color: var(--marine);
     border-bottom: none;
   }
-  .mobile-above-footer-nav .nav-item.active .nav-item-label {
+  .masthead:not(.is-overview) .nav-item.active .nav-item-label,
+  .mobile-above-flow-nav .nav-item.active .nav-item-label {
     color: var(--marine);
     font-weight: 800;
   }
