@@ -1191,16 +1191,12 @@ export function App() {
         </nav>
 
         <div className="masthead-actions">
-          <button className="saved-trigger" onClick={() => setIsArchiveOpen(true)}>
-            <span>ARCHIVE</span>
-            <span className="saved-count">{savedIds.length}</span>
-          </button>
           <button className="artist-register-trigger" onClick={openArtistApplyPage}>
-            <Plus size={14} />
-            <span>작가 등록 신청</span>
+            <Plus size={13} />
+            <span>작가 등록</span>
           </button>
           <button className="submit-trigger" onClick={() => setIsWriteModalOpen(true)}>
-            <Plus size={14} />
+            <Plus size={13} />
             <span>공고 등록</span>
           </button>
           <button

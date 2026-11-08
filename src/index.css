@@ -201,7 +201,7 @@ section {
 .masthead-actions {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 8px;
   flex-shrink: 0;
 }
 
@@ -3020,48 +3020,57 @@ section {
     letter-spacing: 0.03em;
   }
   .masthead {
-    padding: 12px 14px;
-    flex-wrap: nowrap;
-    gap: 12px;
+    padding: 10px 12px 8px;
+    flex-wrap: wrap;
+    gap: 8px 6px;
+    border-bottom: 1px solid var(--line);
   }
   .brand-cell {
+    order: 1;
     padding: 0;
   }
   .brand-title {
-    gap: 6px;
+    gap: 5px;
   }
   .brand-en {
-    font-size: 20px;
+    font-size: 19px;
   }
   .brand-kr {
-    font-size: 11.5px;
-  }
-  .saved-trigger {
-    padding: 4px 6px;
     font-size: 11px;
-    gap: 4px;
   }
-  .saved-count {
-    padding: 1px 5px;
-    font-size: 10px;
+  .masthead-actions {
+    order: 2;
+    margin-left: auto;
+    gap: 5px;
   }
-  .submit-trigger {
-    padding: 6px 10px;
+  .artist-register-trigger,
+  .submit-trigger,
+  .admin-nav-trigger {
+    padding: 5px 8px;
     font-size: 11px;
-    gap: 4px;
+    gap: 3px;
     white-space: nowrap;
   }
   .nav-links {
-    gap: 12px;
-    padding-top: 0;
+    order: 3;
+    width: 100%;
+    flex: 1 0 100%;
+    margin-right: 0;
+    padding-top: 8px;
+    border-top: 1px solid var(--line);
+    justify-content: space-between;
+    gap: 6px;
   }
   .nav-item {
-    padding: 4px 0;
+    padding: 4px 2px;
   }
   .nav-item-label {
     font-size: 12px;
     letter-spacing: -0.02em;
     white-space: nowrap;
+  }
+  .nav-item.active {
+    border-bottom: 2px solid var(--marine);
   }
 
   .hero-top-header {
@@ -3704,17 +3713,17 @@ section {
    ===================================================================== */
 
 .admin-nav-trigger {
-  padding: 0 16px;
-  height: 100%;
-  border-left: 1px solid var(--line-strong);
+  padding: 8px 13px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  font-family: var(--font-mono);
-  font-size: 11.5px;
+  gap: 5px;
+  font-size: 12px;
   font-weight: 700;
-  color: var(--ink-muted);
+  color: var(--ink);
   background: var(--bg-pure);
+  white-space: nowrap;
   transition: all 0.15s ease;
 }
 
