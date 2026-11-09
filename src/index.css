@@ -4425,3 +4425,239 @@ section {
     padding: 18px 14px;
   }
 }
+
+/* ============================================================================
+   BUSAN ART SOUVENIRS — PHOTO EXAMPLE SHOWCASE GRID & COLLAPSIBLE MAKERS BAR
+   ============================================================================ */
+.souvenir-showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-bottom: 1px solid var(--line-strong);
+  background: var(--bg-pure);
+}
+
+.souvenir-photo-card {
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--bg-pure);
+  transition: background 0.2s ease;
+}
+
+.souvenir-photo-card:nth-child(3n) {
+  border-right: none;
+}
+
+.souvenir-main-photo-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: var(--bg-alt);
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
+}
+
+.souvenir-main-photo-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.35s ease;
+}
+
+.souvenir-photo-card:hover .souvenir-main-photo-wrap img {
+  transform: scale(1.03);
+}
+
+.souvenir-photo-badge {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  background: rgba(12, 17, 29, 0.84);
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 5px 10px;
+  letter-spacing: 0.02em;
+  backdrop-filter: blur(4px);
+}
+
+.souvenir-example-thumbs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  padding: 10px 14px;
+  background: var(--bg-alt);
+  border-bottom: 1px solid var(--line);
+}
+
+.souvenir-thumb-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  padding: 5px;
+  border: 1px solid var(--line);
+  background: var(--bg-pure);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: center;
+}
+
+.souvenir-thumb-btn img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  display: block;
+}
+
+.souvenir-thumb-btn span {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink-muted);
+  line-height: 1.25;
+  word-break: keep-all;
+}
+
+.souvenir-thumb-btn.active {
+  border-color: var(--marine);
+  background: rgba(0, 82, 255, 0.05);
+  box-shadow: 0 0 0 1px var(--marine);
+}
+
+.souvenir-thumb-btn.active span {
+  color: var(--marine);
+  font-weight: 700;
+}
+
+.souvenir-card-body {
+  padding: 16px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.souvenir-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.souvenir-card-code {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--marine);
+  letter-spacing: 0.04em;
+}
+
+.souvenir-card-moq {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-muted);
+}
+
+.souvenir-card-title {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  margin-top: 2px;
+}
+
+.souvenir-card-active-desc {
+  font-size: 13px;
+  color: var(--ink-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.souvenir-card-footer {
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px dashed var(--line);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.makers-collapse-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 24px;
+  background: var(--bg-alt);
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.makers-collapse-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.makers-collapse-info strong {
+  font-size: 14px;
+  color: var(--ink);
+}
+
+.makers-collapse-info span {
+  font-size: 12.5px;
+  color: var(--ink-muted);
+}
+
+.makers-collapse-btn {
+  padding: 10px 16px;
+  border: 1px solid var(--line-strong);
+  background: var(--bg-pure);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.makers-collapse-btn:hover {
+  background: var(--marine);
+  border-color: var(--marine);
+  color: #ffffff;
+}
+
+@media (max-width: 1100px) {
+  .souvenir-showcase-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .souvenir-photo-card:nth-child(3n) {
+    border-right: 1px solid var(--line);
+  }
+  .souvenir-photo-card:nth-child(2n) {
+    border-right: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .souvenir-showcase-grid {
+    grid-template-columns: 1fr;
+  }
+  .souvenir-photo-card,
+  .souvenir-photo-card:nth-child(2n),
+  .souvenir-photo-card:nth-child(3n) {
+    border-right: none;
+  }
+  .makers-collapse-bar {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 16px;
+  }
+  .makers-collapse-btn {
+    width: 100%;
+    text-align: center;
+  }
+}

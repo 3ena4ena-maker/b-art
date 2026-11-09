@@ -1,8 +1,166 @@
-// Auto-generated verified Busan artists archive (50 active artists across 5 genres, 100% live accounts & pure artwork images)
+// Auto-generated verified Busan artists archive (52 active artists across 5 genres, 100% live accounts & pure artwork images)
 export const CRAWLED_ARTISTS = [
   {
-    "id": "ttg-haeunjoe",
+    "id": "senap-park-sena",
     "indexNo": "ARTIST 01",
+    "name": "박세나",
+    "nameEn": "SENA PARK",
+    "discipline": "회화·미술",
+    "district": "연제구 (아틀리에 세나피 Sena.P)",
+    "updatedAt": "2026",
+    "statement": "치유와 예술의 경계를 오가며 탄생화·식물·일상의 오브제 속에 깃든 다정한 위로와 내면의 회복을 유화 및 금박 혼합매체로 화폭에 담아냅니다.",
+    "bio": "박세나(SENA PARK)는 부산에서 아틀리에 세나피(Atelier Sena.P)를 운영하며 현대미술 회화와 임상 미술치료를 결합한 창작 활동을 전개하는 화가다. 미국 콜로라도 유학 시절 OJC Art Exhibition 1위 수상 및 Arapahoe College 전시를 거쳐, 귀국 후 부산·울산·서울과 프랑스 파리를 오가며 활발히 작품을 발표하고 있다. 12달의 탄생화를 유화로 그리고 에세이를 엮은 작품집 『해피 벌스 플라워 (Happy Birth-flower)』(2024)를 출간하고 동명의 개인전을 개최했으며, 리본의 매듭과 다정한 일상의 정물을 통해 흔들리되 무너지지 않는 마음의 온기를 전한다.\n\n[최근 주요 이력]\n개인전 2024 박세나 개인전 《해피 벌스 플라워 (Happy Birth-flower)》, 독자서점 갤러리\n출간 2024 유화 작품집 『해피 벌스 플라워 : 내 탄생화 이야기』(교보문고·예스24·알라딘·Amazon 영문판)\n단체전 및 아트페어 2024 《200K-WOMEN in Paris》 그룹전, Galerie 89, 프랑스 파리 / 2024 《2024 화동페어》, 금보성아트센터, 서울 / 2024 《울산국제아트페어 (UiAF)》, 유에코(UECO) / 2024 《자연의 기억 (Memories of Nature)》 그룹전, 삼정타워 삼정갤러리, 부산 / 2024 《200K-WOMEN》 그룹전, 인사동 한국갤러리, 서울 / 2023 《담다 덜다 (Dam-da Deol-da)》 그룹전, 금정문화회관 전시실, 부산 / 2019 《ACC Group Exhibition》, Arapahoe College, 미국 콜로라도\n수상 2018 OJC Art Exhibition Awards 1st Winner, Otero College, 미국",
+    "instagram": "@sena.artwork",
+    "instagramUrl": "https://www.instagram.com/sena.artwork/",
+    "portfolioUrl": "https://senap.co.kr",
+    "sourceLabel": "아틀리에 세나피 (Sena.P) · 부산 현대회화 아카이브 (2026)",
+    "portraitUrl": "https://pub-a809957a25cf4f489e80cf3233ae3f76.r2.dev/uploads/1781588676199_KakaoTalk_20260310_113815300.jpg",
+    "featuredWorkUrl": "https://pub-a809957a25cf4f489e80cf3233ae3f76.r2.dev/uploads/1781588676199_KakaoTalk_20260310_113815300.jpg",
+    "artworks": [
+      {
+        "id": "senap-w1",
+        "title": "리본에 담긴 인연 (Threads of Connection)",
+        "year": "2026",
+        "medium": "캔버스에 유채 (Oil on canvas)",
+        "imageUrl": "https://pub-a809957a25cf4f489e80cf3233ae3f76.r2.dev/uploads/1781588676199_KakaoTalk_20260310_113815300.jpg",
+        "highResUrl": "https://pub-a809957a25cf4f489e80cf3233ae3f76.r2.dev/uploads/1781588676199_KakaoTalk_20260310_113815300.jpg"
+      },
+      {
+        "id": "senap-w2",
+        "title": "봄의 순간 (A Moment of Spring)",
+        "year": "2025",
+        "medium": "캔버스에 혼합매체 (Mixed media)",
+        "imageUrl": "https://pub-a809957a25cf4f489e80cf3233ae3f76.r2.dev/uploads/1781526530524_portfolio_1781526530011.jpg",
+        "highResUrl": "https://pub-a809957a25cf4f489e80cf3233ae3f76.r2.dev/uploads/1781526530524_portfolio_1781526530011.jpg"
+      },
+      {
+        "id": "senap-w3",
+        "title": "달콤한 위로 (Sweet Comfort)",
+        "year": "2025",
+        "medium": "캔버스에 유채 (Oil on canvas)",
+        "imageUrl": "https://pub-a809957a25cf4f489e80cf3233ae3f76.r2.dev/uploads/1781526650494_portfolio_1781526649965.jpg",
+        "highResUrl": "https://pub-a809957a25cf4f489e80cf3233ae3f76.r2.dev/uploads/1781526650494_portfolio_1781526649965.jpg"
+      }
+    ],
+    "naverProfile": {
+      "jobTitle": "서양화가 · 미술심리상담사",
+      "affiliation": "아틀리에 세나피 (Atelier Sena.P) 대표 · 부산 기반 활동 작가",
+      "education": "심리학 및 순수미술 수학 (미국 콜로라도 Otero College · Arapahoe College)",
+      "awards": "2018 미국 OJC Art Exhibition Awards 1st Winner 수상",
+      "collectionsAndMedia": "캔버스에 유채(Oil on canvas) · 금박 혼합매체 · 작품집 『해피 벌스 플라워』",
+      "signatureKeywords": [],
+      "detailedIntro": "치유와 순수회화의 경계를 오가며 마음의 온기를 캔버스에 얹는 화가이자 미술심리상담사입니다. 탄생화와 식물, 유연하게 묶인 리본의 결, 일상의 달콤한 오브제를 유채와 금박 혼합매체로 세밀하게 그려내며 관람자에게 정서적 회복과 조용한 강인함의 메시지를 건넵니다.",
+      "careerTimeline": [
+        {
+          "year": "2024",
+          "badge": "개인전",
+          "content": "《해피 벌스 플라워 (Happy Birth-flower)》 공간 개인전 및 동명 유화 작품집(교보문고·Amazon 영문판) 출간"
+        },
+        {
+          "year": "2024",
+          "badge": "단체전",
+          "content": "《200K-WOMEN in Paris》 Galerie 89, 프랑스 파리 / 《2024 화동페어》 금보성아트센터, 서울"
+        },
+        {
+          "year": "2024",
+          "badge": "단체전",
+          "content": "《울산국제아트페어 (UiAF)》 유에코(UECO) / 《자연의 기억》 부산 삼정타워 삼정갤러리, 부산"
+        },
+        {
+          "year": "2023",
+          "badge": "단체전",
+          "content": "《담다 덜다 (Dam-da Deol-da)》, 금정문화회관 전시실, 부산 금정구"
+        },
+        {
+          "year": "2018",
+          "badge": "수상·선정",
+          "content": "미국 OJC Art Exhibition Awards 1st Winner 수상 및 Arapahoe College 그룹전 참여 (미국 콜로라도)"
+        }
+      ]
+    }
+  },
+  {
+    "id": "lorenkim-busan",
+    "indexNo": "ARTIST 02",
+    "name": "로렌킴",
+    "nameEn": "LOREN KIM",
+    "discipline": "회화·미술",
+    "district": "연제구 연산동 (스튜디오 레임 · F22갤러리)",
+    "updatedAt": "2026",
+    "statement": "디지털 페인팅과 단 하나의 오리지널 아트 프레임, 페이퍼마쉐 및 앗상블라주 오브제를 넘나들며 멈춘 일상 속에 숨어 있는 삶의 온기와 동화적 서사를 시각화합니다.",
+    "bio": "로렌킴(Loren Kim, 김창환)은 부산 연제구에서 디자인 스튜디오 레임(LEIM)을 이끌며 디지털과 물성의 경계에서 작업하는 현대미술 작가다. 일상의 찰나에서 발견한 감정과 조용한 철학적 질문을 굵고 명료한 윤곽선과 깊이 있는 색면 회화로 구현하며, 각 작품을 단 한 점의 오리지널 아트 프레임(1/1 Edition)과 페이퍼마쉐(Papier-mâché), 앗상블라주(Assemblage) 입체 작업으로 확장한다. 2026년 부산 BIFC2 F22갤러리 제6회 개인전 《STILL, LIFE》와 솔트갤러리 제5회 개인전 《Into the Story, 동화는 사라지지 않았다》를 비롯해 활발한 전시와 아트북 출판을 이어가고 있다.\n\n[최근 주요 이력]\n개인전 2026 제6회 개인전 《STILL, LIFE — 멈춘 일상에서 발견하는 삶의 온기》, BIFC2 F22갤러리, 부산 남구 / 2026 제5회 개인전 《Into the Story, 동화는 사라지지 않았다》, 솔트갤러리, 부산 / 2024 개인전 《Strange Mirror》 및 아트북 출간, 부산 / 2024 개인전 《MIRROR》, 부산 / 2023 제1회 개인전 《취향을 그리다 (Drawing Taste — In My Colors)》, 부산\n단체전 2024 《자연의 기억 (Memories of Nature)》, 삼정타워 삼정갤러리, 부산 / 2023 《담다 덜다 (Dam-da Deol-da)》, 금정문화회관, 부산\n수상 2023 인스파이어 어워드 (Inspire Award) 블랙페이퍼상 수상",
+    "instagram": "@artist_lorenkim",
+    "instagramUrl": "https://www.instagram.com/artist_lorenkim/",
+    "portfolioUrl": "https://www.lorenkim.kr",
+    "sourceLabel": "스튜디오 레임 (LEIM) · BIFC2 F22갤러리·솔트갤러리 개인전 (2026)",
+    "portraitUrl": "https://cdn.imweb.me/upload/S202308151396addd63c35/6bf42ed65345d.jpg",
+    "featuredWorkUrl": "https://cdn.imweb.me/upload/S202308151396addd63c35/6bf42ed65345d.jpg",
+    "artworks": [
+      {
+        "id": "loren-w1",
+        "title": "STILL, LIFE — 일상의 온기",
+        "year": "2026",
+        "medium": "Original Art Frame (1/1 Edition)",
+        "imageUrl": "https://cdn.imweb.me/upload/S202308151396addd63c35/6bf42ed65345d.jpg",
+        "highResUrl": "https://cdn.imweb.me/upload/S202308151396addd63c35/6bf42ed65345d.jpg"
+      },
+      {
+        "id": "loren-w2",
+        "title": "Into the Story — 설원의 동화",
+        "year": "2026",
+        "medium": "Original Art Print & Frame",
+        "imageUrl": "https://cdn.imweb.me/thumbnail/20260218/a6ed64d86e87c.jpg",
+        "highResUrl": "https://cdn.imweb.me/thumbnail/20260218/a6ed64d86e87c.jpg"
+      },
+      {
+        "id": "loren-w3",
+        "title": "Explore with Earl (The Assemblage)",
+        "year": "2025",
+        "medium": "Mixed media assemblage in wood frame",
+        "imageUrl": "https://cdn.imweb.me/thumbnail/20260707/c9f0464a3f637.jpg",
+        "highResUrl": "https://cdn.imweb.me/thumbnail/20260707/c9f0464a3f637.jpg"
+      }
+    ],
+    "naverProfile": {
+      "jobTitle": "현대미술 작가 · 페이퍼마쉐 & 일러스트 아티스트",
+      "affiliation": "디자인 스튜디오 레임(LEIM) 대표 · 부산 연제구 기반 활동 작가",
+      "education": "시각디자인 · 레터프레스 및 현대 평면·입체 조형 연구",
+      "awards": "2023 인스파이어 어워드 (Inspire Award) 블랙페이퍼상(Black Paper Prize) 수상",
+      "collectionsAndMedia": "1/1 오리지널 아트 프레임 · 페이퍼마쉐(Papier-mâché) · 앗상블라주 오브제",
+      "signatureKeywords": [],
+      "detailedIntro": "디지털 상상의 자유로움과 손끝으로 종이를 찢어 덧붙이는 페이퍼마쉐·앗상블라주의 아날로그 물성을 결합하는 부산 기반 현대미술 작가입니다. 멈춘 일상의 정물과 어른을 위한 동화적 장면을 단 한 점의 오리지널 프레임과 입체 오브제로 풀어내며 삶의 조용한 온기를 전합니다.",
+      "careerTimeline": [
+        {
+          "year": "2026",
+          "badge": "개인전",
+          "content": "제6회 개인전 《STILL, LIFE — 멈춘 일상에서 발견하는 삶의 온기》, BIFC2 F22갤러리, 부산 남구"
+        },
+        {
+          "year": "2026",
+          "badge": "개인전",
+          "content": "제5회 개인전 《Into the Story, 동화는 사라지지 않았다》, 솔트갤러리, 부산"
+        },
+        {
+          "year": "2024",
+          "badge": "개인전",
+          "content": "《Strange Mirror》 개인전 및 동명 아트북 출간 / 《MIRROR》 개인전, 부산"
+        },
+        {
+          "year": "2024",
+          "badge": "단체전",
+          "content": "《자연의 기억 (Memories of Nature)》, 삼정타워 삼정갤러리, 부산 부산진구"
+        },
+        {
+          "year": "2023",
+          "badge": "개인전",
+          "content": "《취향을 그리다 (Drawing Taste — In My Colors)》 개인전 및 인스파이어 어워드 블랙페이퍼상 수상"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ttg-haeunjoe",
+    "indexNo": "ARTIST 03",
     "name": "조하은",
     "nameEn": "HAEUN JOE",
     "discipline": "회화·미술",
@@ -84,7 +242,7 @@ export const CRAWLED_ARTISTS = [
         "highResUrl": "https://cdn.imweb.me/thumbnail/20250826/772cb9835f214.jpg"
       }
     ],
-    "indexNo": "ARTIST 02"
+    "indexNo": "ARTIST 04"
   },
   {
     "id": "neolook-20250808e",
@@ -127,7 +285,7 @@ export const CRAWLED_ARTISTS = [
         "highResUrl": "https://neolook.com/archives/2025080807e.jpg"
       }
     ],
-    "indexNo": "ARTIST 03"
+    "indexNo": "ARTIST 05"
   },
   {
     "id": "neolook-20251205k",
@@ -170,7 +328,7 @@ export const CRAWLED_ARTISTS = [
         "highResUrl": "https://neolook.com/archives/2025120503k.jpg"
       }
     ],
-    "indexNo": "ARTIST 04"
+    "indexNo": "ARTIST 06"
   },
   {
     "id": "neolook-20250425c",
@@ -213,7 +371,7 @@ export const CRAWLED_ARTISTS = [
         "highResUrl": "https://neolook.com/archives/2025042506c.jpg"
       }
     ],
-    "indexNo": "ARTIST 05"
+    "indexNo": "ARTIST 07"
   },
   {
     "id": "neolook-20241204i",
@@ -256,7 +414,7 @@ export const CRAWLED_ARTISTS = [
         "highResUrl": "https://neolook.com/archives/2024120404i.jpg"
       }
     ],
-    "indexNo": "ARTIST 06"
+    "indexNo": "ARTIST 08"
   },
   {
     "id": "neolook-20241210c",
@@ -299,7 +457,7 @@ export const CRAWLED_ARTISTS = [
         "highResUrl": "https://neolook.com/archives/2024121007c.jpg"
       }
     ],
-    "indexNo": "ARTIST 07"
+    "indexNo": "ARTIST 09"
   },
   {
     "id": "neolook-20230118b",
@@ -342,7 +500,7 @@ export const CRAWLED_ARTISTS = [
         "highResUrl": "https://neolook.com/archives/2023011803b.jpg"
       }
     ],
-    "indexNo": "ARTIST 08"
+    "indexNo": "ARTIST 10"
   },
   {
     "id": "neolook-20220324d",
@@ -385,7 +543,7 @@ export const CRAWLED_ARTISTS = [
         "highResUrl": "https://neolook.com/archives/2022032403d.jpg"
       }
     ],
-    "indexNo": "ARTIST 09"
+    "indexNo": "ARTIST 11"
   },
   {
     "id": "nl-20250702e",
@@ -452,7 +610,7 @@ export const CRAWLED_ARTISTS = [
         }
       ]
     },
-    "indexNo": "ARTIST 10",
+    "indexNo": "ARTIST 12",
     "portraitUrl": "https://neolook.com/archives/2025070202e.jpg",
     "featuredWorkUrl": "https://neolook.com/archives/2025070202e.jpg"
   },
@@ -516,7 +674,7 @@ export const CRAWLED_ARTISTS = [
         }
       ]
     },
-    "indexNo": "ARTIST 11",
+    "indexNo": "ARTIST 13",
     "portraitUrl": "https://neolook.com/archives/2023070602h.jpg",
     "featuredWorkUrl": "https://neolook.com/archives/2023070602h.jpg"
   },
@@ -590,7 +748,7 @@ export const CRAWLED_ARTISTS = [
         }
       ]
     },
-    "indexNo": "ARTIST 12",
+    "indexNo": "ARTIST 14",
     "portraitUrl": "https://e-archive.bscf.or.kr/data/product_data/1793687935_p.jpg",
     "featuredWorkUrl": "https://e-archive.bscf.or.kr/data/product_data/1793687935_p.jpg"
   },
@@ -659,13 +817,13 @@ export const CRAWLED_ARTISTS = [
         }
       ]
     },
-    "indexNo": "ARTIST 13",
+    "indexNo": "ARTIST 15",
     "portraitUrl": "https://e-archive.bscf.or.kr/data/product_data/1786942795_p.jpg",
     "featuredWorkUrl": "https://e-archive.bscf.or.kr/data/product_data/1786942795_p.jpg"
   },
   {
     "id": "ttg-dokikim",
-    "indexNo": "ARTIST 14",
+    "indexNo": "ARTIST 16",
     "name": "김덕희",
     "nameEn": "DOKI KIM",
     "discipline": "도자·조형",
@@ -747,7 +905,7 @@ export const CRAWLED_ARTISTS = [
         "highResUrl": "https://neolook.com/archives/2023092704a.jpg"
       }
     ],
-    "indexNo": "ARTIST 15"
+    "indexNo": "ARTIST 17"
   },
   {
     "id": "neolook-20231211f",
@@ -790,7 +948,7 @@ export const CRAWLED_ARTISTS = [
         "highResUrl": "https://neolook.com/archives/2023121107f.jpg"
       }
     ],
-    "indexNo": "ARTIST 16"
+    "indexNo": "ARTIST 18"
   },
   {
     "id": "nl-20180119f",
@@ -852,7 +1010,7 @@ export const CRAWLED_ARTISTS = [
         }
       ]
     },
-    "indexNo": "ARTIST 17",
+    "indexNo": "ARTIST 19",
     "portraitUrl": "https://neolook.com/archives/2018011903f.jpg",
     "featuredWorkUrl": "https://neolook.com/archives/2018011903f.jpg"
   },
@@ -916,7 +1074,7 @@ export const CRAWLED_ARTISTS = [
         }
       ]
     },
-    "indexNo": "ARTIST 18",
+    "indexNo": "ARTIST 20",
     "portraitUrl": "https://neolook.com/archives/2019090406k.jpg",
     "featuredWorkUrl": "https://neolook.com/archives/2019090406k.jpg"
   },
@@ -980,7 +1138,7 @@ export const CRAWLED_ARTISTS = [
         }
       ]
     },
-    "indexNo": "ARTIST 19",
+    "indexNo": "ARTIST 21",
     "portraitUrl": "https://neolook.com/archives/2019051702g.jpg",
     "featuredWorkUrl": "https://neolook.com/archives/2019051702g.jpg"
   },
@@ -1044,7 +1202,7 @@ export const CRAWLED_ARTISTS = [
         }
       ]
     },
-    "indexNo": "ARTIST 20",
+    "indexNo": "ARTIST 22",
     "portraitUrl": "https://e-archive.bscf.or.kr/data/product_data/1779161917_p.jpg",
     "featuredWorkUrl": "https://e-archive.bscf.or.kr/data/product_data/1779161917_p.jpg"
   },
@@ -1108,7 +1266,7 @@ export const CRAWLED_ARTISTS = [
         }
       ]
     },
-    "indexNo": "ARTIST 21",
+    "indexNo": "ARTIST 23",
     "portraitUrl": "https://neolook.com/archives/2021091702c.jpg",
     "featuredWorkUrl": "https://neolook.com/archives/2021091702c.jpg"
   },
@@ -1172,7 +1330,7 @@ export const CRAWLED_ARTISTS = [
         }
       ]
     },
-    "indexNo": "ARTIST 22",
+    "indexNo": "ARTIST 24",
     "portraitUrl": "https://neolook.com/archives/2021040802b.jpg",
     "featuredWorkUrl": "https://neolook.com/archives/2021040802b.jpg"
   },
@@ -1236,13 +1394,13 @@ export const CRAWLED_ARTISTS = [
         }
       ]
     },
-    "indexNo": "ARTIST 23",
+    "indexNo": "ARTIST 25",
     "portraitUrl": "https://neolook.com/archives/2016070505b.jpg",
     "featuredWorkUrl": "https://neolook.com/archives/2016070505b.jpg"
   },
   {
     "id": "ttg-seongahsim",
-    "indexNo": "ARTIST 24",
+    "indexNo": "ARTIST 26",
     "name": "심성아",
     "nameEn": "SEONGAH SIM",
     "discipline": "공예·오브제",
@@ -1285,7 +1443,7 @@ export const CRAWLED_ARTISTS = [
   },
   {
     "id": "ttg-sayoonyang",
-    "indexNo": "ARTIST 25",
+    "indexNo": "ARTIST 27",
     "name": "양사윤",
     "nameEn": "SAYOON YANG",
     "discipline": "공예·오브제",
@@ -1367,7 +1525,7 @@ export const CRAWLED_ARTISTS = [
         "highResUrl": "https://neolook.com/archives/2024022807e.jpg"
       }
     ],
-    "indexNo": "ARTIST 26"
+    "indexNo": "ARTIST 28"
   },
   {
     "id": "neolook-20221006h",
@@ -1410,7 +1568,7 @@ export const CRAWLED_ARTISTS = [
         "highResUrl": "https://neolook.com/archives/2022100608h.jpg"
       }
     ],
-    "indexNo": "ARTIST 27"
+    "indexNo": "ARTIST 29"
   },
   {
     "id": "nl-20230504a",
@@ -1472,7 +1630,7 @@ export const CRAWLED_ARTISTS = [
         }
       ]
     },
-    "indexNo": "ARTIST 28",
+    "indexNo": "ARTIST 30",
     "portraitUrl": "https://neolook.com/archives/2023050401a.jpg",
     "featuredWorkUrl": "https://neolook.com/archives/2023050401a.jpg"
   },
@@ -1536,7 +1694,7 @@ export const CRAWLED_ARTISTS = [
         }
       ]
     },
-    "indexNo": "ARTIST 29",
+    "indexNo": "ARTIST 31",
     "portraitUrl": "https://e-archive.bscf.or.kr/data/product_data/1789305428_p.jpg",
     "featuredWorkUrl": "https://e-archive.bscf.or.kr/data/product_data/1789305428_p.jpg"
   },
@@ -1600,7 +1758,7 @@ export const CRAWLED_ARTISTS = [
         }
       ]
     },
-    "indexNo": "ARTIST 30",
+    "indexNo": "ARTIST 32",
     "portraitUrl": "https://e-archive.bscf.or.kr/data/product_data/1779281899_p.jpg",
     "featuredWorkUrl": "https://e-archive.bscf.or.kr/data/product_data/1779281899_p.jpg"
   },
@@ -1664,7 +1822,7 @@ export const CRAWLED_ARTISTS = [
         }
       ]
     },
-    "indexNo": "ARTIST 31",
+    "indexNo": "ARTIST 33",
     "portraitUrl": "https://neolook.com/archives/2021040403g.jpg",
     "featuredWorkUrl": "https://neolook.com/archives/2021040403g.jpg"
   },
@@ -1728,7 +1886,7 @@ export const CRAWLED_ARTISTS = [
         }
       ]
     },
-    "indexNo": "ARTIST 32",
+    "indexNo": "ARTIST 34",
     "portraitUrl": "https://neolook.com/archives/2016102001k.jpg",
     "featuredWorkUrl": "https://neolook.com/archives/2016102001k.jpg"
   },
@@ -1792,7 +1950,7 @@ export const CRAWLED_ARTISTS = [
         }
       ]
     },
-    "indexNo": "ARTIST 33",
+    "indexNo": "ARTIST 35",
     "portraitUrl": "https://neolook.com/archives/2018111203d.jpg",
     "featuredWorkUrl": "https://neolook.com/archives/2018111203d.jpg"
   },
@@ -1837,7 +1995,7 @@ export const CRAWLED_ARTISTS = [
         "highResUrl": "https://cdn.imweb.me/thumbnail/20250826/47406cc7c4c4c.jpg"
       }
     ],
-    "indexNo": "ARTIST 34"
+    "indexNo": "ARTIST 36"
   },
   {
     "id": "neolook-20231028e",
@@ -1880,7 +2038,7 @@ export const CRAWLED_ARTISTS = [
         "highResUrl": "https://neolook.com/archives/2023102803e.jpg"
       }
     ],
-    "indexNo": "ARTIST 35"
+    "indexNo": "ARTIST 37"
   },
   {
     "id": "nl-20211005j",
@@ -1937,13 +2095,13 @@ export const CRAWLED_ARTISTS = [
         }
       ]
     },
-    "indexNo": "ARTIST 36",
+    "indexNo": "ARTIST 38",
     "portraitUrl": "https://neolook.com/archives/2021100502j.jpg",
     "featuredWorkUrl": "https://neolook.com/archives/2021100502j.jpg"
   },
   {
     "id": "bscf-5058",
-    "indexNo": "ARTIST 37",
+    "indexNo": "ARTIST 39",
     "name": "김보경",
     "nameEn": "KIM BO KYONG",
     "discipline": "일러스트·드로잉",
@@ -2044,7 +2202,7 @@ export const CRAWLED_ARTISTS = [
         }
       ]
     },
-    "indexNo": "ARTIST 38",
+    "indexNo": "ARTIST 40",
     "portraitUrl": "https://e-archive.bscf.or.kr/data/product_data/1779264753_p.jpg",
     "featuredWorkUrl": "https://e-archive.bscf.or.kr/data/product_data/1779264753_p.jpg"
   },
@@ -2108,7 +2266,7 @@ export const CRAWLED_ARTISTS = [
         }
       ]
     },
-    "indexNo": "ARTIST 39",
+    "indexNo": "ARTIST 41",
     "portraitUrl": "https://neolook.com/archives/2021101802a.jpg",
     "featuredWorkUrl": "https://neolook.com/archives/2021101802a.jpg"
   },
@@ -2172,7 +2330,7 @@ export const CRAWLED_ARTISTS = [
         }
       ]
     },
-    "indexNo": "ARTIST 40",
+    "indexNo": "ARTIST 42",
     "portraitUrl": "https://neolook.com/archives/2024101607k.jpg",
     "featuredWorkUrl": "https://neolook.com/archives/2024101607k.jpg"
   },
@@ -2236,7 +2394,7 @@ export const CRAWLED_ARTISTS = [
         }
       ]
     },
-    "indexNo": "ARTIST 41",
+    "indexNo": "ARTIST 43",
     "portraitUrl": "https://neolook.com/archives/2021112001d.jpg",
     "featuredWorkUrl": "https://neolook.com/archives/2021112001d.jpg"
   },
@@ -2300,7 +2458,7 @@ export const CRAWLED_ARTISTS = [
         }
       ]
     },
-    "indexNo": "ARTIST 42",
+    "indexNo": "ARTIST 44",
     "portraitUrl": "https://e-archive.bscf.or.kr/data/product_data/1758445420_p.png",
     "featuredWorkUrl": "https://e-archive.bscf.or.kr/data/product_data/1758445420_p.png"
   },
@@ -2359,7 +2517,7 @@ export const CRAWLED_ARTISTS = [
         }
       ]
     },
-    "indexNo": "ARTIST 43",
+    "indexNo": "ARTIST 45",
     "portraitUrl": "https://neolook.com/archives/2023072001b.jpg",
     "featuredWorkUrl": "https://neolook.com/archives/2023072001b.jpg"
   },
@@ -2423,7 +2581,7 @@ export const CRAWLED_ARTISTS = [
         }
       ]
     },
-    "indexNo": "ARTIST 44",
+    "indexNo": "ARTIST 46",
     "portraitUrl": "https://neolook.com/archives/2024101102d.jpg",
     "featuredWorkUrl": "https://neolook.com/archives/2024101102d.jpg"
   },
@@ -2487,7 +2645,7 @@ export const CRAWLED_ARTISTS = [
         }
       ]
     },
-    "indexNo": "ARTIST 45",
+    "indexNo": "ARTIST 47",
     "portraitUrl": "https://neolook.com/archives/2022100302a.jpg",
     "featuredWorkUrl": "https://neolook.com/archives/2022100302a.jpg"
   },
@@ -2551,7 +2709,7 @@ export const CRAWLED_ARTISTS = [
         }
       ]
     },
-    "indexNo": "ARTIST 46",
+    "indexNo": "ARTIST 48",
     "portraitUrl": "https://e-archive.bscf.or.kr/data/product_data/1784416409_p.jpg",
     "featuredWorkUrl": "https://e-archive.bscf.or.kr/data/product_data/1784416409_p.jpg"
   },
@@ -2615,7 +2773,7 @@ export const CRAWLED_ARTISTS = [
         }
       ]
     },
-    "indexNo": "ARTIST 47",
+    "indexNo": "ARTIST 49",
     "portraitUrl": "https://neolook.com/archives/2026091601a.jpg",
     "featuredWorkUrl": "https://neolook.com/archives/2026091601a.jpg"
   },
@@ -2679,7 +2837,7 @@ export const CRAWLED_ARTISTS = [
         }
       ]
     },
-    "indexNo": "ARTIST 48",
+    "indexNo": "ARTIST 50",
     "portraitUrl": "https://neolook.com/archives/2022111903h.jpg",
     "featuredWorkUrl": "https://neolook.com/archives/2022111903h.jpg"
   },
@@ -2743,7 +2901,7 @@ export const CRAWLED_ARTISTS = [
         }
       ]
     },
-    "indexNo": "ARTIST 49",
+    "indexNo": "ARTIST 51",
     "portraitUrl": "https://neolook.com/archives/2021062501e.jpg",
     "featuredWorkUrl": "https://neolook.com/archives/2021062501e.jpg"
   },
@@ -2807,7 +2965,7 @@ export const CRAWLED_ARTISTS = [
         }
       ]
     },
-    "indexNo": "ARTIST 50",
+    "indexNo": "ARTIST 52",
     "portraitUrl": "https://neolook.com/archives/2023091901h.jpg",
     "featuredWorkUrl": "https://neolook.com/archives/2023091901h.jpg"
   }

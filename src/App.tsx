@@ -8,7 +8,6 @@ import {
   Artist,
   Artwork,
   ArtistCollabStatus,
-  GoodsManual,
   GallerySpace,
   CollabPost,
   NaverCareerItem,
@@ -734,7 +733,10 @@ export function App() {
   });
 
   // Goods Manual & Local Makers filter state
-  const [selectedManualId, setSelectedManualId] = useState<string>(GOODS_MANUALS[0].id);
+  const [, setSelectedManualId] = useState<string>(GOODS_MANUALS[0].id);
+  const [souvenirFilter, setSouvenirFilter] = useState<string>('전체');
+  const [activeExampleIdxMap, setActiveExampleIdxMap] = useState<Record<string, number>>({});
+  const [isMakersDirectoryOpen, setIsMakersDirectoryOpen] = useState<boolean>(false);
   const [makerCategoryFilter, setMakerCategoryFilter] = useState<string>('전체');
   const [makerQuery, setMakerQuery] = useState<string>('');
 
@@ -1037,11 +1039,6 @@ export function App() {
 
     setIsArtistModalOpen(false);
   };
-
-  // Selected Goods Manual
-  const currentManual: GoodsManual = useMemo(() => {
-    return GOODS_MANUALS.find((m) => m.id === selectedManualId) || GOODS_MANUALS[0];
-  }, [selectedManualId]);
 
   // Filtered Galleries by Busan District (구·군) & District Signature Colors
   const zones = [
@@ -2277,279 +2274,378 @@ export function App() {
       )}
 
       {/* =====================================================================
-          SECTION 02: BUSAN ART SOUVENIRS (실무 제작 공정 매뉴얼 + 부산 실존 로컬 공정처 22곳 디렉토리)
+          SECTION 02: BUSAN ART SOUVENIRS (종류별 예시 사진 중심 쇼케이스 + 로컬 공정처 22곳 접기/펼치기)
          ===================================================================== */}
       {activeSection === 'souvenirs' && (
         <section>
           <div className="section-bar">
             <div className="section-bar-title">
-              <h2>부산 아트 기념품 · 로컬 제작 랩</h2>
+              <h2>부산 아트 기념품 · 품목별 제작 예시</h2>
             </div>
             <a
               href="mailto:floreur88@gmail.com?subject=[PARANG] 부산 관광기념품 콜라보 · B2B 제작 문의"
               className="section-bar-action"
             >
-              <span>콜라보 · 납품 제안</span>
+              <span>콜라보 · 제작 문의</span>
               <ArrowUpRight size={14} />
             </a>
           </div>
 
-          <div className="goods-editorial-layout">
-            <div className="goods-index-rail">
-              <div className="goods-manual-list">
-                {GOODS_MANUALS.map((manual) => {
-                  const active = manual.id === currentManual.id;
-                  return (
-                    <div
-                      key={manual.id}
-                      className={`goods-rail-item ${active ? 'active' : ''}`}
-                      onClick={() => setSelectedManualId(manual.id)}
-                    >
-                      <div className="goods-rail-meta">
-                        <span>
-                          {manual.code} · {manual.category}
-                        </span>
-                        <span>{manual.difficulty}</span>
-                      </div>
-                      <div className="goods-rail-title">{manual.title}</div>
-                    </div>
-                  );
-                })}
-              </div>
+          <div className="filter-strip">
+            <div className="filter-tabs">
+              {['전체', '회화·사진 추천', '일러스트·드로잉 추천', '도자·공예 추천'].map((tab) => (
+                <button
+                  key={tab}
+                  type="button"
+                  className={`filter-tab ${souvenirFilter === tab ? 'active' : ''}`}
+                  onClick={() => setSouvenirFilter(tab)}
+                >
+                  <span>{tab === '전체' ? '전체 품목 (6종)' : tab}</span>
+                </button>
+              ))}
             </div>
+          </div>
 
-            {/* Right Detail Stage */}
-            <div className="goods-detail-stage">
-              <div className="goods-stage-header" style={{ gridTemplateColumns: '1fr' }}>
-                <div className="goods-stage-title-box">
-                  <div>
-                    <div className="goods-stage-code">
-                      {currentManual.code} // {currentManual.category}
-                    </div>
-                    <h3 className="goods-stage-title" style={{ marginTop: '10px' }}>
-                      {currentManual.title}
-                    </h3>
-                    <p
-                      style={{
-                        fontSize: '14px',
-                        color: 'var(--ink-muted)',
-                        marginTop: '8px',
-                        lineHeight: 1.6,
-                      }}
-                    >
-                      {currentManual.summary}
-                    </p>
-                  </div>
+          <div className="souvenir-showcase-grid">
+            {[
+              {
+                id: 'souvenir-01',
+                code: '01 · 지류 에디션',
+                title: '아트 포스터 & 절취형 엽서북',
+                summary: '원화의 색감과 비코팅 종이 질감을 살린 가장 대중적인 전시·관광 기념품',
+                recommended: '회화 · 사진 · 일러스트',
+                moq: '최소 30~50부 · 5–7일',
+                tags: ['회화·사진 추천', '일러스트·드로잉 추천'],
+                examples: [
+                  {
+                    label: '리소그라프 포스터',
+                    desc: '코발트·아쿠아 별색 잉크 질감을 살린 A3/A2 아트 포스터',
+                    imageUrl: '/souvenirs/s01-poster.png',
+                  },
+                  {
+                    label: '절취형 엽서북 (10종)',
+                    desc: '한 장씩 뜯어 소장하거나 액자에 끼울 수 있는 아카이브 엽서북',
+                    imageUrl: '/souvenirs/s01-postcard.png',
+                  },
+                  {
+                    label: '청박 책갈피 & 미니도록',
+                    desc: '작가 시그니처 코발트 청박 후가공이 들어간 북마크 에디션',
+                    imageUrl: '/souvenirs/s01-bookmark.png',
+                  },
+                ],
+              },
+              {
+                id: 'souvenir-02',
+                code: '02 · 아크릴 오브제',
+                title: '바다 단면 아크릴 문진 & 마그넷',
+                summary: '20mm 고투명 아크릴 블록에 작품을 다층 인쇄해 수면 같은 깊이감을 구현한 데스크 오브제',
+                recommended: '사진 · 바다회화 · 그래픽',
+                moq: '최소 20개~ · 7–10일',
+                tags: ['회화·사진 추천', '일러스트·드로잉 추천'],
+                examples: [
+                  {
+                    label: '20T 투명 아크릴 문진',
+                    desc: '빛의 굴절과 깊이감이 살아나는 80×80×20mm 원화 문진 블록',
+                    imageUrl: '/souvenirs/s02-paperweight.png',
+                  },
+                  {
+                    label: '원화 아크릴 마그넷',
+                    desc: '작품의 주요 피사체 실루엣을 살려 커팅한 고투명 자석 오브제',
+                    imageUrl: '/souvenirs/s02-magnet.png',
+                  },
+                  {
+                    label: '투명 아트 코스터',
+                    desc: '윤슬과 파도 모티프를 반투명 레이어로 인쇄한 테이블 코스터',
+                    imageUrl: '/souvenirs/s02-coaster.png',
+                  },
+                ],
+              },
+              {
+                id: 'souvenir-03',
+                code: '03 · 패브릭 & 섬유',
+                title: '린넨 패브릭 포스터 & 실크스크린 백',
+                summary: '부피가 작고 파손 우려가 없어 여행객과 미술관 아트샵에서 선호도가 높은 패브릭 굿즈',
+                recommended: '회화 · 드로잉 · 텍스타일',
+                moq: '최소 30장~ · 7–12일',
+                tags: ['회화·사진 추천', '일러스트·드로잉 추천'],
+                examples: [
+                  {
+                    label: '광목·린넨 패브릭 포스터',
+                    desc: '내추럴한 직조 결 위에 원화를 날염한 벽걸이 태피스트리 포스터',
+                    imageUrl: '/souvenirs/s03-fabric-poster.png',
+                  },
+                  {
+                    label: '실크스크린 에코백·파우치',
+                    desc: '드로잉 라인과 별색 그래픽을 수성 안료로 찍어낸 캔버스 백',
+                    imageUrl: '/souvenirs/s03-totebag.png',
+                  },
+                  {
+                    label: '아트 스카프 & 자수 와펜',
+                    desc: '작품 패턴을 적용한 실크·쉬폰 스카프와 포인트 자수 오브제',
+                    imageUrl: '/souvenirs/s03-scarf.png',
+                  },
+                ],
+              },
+              {
+                id: 'souvenir-04',
+                code: '04 · 도자 & 세라믹',
+                title: '세라믹 인센스 홀더 & 다구 에디션',
+                summary: '부산 도예 공방과 협업해 슬립캐스팅·핸드빌딩으로 빚어내는 소량 입체 도자 기념품',
+                recommended: '도자 · 조형 · 입체작가',
+                moq: '최소 10~30개 · 10–14일',
+                tags: ['도자·공예 추천'],
+                examples: [
+                  {
+                    label: '세라믹 인센스 홀더',
+                    desc: '조형 작가의 형태미를 소형화한 백자·색소지 인센스 스틱 홀더',
+                    imageUrl: '/souvenirs/s04-incense.png',
+                  },
+                  {
+                    label: '윤슬 술잔 & 머그 세트',
+                    desc: '부산 바다빛 유약 시유와 작가 각인이 들어간 도자 컵·주병 에디션',
+                    imageUrl: '/souvenirs/s04-cups.png',
+                  },
+                  {
+                    label: '미니 달항아리 & 오브제 화병',
+                    desc: '공간에 포인트를 주는 소형 도자 화병 및 테이블 오브제',
+                    imageUrl: '/souvenirs/s04-moonjar.png',
+                  },
+                ],
+              },
+              {
+                id: 'souvenir-05',
+                code: '05 · 유리 & 금속 공예',
+                title: '스테인드글라스 썬캐처 & 금속 오브제',
+                summary: '부산 해안의 빛을 투과시키는 색유리 세공과 황동·실버 수공예 오브제 에디션',
+                recommended: '유리 · 금속 · 옻칠공예',
+                moq: '최소 15~30개 · 7–14일',
+                tags: ['도자·공예 추천'],
+                examples: [
+                  {
+                    label: '스테인드글라스 썬캐처',
+                    desc: '창가에 걸면 바다빛 색유리 그림자가 맺히는 핸드메이드 썬캐처',
+                    imageUrl: '/souvenirs/s05-suncatcher.png',
+                  },
+                  {
+                    label: '퓨징 유리 문진 & 트레이',
+                    desc: '영롱한 유리 알갱이를 가마에 녹여 성형한 인센스·주얼리 트레이',
+                    imageUrl: '/souvenirs/s05-glasstray.png',
+                  },
+                  {
+                    label: '황동 북마크 & 키링 오브제',
+                    desc: '작가의 드로잉 심볼을 정밀 부식·커팅한 황동·실버 금속 굿즈',
+                    imageUrl: '/souvenirs/s05-brass.png',
+                  },
+                ],
+              },
+              {
+                id: 'souvenir-06',
+                code: '06 · VIP 아트 기프트',
+                title: '작가 콜라보 시그니처 기프트 패키지',
+                summary: '부산 호텔·기업·기관 VIP 선물용으로 에디션 보증서와 청박 패키지를 결합한 맞춤 세트',
+                recommended: '전 장르 작가 × 기업 콜라보',
+                moq: '50세트~ · 맞춤 기획',
+                tags: ['회화·사진 추천', '일러스트·드로잉 추천', '도자·공예 추천'],
+                examples: [
+                  {
+                    label: '청박 스탬핑 기프트 박스',
+                    desc: '비오톱 네이비 지류 슬리브와 코발트 청박 로고로 마감한 전용 패키지',
+                    imageUrl: '/souvenirs/s06-giftbox.png',
+                  },
+                  {
+                    label: '작가 친필 에디션 보증서 세트',
+                    desc: '원화 정보·에디션 넘버링 카드가 동봉된 갤러리급 아트 기프트',
+                    imageUrl: '/souvenirs/s06-certificate.png',
+                  },
+                  {
+                    label: '호텔·기업 B2B 커스텀 에디션',
+                    desc: '부산 로컬 브랜드·호텔 객실 및 VIP 행사용 아티스트 콜라보 기프트',
+                    imageUrl: '/souvenirs/s06-b2bset.png',
+                  },
+                ],
+              },
+            ]
+              .filter(
+                (item) => souvenirFilter === '전체' || item.tags.includes(souvenirFilter)
+              )
+              .map((item) => {
+                const activeIdx = activeExampleIdxMap[item.id] ?? 0;
+                const activeEx = item.examples[activeIdx] || item.examples[0];
 
-                  <div>
-                    <button
-                      onClick={() => toggleSave(currentManual.id)}
-                      style={{
-                        padding: '9px 16px',
-                        border: '1px solid var(--line-strong)',
-                        fontFamily: 'var(--font-mono)',
-                        fontSize: '11px',
-                        background: savedIds.includes(currentManual.id)
-                          ? 'var(--marine)'
-                          : 'transparent',
-                        color: savedIds.includes(currentManual.id) ? '#ffffff' : 'var(--ink)',
-                      }}
-                    >
-                      {savedIds.includes(currentManual.id) ? 'SAVED' : '+ SAVE SPEC'}
-                    </button>
-                  </div>
-                </div>
-              </div>
+                return (
+                  <article key={item.id} className="souvenir-photo-card">
+                    {/* Main Example Photo */}
+                    <div className="souvenir-main-photo-wrap">
+                      <img
+                        src={activeEx.imageUrl}
+                        alt={`${item.title} - ${activeEx.label}`}
+                        loading="lazy"
+                      />
+                      <span className="souvenir-photo-badge">
+                        예시 0{activeIdx + 1} · {activeEx.label}
+                      </span>
+                    </div>
 
-              <div className="goods-content-columns">
-                <div className="goods-steps-col">
-                  {currentManual.steps.map((step) => (
-                    <div key={step.stepNo} className="goods-step-row">
-                      <div className="goods-step-num">{step.stepNo}</div>
-                      <div>
-                        <div className="goods-step-title">{step.title}</div>
-                        <p className="goods-step-desc">{step.detail}</p>
-                        <div className="goods-step-note">{step.technicalTip}</div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="goods-sidebar-col">
-                  <div>
-                    <div
-                      style={{
-                        fontFamily: 'var(--font-mono)',
-                        fontSize: '11px',
-                        color: 'var(--marine)',
-                        letterSpacing: '0.06em',
-                        marginBottom: '10px',
-                      }}
-                    >
-                      세부 사양
-                    </div>
-                    <div className="spec-table-list">
-                      {currentManual.specs.map((s) => (
-                        <div key={s.label} className="spec-table-row">
-                          <span className="spec-table-key">{s.label}</span>
-                          <span className="spec-table-value">{s.value}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div>
-                    <div
-                      style={{
-                        fontFamily: 'var(--font-mono)',
-                        fontSize: '11px',
-                        color: 'var(--marine)',
-                        letterSpacing: '0.06em',
-                        marginBottom: '10px',
-                      }}
-                    >
-                      인쇄·발주 체크리스트
-                    </div>
-                    <div
-                      style={{
-                        borderTop: '1px solid var(--line-strong)',
-                        display: 'flex',
-                        flexDirection: 'column',
-                      }}
-                    >
-                      {currentManual.checklist.map((item, idx) => (
-                        <div
-                          key={idx}
-                          style={{
-                            padding: '10px 0',
-                            borderBottom: '1px solid var(--line)',
-                            fontSize: '13px',
-                            display: 'flex',
-                            alignItems: 'flex-start',
-                            gap: '8px',
-                          }}
-                        >
-                          <span
-                            style={{
-                              fontFamily: 'var(--font-mono)',
-                              fontSize: '11px',
-                              color: 'var(--marine)',
-                            }}
+                    {/* 3 Clickable Example Item Photo Thumbnails */}
+                    <div className="souvenir-example-thumbs">
+                      {item.examples.map((ex, idx) => {
+                        const isSelected = idx === activeIdx;
+                        return (
+                          <button
+                            key={ex.label}
+                            type="button"
+                            className={`souvenir-thumb-btn ${isSelected ? 'active' : ''}`}
+                            onClick={() =>
+                              setActiveExampleIdxMap((prev) => ({
+                                ...prev,
+                                [item.id]: idx,
+                              }))
+                            }
                           >
-                            0{idx + 1}
-                          </span>
-                          <span>{item}</span>
-                        </div>
-                      ))}
+                            <img src={ex.imageUrl} alt={ex.label} loading="lazy" />
+                            <span>{ex.label}</span>
+                          </button>
+                        );
+                      })}
                     </div>
+
+                    {/* Concise Card Info */}
+                    <div className="souvenir-card-body">
+                      <div className="souvenir-card-meta">
+                        <span className="souvenir-card-code">{item.code}</span>
+                        <span className="souvenir-card-moq">{item.moq}</span>
+                      </div>
+                      <h3 className="souvenir-card-title">{item.title}</h3>
+                      <p className="souvenir-card-active-desc">{activeEx.desc}</p>
+                      <div className="souvenir-card-footer">
+                        <span>추천 분야: {item.recommended}</span>
+                      </div>
+                    </div>
+                  </article>
+                );
+              })}
+          </div>
+
+          {/* COLLAPSIBLE BUSAN LOCAL MAKERS & PRESS DIRECTORY (22곳) */}
+          <div className="makers-collapse-bar">
+            <div className="makers-collapse-info">
+              <strong>부산 로컬 인쇄소 · 소량 오브제 공정처 디렉토리 ({LOCAL_MAKERS.length}곳)</strong>
+              <span>중구 인쇄골목 · 전포동 · 수영구 · 사하구 등 소량 제작이 가능한 부산 업체 리스트</span>
+            </div>
+            <button
+              type="button"
+              className="makers-collapse-btn"
+              onClick={() => setIsMakersDirectoryOpen((prev) => !prev)}
+            >
+              <span>
+                {isMakersDirectoryOpen
+                  ? '− 부산 로컬 제작소 22곳 디렉토리 접기'
+                  : '+ 부산 로컬 제작소 22곳 디렉토리 펼쳐보기'}
+              </span>
+            </button>
+          </div>
+
+          {isMakersDirectoryOpen && (
+            <>
+              <div className="makers-directory-toolbar">
+                <div className="makers-toolbar-controls">
+                  <div className="makers-cat-scroll">
+                    {[
+                      '전체',
+                      '지류·인쇄·리소',
+                      '아크릴·레이저·3D',
+                      '도자·유리·금속 오브제',
+                      '패브릭·실크스크린·자수',
+                      '패키지·액자·화방',
+                    ].map((cat) => (
+                      <button
+                        key={cat}
+                        onClick={() => setMakerCategoryFilter(cat)}
+                        className={`makers-cat-btn ${makerCategoryFilter === cat ? 'active' : ''}`}
+                      >
+                        {cat === '전체' ? `전체 (${LOCAL_MAKERS.length})` : cat}
+                      </button>
+                    ))}
+                  </div>
+
+                  <div className="makers-search-box">
+                    <Search size={13} />
+                    <input
+                      type="text"
+                      placeholder="업체명·동네·공정 검색..."
+                      value={makerQuery}
+                      onChange={(e) => setMakerQuery(e.target.value)}
+                    />
+                    {makerQuery && (
+                      <button onClick={() => setMakerQuery('')}>
+                        <X size={12} />
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
 
-          {/* BUSAN LOCAL MAKERS & PRESS DIRECTORY TABLE */}
-          <div className="makers-directory-toolbar">
-            <div className="makers-toolbar-header">
-              <strong>부산 로컬 인쇄소 · 소량 오브제 공정처 디렉토리 (22곳)</strong>
-            </div>
-
-            <div className="makers-toolbar-controls">
-              <div className="makers-cat-scroll">
-                {[
-                  '전체',
-                  '지류·인쇄·리소',
-                  '아크릴·레이저·3D',
-                  '도자·유리·금속 오브제',
-                  '패브릭·실크스크린·자수',
-                  '패키지·액자·화방',
-                ].map((cat) => (
-                  <button
-                    key={cat}
-                    onClick={() => setMakerCategoryFilter(cat)}
-                    className={`makers-cat-btn ${makerCategoryFilter === cat ? 'active' : ''}`}
-                  >
-                    {cat === '전체' ? `전체 (${LOCAL_MAKERS.length})` : cat}
-                  </button>
-                ))}
+              <div className="makers-table-wrap">
+                <table className="editorial-table makers-table">
+                  <thead>
+                    <tr>
+                      <th style={{ width: '130px' }}>CODE / 분류</th>
+                      <th style={{ width: '260px' }}>업체명 / 부산 소재지 · 연락처</th>
+                      <th style={{ width: '320px' }}>주요 공정 · 보유 장비</th>
+                      <th>업체 특징 & 공식 웹사이트</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {LOCAL_MAKERS.filter((m) => {
+                      const matchCat =
+                        makerCategoryFilter === '전체' || m.category === makerCategoryFilter;
+                      const q = makerQuery.trim().toLowerCase();
+                      const matchQ =
+                        !q ||
+                        m.name.toLowerCase().includes(q) ||
+                        m.district.toLowerCase().includes(q) ||
+                        m.specialty.toLowerCase().includes(q) ||
+                        m.equipment.toLowerCase().includes(q) ||
+                        m.artistNote.toLowerCase().includes(q);
+                      return matchCat && matchQ;
+                    }).map((maker) => (
+                      <tr key={maker.id}>
+                        <td className="maker-cell-code">
+                          <div className="maker-code-badge">{maker.code}</div>
+                          <div className="maker-category-tag">{maker.category}</div>
+                        </td>
+                        <td className="maker-cell-info">
+                          <div className="maker-name">{maker.name}</div>
+                          <div className="maker-district">{maker.district}</div>
+                          <div className="maker-contact">{maker.contact}</div>
+                        </td>
+                        <td className="maker-cell-spec">
+                          <div className="maker-specialty">{maker.specialty}</div>
+                          <div className="maker-equipment">{maker.equipment}</div>
+                        </td>
+                        <td className="maker-cell-note">
+                          <div className="maker-note-text">{maker.artistNote}</div>
+                          {maker.websiteUrl && (
+                            <div className="maker-site-wrap">
+                              <a
+                                href={maker.websiteUrl}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="maker-site-link"
+                              >
+                                <span>OFFICIAL SITE</span>
+                                <ArrowUpRight size={12} />
+                              </a>
+                            </div>
+                          )}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
-
-              <div className="makers-search-box">
-                <Search size={13} />
-                <input
-                  type="text"
-                  placeholder="업체명·동네·공정 검색..."
-                  value={makerQuery}
-                  onChange={(e) => setMakerQuery(e.target.value)}
-                />
-                {makerQuery && (
-                  <button onClick={() => setMakerQuery('')}>
-                    <X size={12} />
-                  </button>
-                )}
-              </div>
-            </div>
-          </div>
-
-          <div className="makers-table-wrap">
-            <table className="editorial-table makers-table">
-              <thead>
-                <tr>
-                  <th style={{ width: '130px' }}>CODE / 분류</th>
-                  <th style={{ width: '260px' }}>업체명 / 부산 소재지 · 연락처</th>
-                  <th style={{ width: '320px' }}>주요 공정 · 보유 장비</th>
-                  <th>업체 특징 & 공식 웹사이트</th>
-                </tr>
-              </thead>
-              <tbody>
-                {LOCAL_MAKERS.filter((m) => {
-                  const matchCat =
-                    makerCategoryFilter === '전체' || m.category === makerCategoryFilter;
-                  const q = makerQuery.trim().toLowerCase();
-                  const matchQ =
-                    !q ||
-                    m.name.toLowerCase().includes(q) ||
-                    m.district.toLowerCase().includes(q) ||
-                    m.specialty.toLowerCase().includes(q) ||
-                    m.equipment.toLowerCase().includes(q) ||
-                    m.artistNote.toLowerCase().includes(q);
-                  return matchCat && matchQ;
-                }).map((maker) => (
-                  <tr key={maker.id}>
-                    <td className="maker-cell-code">
-                      <div className="maker-code-badge">{maker.code}</div>
-                      <div className="maker-category-tag">{maker.category}</div>
-                    </td>
-                    <td className="maker-cell-info">
-                      <div className="maker-name">{maker.name}</div>
-                      <div className="maker-district">{maker.district}</div>
-                      <div className="maker-contact">{maker.contact}</div>
-                    </td>
-                    <td className="maker-cell-spec">
-                      <div className="maker-specialty">{maker.specialty}</div>
-                      <div className="maker-equipment">{maker.equipment}</div>
-                    </td>
-                    <td className="maker-cell-note">
-                      <div className="maker-note-text">{maker.artistNote}</div>
-                      {maker.websiteUrl && (
-                        <div className="maker-site-wrap">
-                          <a
-                            href={maker.websiteUrl}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="maker-site-link"
-                          >
-                            <span>OFFICIAL SITE</span>
-                            <ArrowUpRight size={12} />
-                          </a>
-                        </div>
-                      )}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+            </>
+          )}
         </section>
       )}
 
